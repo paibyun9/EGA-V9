@@ -1,0 +1,15 @@
+[package]
+name = "ega-v9-runtime-core"
+version = "0.1.0"
+edition = "2021"
+description = "EGA V9 Rust runtime core for replay roots, provenance, containment, and SCORP LOCK."
+license = "MIT"
+
+[lib]
+name = "ega_v9_runtime_core"
+path = "src/lib.rs"
+
+[dependencies]
+sha2 = "0.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

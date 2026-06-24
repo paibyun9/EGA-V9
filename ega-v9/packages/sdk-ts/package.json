@@ -1,0 +1,30 @@
+{
+  "name": "ega-9",
+  "version": "0.1.0",
+  "description": "EGA V9 TypeScript SDK for replay, provenance, containment, and SCORP LOCK governance.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node -e \"console.log('ega-9 sdk test placeholder')\"",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "ai-agents",
+    "execution-governance",
+    "replay",
+    "provenance",
+    "containment",
+    "scorp-lock",
+    "agent-safety"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "ega-v9",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EGA V9 monorepo: Rust runtime core, TypeScript SDK, dashboard, examples, and SCORP LOCK governance.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/sdk-ts"
+  ],
+  "scripts": {
+    "build": "npm run build -w packages/sdk-ts",
+    "test": "npm run test -w packages/sdk-ts",
+    "dev": "npm run dev -w packages/sdk-ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
