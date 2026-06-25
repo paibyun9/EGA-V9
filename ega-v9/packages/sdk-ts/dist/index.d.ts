@@ -2,15 +2,68 @@ export type EGATrustLevel = "supported" | "verified";
 export type EGAStatus = "verified" | "contained" | "failed";
 export type EGADetectionStatus = "match" | "mismatch";
 export type EGAContainmentMode = "observe" | "fail-closed";
-export type EGAEventType = "workflow.started" | "workflow.verified" | "replay.mismatch" | "hash.verified" | "mutation.detected" | "containment.activated" | "execution.blocked" | "quarantine.created";
+export type EGATrustTier = "T1" | "T2" | "T3" | "T4";
+export type EGAEventType = "workflow.started" | "workflow.verified" | "replay.mismatch" | "hash.verified" | "mutation.detected" | "containment.activated" | "execution.blocked" | "quarantine.created" | "lineage.reconstructed" | "business.metrics.collected" | "trust.evaluated" | "trust.escalated" | "approval.required" | "privilege.escalation.gated" | "eventbus.event.recorded";
+export type EGAClientIdentity = {
+    anonymousClientId: string;
+    source: "host-header" | "unknown";
+    domainHint?: string;
+};
 export type EGAEvent = {
+    id: string;
+    sequence: number;
     type: EGAEventType;
     timestamp: string;
     requestId: string;
     replayRoot: string;
     trustLevel: EGATrustLevel;
     status: EGAStatus;
+    clientIdentity?: EGAClientIdentity;
     details?: Record<string, unknown>;
+};
+export type EGAEventSummary = {
+    total: number;
+    byType: Record<string, number>;
+    latest?: EGAEvent;
+};
+export type EGABusinessMetrics = {
+    detected: boolean;
+    amount?: number;
+    price?: number;
+    quantity?: number;
+    currency?: string;
+    estimatedTransactionValue?: number;
+};
+export type EGABusinessTrustProfile = {
+    currentTier: EGATrustTier;
+    riskScore: number;
+    approvalRequired: boolean;
+    privilegeEscalationGate: boolean;
+    reason: string;
+};
+export type EGABusinessGovernanceProfile = {
+    metrics: EGABusinessMetrics;
+    trust: EGABusinessTrustProfile;
+};
+export type EGAProvenanceNodeType = "input" | "tool_output" | "policy" | "decision" | "business_metrics" | "trust_escalation";
+export type EGAProvenanceNode = {
+    id: string;
+    type: EGAProvenanceNodeType;
+    label: string;
+    data: Record<string, unknown>;
+};
+export type EGAProvenanceEdge = {
+    from: string;
+    to: string;
+    label: string;
+};
+export type EGAProvenanceGraph = {
+    graphId: string;
+    lineage: string[];
+    nodes: EGAProvenanceNode[];
+    edges: EGAProvenanceEdge[];
+    businessMetrics: EGABusinessMetrics;
+    businessGovernanceProfile: EGABusinessGovernanceProfile;
 };
 export type EGARequestContext = {
     requestId: string;
@@ -18,6 +71,7 @@ export type EGARequestContext = {
     trustLevel: EGATrustLevel;
     status: EGAStatus;
     scorpLock: boolean;
+    clientIdentity: EGAClientIdentity;
     detection: {
         status: EGADetectionStatus;
         expectedReplayRoot?: string;
@@ -30,12 +84,17 @@ export type EGARequestContext = {
         quarantineId?: string;
         executionAllowed: boolean;
     };
+    trust: EGABusinessTrustProfile;
+    businessGovernanceProfile: EGABusinessGovernanceProfile;
+    provenance: EGAProvenanceGraph;
 };
 export type EGAOptions = {
     appName?: string;
     trustLevel?: EGATrustLevel;
     telemetry?: boolean;
     failClosed?: boolean;
+    policyId?: string;
+    approvalThreshold?: number;
 };
 type NextFunction = () => void;
 type EGARequest = {
@@ -58,10 +117,14 @@ type EGAResponse = {
 export declare class EGA {
     private readonly options;
     private readonly eventLog;
+    private eventSequence;
     private constructor();
     static init(options?: EGAOptions): EGA;
     guard(): (req: EGARequest, res: EGAResponse, next: NextFunction) => void;
-    events(): EGAEvent[];
+    events(type?: EGAEventType): EGAEvent[];
+    latestEvents(limit?: number): EGAEvent[];
+    eventSummary(): EGAEventSummary;
+    explain(context?: EGARequestContext): EGAProvenanceGraph | undefined;
     canonicalize(input: unknown): string;
     replayRoot(input: unknown): string;
     detect(input: unknown, expectedReplayRoot?: string): {
@@ -70,6 +133,7 @@ export declare class EGA {
         actualReplayRoot: string;
     };
     private createReplayRoot;
+    private buildProvenanceGraph;
     private getExpectedReplayRoot;
     private recordEvent;
 }
