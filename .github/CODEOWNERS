@@ -1,0 +1,10 @@
+# SCORP LOCK #4 — Core Engine Ownership
+
+/packages/sdk-ts/src/index.ts @paibyun9
+/crates/runtime-core/src/lib.rs @paibyun9
+/package.json @paibyun9
+/packages/sdk-ts/package.json @paibyun9
+/.github/workflows/* @paibyun9
+/.github/CODEOWNERS @paibyun9
+/SECURITY.md @paibyun9
+/security/* @paibyun9

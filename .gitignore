@@ -1,0 +1,13 @@
+node_modules/
+*.tgz
+.DS_Store
+.env
+.vercel/
+npm-debug.log*
+
+# Rust build artifacts
+target/
+crates/**/target/
+
+# Node build artifacts
+node_modules/

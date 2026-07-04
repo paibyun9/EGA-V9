@@ -1,0 +1,52 @@
+name: SCORP LOCK #4 Core Engine Change Protection
+
+on:
+  pull_request:
+    paths:
+      - "packages/sdk-ts/src/index.ts"
+      - "crates/runtime-core/src/lib.rs"
+      - "package.json"
+      - "packages/sdk-ts/package.json"
+      - ".github/workflows/**"
+      - ".github/CODEOWNERS"
+      - "SECURITY.md"
+      - "security/**"
+
+jobs:
+  scorp-lock-core-protection:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Evaluate SCORP LOCK #4
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+
+            const labels = pr.labels.map(label => label.name);
+            const hasApproval = labels.includes("scorp-lock-approved");
+
+            const createdAt = new Date(pr.created_at).getTime();
+            const now = Date.now();
+            const hoursOpen = (now - createdAt) / (1000 * 60 * 60);
+            const coolingPeriodPassed = hoursOpen >= 24;
+
+            core.info(`PR #${pr.number}`);
+            core.info(`Hours open: ${hoursOpen.toFixed(2)}`);
+            core.info(`Has scorp-lock-approved: ${hasApproval}`);
+
+            if (!hasApproval) {
+              core.setFailed(
+                "SCORP LOCK #4 BLOCKED: Core engine change requires the label 'scorp-lock-approved'."
+              );
+              return;
+            }
+
+            if (!coolingPeriodPassed) {
+              core.setFailed(
+                "SCORP LOCK #4 BLOCKED: Core engine change requires a 24-hour cooling period before merge."
+              );
+              return;
+            }
+
+            core.info("SCORP LOCK #4 PASSED: Core engine change governance satisfied.");
