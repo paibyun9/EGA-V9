@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EGA V9 Replay Consistency Demo</title>
+  <title>EGA V9 Scorp Lock Demo</title>
   <style>
     body {
       margin: 0;
@@ -12,9 +12,9 @@
       color: #e5e7eb;
     }
     .wrap {
-      max-width: 980px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 64px 24px;
+      padding: 56px 24px;
     }
     .badge {
       display: inline-block;
@@ -30,10 +30,19 @@
       line-height: 1.05;
       margin: 0 0 16px;
     }
+    h2 {
+      margin-top: 0;
+    }
     .subtitle {
       color: #94a3b8;
       font-size: 18px;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
+      max-width: 760px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
     }
     .panel {
       background: #111827;
@@ -49,6 +58,7 @@
       padding: 16px;
       overflow-x: auto;
       color: #cbd5e1;
+      font-size: 13px;
     }
     button {
       background: #2563eb;
@@ -58,7 +68,10 @@
       padding: 12px 18px;
       font-size: 15px;
       cursor: pointer;
-      margin-right: 10px;
+      margin: 8px 8px 8px 0;
+    }
+    button.danger {
+      background: #dc2626;
     }
     button.secondary {
       background: #334155;
@@ -66,14 +79,14 @@
     .result {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 20px;
+      gap: 14px;
+      margin-top: 16px;
     }
     .box {
       background: #020617;
       border: 1px solid #1e293b;
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px;
       word-break: break-all;
     }
     .label {
@@ -84,20 +97,48 @@
     .hash {
       color: #bfdbfe;
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 13px;
+      font-size: 12px;
     }
-    .verified {
-      margin-top: 20px;
+    .status {
+      margin-top: 16px;
       padding: 16px;
       border-radius: 12px;
+      font-weight: 800;
+      display: none;
+    }
+    .verified {
       background: #052e16;
       border: 1px solid #16a34a;
       color: #bbf7d0;
-      font-weight: 700;
-      display: none;
+    }
+    .blocked {
+      background: #450a0a;
+      border: 1px solid #dc2626;
+      color: #fecaca;
+    }
+    .graph {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .node {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #020617;
+      border: 1px solid #334155;
+      font-size: 13px;
+    }
+    .node.bad {
+      border-color: #dc2626;
+      color: #fecaca;
+    }
+    .arrow {
+      color: #64748b;
     }
     .footer {
-      margin-top: 32px;
+      margin-top: 28px;
       color: #64748b;
       font-size: 14px;
     }
@@ -105,25 +146,37 @@
       color: #93c5fd;
       text-decoration: none;
     }
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 38px;
+      }
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <div class="badge">EGA V9 · v0.1.0 · Scorp Locked Demo</div>
+    <div class="badge">EGA V9 · v0.1.0 · Scorp Locked Vercel Demo</div>
 
-    <h1>Same Workflow.<br />Same Replay Hash.<br />VERIFIED.</h1>
+    <h1>Same Workflow.<br />Same Replay Hash.<br />Divergence Blocked.</h1>
 
     <p class="subtitle">
-      This demo proves the first foundation of EGA V9:
-      deterministic replay consistency.
+      This demo shows two foundations of EGA V9:
+      deterministic replay consistency and DAG-level divergence detection.
     </p>
 
     <section class="panel">
-      <h2>Workflow Input</h2>
+      <h2>① Replay Consistency</h2>
+      <p class="subtitle">
+        Run the same workflow twice. EGA produces the same deterministic replay root.
+      </p>
+
       <pre id="workflow"></pre>
 
       <button onclick="runReplay()">Run Replay Twice</button>
-      <button class="secondary" onclick="resetDemo()">Reset</button>
+      <button class="secondary" onclick="resetReplay()">Reset</button>
 
       <div class="result">
         <div class="box">
@@ -136,13 +189,54 @@
         </div>
       </div>
 
-      <div id="verified" class="verified">
+      <div id="verified" class="status verified">
         ✓ VERIFIED — Same workflow produced the same deterministic replay hash.
       </div>
     </section>
 
     <section class="panel">
-      <h2>3-Line Integration</h2>
+      <h2>② DAG Divergence Detection</h2>
+      <p class="subtitle">
+        Compare a normal workflow with a mutated workflow. If the execution path changes,
+        EGA detects the mismatch and blocks propagation.
+      </p>
+
+      <div class="grid">
+        <div>
+          <h3>Normal Workflow</h3>
+          <pre id="normalWorkflow"></pre>
+          <div class="graph" id="normalGraph"></div>
+        </div>
+
+        <div>
+          <h3>Mutated Workflow</h3>
+          <pre id="mutatedWorkflow"></pre>
+          <div class="graph" id="mutatedGraph"></div>
+        </div>
+      </div>
+
+      <button onclick="runDivergence()">Run Divergence Check</button>
+      <button class="danger" onclick="mutateWorkflow()">Mutate Workflow</button>
+      <button class="secondary" onclick="resetDivergence()">Reset</button>
+
+      <div class="result">
+        <div class="box">
+          <div class="label">Normal DAG Root</div>
+          <div id="normalHash" class="hash">Not executed</div>
+        </div>
+        <div class="box">
+          <div class="label">Mutated DAG Root</div>
+          <div id="mutatedHash" class="hash">Not executed</div>
+        </div>
+      </div>
+
+      <div id="divergenceStatus" class="status blocked">
+        ✕ MISMATCH DETECTED — Execution path diverged. Trust State: CONTAINED / BLOCKED.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>③ 3-Line Integration</h2>
       <pre>npm install ega-v9
 
 import { govern } from "ega-v9";
@@ -167,8 +261,49 @@ const result = govern(workflow);</pre>
       ]
     };
 
+    const normalWorkflow = {
+      workflowId: "purchase-demo-001",
+      dag: [
+        { id: "A", action: "search_product", next: "B" },
+        { id: "B", action: "select_product", next: "C" },
+        { id: "C", action: "checkout_request", next: null }
+      ]
+    };
+
+    let currentMutatedWorkflow = structuredClone(normalWorkflow);
+
     document.getElementById("workflow").textContent =
       JSON.stringify(workflow, null, 2);
+
+    function renderWorkflows() {
+      document.getElementById("normalWorkflow").textContent =
+        JSON.stringify(normalWorkflow, null, 2);
+
+      document.getElementById("mutatedWorkflow").textContent =
+        JSON.stringify(currentMutatedWorkflow, null, 2);
+
+      renderGraph("normalGraph", normalWorkflow.dag);
+      renderGraph("mutatedGraph", currentMutatedWorkflow.dag);
+    }
+
+    function renderGraph(id, dag) {
+      const el = document.getElementById(id);
+      el.innerHTML = "";
+
+      dag.forEach((node, index) => {
+        const nodeEl = document.createElement("div");
+        nodeEl.className = "node" + (node.action.includes("unauthorized") ? " bad" : "");
+        nodeEl.textContent = node.action;
+        el.appendChild(nodeEl);
+
+        if (index < dag.length - 1) {
+          const arrow = document.createElement("span");
+          arrow.className = "arrow";
+          arrow.textContent = "→";
+          el.appendChild(arrow);
+        }
+      });
+    }
 
     function stableStringify(input) {
       if (input === null || typeof input !== "object") {
@@ -208,11 +343,46 @@ const result = govern(workflow);</pre>
       }
     }
 
-    function resetDemo() {
+    function resetReplay() {
       document.getElementById("hash1").textContent = "Not executed";
       document.getElementById("hash2").textContent = "Not executed";
       document.getElementById("verified").style.display = "none";
     }
+
+    async function runDivergence() {
+      const normalHash = await replayRoot(normalWorkflow);
+      const mutatedHash = await replayRoot(currentMutatedWorkflow);
+
+      document.getElementById("normalHash").textContent = normalHash;
+      document.getElementById("mutatedHash").textContent = mutatedHash;
+
+      const diverged = normalHash !== mutatedHash;
+      document.getElementById("divergenceStatus").style.display =
+        diverged ? "block" : "none";
+    }
+
+    function mutateWorkflow() {
+      currentMutatedWorkflow = {
+        workflowId: "purchase-demo-001",
+        dag: [
+          { id: "A", action: "search_product", next: "B" },
+          { id: "B", action: "select_product", next: "X" },
+          { id: "X", action: "unauthorized_tool_call", next: "C" },
+          { id: "C", action: "checkout_request", next: null }
+        ]
+      };
+
+      renderWorkflows();
+      resetDivergence();
+    }
+
+    function resetDivergence() {
+      document.getElementById("normalHash").textContent = "Not executed";
+      document.getElementById("mutatedHash").textContent = "Not executed";
+      document.getElementById("divergenceStatus").style.display = "none";
+    }
+
+    renderWorkflows();
   </script>
 </body>
 </html>
