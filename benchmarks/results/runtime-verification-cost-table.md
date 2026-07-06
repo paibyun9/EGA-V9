@@ -1,8 +1,8 @@
-| Metric                                          |   Measurement |
-|:------------------------------------------------|--------------:|
-| Additional Language-Model Invocations           |      0        |
-| Additional External API Requests                |      0        |
-| CPU Utilization During Runtime Verification (%) |     95.0745   |
-| Verification Latency P50 (ms)                   |      0.001833 |
-| Verification Latency P90 (ms)                   |      0.001917 |
-| Verification Latency P99 (ms)                   |      0.002375 |
+| Metric | Measurement |
+|---|---:|
+| Additional Language-Model Invocations | 0 |
+| Additional External API Requests | 0 |
+| CPU Utilization During Runtime Verification (%) | null |
+| Verification Latency P50 (ms) | 0.0030554200000000266 |
+| Verification Latency P90 (ms) | 0.003649579999999979 |
+| Verification Latency P99 (ms) | 0.006249169999999964 |
