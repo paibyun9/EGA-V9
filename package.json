@@ -12,7 +12,8 @@
     "test": "npm run test -w packages/sdk-ts",
     "dev": "npm run dev -w packages/sdk-ts",
     "release:gate": "node scripts/release-gate.cjs",
-    "stage-b:gate": "node scripts/stage-b-engine-gate.cjs"
+    "stage-b:gate": "node scripts/stage-b-engine-gate.cjs",
+    "stage-c:gate": "node scripts/stage-c-benchmark-gate.cjs"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"
