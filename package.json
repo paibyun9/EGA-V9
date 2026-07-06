@@ -11,7 +11,8 @@
     "build": "npm run build -w packages/sdk-ts",
     "test": "npm run test -w packages/sdk-ts",
     "dev": "npm run dev -w packages/sdk-ts",
-    "release:gate": "node scripts/release-gate.cjs"
+    "release:gate": "node scripts/release-gate.cjs",
+    "stage-b:gate": "node scripts/stage-b-engine-gate.cjs"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"
