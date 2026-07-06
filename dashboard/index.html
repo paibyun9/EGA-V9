@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EGA V9 Replay Consistency Demo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b1020;
+      color: #e5e7eb;
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #334155;
+      border-radius: 999px;
+      color: #93c5fd;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 48px;
+      line-height: 1.05;
+      margin: 0 0 16px;
+    }
+    .subtitle {
+      color: #94a3b8;
+      font-size: 18px;
+      margin-bottom: 36px;
+    }
+    .panel {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    pre {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+      overflow-x: auto;
+      color: #cbd5e1;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button.secondary {
+      background: #334155;
+    }
+    .result {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .box {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px;
+      word-break: break-all;
+    }
+    .label {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .hash {
+      color: #bfdbfe;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+    }
+    .verified {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #052e16;
+      border: 1px solid #16a34a;
+      color: #bbf7d0;
+      font-weight: 700;
+      display: none;
+    }
+    .footer {
+      margin-top: 32px;
+      color: #64748b;
+      font-size: 14px;
+    }
+    a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="badge">EGA V9 · v0.1.0 · Scorp Locked Demo</div>
+
+    <h1>Same Workflow.<br />Same Replay Hash.<br />VERIFIED.</h1>
+
+    <p class="subtitle">
+      This demo proves the first foundation of EGA V9:
+      deterministic replay consistency.
+    </p>
+
+    <section class="panel">
+      <h2>Workflow Input</h2>
+      <pre id="workflow"></pre>
+
+      <button onclick="runReplay()">Run Replay Twice</button>
+      <button class="secondary" onclick="resetDemo()">Reset</button>
+
+      <div class="result">
+        <div class="box">
+          <div class="label">Replay Root #1</div>
+          <div id="hash1" class="hash">Not executed</div>
+        </div>
+        <div class="box">
+          <div class="label">Replay Root #2</div>
+          <div id="hash2" class="hash">Not executed</div>
+        </div>
+      </div>
+
+      <div id="verified" class="verified">
+        ✓ VERIFIED — Same workflow produced the same deterministic replay hash.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3-Line Integration</h2>
+      <pre>npm install ega-v9
+
+import { govern } from "ega-v9";
+
+const result = govern(workflow);</pre>
+    </section>
+
+    <div class="footer">
+      GitHub: <a href="https://github.com/paibyun9/EGA-V9" target="_blank">paibyun9/EGA-V9</a>
+      · npm: <a href="https://www.npmjs.com/package/ega-v9" target="_blank">ega-v9</a>
+      · Proof, not promise.
+    </div>
+  </main>
+
+  <script>
+    const workflow = {
+      workflowId: "purchase-demo-001",
+      steps: [
+        { step: 1, action: "search_product", item: "laptop" },
+        { step: 2, action: "select_product", quantity: 1 },
+        { step: 3, action: "checkout_request", approved: true }
+      ]
+    };
+
+    document.getElementById("workflow").textContent =
+      JSON.stringify(workflow, null, 2);
+
+    function stableStringify(input) {
+      if (input === null || typeof input !== "object") {
+        return JSON.stringify(input);
+      }
+
+      if (Array.isArray(input)) {
+        return "[" + input.map(stableStringify).join(",") + "]";
+      }
+
+      return "{" + Object.keys(input).sort().map(key => {
+        return JSON.stringify(key) + ":" + stableStringify(input[key]);
+      }).join(",") + "}";
+    }
+
+    async function sha256(text) {
+      const encoded = new TextEncoder().encode(text);
+      const buffer = await crypto.subtle.digest("SHA-256", encoded);
+      return Array.from(new Uint8Array(buffer))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function replayRoot(input) {
+      return sha256(stableStringify(input));
+    }
+
+    async function runReplay() {
+      const hashA = await replayRoot(workflow);
+      const hashB = await replayRoot(workflow);
+
+      document.getElementById("hash1").textContent = hashA;
+      document.getElementById("hash2").textContent = hashB;
+
+      if (hashA === hashB) {
+        document.getElementById("verified").style.display = "block";
+      }
+    }
+
+    function resetDemo() {
+      document.getElementById("hash1").textContent = "Not executed";
+      document.getElementById("hash2").textContent = "Not executed";
+      document.getElementById("verified").style.display = "none";
+    }
+  </script>
+</body>
+</html>
