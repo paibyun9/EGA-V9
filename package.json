@@ -10,7 +10,8 @@
   "scripts": {
     "build": "npm run build -w packages/sdk-ts",
     "test": "npm run test -w packages/sdk-ts",
-    "dev": "npm run dev -w packages/sdk-ts"
+    "dev": "npm run dev -w packages/sdk-ts",
+    "release:gate": "node scripts/release-gate.cjs"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"
