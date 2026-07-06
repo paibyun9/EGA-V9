@@ -160,11 +160,16 @@
   <main class="wrap">
     <div class="badge">EGA V9 · v0.1.0 · Scorp Locked Vercel Demo</div>
 
-    <h1>Same Workflow.<br />Same Replay Hash.<br />Divergence Blocked.</h1>
+    <h1>
+      Execution Governance AI (EGA) V9<br />
+      <span style="color:#93c5fd;">Proof, not promise.</span>
+    </h1>
 
     <p class="subtitle">
-      This demo shows two foundations of EGA V9:
-      deterministic replay consistency and DAG-level divergence detection.
+      Deterministic Replay.<br />
+      Execution Verification.<br />
+      Runtime Trust.<br /><br />
+      Deterministic runtime governance for autonomous AI workflows.
     </p>
 
     <section class="panel">
@@ -237,11 +242,41 @@
 
     <section class="panel">
       <h2>③ 3-Line Integration</h2>
-      <pre>npm install ega-v9
+      <p class="subtitle">
+        EGA V9 can be attached to an existing workflow with a minimal integration path.
+        Install the SDK, import governance, and verify a workflow in minutes.
+      </p>
 
-import { govern } from "ega-v9";
+      <div class="grid">
+        <div>
+          <h3>Install</h3>
+          <pre>npm install ega-v9</pre>
+
+          <h3>Use in 3 Lines</h3>
+          <pre>import { govern } from "ega-v9";
+
+const workflow = [
+  { step: 1, action: "search_product", item: "laptop" },
+  { step: 2, action: "select_product", quantity: 1 },
+  { step: 3, action: "checkout_request", approved: true }
+];
 
 const result = govern(workflow);</pre>
+        </div>
+
+        <div>
+          <h3>Expected Output</h3>
+          <pre>{
+  "replayConsistency": true,
+  "trustState": "VERIFIED",
+  "containmentRequired": false
+}</pre>
+
+          <div class="status verified" style="display:block;">
+            ✓ READY IN MINUTES — Install, import, and verify an autonomous workflow.
+          </div>
+        </div>
+      </div>
     </section>
 
     <div class="footer">
