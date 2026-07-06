@@ -58,8 +58,32 @@ for (const row of [verification, replay, trust, containment].filter(Boolean)) {
   check(`${row.metric} p50 exists`, typeof row.p50_ms === "number");
   check(`${row.metric} p90 exists`, typeof row.p90_ms === "number");
   check(`${row.metric} p99 exists`, typeof row.p99_ms === "number");
+  check(`${row.metric} mean_ms exists`, typeof row.mean_ms === "number");
+  check(`${row.metric} memory_overhead_mb exists`, typeof row.memory_overhead_mb === "number");
+
   check(`${row.metric} iterations >= 10000`, row.iterations >= 10000);
   check(`${row.metric} p99 <= 100ms`, row.p99_ms <= 100, `Observed ${row.p99_ms}ms`);
+
+  // Measurement sanity checks for paper-grade benchmark reliability.
+  // Extremely tiny timings may indicate measurement-resolution noise.
+  // Negative memory deltas may indicate GC/OS noise rather than true overhead.
+  check(
+    `${row.metric} mean_ms >= 0.001ms sanity floor`,
+    row.mean_ms >= 0.001,
+    `Observed mean_ms=${row.mean_ms}. This may be below reliable timer resolution.`
+  );
+
+  check(
+    `${row.metric} p50 <= p90 <= p99`,
+    row.p50_ms <= row.p90_ms && row.p90_ms <= row.p99_ms,
+    `Observed p50=${row.p50_ms}, p90=${row.p90_ms}, p99=${row.p99_ms}.`
+  );
+
+  check(
+    `${row.metric} memory_overhead_mb >= 0`,
+    row.memory_overhead_mb >= 0,
+    `Observed memory_overhead_mb=${row.memory_overhead_mb}. Negative values may indicate GC/OS measurement noise.`
+  );
 }
 
 const llm = metricRow(cost, "Additional Language-Model Invocations");
