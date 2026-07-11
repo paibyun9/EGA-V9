@@ -1,5 +1,5 @@
 {
-  "name": "ega-9",
+  "name": "ega-v9",
   "version": "0.1.0",
   "description": "EGA V9 TypeScript SDK for replay, provenance, containment, and SCORP LOCK governance.",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "node -e \"console.log('ega-9 sdk test placeholder')\"",
+    "test": "node -e \"console.log('ega-v9 sdk test placeholder')\"",
     "dev": "tsc --watch"
   },
   "keywords": [

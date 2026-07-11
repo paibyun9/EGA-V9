@@ -2,11 +2,11 @@
 
 ## Package Name
 
-npm install ega-9
+npm install ega-v9
 
 The public npm package name will be:
 
-ega-9
+ega-v9
 
 ## Repository Structure
 
