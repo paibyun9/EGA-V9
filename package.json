@@ -13,7 +13,10 @@
     "dev": "npm run dev -w packages/sdk-ts",
     "release:gate": "node scripts/release-gate.cjs",
     "stage-b:gate": "node scripts/stage-b-engine-gate.cjs",
-    "stage-c:gate": "node scripts/stage-c-benchmark-gate.cjs"
+    "stage-c:gate": "node scripts/stage-c-benchmark-gate.cjs",
+    "stage-d:gate": "node scripts/stage-d-table-consistency-gate.cjs",
+    "release:all-gates": "npm run release:gate && npm run stage-b:gate && npm run stage-c:gate && npm run stage-d:gate",
+    "table4:build": "node scripts/build-table4.cjs"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"

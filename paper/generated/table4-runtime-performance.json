@@ -1,0 +1,41 @@
+{
+  "title": "Table 4. Runtime Performance Results",
+  "decimal_places": 6,
+  "source": "benchmarks/results/runtime-performance-results.json",
+  "benchmark_configuration": {
+    "iterations": 10000,
+    "warmup_iterations": 1000,
+    "batch_size": 100,
+    "timing_floor_ms": 0.001
+  },
+  "rows": [
+    {
+      "metric": "Verification Latency",
+      "p50_ms": 0.003055,
+      "p90_ms": 0.00365,
+      "p99_ms": 0.006249,
+      "mean_ms": 0.003159
+    },
+    {
+      "metric": "Replay Latency",
+      "p50_ms": 0.002893,
+      "p90_ms": 0.003021,
+      "p99_ms": 0.003818,
+      "mean_ms": 0.00284
+    },
+    {
+      "metric": "Trust-Escalation Latency",
+      "p50_ms": 0.001,
+      "p90_ms": 0.001,
+      "p99_ms": 0.001,
+      "mean_ms": 0.001
+    },
+    {
+      "metric": "Containment Activation Latency",
+      "p50_ms": 0.001,
+      "p90_ms": 0.001,
+      "p99_ms": 0.001,
+      "mean_ms": 0.001
+    }
+  ]
+}
