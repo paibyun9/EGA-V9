@@ -8,6 +8,7 @@ npm-debug.log*
 # Rust build artifacts
 target/
 crates/**/target/
-
 # Node build artifacts
-node_modules/
+# Local manuscript source — publish only after final approval
+paper/*.docx
+paper/*.pdf

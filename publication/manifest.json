@@ -1,0 +1,37 @@
+{
+  "project_name": "Execution Governance AI (EGA) V9",
+  "short_name": "EGA V9",
+  "target_version": "1.0.0",
+  "npm_package": "ega-v9",
+  "github_repository": "https://github.com/paibyun9/EGA-V9",
+  "npm_url": "https://www.npmjs.com/package/ega-v9",
+  "vercel_demo_url": "PENDING_VERCEL_URL",
+  "homepage_url": "https://lcm3.com",
+  "license": "MIT",
+  "public_api": [
+    "EGA",
+    "replay",
+    "provenance",
+    "contain",
+    "verifyExecution"
+  ],
+  "required_demo_features": [
+    "Replay Consistency",
+    "DAG Divergence Detection",
+    "3-Line Integration"
+  ],
+  "required_publication_phrases": [
+    "Deterministic Replay",
+    "Execution Verification",
+    "Runtime Trust",
+    "Proof, not promise."
+  ],
+  "benchmark_table": "paper/generated/table4-runtime-performance.json",
+  "release_policy": {
+    "require_version_alignment": true,
+    "require_clean_git": true,
+    "require_demo_url": true,
+    "require_homepage_alignment": false,
+    "require_live_url_checks": false
+  }
+}

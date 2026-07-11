@@ -15,8 +15,10 @@
     "stage-b:gate": "node scripts/stage-b-engine-gate.cjs",
     "stage-c:gate": "node scripts/stage-c-benchmark-gate.cjs",
     "stage-d:gate": "node scripts/stage-d-table-consistency-gate.cjs",
-    "release:all-gates": "npm run release:gate && npm run stage-b:gate && npm run stage-c:gate && npm run stage-d:gate",
-    "table4:build": "node scripts/build-table4.cjs"
+    "release:all-gates": "npm run release:gate && npm run stage-b:gate && npm run stage-c:gate && npm run stage-d:gate && npm run stage-e:gate",
+    "table4:build": "node scripts/build-table4.cjs",
+    "stage-e:gate": "node scripts/stage-e-publication-consistency-gate.cjs",
+    "stage-e:live": "EGA_LIVE_PUBLICATION_CHECK=1 node scripts/stage-e-publication-consistency-gate.cjs"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"
