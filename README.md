@@ -128,9 +128,9 @@ This guide explains how to:
 
 ## 7. Publication Verification
 
-See:
+The complete publication verification workflow is documented here.
 
-→ **[Publication Verification](docs/PUBLICATION_VERIFICATION.md)**
+Detailed guide → **[Publication Verification](docs/PUBLICATION_VERIFICATION.md)**
 
 ------------------------------------------------------------------------
 
