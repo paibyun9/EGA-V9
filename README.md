@@ -125,25 +125,11 @@ This guide explains how to:
 - Reproduce the paper artifacts
 
 ------------------------------------------------------------------------
-
 ## 7. Publication Verification
 
-Run the verification gates sequentially:
+See:
 
-``` bash
-npm run release:gate
-npm run stage-b:gate
-npm run stage-c:gate
-npm run stage-d:gate
-npm run stage-e:gate
-```
-
-When all public assets are finalized:
-
-``` bash
-npm run stage-e:live
-```
-
+→ **[Publication Verification](docs/PUBLICATION_VERIFICATION.md)**
 ------------------------------------------------------------------------
 
 ## 8. Runtime Architecture
