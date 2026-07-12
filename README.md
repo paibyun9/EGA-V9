@@ -125,31 +125,20 @@ This guide explains how to:
 - Reproduce the paper artifacts
 
 ------------------------------------------------------------------------
+
 ## 7. Publication Verification
 
 See:
 
 → **[Publication Verification](docs/PUBLICATION_VERIFICATION.md)**
+
 ------------------------------------------------------------------------
 
 ## 8. Runtime Architecture
 
-``` text
-Workflow
-   │
-   ▼
-TypeScript SDK
-   │
-   ▼
-Runtime Governance Core
-   ├── Deterministic Replay
-   ├── Provenance Verification
-   ├── Trust-State Evaluation
-   └── Fail-Closed Containment
-   │
-   ▼
-Publication Verification
-```
+See:
+
+→ **[Runtime Architecture](docs/RUNTIME_ARCHITECTURE.md)**
 
 ------------------------------------------------------------------------
 
