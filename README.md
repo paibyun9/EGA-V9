@@ -136,9 +136,9 @@ Detailed guide → **[Publication Verification](docs/PUBLICATION_VERIFICATION.md
 
 ## 8. Runtime Architecture
 
-See:
+The complete EGA V9 runtime architecture is documented here.
 
-→ **[Runtime Architecture](docs/RUNTIME_ARCHITECTURE.md)**
+Detailed guide → **[Runtime Architecture](docs/RUNTIME_ARCHITECTURE.md)**
 
 ------------------------------------------------------------------------
 
