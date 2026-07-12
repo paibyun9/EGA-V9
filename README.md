@@ -114,7 +114,7 @@ node quick-start.mjs
 
 The complete replication workflow used in the EGA V9 paper is available here:
 
-→ **[Reproducing the Paper](docs/REPRODUCING_THE_PAPER.md)**
+→ Detailed guide →**[Reproducing the Paper](docs/REPRODUCING_THE_PAPER.md)**
 
 This guide explains how to:
 
