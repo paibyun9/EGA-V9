@@ -68,12 +68,32 @@ npm ci
 
 ## 3. Three-Line Integration
 
-``` javascript
-import { govern } from "ega-v9";
+Protect an existing AI application with a single middleware.
 
-const result = govern(workflow);
+### Before
 
-console.log(result.verification);
+```ts
+app.post("/checkout", async (req) => {
+  await agent.buy(req.body.item);
+});
+```
+
+### After
+
+```ts
+import { ega } from "ega-v9";
+
+app.use(ega.guard());
+```
+
+Example verification result:
+
+```json
+{
+  "verified": true,
+  "containmentRequired": false,
+  "latency": "1.83µs"
+}
 ```
 
 ------------------------------------------------------------------------
