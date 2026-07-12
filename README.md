@@ -112,17 +112,17 @@ node quick-start.mjs
 
 ## 6. Reproducing the Paper
 
-``` bash
-npm run build
-npm test
-npm run stage-c:gate
-npm run table4:build
-npm run stage-d:gate
-npm run release:all-gates
-```
+The complete replication workflow used in the EGA V9 paper is available here:
 
-This workflow regenerates the publication artifact used by the paper and
-validates its consistency.
+→ **[Reproducing the Paper](docs/REPRODUCING_THE_PAPER.md)**
+
+This guide explains how to:
+
+- Build the SDK
+- Run the benchmark
+- Regenerate Table 4
+- Execute all publication verification gates
+- Reproduce the paper artifacts
 
 ------------------------------------------------------------------------
 
