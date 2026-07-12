@@ -28,7 +28,7 @@ console.log("\nEGA V9 v1.0.0 Release Gate\n");
 check("Root package.json exists", exists("package.json"));
 check("README.md exists", exists("README.md"));
 check("LICENSE or SECURITY.md exists", exists("SECURITY.md") || exists("LICENSE"));
-check("Release Gate document exists", exists("docs/RELEASE_GATE_V1.md"));
+check("Publication verification document exists", exists("docs/PUBLICATION_VERIFICATION.md"));
 
 // 2. SDK workspace
 check("TypeScript SDK package exists", exists("packages/sdk-ts/package.json"));
