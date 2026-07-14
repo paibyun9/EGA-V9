@@ -135,10 +135,13 @@ Run:
 
 ```bash
 node server.cjs
+```
 
-------------------------------------------------------------------------
+---
 
 ## 5. Verified Behavior
+
+The official Express integration tests verify the following behavior.
 
 A normal workflow is verified and allowed:
 
@@ -150,9 +153,11 @@ A normal workflow is verified and allowed:
   "containmentRequired": false,
   "executionAllowed": true
 }
+```
 
 A replay mismatch is fail-closed contained:
 
+```json
 {
   "statusCode": 403,
   "checkoutAccepted": false,
@@ -161,6 +166,7 @@ A replay mismatch is fail-closed contained:
   "containmentRequired": true,
   "executionAllowed": false
 }
+```
 
 Latency values are omitted because they vary across execution environments. Publication performance results are reported separately in the benchmark artifacts.
 
