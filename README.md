@@ -20,14 +20,13 @@ EGA V9 paper.
 3.  Three-Line Integration
 4.  Quick Start
 5. [Verified Behavior](#5-verified-behavior)
-6.  Expected Output
-7.  Reproducing the Paper
-8.  Publication Verification
-9.  Runtime Architecture
-10.  Repository Structure
-11. Contact and Collaboration
-12. License
-13. Roadmap
+6.  Reproducing the Paper
+7.  Publication Verification
+8.  Runtime Architecture
+9.  Repository Structure
+10. Contact and Collaboration
+11. License
+12. Roadmap
 
 ------------------------------------------------------------------------
 
