@@ -100,27 +100,36 @@ Example verification result:
 
 ## 4. Quick Start
 
-Create `quick-start.mjs`.
+Create `server.cjs`:
 
-``` javascript
-import { govern } from "ega-v9";
+```js
+const express = require("express");
+const {
+  ega
+} = require("ega-v9");
 
-const workflow = [
-  { step:1, action:"search_product", item:"laptop" },
-  { step:2, action:"select_product", quantity:1 },
-  { step:3, action:"checkout_request", approved:true }
-];
+const app = express();
 
-const result = govern(workflow);
+app.use(express.json());
+app.use(ega.guard());
 
-console.log(JSON.stringify(result.verification,null,2));
-```
+app.post(
+  "/checkout",
+  (req, res) => {
+    res.json({
+      checkoutAccepted: true
+    });
+  }
+);
 
-Run:
-
-``` bash
-node quick-start.mjs
-```
+app.listen(
+  3000,
+  () => {
+    console.log(
+      "EGA V9 example listening on port 3000"
+    );
+  }
+);
 
 ------------------------------------------------------------------------
 
