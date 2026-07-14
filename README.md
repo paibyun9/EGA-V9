@@ -133,19 +133,6 @@ node server.cjs
 
 ## 5. Verified Behavior
 
-
-Run:
-
-```bash
-node server.cjs
-```
-```bash
-node server.cjs
-```
----
-
-## 5. Verified Behavior
-
 The official Express integration tests verify the following behavior.
 
 A normal workflow is verified and allowed:
