@@ -128,7 +128,6 @@ Run:
 ```bash
 node server.cjs
 ```
-
 ---
 
 ## 5. Verified Behavior
