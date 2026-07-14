@@ -129,10 +129,6 @@ Run:
 node server.cjs
 ```
 
-```bash
-node server.cjs
-```
-
 ---
 
 ## 5. Verified Behavior
