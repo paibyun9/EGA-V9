@@ -131,17 +131,39 @@ app.listen(
   }
 );
 
+Run:
+
+```bash
+node server.cjs
+
 ------------------------------------------------------------------------
 
-## 5. Expected Output
+## 5. Verified Behavior
 
-``` json
+A normal workflow is verified and allowed:
+
+```json
 {
-  "replayConsistency": true,
-  "trustState": "VERIFIED",
-  "containmentRequired": false
+  "statusCode": 200,
+  "checkoutAccepted": true,
+  "verified": true,
+  "containmentRequired": false,
+  "executionAllowed": true
 }
-```
+
+A replay mismatch is fail-closed contained:
+
+{
+  "statusCode": 403,
+  "checkoutAccepted": false,
+  "detectionStatus": "mismatch",
+  "verified": false,
+  "containmentRequired": true,
+  "executionAllowed": false
+}
+
+Latency values are omitted because they vary across execution environments. Publication performance results are reported separately in the benchmark artifacts.
+
 ------------------------------------------------------------------------
 
 ## 6. Reproducing the Paper
