@@ -80,21 +80,13 @@ app.post("/checkout", async (req) => {
 
 ### After
 
-```ts
-import { ega } from "ega-v9";
+```js
+const { ega } = require("ega-v9");
 
 app.use(ega.guard());
 ```
 
-Example verification result:
-
-```json
-{
-  "verified": true,
-  "containmentRequired": false,
-  "latency": "1.83µs"
-}
-```
+A verified request continues to the protected route. A replay mismatch is fail-closed contained before the protected operation is executed.
 
 ------------------------------------------------------------------------
 
