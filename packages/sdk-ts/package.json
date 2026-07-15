@@ -1,6 +1,6 @@
 {
   "name": "ega-v9",
-  "version": "0.1.0",
+  "version": "1.0.0-rc.1",
   "description": "EGA V9 TypeScript SDK for replay, provenance, containment, and SCORP LOCK governance.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

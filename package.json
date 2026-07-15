@@ -1,6 +1,6 @@
 {
   "name": "ega-v9",
-  "version": "0.1.0",
+  "version": "1.0.0-rc.1",
   "private": true,
   "description": "EGA V9 monorepo: Rust runtime core, TypeScript SDK, dashboard, examples, and SCORP LOCK governance.",
   "license": "MIT",
