@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "npm run build -w packages/sdk-ts",
-    "test": "npm run test -w packages/sdk-ts",
+    "test": "npm run test:v1",
     "dev": "npm run dev -w packages/sdk-ts",
     "release:gate": "node scripts/release-gate.cjs",
     "stage-b:gate": "node scripts/stage-b-engine-gate.cjs",
@@ -18,7 +18,20 @@
     "release:all-gates": "npm run release:gate && npm run stage-b:gate && npm run stage-c:gate && npm run stage-d:gate && npm run stage-e:gate",
     "table4:build": "node scripts/build-table4.cjs",
     "stage-e:gate": "node scripts/stage-e-publication-consistency-gate.cjs",
-    "stage-e:live": "EGA_LIVE_PUBLICATION_CHECK=1 node scripts/stage-e-publication-consistency-gate.cjs"
+    "stage-e:live": "EGA_LIVE_PUBLICATION_CHECK=1 node scripts/stage-e-publication-consistency-gate.cjs",
+    "example:express": "npm run build && node examples/express/server.mjs",
+    "test:express-integration": "npm run build && node packages/sdk-ts/test/express-guard-integration.mjs",
+    "test:behavior:normal": "npm run build && node --test packages/sdk-ts/test/behavior/normal-workflow.test.mjs",
+    "test:behavior:replay-mismatch": "npm run build && node --test packages/sdk-ts/test/behavior/replay-mismatch.test.mjs",
+    "test:behavior:provenance": "npm run build && node --test packages/sdk-ts/test/behavior/provenance.test.mjs",
+    "test:behavior:containment": "npm run build && node --test packages/sdk-ts/test/behavior/containment.test.mjs",
+    "test:behavior:trust-state": "npm run build && node --test packages/sdk-ts/test/behavior/trust-state.test.mjs",
+    "test:v1": "npm run build && node scripts/testing/run-v1-test-suite.cjs",
+    "test:behavior:negative": "npm run build && node --test packages/sdk-ts/test/behavior/negative-paths.test.mjs",
+    "benchmark:v1:smoke": "npm run build && node --expose-gc benchmarks/v1/runtime-governance-benchmark.mjs --profile=smoke --output=/tmp/ega-v9-v1-benchmark-smoke",
+    "benchmark:v1:publication": "npm run build && node --expose-gc benchmarks/v1/runtime-governance-benchmark.mjs --profile=publication --output=benchmarks/results/v1-runtime-governance",
+    "benchmark:v1:gate": "node scripts/v1-benchmark-gate.cjs",
+    "benchmark:v1:all": "npm run benchmark:v1:publication && npm run benchmark:v1:gate"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "node -e \"console.log('ega-v9 sdk test placeholder')\"",
+    "test": "npm run build && node ../../scripts/testing/run-v1-test-suite.cjs",
     "dev": "tsc --watch"
   },
   "keywords": [

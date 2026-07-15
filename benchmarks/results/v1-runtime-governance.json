@@ -1,0 +1,578 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmark": "EGA V9 v1 Runtime Governance Benchmark",
+  "profile": "publication",
+  "generatedAt": "2026-07-13T21:59:31.796Z",
+  "environment": {
+    "nodeVersion": "v20.20.2",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "operatingSystemRelease": "25.5.0",
+    "cpuModel": "Apple M1",
+    "logicalCpuCount": 8,
+    "totalSystemMemoryBytes": 8589934592
+  },
+  "benchmarkConfiguration": {
+    "warmupIterations": 1000,
+    "operationCounts": [
+      1000,
+      10000
+    ],
+    "concurrencyLevels": [
+      1,
+      10,
+      50
+    ],
+    "scenarios": [
+      "normal",
+      "replay-mismatch"
+    ]
+  },
+  "integrity": {
+    "totalErrors": 0,
+    "totalReplayRootDivergences": 0,
+    "llmCalls": 0
+  },
+  "results": [
+    {
+      "scenario": "normal",
+      "operationCount": 1000,
+      "concurrency": 1,
+      "warmupIterations": 1000,
+      "completedOperations": 1000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 22.386403,
+        "p50Microseconds": 20.5625,
+        "p95Microseconds": 26.42115,
+        "p99Microseconds": 42.00384,
+        "minMicroseconds": 17.208,
+        "maxMicroseconds": 471.917
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 20.989385,
+        "p50Microseconds": 19.167,
+        "p95Microseconds": 24.8372,
+        "p99Microseconds": 39.95967,
+        "minMicroseconds": 16.042,
+        "maxMicroseconds": 468.25
+      },
+      "throughput": {
+        "operationsPerSecond": 25392.875394,
+        "wallClockMilliseconds": 39.381125
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 66.798,
+        "internalGuardMicrosecondsPerOperation": 20.989385,
+        "evidenceBytesPerOperation": 3672,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5193424,
+        "heapUsedAfterBytes": 20171800,
+        "heapUsedDeltaBytes": 14978376,
+        "peakHeapUsedBytes": 20171800,
+        "rssBeforeBytes": 69648384,
+        "rssAfterBytes": 74973184,
+        "rssDeltaBytes": 5324800
+      }
+    },
+    {
+      "scenario": "replay-mismatch",
+      "operationCount": 1000,
+      "concurrency": 1,
+      "warmupIterations": 1000,
+      "completedOperations": 1000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 65.412067,
+        "p50Microseconds": 61.6455,
+        "p95Microseconds": 69.30865,
+        "p99Microseconds": 89.94601,
+        "minMicroseconds": 56.917,
+        "maxMicroseconds": 760.042
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 63.698048,
+        "p50Microseconds": 60,
+        "p95Microseconds": 67.13125,
+        "p99Microseconds": 85.22742,
+        "minMicroseconds": 55.333,
+        "maxMicroseconds": 754.291
+      },
+      "throughput": {
+        "operationsPerSecond": 12380.310869,
+        "wallClockMilliseconds": 80.773416
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 115.961,
+        "internalGuardMicrosecondsPerOperation": 63.698048,
+        "evidenceBytesPerOperation": 3888,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5536584,
+        "heapUsedAfterBytes": 17776368,
+        "heapUsedDeltaBytes": 12239784,
+        "peakHeapUsedBytes": 27205048,
+        "rssBeforeBytes": 95911936,
+        "rssAfterBytes": 92258304,
+        "rssDeltaBytes": -3653632
+      }
+    },
+    {
+      "scenario": "normal",
+      "operationCount": 1000,
+      "concurrency": 10,
+      "warmupIterations": 1000,
+      "completedOperations": 1000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 243.828426,
+        "p50Microseconds": 233.1875,
+        "p95Microseconds": 288.6479,
+        "p99Microseconds": 905.43458,
+        "minMicroseconds": 172.917,
+        "maxMicroseconds": 968.875
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 113.772488,
+        "p50Microseconds": 106.2915,
+        "p95Microseconds": 177.04615,
+        "p99Microseconds": 301.64116,
+        "minMicroseconds": 37.5,
+        "maxMicroseconds": 859.792
+      },
+      "throughput": {
+        "operationsPerSecond": 30634.869061,
+        "wallClockMilliseconds": 32.642542
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 56.038,
+        "internalGuardMicrosecondsPerOperation": 113.772488,
+        "evidenceBytesPerOperation": 3672,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5392512,
+        "heapUsedAfterBytes": 18238640,
+        "heapUsedDeltaBytes": 12846128,
+        "peakHeapUsedBytes": 21607328,
+        "rssBeforeBytes": 95846400,
+        "rssAfterBytes": 93831168,
+        "rssDeltaBytes": -2015232
+      }
+    },
+    {
+      "scenario": "replay-mismatch",
+      "operationCount": 1000,
+      "concurrency": 10,
+      "warmupIterations": 1000,
+      "completedOperations": 1000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 716.043354,
+        "p50Microseconds": 687.479,
+        "p95Microseconds": 793.20595,
+        "p99Microseconds": 1450.67292,
+        "minMicroseconds": 615.041,
+        "maxMicroseconds": 1506.667
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 369.635303,
+        "p50Microseconds": 364.583,
+        "p95Microseconds": 628.03095,
+        "p99Microseconds": 1176.06709,
+        "minMicroseconds": 78,
+        "maxMicroseconds": 1376.417
+      },
+      "throughput": {
+        "operationsPerSecond": 12589.113931,
+        "wallClockMilliseconds": 79.433708
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 104.084,
+        "internalGuardMicrosecondsPerOperation": 369.635303,
+        "evidenceBytesPerOperation": 3888,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5373696,
+        "heapUsedAfterBytes": 17454752,
+        "heapUsedDeltaBytes": 12081056,
+        "peakHeapUsedBytes": 26722120,
+        "rssBeforeBytes": 95223808,
+        "rssAfterBytes": 93814784,
+        "rssDeltaBytes": -1409024
+      }
+    },
+    {
+      "scenario": "normal",
+      "operationCount": 1000,
+      "concurrency": 50,
+      "warmupIterations": 1000,
+      "completedOperations": 1000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 1304.299797,
+        "p50Microseconds": 1257.2295,
+        "p95Microseconds": 1870.4771,
+        "p99Microseconds": 2026.93916,
+        "minMicroseconds": 940.709,
+        "maxMicroseconds": 2098.084
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 562.408633,
+        "p50Microseconds": 531.333,
+        "p95Microseconds": 1125.05,
+        "p99Microseconds": 1443.74667,
+        "minMicroseconds": 143.417,
+        "maxMicroseconds": 1551
+      },
+      "throughput": {
+        "operationsPerSecond": 30110.090319,
+        "wallClockMilliseconds": 33.211458
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 58.922,
+        "internalGuardMicrosecondsPerOperation": 562.408633,
+        "evidenceBytesPerOperation": 3672,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5412560,
+        "heapUsedAfterBytes": 18499288,
+        "heapUsedDeltaBytes": 13086728,
+        "peakHeapUsedBytes": 21934600,
+        "rssBeforeBytes": 95764480,
+        "rssAfterBytes": 94568448,
+        "rssDeltaBytes": -1196032
+      }
+    },
+    {
+      "scenario": "replay-mismatch",
+      "operationCount": 1000,
+      "concurrency": 50,
+      "warmupIterations": 1000,
+      "completedOperations": 1000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 3588.504358,
+        "p50Microseconds": 3495.625,
+        "p95Microseconds": 4285.7271,
+        "p99Microseconds": 4514.5825,
+        "minMicroseconds": 3060.583,
+        "maxMicroseconds": 4586.792
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 1709.312922,
+        "p50Microseconds": 1663.583,
+        "p95Microseconds": 3120.93685,
+        "p99Microseconds": 3653.868,
+        "minMicroseconds": 175.875,
+        "maxMicroseconds": 3941.375
+      },
+      "throughput": {
+        "operationsPerSecond": 12559.355987,
+        "wallClockMilliseconds": 79.621917
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 105.93,
+        "internalGuardMicrosecondsPerOperation": 1709.312922,
+        "evidenceBytesPerOperation": 3888,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5394776,
+        "heapUsedAfterBytes": 20051216,
+        "heapUsedDeltaBytes": 14656440,
+        "peakHeapUsedBytes": 25817080,
+        "rssBeforeBytes": 95207424,
+        "rssAfterBytes": 94683136,
+        "rssDeltaBytes": -524288
+      }
+    },
+    {
+      "scenario": "normal",
+      "operationCount": 10000,
+      "concurrency": 1,
+      "warmupIterations": 1000,
+      "completedOperations": 10000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 17.702174,
+        "p50Microseconds": 15.583,
+        "p95Microseconds": 20.042,
+        "p99Microseconds": 27.12584,
+        "minMicroseconds": 14.667,
+        "maxMicroseconds": 762.417
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 16.964076,
+        "p50Microseconds": 14.958,
+        "p95Microseconds": 19.125,
+        "p99Microseconds": 25.29283,
+        "minMicroseconds": 14.041,
+        "maxMicroseconds": 755.125
+      },
+      "throughput": {
+        "operationsPerSecond": 31465.109946,
+        "wallClockMilliseconds": 317.812333
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 38.9235,
+        "internalGuardMicrosecondsPerOperation": 16.964076,
+        "evidenceBytesPerOperation": 3672,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5428320,
+        "heapUsedAfterBytes": 16826416,
+        "heapUsedDeltaBytes": 11398096,
+        "peakHeapUsedBytes": 53678120,
+        "rssBeforeBytes": 96829440,
+        "rssAfterBytes": 105447424,
+        "rssDeltaBytes": 8617984
+      }
+    },
+    {
+      "scenario": "replay-mismatch",
+      "operationCount": 10000,
+      "concurrency": 1,
+      "warmupIterations": 1000,
+      "completedOperations": 10000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 63.196441,
+        "p50Microseconds": 59.666,
+        "p95Microseconds": 65.125,
+        "p99Microseconds": 79.17283,
+        "minMicroseconds": 53.625,
+        "maxMicroseconds": 892.417
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 61.976376,
+        "p50Microseconds": 58.5,
+        "p95Microseconds": 63.58605,
+        "p99Microseconds": 76.83383,
+        "minMicroseconds": 52.708,
+        "maxMicroseconds": 882.458
+      },
+      "throughput": {
+        "operationsPerSecond": 12902.626459,
+        "wallClockMilliseconds": 775.036
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 88.0853,
+        "internalGuardMicrosecondsPerOperation": 61.976376,
+        "evidenceBytesPerOperation": 3888,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5418216,
+        "heapUsedAfterBytes": 26831248,
+        "heapUsedDeltaBytes": 21413032,
+        "peakHeapUsedBytes": 54452408,
+        "rssBeforeBytes": 105578496,
+        "rssAfterBytes": 103809024,
+        "rssDeltaBytes": -1769472
+      }
+    },
+    {
+      "scenario": "normal",
+      "operationCount": 10000,
+      "concurrency": 10,
+      "warmupIterations": 1000,
+      "completedOperations": 10000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 223.432344,
+        "p50Microseconds": 209.458,
+        "p95Microseconds": 257.33605,
+        "p99Microseconds": 850.7525,
+        "minMicroseconds": 158.708,
+        "maxMicroseconds": 1005.125
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 99.022222,
+        "p50Microseconds": 94.1875,
+        "p95Microseconds": 149.83605,
+        "p99Microseconds": 212.62625,
+        "minMicroseconds": 32.916,
+        "maxMicroseconds": 898.334
+      },
+      "throughput": {
+        "operationsPerSecond": 33899.114182,
+        "wallClockMilliseconds": 294.992959
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 35.0386,
+        "internalGuardMicrosecondsPerOperation": 99.022222,
+        "evidenceBytesPerOperation": 3672,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5469000,
+        "heapUsedAfterBytes": 51862744,
+        "heapUsedDeltaBytes": 46393744,
+        "peakHeapUsedBytes": 53468064,
+        "rssBeforeBytes": 103809024,
+        "rssAfterBytes": 118964224,
+        "rssDeltaBytes": 15155200
+      }
+    },
+    {
+      "scenario": "replay-mismatch",
+      "operationCount": 10000,
+      "concurrency": 10,
+      "warmupIterations": 1000,
+      "completedOperations": 10000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 692.968682,
+        "p50Microseconds": 660.2915,
+        "p95Microseconds": 760.82295,
+        "p99Microseconds": 1435.33525,
+        "minMicroseconds": 572,
+        "maxMicroseconds": 2317.167
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 355.330535,
+        "p50Microseconds": 348.979,
+        "p95Microseconds": 604,
+        "p99Microseconds": 1214.0125,
+        "minMicroseconds": 73.542,
+        "maxMicroseconds": 2203.042
+      },
+      "throughput": {
+        "operationsPerSecond": 13059.61256,
+        "wallClockMilliseconds": 765.7195
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 87.5075,
+        "internalGuardMicrosecondsPerOperation": 355.330535,
+        "evidenceBytesPerOperation": 3888,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5457688,
+        "heapUsedAfterBytes": 28456112,
+        "heapUsedDeltaBytes": 22998424,
+        "peakHeapUsedBytes": 53899440,
+        "rssBeforeBytes": 105709568,
+        "rssAfterBytes": 108298240,
+        "rssDeltaBytes": 2588672
+      }
+    },
+    {
+      "scenario": "normal",
+      "operationCount": 10000,
+      "concurrency": 50,
+      "warmupIterations": 1000,
+      "completedOperations": 10000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 1154.242715,
+        "p50Microseconds": 1089.125,
+        "p95Microseconds": 1792.56395,
+        "p99Microseconds": 1970.88125,
+        "minMicroseconds": 817,
+        "maxMicroseconds": 3132.125
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 478.303207,
+        "p50Microseconds": 448.9165,
+        "p95Microseconds": 925.35415,
+        "p99Microseconds": 1369.00125,
+        "minMicroseconds": 117.042,
+        "maxMicroseconds": 2594.417
+      },
+      "throughput": {
+        "operationsPerSecond": 33545.832203,
+        "wallClockMilliseconds": 298.099625
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 36.9959,
+        "internalGuardMicrosecondsPerOperation": 478.303207,
+        "evidenceBytesPerOperation": 3672,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5322776,
+        "heapUsedAfterBytes": 21109096,
+        "heapUsedDeltaBytes": 15786320,
+        "peakHeapUsedBytes": 51929888,
+        "rssBeforeBytes": 108314624,
+        "rssAfterBytes": 103514112,
+        "rssDeltaBytes": -4800512
+      }
+    },
+    {
+      "scenario": "replay-mismatch",
+      "operationCount": 10000,
+      "concurrency": 50,
+      "warmupIterations": 1000,
+      "completedOperations": 10000,
+      "errors": 0,
+      "replayRootDivergences": 0,
+      "latency": {
+        "meanMicroseconds": 3473.73907,
+        "p50Microseconds": 3344.625,
+        "p95Microseconds": 4309.4191,
+        "p99Microseconds": 4800.96325,
+        "minMicroseconds": 2942.833,
+        "maxMicroseconds": 6163.333
+      },
+      "internalGuardLatency": {
+        "meanMicroseconds": 1627.947105,
+        "p50Microseconds": 1601.667,
+        "p95Microseconds": 2955.8527,
+        "p99Microseconds": 3664.21232,
+        "minMicroseconds": 160.25,
+        "maxMicroseconds": 5570.667
+      },
+      "throughput": {
+        "operationsPerSecond": 13017.578939,
+        "wallClockMilliseconds": 768.192
+      },
+      "replayCost": {
+        "cpuMicrosecondsPerOperation": 89.3581,
+        "internalGuardMicrosecondsPerOperation": 1627.947105,
+        "evidenceBytesPerOperation": 3888,
+        "llmCalls": 0,
+        "networkCallsInitiatedByHarness": 0
+      },
+      "memory": {
+        "heapUsedBeforeBytes": 5307496,
+        "heapUsedAfterBytes": 23499192,
+        "heapUsedDeltaBytes": 18191696,
+        "peakHeapUsedBytes": 57816960,
+        "rssBeforeBytes": 104497152,
+        "rssAfterBytes": 114851840,
+        "rssDeltaBytes": 10354688
+      }
+    }
+  ]
+}
