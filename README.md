@@ -92,42 +92,63 @@ A verified request proceeds to the protected route. A replay mismatch is fail-cl
 
 ## 4. Quick Start
 
-Create `server.cjs`:
+Create a file named `quick-start.cjs`.
 
-```js
-const express = require("express");
-const {
-  ega
-} = require("ega-v9");
+```javascript
+const { verifyExecution } = require("ega-v9");
 
-const app = express();
-
-app.use(express.json());
-app.use(ega.guard());
-
-app.post(
-  "/checkout",
-  (req, res) => {
-    res.json({
-      checkoutAccepted: true
-    });
+const workflow = [
+  {
+    step: 1,
+    action: "search_product",
+    item: "laptop"
+  },
+  {
+    step: 2,
+    action: "select_product",
+    quantity: 1
+  },
+  {
+    step: 3,
+    action: "checkout_request",
+    approved: true
   }
-);
+];
 
-app.listen(
-  3000,
-  () => {
-    console.log(
-      "EGA V9 example listening on port 3000"
-    );
-  }
-);
+const result = verifyExecution(workflow);
+
+console.log({
+  status: result.status,
+  replayConsistency:
+    result.detection.status === "match",
+  trustState:
+    result.trust.currentTier,
+  containmentRequired:
+    result.containment.activated &&
+    !result.containment.executionAllowed,
+  executionAllowed:
+    result.containment.executionAllowed
+});
+```
 
 Run:
 
 ```bash
-node server.cjs
+node quick-start.cjs
 ```
+
+Expected output:
+
+```text
+{
+  status: 'verified',
+  replayConsistency: true,
+  trustState: 'T1',
+  containmentRequired: false,
+  executionAllowed: true
+}
+```
+
 ---
 
 ## 5. Verified Behavior
