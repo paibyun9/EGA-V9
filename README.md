@@ -171,6 +171,8 @@ This output demonstrates that:
 - ✅ The workflow remains in Trust State **T1**.
 - ✅ No containment is required.
 - ✅ Execution is allowed.
+
+These results were verified using the published EGA V9 Release Candidate package.
   
 ------------------------------------------------------------------------
 
