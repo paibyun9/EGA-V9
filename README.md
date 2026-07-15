@@ -72,7 +72,7 @@ Protect an existing AI application with a single middleware.
 
 ### Before
 
-```ts
+```javascript
 app.post("/checkout", async (req) => {
   await agent.buy(req.body.item);
 });
@@ -80,13 +80,13 @@ app.post("/checkout", async (req) => {
 
 ### After
 
-```js
+```javascript
 const { ega } = require("ega-v9");
 
 app.use(ega.guard());
 ```
 
-A verified request continues to the protected route. A replay mismatch is fail-closed contained before the protected operation is executed.
+A verified request proceeds to the protected route. A replay mismatch is fail-closed contained before the protected operation is executed.
 
 ------------------------------------------------------------------------
 
