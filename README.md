@@ -153,7 +153,7 @@ Expected output:
 
 ## 5. Verified Behavior
 
-The Quick Start example produces deterministic runtime verification.
+The Quick Start example demonstrates deterministic runtime verification.
 
 ```text
 {
