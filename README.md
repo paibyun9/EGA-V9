@@ -153,35 +153,25 @@ Expected output:
 
 ## 5. Verified Behavior
 
-The official Express integration tests verify the following behavior.
+The Quick Start example produces deterministic runtime verification.
 
-A normal workflow is verified and allowed:
-
-```json
+```text
 {
-  "statusCode": 200,
-  "checkoutAccepted": true,
-  "verified": true,
-  "containmentRequired": false,
-  "executionAllowed": true
+  status: 'verified',
+  replayConsistency: true,
+  trustState: 'T1',
+  containmentRequired: false,
+  executionAllowed: true
 }
 ```
 
-A replay mismatch is fail-closed contained:
+This output demonstrates that:
 
-```json
-{
-  "statusCode": 403,
-  "checkoutAccepted": false,
-  "detectionStatus": "mismatch",
-  "verified": false,
-  "containmentRequired": true,
-  "executionAllowed": false
-}
-```
-
-Latency values are omitted because they vary across execution environments. Publication performance results are reported separately in the benchmark artifacts.
-
+- ✅ Replay consistency is verified.
+- ✅ The workflow remains in Trust State **T1**.
+- ✅ No containment is required.
+- ✅ Execution is allowed.
+  
 ------------------------------------------------------------------------
 
 ## 6. Reproducing the Paper
