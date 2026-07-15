@@ -41,7 +41,7 @@ Instead of asking another LLM whether an execution is safe, EGA V9 verifies work
 ### EGA V9
 
 - Runtime verification with **0 additional LLM calls**
-- Average verification latency: **~0.0018 ms**
+- Median (P50) verification latency: **0.003055 ms**
 - **10,000 workflows evaluated**
 - **0% false positives / 0% false negatives**
 - Deterministic replay, provenance verification, and fail-closed containment
