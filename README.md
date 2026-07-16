@@ -117,7 +117,7 @@ Expected Output
 
 ## 5. Expected Output
 
-A verified workflow produces deterministic execution results. When the replay path matches the original execution, EGA confirms workflow integrity, keeps the trust state at **T1**, and allows execution without containment.
+A verified workflow confirms deterministic replay, preserves workflow integrity, and allows execution without containment. When the replay path matches the original execution, EGA confirms workflow integrity, keeps the trust state at **T1**, and allows execution without containment.
 
 ```json
 {
