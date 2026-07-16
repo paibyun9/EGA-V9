@@ -72,10 +72,10 @@ app.use(ega.guard());
 The middleware verifies the workflow before the application route executes.
 Replay mismatches are fail-closed contained and do not reach the protected
 route.
-
+```
 ------------------------------------------------------------------------
 
-4. Quick Start
+## 4. Quick Start
 
 Verify a workflow with a single function call.
 
@@ -114,68 +114,7 @@ Expected Output
 }
 ```
 
-
-## 4. Quick Start
-
-Create quick-start.cjs.
-
-const {
-  verifyExecution
-} = require("ega-v9");
-
-const workflow = [
-  {
-    step: 1,
-    action: "search_product",
-    item: "laptop"
-  },
-  {
-    step: 2,
-    action: "select_product",
-    quantity: 1
-  },
-  {
-    step: 3,
-    action: "checkout_request",
-    approved: true
-  }
-];
-
-const result = verifyExecution(workflow);
-
-console.log(
-  JSON.stringify(
-    {
-      status: result.status,
-      replayConsistency:
-        result.detection.status === "match",
-      trustState:
-        result.trust.currentTier,
-      containmentRequired:
-        result.containment.activated &&
-        !result.containment.executionAllowed,
-      executionAllowed:
-        result.containment.executionAllowed
-    },
-    null,
-    2
-  )
-);
-
-Run:
-
-node quick-start.cjs
-
-5. Expected Output
-{
-  "status": "verified",
-  "replayConsistency": true,
-  "trustState": "T1",
-  "containmentRequired": false,
-  "executionAllowed": true
-}
-
-## 6. Reproducing the Paper
+## 5. Reproducing the Paper
 
 ``` bash
 npm run build
@@ -191,7 +130,7 @@ validates its consistency.
 
 ------------------------------------------------------------------------
 
-## 7. Publication Verification
+## 6. Publication Verification
 
 Run the verification gates sequentially:
 
@@ -211,7 +150,7 @@ npm run stage-e:live
 
 ------------------------------------------------------------------------
 
-## 8. Runtime Architecture
+## 7. Runtime Architecture
 
 ``` text
 Workflow
@@ -232,7 +171,7 @@ Publication Verification
 
 ------------------------------------------------------------------------
 
-## 9. Repository Structure
+## 8. Repository Structure
 
 ``` text
 EGA-V9/
