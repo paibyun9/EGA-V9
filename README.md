@@ -62,7 +62,7 @@ npm ci
 
 ## 3. Three-Line Integration
 
-Apply EGA execution governance before protected routes.
+Apply EGA runtime governance before protected application routes.
 
 ```javascript
 const { ega } = require("ega-v9");
