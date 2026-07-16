@@ -176,21 +176,48 @@ Successful execution regenerates the publication artifacts, validates repository
 
 ## 7. Publication Verification
 
-Run the verification gates sequentially:
 
-``` bash
+Validate the complete publication pipeline by running each release gate in sequence.
+
+### Stage A — Repository Validation
+
+```bash
 npm run release:gate
+```
+
+### Stage B — Build Validation
+
+```bash
 npm run stage-b:gate
+```
+
+### Stage C — Documentation Validation
+
+```bash
 npm run stage-c:gate
+```
+
+### Stage D — Benchmark Validation
+
+```bash
 npm run stage-d:gate
+```
+
+### Stage E — Publication Validation
+
+```bash
 npm run stage-e:gate
 ```
 
-When all public assets are finalized:
+### Live Publication Verification
 
-``` bash
+After all public artifacts (GitHub, npm, Vercel, paper, and documentation) are published, run the live consistency check.
+
+```bash
 npm run stage-e:live
 ```
+
+Successful completion confirms that the repository, benchmark artifacts, documentation, and public publication assets are internally consistent and ready for release.
 
 ------------------------------------------------------------------------
 
