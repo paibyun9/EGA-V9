@@ -1,0 +1,25 @@
+3:export type EGATrustLevel = "supported" | "verified";
+4:export type EGAStatus = "verified" | "contained" | "failed";
+5:export type EGADetectionStatus = "match" | "mismatch";
+6:export type EGAContainmentMode = "observe" | "fail-closed";
+7:export type EGATrustTier = "T1" | "T2" | "T3" | "T4";
+9:export type EGAEventType =
+27:export type EGAClientIdentity = {
+33:export type EGALicenseState = {
+40:export type EGAMitreAtlasMapping = {
+49:export type EGAEvent = {
+63:export type EGAEventSummary = {
+69:export type EGABusinessMetrics = {
+78:export type EGABusinessTrustProfile = {
+86:export type EGABusinessGovernanceProfile = {
+91:export type EGAProvenanceNodeType =
+99:export type EGAProvenanceNode = {
+106:export type EGAProvenanceEdge = {
+112:export type EGAProvenanceGraph = {
+121:export type EGARequestContext = {
+147:export type EGAOptions = {
+177:export class EGA {
+895:export function verifyExecution(input: unknown): EGARequestContext {
+956:export function replay(input: unknown): EGARequestContext {
+960:export function provenance(input: unknown): EGARequestContext {
+964:export function contain(input: unknown): EGARequestContext {

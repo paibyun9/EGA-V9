@@ -1,0 +1,48 @@
+{
+  "validationSuite": "Replay Root Determinism Validation",
+  "system": "EGA V9 Live Demo",
+  "hashAlgorithm": "SHA-256",
+  "hashRuntime": "Browser Web Crypto API",
+  "canonicalization": "stableStringify with recursively sorted object keys",
+  "hashDomains": {
+    "test1": "steps-based workflow object",
+    "tests2To4": "DAG workflow object"
+  },
+  "normalDagReplayRoot": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564",
+  "mutatedDagReplayRoot": "6fddd037a4927f2a067189790a2b699811b92a4322a4e8993e480fc77c1249c7",
+  "mutation": {
+    "insertedNode": {
+      "id": "X",
+      "action": "unauthorized_tool_call",
+      "next": "C"
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "name": "Baseline",
+      "file": "test-1-baseline.json",
+      "status": "PASS"
+    },
+    {
+      "id": 2,
+      "name": "Input Mutation",
+      "file": "test-2-input-mutation.json",
+      "status": "PASS"
+    },
+    {
+      "id": 3,
+      "name": "Normal DAG Restoration",
+      "file": "test-3-normal-dag-restoration.json",
+      "status": "PASS"
+    },
+    {
+      "id": 4,
+      "name": "Repeatability",
+      "file": "test-4-repeatability.json",
+      "status": "PASS",
+      "runsPerState": 100
+    }
+  ],
+  "overallStatus": "PASS"
+}

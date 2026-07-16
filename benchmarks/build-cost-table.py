@@ -11,7 +11,10 @@ data = json.loads(input_path.read_text())
 rows = []
 for r in data:
     value = r["measurement"]
-    if isinstance(value, float):
+
+    if value is None:
+        value = "Not measured"
+    elif isinstance(value, float):
         value = f"{value:.6f}"
     rows.append({
         "Metric": r["metric"],

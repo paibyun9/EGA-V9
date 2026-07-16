@@ -1,0 +1,11 @@
+{
+  "workflow": [
+    {
+      "step": 1,
+      "action": "checkout_request",
+      "item": "laptop",
+      "quantity": 1,
+      "approved": true
+    }
+  ]
+}

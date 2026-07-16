@@ -105,16 +105,16 @@ export type EGARequestContext = {
     businessGovernanceProfile: EGABusinessGovernanceProfile;
     provenance: EGAProvenanceGraph;
 };
-export type EGAOptions = {
-    appName?: string;
-    trustLevel?: EGATrustLevel;
-    telemetry?: boolean;
-    failClosed?: boolean;
-    policyId?: string;
-    approvalThreshold?: number;
+export type EGAGuardDecision = {
+    verified: boolean;
+    containmentRequired: boolean;
+    executionAllowed: boolean;
+    trustState: EGATrustTier;
+    reason: string | null;
+    latencyMicroseconds: number;
+    verification: EGARequestContext;
 };
-type NextFunction = () => void;
-type EGARequest = {
+export type EGAGuardRequest = {
     method?: string;
     originalUrl?: string;
     url?: string;
@@ -123,14 +123,37 @@ type EGARequest = {
     query?: unknown;
     params?: unknown;
     headers?: Record<string, unknown>;
+    egaWorkflow?: unknown;
     ega?: EGARequestContext;
+    egaDecision?: EGAGuardDecision;
 };
-type EGAResponse = {
+export type EGAGuardResponse = {
     statusCode?: number;
     setHeader?: (name: string, value: string) => void;
-    status?: (code: number) => EGAResponse;
+    status?: (code: number) => EGAGuardResponse;
     json?: (body: unknown) => void;
 };
+export type EGAGuardNext = (error?: unknown) => void;
+export type EGAWorkflowResolver = (req: EGAGuardRequest) => unknown | Promise<unknown>;
+export type EGAGuardOptions = {
+    mode?: "observe" | "fail-closed";
+    statusCode?: number;
+    policyId?: string;
+    resolveWorkflow?: EGAWorkflowResolver;
+    onVerified?: (decision: EGAGuardDecision) => void | Promise<void>;
+    onContained?: (decision: EGAGuardDecision) => void | Promise<void>;
+};
+export type EGAOptions = {
+    appName?: string;
+    trustLevel?: EGATrustLevel;
+    telemetry?: boolean;
+    failClosed?: boolean;
+    policyId?: string;
+    approvalThreshold?: number;
+};
+type NextFunction = EGAGuardNext;
+type EGARequest = EGAGuardRequest;
+type EGAResponse = EGAGuardResponse;
 export declare class EGA {
     private readonly options;
     private readonly eventLog;
@@ -158,4 +181,8 @@ export declare function verifyExecution(input: unknown): EGARequestContext;
 export declare function replay(input: unknown): EGARequestContext;
 export declare function provenance(input: unknown): EGARequestContext;
 export declare function contain(input: unknown): EGARequestContext;
+declare function createGuard(options?: EGAGuardOptions): (req: EGAGuardRequest, res: EGAGuardResponse, next: EGAGuardNext) => Promise<void>;
+export declare const ega: Readonly<{
+    guard: typeof createGuard;
+}>;
 export {};

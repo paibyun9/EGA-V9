@@ -144,6 +144,56 @@ export type EGARequestContext = {
   provenance: EGAProvenanceGraph;
 };
 
+export type EGAGuardDecision = {
+  verified: boolean;
+  containmentRequired: boolean;
+  executionAllowed: boolean;
+  trustState: EGATrustTier;
+  reason: string | null;
+  latencyMicroseconds: number;
+  verification: EGARequestContext;
+};
+
+export type EGAGuardRequest = {
+  method?: string;
+  originalUrl?: string;
+  url?: string;
+  path?: string;
+  body?: unknown;
+  query?: unknown;
+  params?: unknown;
+  headers?: Record<string, unknown>;
+  egaWorkflow?: unknown;
+  ega?: EGARequestContext;
+  egaDecision?: EGAGuardDecision;
+};
+
+export type EGAGuardResponse = {
+  statusCode?: number;
+  setHeader?: (name: string, value: string) => void;
+  status?: (code: number) => EGAGuardResponse;
+  json?: (body: unknown) => void;
+};
+
+export type EGAGuardNext = (error?: unknown) => void;
+
+export type EGAWorkflowResolver = (
+  req: EGAGuardRequest
+) => unknown | Promise<unknown>;
+
+export type EGAGuardOptions = {
+  mode?: "observe" | "fail-closed";
+  statusCode?: number;
+  policyId?: string;
+  resolveWorkflow?: EGAWorkflowResolver;
+  onVerified?: (
+    decision: EGAGuardDecision
+  ) => void | Promise<void>;
+  onContained?: (
+    decision: EGAGuardDecision
+  ) => void | Promise<void>;
+};
+
 export type EGAOptions = {
   appName?: string;
   trustLevel?: EGATrustLevel;
@@ -153,26 +203,9 @@ export type EGAOptions = {
   approvalThreshold?: number;
 };
 
-type NextFunction = () => void;
-
-type EGARequest = {
-  method?: string;
-  originalUrl?: string;
-  url?: string;
-  path?: string;
-  body?: unknown;
-  query?: unknown;
-  params?: unknown;
-  headers?: Record<string, unknown>;
-  ega?: EGARequestContext;
-};
-
-type EGAResponse = {
-  statusCode?: number;
-  setHeader?: (name: string, value: string) => void;
-  status?: (code: number) => EGAResponse;
-  json?: (body: unknown) => void;
-};
+type NextFunction = EGAGuardNext;
+type EGARequest = EGAGuardRequest;
+type EGAResponse = EGAGuardResponse;
 
 export class EGA {
   private readonly options: Required<EGAOptions>;
@@ -964,3 +997,356 @@ export function provenance(input: unknown): EGARequestContext {
 export function contain(input: unknown): EGARequestContext {
   return verifyExecution(input);
 }
+
+function guardLatencyMicroseconds(startedAt: bigint): number {
+  const elapsedNanoseconds = process.hrtime.bigint() - startedAt;
+  return Number(elapsedNanoseconds) / 1_000;
+}
+
+function resolveGuardWorkflow(
+  req: EGAGuardRequest,
+  resolver?: EGAWorkflowResolver
+): unknown | Promise<unknown> {
+  if (resolver) {
+    return resolver(req);
+  }
+
+  if (req.egaWorkflow !== undefined) {
+    return req.egaWorkflow;
+  }
+
+  if (
+    req.body !== null &&
+    typeof req.body === "object" &&
+    "workflow" in req.body
+  ) {
+    return (req.body as Record<string, unknown>).workflow;
+  }
+
+  return req.body;
+}
+
+function buildGuardDecision(
+  verification: EGARequestContext,
+  startedAt: bigint
+): EGAGuardDecision {
+  return {
+    verified:
+      verification.status === "verified" &&
+      verification.detection.status === "match" &&
+      verification.containment.executionAllowed,
+    containmentRequired:
+      verification.containment.activated &&
+      !verification.containment.executionAllowed,
+    executionAllowed: verification.containment.executionAllowed,
+    trustState: verification.trust.currentTier,
+    reason: verification.containment.reason ?? null,
+    latencyMicroseconds: guardLatencyMicroseconds(startedAt),
+    verification
+  };
+}
+
+class EGAGuardInputError extends Error {
+  readonly code: string;
+  readonly statusCode: number;
+
+  constructor(
+    code: string,
+    message: string,
+    statusCode = 400
+  ) {
+    super(message);
+    this.name = "EGAGuardInputError";
+    this.code = code;
+    this.statusCode = statusCode;
+  }
+}
+
+function isWorkflowStep(value: unknown): boolean {
+  if (
+    value === null ||
+    typeof value !== "object" ||
+    Array.isArray(value)
+  ) {
+    return false;
+  }
+
+  const step = value as Record<string, unknown>;
+
+  return (
+    typeof step.action === "string" &&
+    step.action.trim().length > 0
+  );
+}
+
+function validateGuardWorkflow(workflow: unknown): void {
+  if (workflow === undefined || workflow === null) {
+    throw new EGAGuardInputError(
+      "EGA_WORKFLOW_REQUIRED",
+      "A governable workflow is required."
+    );
+  }
+
+  if (Array.isArray(workflow)) {
+    if (workflow.length === 0) {
+      throw new EGAGuardInputError(
+        "EGA_INVALID_WORKFLOW",
+        "Workflow must contain at least one step."
+      );
+    }
+
+    if (!workflow.every(isWorkflowStep)) {
+      throw new EGAGuardInputError(
+        "EGA_INVALID_WORKFLOW",
+        "Every workflow step must be an object with a non-empty action."
+      );
+    }
+
+    return;
+  }
+
+  if (
+    typeof workflow === "object" &&
+    !Array.isArray(workflow)
+  ) {
+    const candidate =
+      workflow as Record<string, unknown>;
+
+    if (
+      Array.isArray(candidate.steps) &&
+      candidate.steps.length > 0 &&
+      candidate.steps.every(isWorkflowStep)
+    ) {
+      return;
+    }
+
+    if (isWorkflowStep(candidate)) {
+      return;
+    }
+  }
+
+  throw new EGAGuardInputError(
+    "EGA_INVALID_WORKFLOW",
+    "Workflow must be a valid action, step array, or object containing steps."
+  );
+}
+
+function createGuard(options: EGAGuardOptions = {}) {
+  const mode = options.mode ?? "fail-closed";
+  const blockStatusCode = options.statusCode ?? 403;
+  const policyId =
+    options.policyId ?? "default-policy";
+
+  const invalidPolicy =
+    typeof policyId !== "string" ||
+    policyId.trim().length === 0;
+
+  const engine = EGA.init({
+    failClosed: mode === "fail-closed",
+    policyId:
+      invalidPolicy
+        ? "invalid-policy"
+        : policyId.trim()
+  });
+
+  const engineMiddleware = engine.guard();
+
+  return async (
+    req: EGAGuardRequest,
+    res: EGAGuardResponse,
+    next: EGAGuardNext
+  ): Promise<void> => {
+    const startedAt = process.hrtime.bigint();
+
+    try {
+      if (invalidPolicy) {
+        throw new EGAGuardInputError(
+          "EGA_INVALID_POLICY",
+          "policyId must be a non-empty string."
+        );
+      }
+
+      const workflow = await resolveGuardWorkflow(
+        req,
+        options.resolveWorkflow
+      );
+
+      validateGuardWorkflow(workflow);
+
+      const governedRequest: EGAGuardRequest = {
+        method: req.method,
+        originalUrl: req.originalUrl,
+        url: req.url,
+        path: req.path,
+        body: workflow,
+        query: req.query,
+        params: req.params,
+        headers: req.headers,
+        ega: req.ega,
+        egaDecision: req.egaDecision
+      };
+
+      const originalStatus = res.status?.bind(res);
+      const originalJson = res.json?.bind(res);
+
+      let decisionDelivered = false;
+
+      const deliverDecision = async (
+        decision: EGAGuardDecision
+      ): Promise<void> => {
+        if (decisionDelivered) {
+          return;
+        }
+
+        decisionDelivered = true;
+        req.ega = decision.verification;
+        req.egaDecision = decision;
+
+        res.setHeader?.(
+          "x-ega-latency-microseconds",
+          String(decision.latencyMicroseconds)
+        );
+
+        if (
+          decision.verification.containment.activated
+        ) {
+          await options.onContained?.(decision);
+        } else {
+          await options.onVerified?.(decision);
+        }
+      };
+
+      const responseProxy: EGAGuardResponse = {
+        ...res,
+
+        setHeader(name: string, value: string): void {
+          res.setHeader?.(name, value);
+        },
+
+        status(code: number): EGAGuardResponse {
+          const finalCode =
+            code === 409 && mode === "fail-closed"
+              ? blockStatusCode
+              : code;
+
+          if (originalStatus) {
+            originalStatus(finalCode);
+          } else {
+            res.statusCode = finalCode;
+          }
+
+          return responseProxy;
+        },
+
+        json(body: unknown): void {
+          const verification = governedRequest.ega;
+
+          if (!verification) {
+            originalJson?.(body);
+            return;
+          }
+
+          const decision = buildGuardDecision(
+            verification,
+            startedAt
+          );
+
+          void deliverDecision(decision).then(() => {
+            if (
+              body !== null &&
+              typeof body === "object" &&
+              !Array.isArray(body)
+            ) {
+              originalJson?.({
+                ...(body as Record<string, unknown>),
+                decision
+              });
+              return;
+            }
+
+            originalJson?.({
+              body,
+              decision
+            });
+          });
+        }
+      };
+
+      const guardedNext: EGAGuardNext = (error?: unknown): void => {
+        if (error !== undefined) {
+          next(error);
+          return;
+        }
+
+        const verification = governedRequest.ega;
+
+        if (!verification) {
+          next(
+            new Error(
+              "EGA guard completed without verification evidence."
+            )
+          );
+          return;
+        }
+
+        const decision = buildGuardDecision(
+          verification,
+          startedAt
+        );
+
+        void deliverDecision(decision)
+          .then(() => next())
+          .catch((callbackError) => next(callbackError));
+      };
+
+      engineMiddleware(
+        governedRequest,
+        responseProxy,
+        guardedNext
+      );
+    } catch (error) {
+      const latencyMicroseconds =
+        guardLatencyMicroseconds(startedAt);
+
+      res.setHeader?.(
+        "x-ega-latency-microseconds",
+        String(latencyMicroseconds)
+      );
+
+      const isInputError =
+        error instanceof EGAGuardInputError;
+
+      const statusCode =
+        isInputError
+          ? error.statusCode
+          : 500;
+
+      const errorCode =
+        isInputError
+          ? error.code
+          : "EGA_GUARD_FAILURE";
+
+      if (res.status) {
+        res.status(statusCode);
+      } else {
+        res.statusCode = statusCode;
+      }
+
+      res.json?.({
+        ok: false,
+        error: errorCode,
+        message:
+          error instanceof Error
+            ? error.message
+            : "Unknown EGA guard failure.",
+        containmentRequired: true,
+        executionAllowed: false,
+        latencyMicroseconds
+      });
+    }
+  };
+}
+
+export const ega = Object.freeze({
+  guard: createGuard
+});

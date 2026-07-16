@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EGA = void 0;
+exports.ega = exports.EGA = void 0;
 exports.verifyExecution = verifyExecution;
 exports.replay = replay;
 exports.provenance = provenance;
@@ -688,3 +688,221 @@ function provenance(input) {
 function contain(input) {
     return verifyExecution(input);
 }
+function guardLatencyMicroseconds(startedAt) {
+    const elapsedNanoseconds = process.hrtime.bigint() - startedAt;
+    return Number(elapsedNanoseconds) / 1000;
+}
+function resolveGuardWorkflow(req, resolver) {
+    if (resolver) {
+        return resolver(req);
+    }
+    if (req.egaWorkflow !== undefined) {
+        return req.egaWorkflow;
+    }
+    if (req.body !== null &&
+        typeof req.body === "object" &&
+        "workflow" in req.body) {
+        return req.body.workflow;
+    }
+    return req.body;
+}
+function buildGuardDecision(verification, startedAt) {
+    return {
+        verified: verification.status === "verified" &&
+            verification.detection.status === "match" &&
+            verification.containment.executionAllowed,
+        containmentRequired: verification.containment.activated &&
+            !verification.containment.executionAllowed,
+        executionAllowed: verification.containment.executionAllowed,
+        trustState: verification.trust.currentTier,
+        reason: verification.containment.reason ?? null,
+        latencyMicroseconds: guardLatencyMicroseconds(startedAt),
+        verification
+    };
+}
+class EGAGuardInputError extends Error {
+    constructor(code, message, statusCode = 400) {
+        super(message);
+        this.name = "EGAGuardInputError";
+        this.code = code;
+        this.statusCode = statusCode;
+    }
+}
+function isWorkflowStep(value) {
+    if (value === null ||
+        typeof value !== "object" ||
+        Array.isArray(value)) {
+        return false;
+    }
+    const step = value;
+    return (typeof step.action === "string" &&
+        step.action.trim().length > 0);
+}
+function validateGuardWorkflow(workflow) {
+    if (workflow === undefined || workflow === null) {
+        throw new EGAGuardInputError("EGA_WORKFLOW_REQUIRED", "A governable workflow is required.");
+    }
+    if (Array.isArray(workflow)) {
+        if (workflow.length === 0) {
+            throw new EGAGuardInputError("EGA_INVALID_WORKFLOW", "Workflow must contain at least one step.");
+        }
+        if (!workflow.every(isWorkflowStep)) {
+            throw new EGAGuardInputError("EGA_INVALID_WORKFLOW", "Every workflow step must be an object with a non-empty action.");
+        }
+        return;
+    }
+    if (typeof workflow === "object" &&
+        !Array.isArray(workflow)) {
+        const candidate = workflow;
+        if (Array.isArray(candidate.steps) &&
+            candidate.steps.length > 0 &&
+            candidate.steps.every(isWorkflowStep)) {
+            return;
+        }
+        if (isWorkflowStep(candidate)) {
+            return;
+        }
+    }
+    throw new EGAGuardInputError("EGA_INVALID_WORKFLOW", "Workflow must be a valid action, step array, or object containing steps.");
+}
+function createGuard(options = {}) {
+    const mode = options.mode ?? "fail-closed";
+    const blockStatusCode = options.statusCode ?? 403;
+    const policyId = options.policyId ?? "default-policy";
+    const invalidPolicy = typeof policyId !== "string" ||
+        policyId.trim().length === 0;
+    const engine = EGA.init({
+        failClosed: mode === "fail-closed",
+        policyId: invalidPolicy
+            ? "invalid-policy"
+            : policyId.trim()
+    });
+    const engineMiddleware = engine.guard();
+    return async (req, res, next) => {
+        const startedAt = process.hrtime.bigint();
+        try {
+            if (invalidPolicy) {
+                throw new EGAGuardInputError("EGA_INVALID_POLICY", "policyId must be a non-empty string.");
+            }
+            const workflow = await resolveGuardWorkflow(req, options.resolveWorkflow);
+            validateGuardWorkflow(workflow);
+            const governedRequest = {
+                method: req.method,
+                originalUrl: req.originalUrl,
+                url: req.url,
+                path: req.path,
+                body: workflow,
+                query: req.query,
+                params: req.params,
+                headers: req.headers,
+                ega: req.ega,
+                egaDecision: req.egaDecision
+            };
+            const originalStatus = res.status?.bind(res);
+            const originalJson = res.json?.bind(res);
+            let decisionDelivered = false;
+            const deliverDecision = async (decision) => {
+                if (decisionDelivered) {
+                    return;
+                }
+                decisionDelivered = true;
+                req.ega = decision.verification;
+                req.egaDecision = decision;
+                res.setHeader?.("x-ega-latency-microseconds", String(decision.latencyMicroseconds));
+                if (decision.verification.containment.activated) {
+                    await options.onContained?.(decision);
+                }
+                else {
+                    await options.onVerified?.(decision);
+                }
+            };
+            const responseProxy = {
+                ...res,
+                setHeader(name, value) {
+                    res.setHeader?.(name, value);
+                },
+                status(code) {
+                    const finalCode = code === 409 && mode === "fail-closed"
+                        ? blockStatusCode
+                        : code;
+                    if (originalStatus) {
+                        originalStatus(finalCode);
+                    }
+                    else {
+                        res.statusCode = finalCode;
+                    }
+                    return responseProxy;
+                },
+                json(body) {
+                    const verification = governedRequest.ega;
+                    if (!verification) {
+                        originalJson?.(body);
+                        return;
+                    }
+                    const decision = buildGuardDecision(verification, startedAt);
+                    void deliverDecision(decision).then(() => {
+                        if (body !== null &&
+                            typeof body === "object" &&
+                            !Array.isArray(body)) {
+                            originalJson?.({
+                                ...body,
+                                decision
+                            });
+                            return;
+                        }
+                        originalJson?.({
+                            body,
+                            decision
+                        });
+                    });
+                }
+            };
+            const guardedNext = (error) => {
+                if (error !== undefined) {
+                    next(error);
+                    return;
+                }
+                const verification = governedRequest.ega;
+                if (!verification) {
+                    next(new Error("EGA guard completed without verification evidence."));
+                    return;
+                }
+                const decision = buildGuardDecision(verification, startedAt);
+                void deliverDecision(decision)
+                    .then(() => next())
+                    .catch((callbackError) => next(callbackError));
+            };
+            engineMiddleware(governedRequest, responseProxy, guardedNext);
+        }
+        catch (error) {
+            const latencyMicroseconds = guardLatencyMicroseconds(startedAt);
+            res.setHeader?.("x-ega-latency-microseconds", String(latencyMicroseconds));
+            const isInputError = error instanceof EGAGuardInputError;
+            const statusCode = isInputError
+                ? error.statusCode
+                : 500;
+            const errorCode = isInputError
+                ? error.code
+                : "EGA_GUARD_FAILURE";
+            if (res.status) {
+                res.status(statusCode);
+            }
+            else {
+                res.statusCode = statusCode;
+            }
+            res.json?.({
+                ok: false,
+                error: errorCode,
+                message: error instanceof Error
+                    ? error.message
+                    : "Unknown EGA guard failure.",
+                containmentRequired: true,
+                executionAllowed: false,
+                latencyMicroseconds
+            });
+        }
+    };
+}
+exports.ega = Object.freeze({
+    guard: createGuard
+});

@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "benchmark_name": "EGA V9 v1 Runtime Governance Benchmark",
+  "implementation_version": "0.1.0",
+  "profiles": {
+    "smoke": {
+      "warmup_iterations": 50,
+      "operation_counts": [100, 1000],
+      "concurrency_levels": [1, 10]
+    },
+    "publication": {
+      "warmup_iterations": 1000,
+      "operation_counts": [1000, 10000],
+      "concurrency_levels": [1, 10, 50]
+    }
+  },
+  "scenarios": [
+    "normal",
+    "replay-mismatch"
+  ],
+  "metrics": {
+    "latency": [
+      "mean_microseconds",
+      "p50_microseconds",
+      "p95_microseconds",
+      "p99_microseconds",
+      "min_microseconds",
+      "max_microseconds"
+    ],
+    "throughput": [
+      "operations_per_second",
+      "wall_clock_milliseconds"
+    ],
+    "replay_cost": [
+      "cpu_microseconds_per_operation",
+      "internal_guard_microseconds_per_operation",
+      "evidence_bytes_per_operation",
+      "llm_calls"
+    ],
+    "memory": [
+      "heap_used_before_bytes",
+      "heap_used_after_bytes",
+      "heap_used_delta_bytes",
+      "peak_heap_used_bytes",
+      "rss_before_bytes",
+      "rss_after_bytes",
+      "rss_delta_bytes"
+    ],
+    "scalability": [
+      "operation_count",
+      "concurrency",
+      "errors",
+      "replay_root_divergences"
+    ]
+  },
+  "integrity_requirements": {
+    "errors": 0,
+    "replay_root_divergences": 0,
+    "llm_calls": 0,
+    "normal_execution_allowed": true,
+    "mismatch_execution_allowed": false
+  },
+  "notes": [
+    "Smoke results are diagnostic and must not be cited as publication results.",
+    "Publication results remain candidate evidence until the benchmark gate and repeated runs pass.",
+    "Latency values from behavioral tests are not publication benchmark values.",
+    "The benchmark measures EGA runtime governance only and does not measure model inference."
+  ]
+}

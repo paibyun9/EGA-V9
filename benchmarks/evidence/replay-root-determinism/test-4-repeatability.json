@@ -1,0 +1,56 @@
+{
+  "test": "Test 4 — Repeatability",
+  "hashDomain": "DAG workflow object",
+  "runsPerState": 100,
+  "totalHashComparisons": 200,
+  "expected": {
+    "normalReplayRoot": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564",
+    "mutatedReplayRoot": "6fddd037a4927f2a067189790a2b699811b92a4322a4e8993e480fc77c1249c7"
+  },
+  "normalPhase": {
+    "runs": 100,
+    "uniqueNormalRoots": [
+      "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+    ],
+    "uniqueComparisonRoots": [
+      "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+    ],
+    "consistencyRate": "100/100"
+  },
+  "mutationPhase": {
+    "runs": 100,
+    "uniqueNormalRoots": [
+      "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+    ],
+    "uniqueMutatedRoots": [
+      "6fddd037a4927f2a067189790a2b699811b92a4322a4e8993e480fc77c1249c7"
+    ],
+    "divergenceRate": "100/100"
+  },
+  "finalRestoration": {
+    "normalHash": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564",
+    "comparisonHash": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+  },
+  "checks": {
+    "normalRunCountCorrect": true,
+    "mutationRunCountCorrect": true,
+    "allNormalRootsAre64Hex": true,
+    "allNormalComparisonRootsAre64Hex": true,
+    "allMutationNormalRootsAre64Hex": true,
+    "allMutationRootsAre64Hex": true,
+    "normalRootStableAcross100Runs": true,
+    "normalComparisonStableAcross100Runs": true,
+    "normalPairsMatchAcross100Runs": true,
+    "normalRootMatchesExpected": true,
+    "mutationNormalRootStableAcross100Runs": true,
+    "mutationRootStableAcross100Runs": true,
+    "mutationNormalMatchesExpected": true,
+    "mutationRootMatchesExpected": true,
+    "mutationDivergesAcross100Runs": true,
+    "finalRestoredRootsMatch": true,
+    "finalRestoredRootMatchesExpected": true
+  },
+  "failedChecks": [],
+  "elapsedMilliseconds": 9.1,
+  "status": "PASS"
+}

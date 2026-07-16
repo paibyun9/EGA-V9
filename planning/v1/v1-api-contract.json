@@ -1,0 +1,38 @@
+{
+  "contract_version": "1.0",
+  "package": "ega-v9",
+  "target_release": "1.0.0",
+  "implementation_status": "implemented",
+  "preserve_exports": [
+    "EGA",
+    "verifyExecution",
+    "replay",
+    "provenance",
+    "contain"
+  ],
+  "add_exports": [
+    "ega"
+  ],
+  "ega_facade": {
+    "methods": [
+      "guard"
+    ]
+  },
+  "guard": {
+    "default_mode": "fail-closed",
+    "default_block_status": 403,
+    "calls_next_when_allowed": true,
+    "blocks_when_containment_required": true,
+    "external_llm_calls": 0,
+    "latency_field": "latencyMicroseconds",
+    "latency_type": "number",
+    "request_context_field": "ega"
+  },
+  "truthfulness_requirements": {
+    "implementation_required_before_documentation": true,
+    "behavioral_tests_required": true,
+    "express_integration_tests_required": true,
+    "benchmark_required": true,
+    "stage_a_to_e_required": true
+  }
+}
