@@ -113,8 +113,34 @@ Expected Output
   "executionAllowed": true
 }
 ```
+------------------------------------------------------------------------
 
-## 5. Reproducing the Paper
+## 5. Expected Output
+
+A verified workflow produces deterministic execution results. When the replay path matches the original execution, EGA confirms workflow integrity, keeps the trust state at **T1**, and allows execution without containment.
+
+```json
+{
+  "status": "verified",
+  "replayConsistency": true,
+  "trustState": "T1",
+  "containmentRequired": false,
+  "executionAllowed": true
+}
+```
+
+Field | Meaning
+------|--------
+`status` | Overall verification result.
+`replayConsistency` | Confirms that replay reproduced the identical execution path.
+`trustState` | Current runtime trust level (`T1` = verified).
+`containmentRequired` | Indicates whether fail-closed containment is required.
+`executionAllowed` | Whether the workflow is permitted to continue.
+A verified workflow returns deterministic execution results.
+
+------------------------------------------------------------------------
+
+## 6. Reproducing the Paper
 
 ``` bash
 npm run build
@@ -130,7 +156,7 @@ validates its consistency.
 
 ------------------------------------------------------------------------
 
-## 6. Publication Verification
+## 7. Publication Verification
 
 Run the verification gates sequentially:
 
@@ -150,7 +176,7 @@ npm run stage-e:live
 
 ------------------------------------------------------------------------
 
-## 7. Runtime Architecture
+## 8. Runtime Architecture
 
 ``` text
 Workflow
@@ -171,7 +197,7 @@ Publication Verification
 
 ------------------------------------------------------------------------
 
-## 8. Repository Structure
+## 9. Repository Structure
 
 ``` text
 EGA-V9/
