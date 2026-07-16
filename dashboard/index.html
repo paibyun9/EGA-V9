@@ -158,7 +158,7 @@
 </head>
 <body>
   <main class="wrap">
-    <div class="badge">EGA V9 · v0.1.0 · Scorp Locked Vercel Demo</div>
+    <div class="badge">EGA V9 · v1.0.0 · Scorp Locked Vercel Demo</div>
 
     <h1>
       Execution Governance AI (EGA) V9<br />
@@ -396,6 +396,12 @@ const result = govern(workflow);</pre>
         diverged ? "block" : "none";
     }
 
+    function clearDivergenceResult() {
+      document.getElementById("normalHash").textContent = "Not executed";
+      document.getElementById("mutatedHash").textContent = "Not executed";
+      document.getElementById("divergenceStatus").style.display = "none";
+    }
+
     function mutateWorkflow() {
       currentMutatedWorkflow = {
         workflowId: "purchase-demo-001",
@@ -408,13 +414,15 @@ const result = govern(workflow);</pre>
       };
 
       renderWorkflows();
-      resetDivergence();
+      clearDivergenceResult();
     }
 
     function resetDivergence() {
-      document.getElementById("normalHash").textContent = "Not executed";
-      document.getElementById("mutatedHash").textContent = "Not executed";
-      document.getElementById("divergenceStatus").style.display = "none";
+      currentMutatedWorkflow =
+        structuredClone(normalWorkflow);
+
+      renderWorkflows();
+      clearDivergenceResult();
     }
 
     renderWorkflows();

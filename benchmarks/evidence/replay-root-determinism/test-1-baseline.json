@@ -1,0 +1,22 @@
+
+{
+  "test": "Test 1 — Baseline",
+  "input": {
+    "item": "laptop",
+    "quantity": 1
+  },
+  "hashesDetected": [
+    "c74d7d9846359868c58c0d3442abbf7f5a536988b236b49d38b3335a65eab82e",
+    "c74d7d9846359868c58c0d3442abbf7f5a536988b236b49d38b3335a65eab82e"
+  ],
+  "repeatedHashes": [
+    {
+      "hash": "c74d7d9846359868c58c0d3442abbf7f5a536988b236b49d38b3335a65eab82e",
+      "count": 2
+    }
+  ],
+  "sameReplayRootDetected": true,
+  "verifiedTextDetected": true,
+  "status": "PASS"
+}
+

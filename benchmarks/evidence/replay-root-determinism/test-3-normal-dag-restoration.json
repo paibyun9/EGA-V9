@@ -1,0 +1,46 @@
+{
+  "test": "Test 3 — Normal DAG Restoration",
+  "hashDomain": "DAG workflow object",
+  "original": {
+    "normalHash": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564",
+    "comparisonHash": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+  },
+  "mutation": {
+    "insertedNode": {
+      "id": "X",
+      "action": "unauthorized_tool_call",
+      "next": "C"
+    },
+    "normalHash": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564",
+    "mutatedHash": "6fddd037a4927f2a067189790a2b699811b92a4322a4e8993e480fc77c1249c7"
+  },
+  "restored": {
+    "normalHash": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564",
+    "comparisonHash": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+  },
+  "transition": {
+    "expected": "Hash A → Hash B → Hash A",
+    "actual": [
+      "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564",
+      "6fddd037a4927f2a067189790a2b699811b92a4322a4e8993e480fc77c1249c7",
+      "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+    ]
+  },
+  "checks": {
+    "originalNormalHashIs64Hex": true,
+    "originalComparisonHashIs64Hex": true,
+    "originalDagsMatch": true,
+    "originalMatchesTest2Normal": true,
+    "mutationHashIs64Hex": true,
+    "mutationNormalUnchanged": true,
+    "mutationMatchesTest2": true,
+    "mutationChangedReplayRoot": true,
+    "restoredNormalHashIs64Hex": true,
+    "restoredComparisonHashIs64Hex": true,
+    "restoredDagsMatch": true,
+    "restoredNormalMatchesOriginal": true,
+    "restoredComparisonMatchesOriginal": true,
+    "mismatchClearedAfterRestore": true
+  },
+  "status": "PASS"
+}

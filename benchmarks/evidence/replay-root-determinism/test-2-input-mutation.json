@@ -1,0 +1,21 @@
+{
+  "test": "Test 2 — Input Mutation",
+  "hashDomain": "DAG workflow object",
+  "normalWorkflow": {
+    "replayRoot": "587ad42b30acbf371367e144dd195c23a8835c3f3ac9ef0e238ce8e67a507564"
+  },
+  "mutation": {
+    "insertedNode": {
+      "id": "X",
+      "action": "unauthorized_tool_call",
+      "next": "C"
+    },
+    "replayRoot": "6fddd037a4927f2a067189790a2b699811b92a4322a4e8993e480fc77c1249c7"
+  },
+  "normalHashIs64Hex": true,
+  "mutatedHashIs64Hex": true,
+  "replayRootChanged": true,
+  "mismatchStatusVisible": true,
+  "mismatchTextDetected": true,
+  "status": "PASS"
+}
