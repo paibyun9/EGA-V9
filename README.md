@@ -142,17 +142,35 @@ A verified workflow returns deterministic execution results.
 
 ## 6. Reproducing the Paper
 
-``` bash
+Regenerate the benchmark artifacts and verify that the repository reproduces the deterministic results reported in the EGA V9 paper.
+
+### Build
+
+```bash
 npm run build
+```
+
+### Test
+
+```bash
 npm test
-npm run stage-c:gate
+```
+
+### Benchmark
+
+```bash
 npm run table4:build
+```
+
+### Publication Verification
+
+```bash
+npm run stage-c:gate
 npm run stage-d:gate
 npm run release:all-gates
 ```
 
-This workflow regenerates the publication artifact used by the paper and
-validates its consistency.
+Successful execution regenerates the publication artifacts, validates repository consistency, and confirms that the benchmark results remain reproducible.
 
 ------------------------------------------------------------------------
 
