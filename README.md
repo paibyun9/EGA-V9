@@ -73,7 +73,9 @@ The middleware verifies the workflow before the application route executes.
 Replay mismatches are fail-closed contained and do not reach the protected
 route.
 
-4. Quick Start
+------------------------------------------------------------------------
+
+## 4. Quick Start
 
 Create quick-start.cjs.
 
@@ -123,6 +125,7 @@ console.log(
 Run:
 
 node quick-start.cjs
+
 5. Expected Output
 {
   "status": "verified",
