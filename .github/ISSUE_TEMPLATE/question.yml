@@ -1,0 +1,36 @@
+name: "❓ Question"
+description: "Ask a general question about EGA V9."
+title: "[Question]: "
+labels:
+  - "question"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your interest in EGA V9. Please provide enough detail for us to understand and answer your question.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What would you like to know?
+      placeholder: Please describe your question clearly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Include any relevant code, workflow details, screenshots, or references.
+      placeholder: Add any supporting context here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched the existing issues before submitting this question.
+          required: true
