@@ -264,10 +264,17 @@ EGA-V9/
 
 ## 10. Contact and Collaboration
 
-contact@lcm3.com
+Feedback from researchers, developers, startups, and enterprise engineering teams is welcome.
 
-Feedback from researchers, developers, startups, and enterprise
-engineering teams is welcome.
+### Community Support
+- GitHub Issues (Questions, Bug Reports, Feature Requests)
+
+### Project Resources
+- Live Vercel Demo: https://ega-v9.vercel.app/
+- Official Project Website: https://lcm3.com/
+
+### Direct Contact
+- contact@lcm3.com
 
 ------------------------------------------------------------------------
 
