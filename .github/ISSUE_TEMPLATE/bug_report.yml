@@ -1,0 +1,126 @@
+name: "🐞 Bug Report"
+description: "Report unexpected behaviour or a technical problem in EGA V9."
+title: "[Bug]: "
+labels:
+  - "bug"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem in EGA V9.
+        Please provide enough information for us to reproduce and investigate the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Describe the problem clearly and concisely.
+      placeholder: Explain what went wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: List the exact steps needed to reproduce the problem.
+      placeholder: |
+        1. Install EGA V9 using...
+        2. Run...
+        3. Provide this workflow...
+        4. Observe the error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behaviour
+      description: Describe what you expected to happen.
+      placeholder: Explain the expected result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behaviour
+      description: Describe what actually happened.
+      placeholder: Explain the actual result or error.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: EGA V9 Version
+      description: Enter the npm package version or repository release version.
+      placeholder: "For example: 1.0.0-rc.1"
+    validations:
+      required: true
+
+  - type: input
+    id: node_version
+    attributes:
+      label: Node.js Version
+      description: Enter the Node.js version used when the issue occurred.
+      placeholder: "For example: v22.14.0"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Select the environment where the problem occurred.
+      options:
+        - npm package / SDK
+        - GitHub repository
+        - Vercel browser demonstration
+        - macOS
+        - Linux
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow or Input
+      description: Provide the workflow, JSON input, DAG, or code that caused the problem.
+      placeholder: Paste the relevant workflow, input, or code here.
+      render: json
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or Error Output
+      description: Paste relevant logs or error messages. Remove credentials and sensitive information.
+      placeholder: Paste the error output here.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Additional Evidence
+      description: Drag and drop screenshots or attach other supporting evidence.
+      placeholder: Add screenshots or supporting details here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission Checklist
+      options:
+        - label: I searched the existing issues and did not find a duplicate.
+          required: true
+        - label: I included enough information to reproduce the problem.
+          required: true
+        - label: I removed API keys, credentials, and other sensitive information.
+          required: true
