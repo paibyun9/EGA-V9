@@ -1,0 +1,231 @@
+name: "🔬 Reproducibility Report"
+description: "Report the outcome of independently reproducing EGA V9 results."
+title: "[Reproducibility]: "
+labels:
+  - "reproducibility"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for independently evaluating EGA V9.
+
+        Successful, partially successful, and unsuccessful reproduction
+        reports are all valuable. Please document the tested target,
+        environment, procedure, observed results, and supporting evidence.
+
+  - type: dropdown
+    id: target
+    attributes:
+      label: Reproduction Target
+      description: Select the EGA V9 result or component you evaluated.
+      options:
+        - Replay Root Determinism Validation
+        - Publication Benchmark v1
+        - Runtime Performance Results
+        - Runtime Verification Cost Results
+        - Trust-State Evaluation Tests
+        - Containment Behaviour
+        - Provenance Reconstruction
+        - Stage A-E Release Gates
+        - Three-Line Integration
+        - TypeScript SDK Quick Start
+        - Vercel Browser Demonstration
+        - Full Paper Reproduction
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Reproduction Outcome
+      description: Select the outcome that best represents your evaluation.
+      options:
+        - Fully reproduced
+        - Partially reproduced
+        - Not reproduced
+        - Unable to complete
+        - Result requires further investigation
+    validations:
+      required: true
+
+  - type: input
+    id: repository_version
+    attributes:
+      label: Repository Version or Commit
+      description: Provide the release, tag, branch, or commit hash used.
+      placeholder: "For example: v1.0.0-rc.1, main, or a commit hash"
+    validations:
+      required: true
+
+  - type: input
+    id: package_version
+    attributes:
+      label: npm Package Version
+      description: Provide the installed EGA V9 npm package version, if applicable.
+      placeholder: "For example: ega-v9@1.0.0-rc.1"
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Provide enough information for another person to reproduce your environment.
+      placeholder: |
+        Operating system:
+        Hardware:
+        Node.js version:
+        npm version:
+        Browser and version:
+        Python version, if used:
+        Other relevant software:
+    validations:
+      required: true
+
+  - type: dropdown
+    id: execution_source
+    attributes:
+      label: Execution Source
+      description: Where did you perform the reproduction?
+      options:
+        - Cloned GitHub repository
+        - Installed npm package
+        - Live Vercel demonstration
+        - Local browser build
+        - CI or cloud environment
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: preparation
+    attributes:
+      label: Setup and Preparation
+      description: Describe how you obtained and prepared EGA V9 before running the validation.
+      placeholder: |
+        Example:
+        1. Clone the public repository.
+        2. Check out the tested commit.
+        3. Run npm ci.
+        4. Build the SDK.
+    validations:
+      required: true
+
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands or Procedure Used
+      description: Provide the exact commands or browser procedure used during reproduction.
+      placeholder: |
+        npm ci
+        npm run build
+        npm test
+        npm run benchmark:v1:publication
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: input
+    attributes:
+      label: Workflow, Input, or Test Configuration
+      description: Provide the workflow, DAG, JSON input, benchmark profile, or relevant test configuration.
+      placeholder: |
+        Paste the tested workflow, configuration, or input here.
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Result
+      description: State the result reported by the paper, repository, benchmark artifact, or live demonstration.
+      placeholder: |
+        Example:
+        Identical workflow states should produce identical Replay Roots
+        across 100 repeated executions.
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed Result
+      description: Describe the result you obtained, including relevant measurements or output values.
+      placeholder: |
+        Describe the observed Replay Roots, benchmark totals,
+        latency measurements, trust states, errors, or other results.
+    validations:
+      required: true
+
+  - type: textarea
+    id: comparison
+    attributes:
+      label: Comparison With Reported Results
+      description: Explain whether the observed result matched the paper or public artifacts.
+      placeholder: |
+        State which results matched, which differed, and the size
+        or nature of any difference.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and Console Output
+      description: Paste relevant terminal, browser console, test, or benchmark output. Remove sensitive information.
+      placeholder: Paste relevant output here.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and Artifacts
+      description: Attach JSON files, CSV files, screenshots, Replay Roots, benchmark reports, or links to public evidence.
+      placeholder: |
+        Drag and drop files or screenshots here, or provide links
+        to publicly accessible reproduction artifacts.
+    validations:
+      required: false
+
+  - type: textarea
+    id: differences
+    attributes:
+      label: Differences or Possible Causes
+      description: If the result differed, describe possible environmental, version, configuration, or implementation causes.
+      placeholder: |
+        Example:
+        The Node.js version, hardware, browser, commit, timing floor,
+        concurrency setting, or benchmark configuration differed.
+    validations:
+      required: false
+
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Recommended Follow-Up
+      description: Suggest documentation changes, additional tests, fixes, or further investigation.
+      placeholder: Add any recommended next step.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Verification Checklist
+      options:
+        - label: I used the public EGA V9 repository, npm package, or live demonstration.
+          required: true
+        - label: I recorded the tested version or commit.
+          required: true
+        - label: I documented the environment and reproduction procedure.
+          required: true
+        - label: I compared the observed result with the reported result.
+          required: true
+        - label: I searched existing issues for a similar reproduction report.
+          required: true
+        - label: I removed credentials, API keys, personal data, and other sensitive information.
+          required: true
