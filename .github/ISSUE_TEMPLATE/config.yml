@@ -1,0 +1,18 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: "🌐 EGA V9 Live Demo"
+    url: "https://ega-v9.vercel.app/"
+    about: "Explore the interactive EGA V9 browser demonstration."
+
+  - name: "🏢 Official Project Website"
+    url: "https://lcm3.com/"
+    about: "Visit the official LCM website for project information and updates."
+
+  - name: "🤝 Research, Enterprise, or Private Inquiry"
+    url: "mailto:contact@lcm3.com"
+    about: "Use email for research collaboration, enterprise evaluation, partnership, or other private inquiries."
+
+  - name: "🔒 Report a Security Vulnerability"
+    url: "https://github.com/paibyun9/ega-v9/security/advisories/new"
+    about: "Privately report security vulnerabilities. Do not disclose sensitive security issues in a public Issue."
