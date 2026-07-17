@@ -1,0 +1,112 @@
+name: "💡 Feature Request"
+description: "Suggest a new feature or improvement for EGA V9."
+title: "[Feature]: "
+labels:
+  - "enhancement"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve EGA V9.
+        Please explain the problem, proposed feature, and expected value as clearly as possible.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Need
+      description: What problem, limitation, or unmet need would this feature address?
+      placeholder: Describe the current problem or limitation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Feature
+      description: Describe the feature or improvement you are proposing.
+      placeholder: Explain how the proposed feature should work.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use Case
+      description: Explain how researchers, developers, startups, or enterprise engineering teams would use this feature.
+      placeholder: Describe a realistic example or workflow.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Relevant Area
+      description: Select the EGA V9 component most closely related to this request.
+      options:
+        - TypeScript SDK
+        - Runtime Governance
+        - Replay Root and Deterministic Replay
+        - Provenance Reconstruction
+        - Trust-State Evaluation
+        - Containment
+        - Benchmarking and Reproducibility
+        - Documentation
+        - Vercel Browser Demonstration
+        - Developer Experience
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_benefit
+    attributes:
+      label: Expected Benefit
+      description: What practical benefit would this feature provide?
+      placeholder: Explain the expected improvement in usability, performance, security, reproducibility, or integration.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_interface
+    attributes:
+      label: Proposed API or Interface
+      description: If applicable, provide an example API, command, workflow, or user interface.
+      placeholder: |
+        Example:
+
+        const result = govern(workflow, {
+          featureOption: true
+        });
+      render: typescript
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions, existing tools, or temporary workarounds you considered.
+      placeholder: Explain why the alternatives are insufficient.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Add relevant links, diagrams, screenshots, papers, or supporting information.
+      placeholder: Add any supporting context here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission Checklist
+      options:
+        - label: I searched the existing issues and did not find a duplicate feature request.
+          required: true
+        - label: I explained the problem or need, not only the proposed solution.
+          required: true
+        - label: This request is relevant to EGA V9 execution governance or its public tooling.
+          required: true
