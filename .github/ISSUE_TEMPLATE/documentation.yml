@@ -1,0 +1,131 @@
+name: "📖 Documentation"
+description: "Report unclear, missing, outdated, or incorrect EGA V9 documentation."
+title: "[Documentation]: "
+labels:
+  - "documentation"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the EGA V9 documentation.
+        Please identify the relevant page or file and explain what should be corrected or clarified.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Documentation Area
+      description: Select the documentation area related to this report.
+      options:
+        - README
+        - Installation
+        - Three-Line Integration
+        - Quick Start
+        - Expected Output
+        - Reproducing the Paper
+        - Publication Verification
+        - Runtime Architecture
+        - SDK or API Documentation
+        - Examples
+        - Benchmarks
+        - Vercel Browser Demonstration
+        - Official Project Website
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Page, Section, or File
+      description: Provide the page URL, section title, or repository file path.
+      placeholder: "For example: docs/REPRODUCING_THE_PAPER.md or README > Quick Start"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: problem_type
+    attributes:
+      label: Type of Documentation Problem
+      description: Select the option that best describes the problem.
+      options:
+        - Unclear explanation
+        - Missing information
+        - Incorrect information
+        - Outdated information
+        - Broken link
+        - Code example does not work
+        - Typographical or formatting error
+        - Translation or terminology issue
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Documentation Problem
+      description: Explain what is unclear, missing, outdated, or incorrect.
+      placeholder: Describe the documentation problem in detail.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Documentation
+      description: Explain what the documentation should say or show instead.
+      placeholder: Describe the expected explanation, instruction, or result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested_change
+    attributes:
+      label: Suggested Improvement
+      description: Provide suggested wording, corrected instructions, or a proposed documentation change.
+      placeholder: Add your proposed revision here.
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: If a command, code example, or link does not work, provide the steps used to identify the problem.
+      placeholder: |
+        1. Open...
+        2. Follow the instructions in...
+        3. Run...
+        4. Observe...
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: EGA V9 Version
+      description: Enter the repository, npm package, or release version, if relevant.
+      placeholder: "For example: 1.0.0-rc.1"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Add screenshots, links, logs, or other supporting information.
+      placeholder: Drag and drop screenshots or add supporting information here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission Checklist
+      options:
+        - label: I checked the latest version of the documentation.
+          required: true
+        - label: I identified the relevant page, section, or file.
+          required: true
+        - label: I searched the existing issues and did not find a duplicate report.
+          required: true
