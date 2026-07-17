@@ -267,8 +267,7 @@ EGA-V9/
 Feedback from researchers, developers, startups, and enterprise engineering teams is welcome.
 
 ### Community Support
-- GitHub Issues (Questions, Bug Reports, Feature Requests,
-  Documentation Feedback, and Reproducibility Reports)
+- GitHub Issues (Questions, Bug Reports, Feature Requests, Documentation Feedback, and Independent Reproducibility Reports)
 
 ### Project Resources
 - Live Vercel Demo: https://ega-v9.vercel.app/
