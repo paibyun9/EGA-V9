@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "phase": "Phase 3",
+  "gate": "Fresh-install consumer verification",
+  "generatedAt": "2026-07-20T20:25:06.784Z",
+  "environment": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "nodeVersion": "v20.20.2",
+    "npmVersion": "10.8.2"
+  },
+  "package": {
+    "name": "ega-v9",
+    "version": "1.0.0",
+    "tarballSha256": "dcf2d83a898eeaae74e1f82290acfa6059b3fd6af9474a39a2c5a371d76547ea",
+    "installedPackageJsonSha256": "51ba22518b55e3e92e1539a19bd95ef88260eceb8b8f091ee283c887acc731ab",
+    "installedFiles": [
+      "LICENSE",
+      "README.md",
+      "dist/index.d.ts",
+      "dist/index.js",
+      "package.json"
+    ]
+  },
+  "security": {
+    "productionAuditExitCode": 0,
+    "vulnerabilityTotal": 0,
+    "pathLeakMatches": [],
+    "pathLeakPass": true
+  },
+  "tests": [
+    {
+      "name": "commonjsImport",
+      "exitCode": 0,
+      "pass": true
+    },
+    {
+      "name": "apiSmoke",
+      "exitCode": 0,
+      "pass": true
+    },
+    {
+      "name": "replayDeterminism",
+      "exitCode": 0,
+      "pass": true
+    },
+    {
+      "name": "normalGuard",
+      "exitCode": 0,
+      "pass": true
+    },
+    {
+      "name": "failClosedGuard",
+      "exitCode": 0,
+      "pass": true
+    },
+    {
+      "name": "esmImport",
+      "exitCode": 0,
+      "pass": true
+    },
+    {
+      "name": "typescriptCompile",
+      "exitCode": 0,
+      "pass": true
+    },
+    {
+      "name": "productionAudit",
+      "exitCode": 0,
+      "pass": true
+    }
+  ],
+  "finalStatus": "PASS"
+}

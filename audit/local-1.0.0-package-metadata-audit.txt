@@ -1,0 +1,40 @@
+{
+  "auditTime": "2026-07-20T17:47:57.416Z",
+  "result": "PASS",
+  "rootPackage": {
+    "name": "ega-v9",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+      "packages/sdk-ts"
+    ]
+  },
+  "sdkPackage": {
+    "name": "ega-v9",
+    "version": "1.0.0",
+    "description": "EGA V9 TypeScript SDK for replay, provenance, containment, and SCORP LOCK governance.",
+    "main": "dist/index.js",
+    "mainExists": true,
+    "types": "dist/index.d.ts",
+    "typesExists": true,
+    "files": [
+      "dist",
+      "README.md",
+      "LICENSE"
+    ],
+    "license": "MIT",
+    "repository": "git+https://github.com/paibyun9/EGA-V9.git",
+    "repositoryDirectory": "packages/sdk-ts",
+    "homepage": "https://github.com/paibyun9/EGA-V9#readme",
+    "bugs": "https://github.com/paibyun9/EGA-V9/issues",
+    "scripts": {
+      "build": "tsc",
+      "test": "npm run build && node ../../scripts/testing/run-v1-test-suite.cjs",
+      "dev": "tsc --watch"
+    }
+  },
+  "lockfileVersions": {
+    "root": "1.0.0",
+    "sdk": "1.0.0"
+  }
+}

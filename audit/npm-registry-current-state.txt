@@ -1,0 +1,36 @@
+=== Audit Time ===
+Mon 20 Jul 2026 17:21:13 UTC
+
+=== Registry Version ===
+0.1.0
+
+=== Registry Versions ===
+[
+  "0.1.0"
+]
+
+=== Dist Tags ===
+latest: 0.1.0
+
+=== Owners ===
+paibyun9 <contact@lcm3.com>
+
+=== Registry Metadata ===
+{
+  "name": "ega-v9",
+  "version": "0.1.0",
+  "description": "Execution Governance AI V9: deterministic runtime governance for autonomous AI workflows.",
+  "license": "MIT",
+  "main": "src/index.js",
+  "dist-tags": {
+    "latest": "0.1.0"
+  },
+  "dist.tarball": "https://registry.npmjs.org/ega-v9/-/ega-v9-0.1.0.tgz",
+  "dist.integrity": "sha512-ouPUebXben4hsNxNvCAVyfDqKZ65bWw+3b3AX869iU11RlP7BxcnPlOdhwZncivSsStXJiao1lkZTfBw87PZPg==",
+  "dist.unpackedSize": 3496,
+  "time": {
+    "created": "2026-07-04T19:43:05.848Z",
+    "0.1.0": "2026-07-04T19:43:06.173Z",
+    "modified": "2026-07-04T19:43:06.377Z"
+  }
+}
