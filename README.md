@@ -129,7 +129,7 @@ A successful execution verifies deterministic replay, evaluates the workflow
 trust state, and confirms that no containment action is required.
 
 ```json
-A verified workflow confirms deterministic replay, preserves workflow integrity, and allows execution without containment. When the replay path matches the original execution, EGA confirms workflow integrity, keeps the trust state at T1, and allows execution without containment.
+
 {
   "status": "verified",
   "replayConsistency": true,
