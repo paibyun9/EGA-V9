@@ -93,28 +93,44 @@ app.use(ega.guard());
 
 ------------------------------------------------------------------------
 
-## 5. Expected Output
+## 5. Quick Start
 
-A verified workflow confirms deterministic replay, preserves workflow integrity, and allows execution without containment. When the replay path matches the original execution, EGA confirms workflow integrity, keeps the trust state at **T1**, and allows execution without containment.
+Get EGA V9 running in less than one minute.
 
-```json
-{
-  "status": "verified",
-  "replayConsistency": true,
-  "trustState": "T1",
-  "containmentRequired": false,
-  "executionAllowed": true
-}
+### 1. Install
+
+```bash
+npm install ega-v9
 ```
 
-Field | Meaning
-------|--------
-`status` | Overall verification result.
-`replayConsistency` | Confirms that replay reproduced the identical execution path.
-`trustState` | Current runtime trust level (`T1` = verified).
-`containmentRequired` | Indicates whether fail-closed containment is required.
-`executionAllowed` | Whether the workflow is permitted to continue.
-A verified workflow returns deterministic execution results.
+---
+
+### 2. Create a Quick Start Example
+
+Create `quick-start.cjs` and paste the following code.
+
+```javascript
+// 기존 Quick Start 코드 그대로
+```
+
+---
+
+### 3. Run
+
+```bash
+node quick-start.cjs
+```
+
+---
+
+### 4. Expected Output
+
+A successful execution verifies deterministic replay, evaluates the workflow
+trust state, and confirms that no containment action is required.
+
+```json
+// 기존 Expected Output 그대로
+```
 
 ------------------------------------------------------------------------
 
