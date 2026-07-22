@@ -55,7 +55,7 @@ EGA V9 paper.
 
 ✓ MCP Tool Server + EGA V9
 
-> **Note**
+> **Note;**
 >
 > **EGA V9 complements your existing agent framework—it does not replace it.**
 >
