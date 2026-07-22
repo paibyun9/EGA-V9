@@ -156,7 +156,6 @@ trust state, and confirms that no containment action is required.
   "containmentRequired": false,
   "executionAllowed": true
 }
-<img width="468" height="172" alt="image" src="https://github.com/user-attachments/assets/07349ba1-8130-4405-a806-3dfda865cd45" />
 
 ```
 
