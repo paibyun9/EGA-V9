@@ -162,7 +162,7 @@ node quick-start.cjs
 
 ## 6. Why Adopt EGA?
 
-Build trustworthy AI workflows without sacrificing speed, cost, or simplicity.
+### Build trustworthy AI workflows without sacrificing speed, cost, or simplicity.
 
 - ⚡ **Fast** — Runtime verification in milliseconds.
 - 💰 **Near-Zero Cost** — Runtime verification without external LLM or API calls.
