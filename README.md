@@ -29,19 +29,17 @@ EGA V9 paper.
 
 ------------------------------------------------------------------------
 
-## 2. Installation
+## 2. EGA V9 Solves These Problems
 
-``` bash
-npm install ega-v9
-```
+✓ Replay Verification
 
-Repository replication:
+✓ Runtime Governance
 
-``` bash
-git clone https://github.com/paibyun9/EGA-V9.git
-cd EGA-V9
-npm ci
-```
+✓ Trust-State Evaluation
+
+✓ Fail-Closed Containment
+
+✓ Execution Provenance
 
 ------------------------------------------------------------------------
 
