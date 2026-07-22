@@ -64,7 +64,16 @@ EGA V9 paper.
 
 ------------------------------------------------------------------------
 
-## 4. Quick Start
+## 4. Architecture Flow
+
+**Before EGA (Unmonitored Execution)**
+`LangChain / Framework` ──► `Your Agent` ──► `LLM / External Tools` (Black Box)
+
+**After EGA (Governed & Replayable Execution)**
+`LangChain / Framework` ──► `Your Agent` ──► **[ EGA Runtime Governance ]** ──► `LLM / External Tools`
+                                                      │
+                                                      └──► `Replay Root / Fail-Closed`
+
 
 Verify a workflow with a single function call.
 
