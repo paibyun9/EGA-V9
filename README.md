@@ -64,7 +64,6 @@ EGA V9 paper.
 
 ------------------------------------------------------------------------
 
-```markdown
 ## 4. Architecture Flow
 
 | Without EGA | With EGA |
@@ -80,6 +79,9 @@ EGA V9 paper.
 |  | └─ Execution Provenance |
 |  | ↓ |
 |  | LLM / External Tools |
+
+**No framework migration. No prompt rewrite. No workflow redesign.**
+**Just add EGA Runtime Governance.**
 
 ------------------------------------------------------------------------
 
