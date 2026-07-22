@@ -110,7 +110,7 @@ npm install ega-v9
 Create a file named `quick-start.cjs`, paste the following code, and save it.
 
 ```javascript
-const { govern } = require("ega-v9");
+const { verifyExecution } = require("ega-v9");
 
 const workflow = [
   {
@@ -124,9 +124,14 @@ const workflow = [
   }
 ];
 
-const result = govern(workflow);
+const result = verifyExecution(workflow);
 
-console.log(result.verification);
+console.log({
+  status: result.status,
+  trustState: result.trust.currentTier,
+  executionAllowed: result.containment.executionAllowed,
+  containmentActivated: result.containment.activated
+});
 ```
 
 ### 3). Run
