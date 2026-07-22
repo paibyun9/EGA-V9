@@ -165,9 +165,9 @@ node quick-start.cjs
 Build trustworthy AI workflows without sacrificing speed, cost, or simplicity.
 
 - ⚡ **Fast** — Runtime verification in milliseconds.
-- 💰 **Near-Zero Cost** — No external LLM or API calls during verification.
+- 💰 **Near-Zero Cost** — Runtime verification without external LLM or API calls.
 - 🚀 **Simple** — Integrate with just a few lines of code.
-- 🔒 **Secure** — Deterministic replay, governance, and fail-closed execution.
+- 🔒 **Secure** — Protect AI workflows with deterministic governance and fail-closed execution.
 
 ### Built for Production
 
