@@ -128,7 +128,6 @@ const workflow = [
 const result = verifyExecution(workflow);
 
 console.log(result);
-<img width="468" height="268" alt="image" src="https://github.com/user-attachments/assets/4e4fb715-472f-4945-9709-563bf2a1f771" />
 
 ```
 
