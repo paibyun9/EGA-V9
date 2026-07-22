@@ -160,6 +160,13 @@ trust state, and confirms that no containment action is required.
 
 ```
 
+**Verification Summary**
+
+- ✅ Replay verified
+- ✅ Trust state: T1
+- ✅ No containment required
+- ✅ Execution allowed
+
 ------------------------------------------------------------------------
 
 ## 6. Reproducing the Paper
