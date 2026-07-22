@@ -160,37 +160,22 @@ node quick-start.cjs
 
 ------------------------------------------------------------------------
 
-## 6. Reproducing the Paper
+## 6. Why Adopt EGA?
 
-Regenerate the benchmark artifacts and verify that the repository reproduces the deterministic results reported in the EGA V9 paper.
+Build trustworthy AI workflows without sacrificing speed, cost, or simplicity.
 
-### Build
+- ⚡ **Fast** — Runtime verification in milliseconds.
+- 💰 **Near-Zero Cost** — No external LLM or API calls during verification.
+- 🚀 **Simple** — Integrate with just a few lines of code.
+- 🔒 **Secure** — Deterministic replay, governance, and fail-closed execution.
 
-```bash
-npm run build
-```
+### Built for Production
 
-### Test
-
-```bash
-npm test
-```
-
-### Benchmark
-
-```bash
-npm run table4:build
-```
-
-### Publication Verification
-
-```bash
-npm run stage-c:gate
-npm run stage-d:gate
-npm run release:all-gates
-```
-
-Successful execution regenerates the publication artifacts, validates repository consistency, and confirms that the benchmark results remain reproducible.
+- **Replay** — Reconstruct every workflow exactly.
+- **Auditability** — Generate cryptographically verifiable runtime evidence.
+- **Runtime Verification** — Detect execution inconsistencies.
+- **Deterministic Governance** — Govern AI with predictable decisions.
+- **Fail-Closed Execution** — Automatically contain unsafe workflows.
 
 ------------------------------------------------------------------------
 
