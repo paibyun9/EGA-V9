@@ -107,11 +107,10 @@ npm install ega-v9
 
 ### 2). Create a Quick Start Example
 
-Create a file named `quick-start.cjs` and paste the following example.
+Create a file named `quick-start.cjs`, paste the following code, and save it.
 
 ```javascript
-
-const { verifyExecution } = require("ega-v9");
+const { govern } = require("ega-v9");
 
 const workflow = [
   {
@@ -125,13 +124,10 @@ const workflow = [
   }
 ];
 
-const result = verifyExecution(workflow);
+const result = govern(workflow);
 
-console.log(result);
-
+console.log(result.verification);
 ```
-
----
 
 ### 3). Run
 
@@ -139,23 +135,14 @@ console.log(result);
 node quick-start.cjs
 ```
 
----
-
 ### 4). Expected Output
 
-A successful execution verifies deterministic replay, evaluates the workflow
-trust state, and confirms that no containment action is required.
-
 ```json
-
 {
-  "status": "verified",
   "replayConsistency": true,
-  "trustState": "T1",
-  "containmentRequired": false,
-  "executionAllowed": true
+  "trustState": "VERIFIED",
+  "containmentRequired": false
 }
-
 ```
 
 **Verification Summary**
