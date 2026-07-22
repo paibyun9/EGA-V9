@@ -43,19 +43,18 @@ EGA V9 paper.
 
 ------------------------------------------------------------------------
 
-## 3. Three-Line Integration
+## 3. EGA V9 adds five runtime governance capabilities to autonomous AI workflows:
 
-Apply EGA runtime governance before protected application routes.
+✓ Replay Verification with EGA V9
 
-```javascript
-const { ega } = require("ega-v9");
+✓ Runtime Governance with EGA V9
 
-app.use(ega.guard());
+✓ Trust-State Evaluation with EGA V9
 
-The middleware verifies the workflow before the application route executes.
-Replay mismatches are fail-closed contained and do not reach the protected
-route.
-```
+✓ Fail-Closed Containment with EGA V9
+
+✓ Execution Provenance with EGA V9
+
 ------------------------------------------------------------------------
 
 ## 4. Quick Start
