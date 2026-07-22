@@ -66,38 +66,27 @@ EGA V9 paper.
 
 ## 4. Architecture Flow
 
-### Before EGA (Unmonitored Execution)
+| Before EGA (Unmonitored Execution) | After EGA (Governed & Replayable Execution) |
+|------------------------------------|---------------------------------------------|
+| **LangChain / Framework** | **LangChain / Framework** |
+| ↓ | ↓ |
+| **Your Agent** | **Your Agent** |
+| ↓ | ↓ |
+| **LLM / External Tools** *(Black Box)* | **EGA Runtime Governance** |
+|  | • Replay Verification |
+|  | • Trust-State Evaluation |
+|  | • Fail-Closed Containment |
+|  | • Execution Provenance |
+|  | ↓ |
+|  | **LLM / External Tools** |
 
-LangChain / Framework
-        │
-        ▼
-    Your Agent
-        │
-        ▼
-LLM / External Tools
-   (Black Box)
+```javascript
+const { ega } = require("ega-v9");
 
----
+app.use(ega.guard());
 
-### After EGA (Governed & Replayable Execution)
-
-LangChain / Framework
-        │
-        ▼
-    Your Agent
-        │
-        ▼
-┌──────────────────────────────┐
-│   EGA Runtime Governance     │
-│                              │
-│ • Replay Verification        │
-│ • Trust-State Evaluation     │
-│ • Fail-Closed Containment    │
-│ • Execution Provenance       │
-└──────────────────────────────┘
-        │
-        ▼
-LLM / External Tools
+Just two lines.
+Keep your existing agent framework. EGA V9 adds deterministic runtime governance underneath.
 
 ------------------------------------------------------------------------
 
