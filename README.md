@@ -110,7 +110,26 @@ npm install ega-v9
 Create `quick-start.cjs` and paste the following code.
 
 ```javascript
-// 기존 Quick Start 코드 그대로
+
+const { verifyExecution } = require("ega-v9");
+
+const workflow = [
+  {
+    step: 1,
+    action: "search_product",
+    item: "Laptop"
+  },
+  {
+    step: 2,
+    action: "checkout_request"
+  }
+];
+
+const result = verifyExecution(workflow);
+
+console.log(result);
+<img width="468" height="268" alt="image" src="https://github.com/user-attachments/assets/4e4fb715-472f-4945-9709-563bf2a1f771" />
+
 ```
 
 ---
