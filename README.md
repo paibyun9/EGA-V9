@@ -13,34 +13,19 @@ EGA V9 paper.
 
 ------------------------------------------------------------------------
 
-## Table of Contents
+## 1. Are You Facing These Problems?
 
-1.  Why EGA V9?
-2.  Installation
-3.  Three-Line Integration
-4.  Quick Start
-5.  Expected Output
-6.  Reproducing the Paper
-7.  Publication Verification
-8.  Runtime Architecture
-9.  Repository Structure
-10. Contact and Collaboration
-11. License
-12. Roadmap
+☐ AI agent tool calls cannot be verified.
 
-------------------------------------------------------------------------
+☐ Agent execution cannot be replayed.
 
-## 1. Why EGA V9?
+☐ State corruption is difficult to diagnose.
 
-Autonomous AI systems require deterministic runtime governance rather
-than probabilistic execution trust.
+☐ Workflow failures are hard to reproduce.
 
-EGA V9 introduces four governance primitives:
+☐ Prompt injection leaves little audit evidence.
 
--   Deterministic Replay
--   Provenance-aware Verification
--   Trust-State Evaluation
--   Fail-Closed Containment
+☐ Multi-agent execution becomes a black box.
 
 ------------------------------------------------------------------------
 
