@@ -107,7 +107,7 @@ npm install ega-v9
 
 ### 2). Create a Quick Start Example
 
-Create `quick-start.cjs` and paste the following code.
+Create a file named `quick-start.cjs` and paste the following example.
 
 ```javascript
 
