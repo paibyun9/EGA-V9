@@ -179,95 +179,7 @@ node quick-start.cjs
 
 ------------------------------------------------------------------------
 
-## 7. Publication Verification
-
-
-Validate the complete publication pipeline by running each release gate in sequence.
-
-### Stage A — Repository Validation
-
-```bash
-npm run release:gate
-```
-
-### Stage B — Build Validation
-
-```bash
-npm run stage-b:gate
-```
-
-### Stage C — Documentation Validation
-
-```bash
-npm run stage-c:gate
-```
-
-### Stage D — Benchmark Validation
-
-```bash
-npm run stage-d:gate
-```
-
-### Stage E — Publication Validation
-
-```bash
-npm run stage-e:gate
-```
-
-### Live Publication Verification
-
-After all public artifacts (GitHub, npm, Vercel, paper, and documentation) are published, run the live consistency check.
-
-```bash
-npm run stage-e:live
-```
-
-Successful completion confirms that the repository, benchmark artifacts, documentation, and public publication assets are internally consistent and ready for release.
-
-------------------------------------------------------------------------
-
-## 8. Runtime Architecture
-
-``` text
-Workflow
-   │
-   ▼
-TypeScript SDK
-   │
-   ▼
-Runtime Governance Core
-   ├── Deterministic Replay
-   ├── Provenance Verification
-   ├── Trust-State Evaluation
-   └── Fail-Closed Containment
-   │
-   ▼
-Publication Verification
-```
-
-------------------------------------------------------------------------
-
-## 9. Repository Structure
-
-``` text
-EGA-V9/
-├── benchmarks/
-├── crates/
-├── dashboard/
-├── docs/
-├── packages/sdk-ts/
-├── paper/generated/
-├── publication/
-├── scripts/
-├── package.json
-├── SECURITY.md
-├── LICENSE
-└── README.md
-```
-
-------------------------------------------------------------------------
-
-## 10. Contact and Collaboration
+## 7. Contact and Collaboration
 
 Feedback from researchers, developers, startups, and enterprise engineering teams is welcome.
 
@@ -283,13 +195,13 @@ Feedback from researchers, developers, startups, and enterprise engineering team
 
 ------------------------------------------------------------------------
 
-## 11. License
+## 8. License
 
 Released under the MIT License.
 
 ------------------------------------------------------------------------
 
-## 12. Roadmap
+## 9. Roadmap
 
 Current development:
 
