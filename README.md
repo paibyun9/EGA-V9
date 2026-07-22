@@ -160,7 +160,7 @@ node quick-start.cjs
 
 ------------------------------------------------------------------------
 
-## 6. Why Adopt EGA?
+## 6. Why Adopt EGA V9?
 
 ### Build trustworthy AI workflows without sacrificing speed, cost, or simplicity.
 
