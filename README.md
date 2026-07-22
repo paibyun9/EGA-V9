@@ -43,17 +43,24 @@ EGA V9 paper.
 
 ------------------------------------------------------------------------
 
-## 3. EGA V9 adds five runtime governance capabilities to autonomous AI workflows:
+## 3. Works With
 
-✓ Replay Verification with EGA V9
+✓ LangChain + EGA V9
 
-✓ Runtime Governance with EGA V9
+✓ OpenAI Agents SDK + EGA V9
 
-✓ Trust-State Evaluation with EGA V9
+✓ CrewAI + EGA V9
 
-✓ Fail-Closed Containment with EGA V9
+✓ AutoGen + EGA V9
 
-✓ Execution Provenance with EGA V9
+✓ MCP Tool Server + EGA V9
+
+> **Note**
+>
+> **EGA V9 complements your existing agent framework—it does not replace it.**
+>
+> Keep your orchestration logic, prompts, and tool definitions.
+> EGA adds deterministic runtime verification underneath.
 
 ------------------------------------------------------------------------
 
