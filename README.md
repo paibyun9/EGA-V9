@@ -66,29 +66,29 @@ EGA V9 paper.
 
 ## 4. Runtime Architecture
 
-| Without EGA | With EGA |
-|-------------|----------|
+| Existing Stack | Existing Stack + EGA |
+|----------------|----------------------|
 | **LangChain / Framework** | **LangChain / Framework** |
 | ↓ | ↓ |
 | **Your Agent** | **Your Agent** |
 | ↓ | ↓ |
-| **LLM / External Tools**<br><sub>(Black Box)</sub> | **EGA Runtime Governance** |
+| **LLM / External Tools**<br><sub>Black Box</sub> | **EGA Runtime Governance Layer** |
 |  | ├─ Replay Verification |
+|  | ├─ Runtime Governance |
 |  | ├─ Trust-State Evaluation |
 |  | ├─ Fail-Closed Containment |
 |  | └─ Execution Provenance |
 |  | ↓ |
 |  | **LLM / External Tools** |
 
+> **No framework migration. No prompt rewrite. No workflow redesign.**  
+> **Just add EGA Runtime Governance.**
+
 ```javascript
 const { ega } = require("ega-v9");
 
 app.use(ega.guard());
 ```
-
-> **No framework migration. No prompt rewrite. No workflow redesign.**
->
-> **Just add EGA Runtime Governance.**
 
 ------------------------------------------------------------------------
 
