@@ -66,13 +66,38 @@ EGA V9 paper.
 
 ## 4. Architecture Flow
 
-**Before EGA (Unmonitored Execution)**
-`LangChain / Framework` ──► `Your Agent` ──► `LLM / External Tools` (Black Box)
+### Before EGA (Unmonitored Execution)
 
-**After EGA (Governed & Replayable Execution)**
-`LangChain / Framework` ──► `Your Agent` ──► **[ EGA Runtime Governance ]** ──► `LLM / External Tools`
-                                                      │
-                                                      └──► `Replay Root / Fail-Closed`
+LangChain / Framework
+        │
+        ▼
+    Your Agent
+        │
+        ▼
+LLM / External Tools
+   (Black Box)
+
+---
+
+### After EGA (Governed & Replayable Execution)
+
+LangChain / Framework
+        │
+        ▼
+    Your Agent
+        │
+        ▼
+┌──────────────────────────────┐
+│   EGA Runtime Governance     │
+│                              │
+│ • Replay Verification        │
+│ • Trust-State Evaluation     │
+│ • Fail-Closed Containment    │
+│ • Execution Provenance       │
+└──────────────────────────────┘
+        │
+        ▼
+LLM / External Tools
 
 ------------------------------------------------------------------------
 
