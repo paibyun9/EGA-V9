@@ -203,13 +203,11 @@ Released under the MIT License.
 
 ## 9. Roadmap
 
-Current development:
-
--   Complete README replication guide
--   Finalize SDK
--   Finalize benchmark reproducibility
--   Finalize Stage E
--   Release v1.0.0
+- Improve SDK integrations
+- Expand language support
+- Add enterprise deployment examples
+- Continue benchmark reproducibility
+- Future EGA releases
 
 ------------------------------------------------------------------------
 
