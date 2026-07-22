@@ -144,9 +144,10 @@ node quick-start.cjs
 
 ```json
 {
-  "replayConsistency": true,
-  "trustState": "VERIFIED",
-  "containmentRequired": false
+  status: 'verified',
+  trustState: 'T1',
+  executionAllowed: true,
+  containmentActivated: false
 }
 ```
 
