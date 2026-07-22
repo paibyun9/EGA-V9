@@ -97,7 +97,7 @@ app.use(ega.guard());
 
 Get EGA V9 running in less than one minute.
 
-### 1. Install
+### 1). Install
 
 ```bash
 npm install ega-v9
@@ -105,7 +105,7 @@ npm install ega-v9
 
 ---
 
-### 2. Create a Quick Start Example
+### 2). Create a Quick Start Example
 
 Create `quick-start.cjs` and paste the following code.
 
@@ -115,7 +115,7 @@ Create `quick-start.cjs` and paste the following code.
 
 ---
 
-### 3. Run
+### 3). Run
 
 ```bash
 node quick-start.cjs
@@ -123,7 +123,7 @@ node quick-start.cjs
 
 ---
 
-### 4. Expected Output
+### 4). Expected Output
 
 A successful execution verifies deterministic replay, evaluates the workflow
 trust state, and confirms that no containment action is required.
