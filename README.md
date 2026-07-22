@@ -74,43 +74,6 @@ EGA V9 paper.
                                                       │
                                                       └──► `Replay Root / Fail-Closed`
 
-
-Verify a workflow with a single function call.
-
-Create quick-start.cjs
-```javascript
-const { verifyExecution } = require("ega-v9");
-
-const workflow = [
-  {
-    step: 1,
-    action: "search_product",
-    item: "Laptop"
-  },
-  {
-    step: 2,
-    action: "checkout_request"
-  }
-];
-
-const result = verifyExecution(workflow);
-
-console.log(result);
-```
-Run
-```bash
-node quick-start.cjs
-```
-Expected Output
-```json
-{
-  "status": "verified",
-  "replayConsistency": true,
-  "trustState": "T1",
-  "containmentRequired": false,
-  "executionAllowed": true
-}
-```
 ------------------------------------------------------------------------
 
 ## 5. Expected Output
