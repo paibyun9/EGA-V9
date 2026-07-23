@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "ega-v9.replay-root-change-evidence.v1",
+  "testId": "RRC-001",
+  "title": "Replay Root Stability and Mutation Sensitivity",
+  "generatedAt": "2026-07-23T22:02:20.930Z",
+  "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
+  "sdkApisUsed": [
+    "EGA.init",
+    "EGA.replayRoot",
+    "verifyExecution"
+  ],
+  "hashAlgorithm": "SHA-256",
+  "repeatCount": 100,
+  "scope": {
+    "included": [
+      "identical-workflow Replay Root stability",
+      "canonical object-key ordering",
+      "workflow mutation sensitivity",
+      "direct SDK and verifyExecution consistency"
+    ],
+    "excluded": [
+      "operating-system attacks",
+      "network intrusion",
+      "GPU or virtual-machine escape",
+      "model-internal vulnerabilities"
+    ]
+  },
+  "baseline": {
+    "scenario": "approved-purchase-workflow",
+    "replayRoot": "15ee1b641de5e499d340cbacb9a172c38a0ba75734f998be8fc04bcd15d6e0a4",
+    "replayRootDisplay": "15ee1b641de5...4bcd15d6e0a4",
+    "matchCount": 100,
+    "mismatchCount": 0,
+    "uniqueReplayRootCount": 1,
+    "stable": true
+  },
+  "reorderedBaseline": {
+    "scenario": "same-workflow-reordered-object-keys",
+    "replayRoot": "15ee1b641de5e499d340cbacb9a172c38a0ba75734f998be8fc04bcd15d6e0a4",
+    "replayRootDisplay": "15ee1b641de5...4bcd15d6e0a4",
+    "sameAsBaseline": true
+  },
+  "mutation": {
+    "scenario": "unexpected-tool-insertion",
+    "mutationType": "tool-injection",
+    "insertedStep": {
+      "step": 2.5,
+      "action": "unknown_external_tool",
+      "target": "unapproved-endpoint"
+    },
+    "originalReplayRoot": "15ee1b641de5e499d340cbacb9a172c38a0ba75734f998be8fc04bcd15d6e0a4",
+    "mutatedReplayRoot": "69ccf350abb836aeba989509b97bd57fc5560b30d3d891916cb28287468dc21d",
+    "originalReplayRootDisplay": "15ee1b641de5...4bcd15d6e0a4",
+    "mutatedReplayRootDisplay": "69ccf350abb8...8287468dc21d",
+    "replayRootChanged": true
+  },
+  "sdkConsistency": {
+    "baselineVerifyExecutionRoot": "15ee1b641de5e499d340cbacb9a172c38a0ba75734f998be8fc04bcd15d6e0a4",
+    "mutatedVerifyExecutionRoot": "69ccf350abb836aeba989509b97bd57fc5560b30d3d891916cb28287468dc21d",
+    "pass": true
+  },
+  "assertions": {
+    "identicalWorkflowStable": true,
+    "reorderedKeysStable": true,
+    "mutationChangesRoot": true,
+    "sdkConsistency": true
+  },
+  "finalStatus": "PASS"
+}

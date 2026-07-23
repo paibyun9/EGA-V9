@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "ega-v9.fail-closed-containment-evidence.v1",
+  "testId": "FC-001",
+  "title": "Fail-Closed Containment and Downstream Execution Prevention",
+  "generatedAt": "2026-07-23T22:02:26.075Z",
+  "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
+  "sdkApisUsed": [
+    "EGA.init",
+    "EGA.replayRoot",
+    "EGA.guard",
+    "EGA.events"
+  ],
+  "repeatCountPerScenario": 100,
+  "totalExecutions": 300,
+  "scope": {
+    "included": [
+      "normal workflow execution allowance",
+      "Replay Root mismatch containment activation",
+      "fail-closed downstream execution prevention",
+      "HTTP containment response",
+      "quarantine creation",
+      "containment event recording",
+      "execution.blocked event recording",
+      "observe-mode contrast"
+    ],
+    "excluded": [
+      "remote infrastructure isolation",
+      "operating-system process termination",
+      "network segmentation",
+      "GPU or virtual-machine isolation",
+      "model-level containment"
+    ]
+  },
+  "replayRoots": {
+    "approved": "a38d155d1195237432d3a97ce6765ed39c670eb525181e4116349897bd60b864",
+    "approvedDisplay": "a38d155d1195...9897bd60b864",
+    "failClosedMismatchActual": "a53bc4276fb082cff683659f2dd5ee2f825046b8cdd424e7f4f8a2b0cc48fbc9",
+    "failClosedMismatchDisplay": "a53bc4276fb0...a2b0cc48fbc9",
+    "observeMismatchActual": "a53bc4276fb082cff683659f2dd5ee2f825046b8cdd424e7f4f8a2b0cc48fbc9",
+    "observeMismatchDisplay": "a53bc4276fb0...a2b0cc48fbc9"
+  },
+  "normal": {
+    "scenario": "approved-workflow-fail-closed",
+    "expected": {
+      "detectionStatus": "match",
+      "containmentActivated": false,
+      "containmentMode": "fail-closed",
+      "executionAllowed": true,
+      "nextCalled": true,
+      "statusCode": 200,
+      "executionBlockedEvents": 0
+    },
+    "observed": {
+      "detectionStatus": "match",
+      "containmentActivated": false,
+      "containmentMode": "fail-closed",
+      "executionAllowed": true,
+      "contextStatus": "verified",
+      "trustTier": "T1",
+      "riskScore": 10,
+      "nextCalled": true,
+      "nextCallCount": 1,
+      "statusCode": 200,
+      "jsonCallCount": 0,
+      "statusCallCount": 0,
+      "responseHeaders": {
+        "x-ega-request-id": "ab83479b-8847-4da9-9582-a4a1b2824ea6",
+        "x-ega-replay-root": "a38d155d1195237432d3a97ce6765ed39c670eb525181e4116349897bd60b864",
+        "x-ega-trust-level": "supported",
+        "x-ega-scorp-lock": "true",
+        "x-ega-detection": "match",
+        "x-ega-containment": "inactive",
+        "x-ega-execution-allowed": "true",
+        "x-ega-trust-tier": "T1",
+        "x-ega-risk-score": "10",
+        "x-ega-approval-required": "false",
+        "x-ega-client-id": "client_b2af1ed6246e0e248323b822",
+        "x-ega-license-status": "active",
+        "x-ega-license-enforcement": "disabled",
+        "x-ega-atlas-technique": "none",
+        "x-ega-severity": "none"
+      },
+      "eventCounts": {
+        "workflow.verified": 1,
+        "hash.verified": 1,
+        "replay.mismatch": 0,
+        "mutation.detected": 0,
+        "quarantine.created": 0,
+        "containment.activated": 0,
+        "execution.blocked": 0
+      }
+    },
+    "passCount": 100,
+    "failCount": 0,
+    "eventTotals": {
+      "replay.mismatch": 0,
+      "quarantine.created": 0,
+      "containment.activated": 0,
+      "execution.blocked": 0
+    },
+    "pass": true
+  },
+  "failClosedMismatch": {
+    "scenario": "divergent-workflow-fail-closed",
+    "expected": {
+      "detectionStatus": "mismatch",
+      "containmentActivated": true,
+      "containmentMode": "fail-closed",
+      "executionAllowed": false,
+      "nextCalled": false,
+      "statusCode": 409,
+      "responseError": "EGA_CONTAINMENT_ACTIVATED",
+      "replayMismatchEvents": 100,
+      "quarantineEvents": 100,
+      "containmentEvents": 100,
+      "executionBlockedEvents": 100
+    },
+    "observed": {
+      "detectionStatus": "mismatch",
+      "containmentActivated": true,
+      "containmentMode": "fail-closed",
+      "containmentReason": "replay root mismatch",
+      "quarantineId": "q_f40f22c2-5f7c-4960-9442-3f57022b750b",
+      "executionAllowed": false,
+      "contextStatus": "contained",
+      "trustTier": "T3",
+      "riskScore": 85,
+      "nextCalled": false,
+      "nextCallCount": 0,
+      "statusCode": 409,
+      "responseError": "EGA_CONTAINMENT_ACTIVATED",
+      "responseOk": false,
+      "jsonCallCount": 1,
+      "statusCallCount": 1,
+      "responseHeaders": {
+        "x-ega-request-id": "f40f22c2-5f7c-4960-9442-3f57022b750b",
+        "x-ega-replay-root": "a53bc4276fb082cff683659f2dd5ee2f825046b8cdd424e7f4f8a2b0cc48fbc9",
+        "x-ega-trust-level": "supported",
+        "x-ega-scorp-lock": "true",
+        "x-ega-detection": "mismatch",
+        "x-ega-containment": "activated",
+        "x-ega-execution-allowed": "false",
+        "x-ega-trust-tier": "T3",
+        "x-ega-risk-score": "85",
+        "x-ega-approval-required": "true",
+        "x-ega-client-id": "client_b2af1ed6246e0e248323b822",
+        "x-ega-license-status": "active",
+        "x-ega-license-enforcement": "disabled",
+        "x-ega-atlas-technique": "ATLAS: Unauthorized Tool Invocation",
+        "x-ega-severity": "critical"
+      },
+      "eventCounts": {
+        "workflow.verified": 0,
+        "hash.verified": 0,
+        "replay.mismatch": 1,
+        "mutation.detected": 1,
+        "quarantine.created": 1,
+        "containment.activated": 1,
+        "execution.blocked": 1
+      }
+    },
+    "passCount": 100,
+    "failCount": 0,
+    "eventTotals": {
+      "replay.mismatch": 100,
+      "quarantine.created": 100,
+      "containment.activated": 100,
+      "execution.blocked": 100
+    },
+    "pass": true
+  },
+  "observeMismatch": {
+    "scenario": "divergent-workflow-observe",
+    "expected": {
+      "detectionStatus": "mismatch",
+      "containmentActivated": true,
+      "containmentMode": "observe",
+      "executionAllowed": true,
+      "nextCalled": true,
+      "statusCode": 200,
+      "replayMismatchEvents": 100,
+      "quarantineEvents": 100,
+      "containmentEvents": 100,
+      "executionBlockedEvents": 0
+    },
+    "observed": {
+      "detectionStatus": "mismatch",
+      "containmentActivated": true,
+      "containmentMode": "observe",
+      "containmentReason": "replay root mismatch",
+      "quarantineId": "q_e2d854a7-65d2-4fea-ad68-044ca716c3f3",
+      "executionAllowed": true,
+      "contextStatus": "contained",
+      "trustTier": "T3",
+      "riskScore": 70,
+      "nextCalled": true,
+      "nextCallCount": 1,
+      "statusCode": 200,
+      "jsonCallCount": 0,
+      "statusCallCount": 0,
+      "responseHeaders": {
+        "x-ega-request-id": "e2d854a7-65d2-4fea-ad68-044ca716c3f3",
+        "x-ega-replay-root": "a53bc4276fb082cff683659f2dd5ee2f825046b8cdd424e7f4f8a2b0cc48fbc9",
+        "x-ega-trust-level": "supported",
+        "x-ega-scorp-lock": "true",
+        "x-ega-detection": "mismatch",
+        "x-ega-containment": "activated",
+        "x-ega-execution-allowed": "true",
+        "x-ega-trust-tier": "T3",
+        "x-ega-risk-score": "70",
+        "x-ega-approval-required": "true",
+        "x-ega-client-id": "client_b2af1ed6246e0e248323b822",
+        "x-ega-license-status": "active",
+        "x-ega-license-enforcement": "disabled",
+        "x-ega-atlas-technique": "ATLAS: Unauthorized Tool Invocation",
+        "x-ega-severity": "critical"
+      },
+      "eventCounts": {
+        "workflow.verified": 0,
+        "hash.verified": 0,
+        "replay.mismatch": 1,
+        "mutation.detected": 1,
+        "quarantine.created": 1,
+        "containment.activated": 1,
+        "execution.blocked": 0
+      }
+    },
+    "passCount": 100,
+    "failCount": 0,
+    "eventTotals": {
+      "replay.mismatch": 100,
+      "quarantine.created": 100,
+      "containment.activated": 100,
+      "execution.blocked": 0
+    },
+    "pass": true
+  },
+  "assertions": {
+    "normalExecutionAllowed": true,
+    "normalDoesNotActivateContainment": true,
+    "normalDoesNotRecordBlockedEvent": true,
+    "failClosedMismatchDetected": true,
+    "failClosedContainmentActivated": true,
+    "failClosedExecutionDisallowed": true,
+    "failClosedNextNotCalled": true,
+    "failClosedReturns409": true,
+    "failClosedReturnsContainmentError": true,
+    "failClosedCreatesQuarantine": true,
+    "failClosedRecordsExecutionBlocked": true,
+    "observeMismatchDetected": true,
+    "observeExecutionAllowed": true,
+    "observeNextCalled": true,
+    "observeDoesNotRecordExecutionBlocked": true,
+    "containmentModeDoesNotChangeReplayRoot": true
+  },
+  "finalStatus": "PASS"
+}

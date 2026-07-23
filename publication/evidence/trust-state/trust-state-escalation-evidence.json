@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "ega-v9.trust-state-escalation-evidence.v1",
+  "testId": "TS-001",
+  "title": "Deterministic Trust State Evaluation and Escalation",
+  "generatedAt": "2026-07-23T22:02:24.356Z",
+  "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
+  "sdkApisUsed": [
+    "EGA.init",
+    "EGA.replayRoot",
+    "EGA.guard",
+    "EGA.events"
+  ],
+  "configuration": {
+    "failClosed": true,
+    "approvalThreshold": 70,
+    "repeatCountPerScenario": 100
+  },
+  "repeatCountPerScenario": 100,
+  "totalExecutions": 300,
+  "scope": {
+    "included": [
+      "normal T1 trust-state evaluation",
+      "Replay Root mismatch T1-to-T3 escalation",
+      "high-value mismatch T1-to-T4 escalation",
+      "risk-score consistency",
+      "approval-required evaluation",
+      "privilege-escalation gate evaluation",
+      "trust governance event recording"
+    ],
+    "excluded": [
+      "containment response correctness",
+      "network and operating-system security",
+      "model-level security",
+      "remote policy enforcement"
+    ]
+  },
+  "replayRoots": {
+    "approvedNormal": "30fdcfe81ec807167d309eb9e4d59891269dce83748200db781e64d97e0c1c11",
+    "approvedNormalDisplay": "30fdcfe81ec8...64d97e0c1c11",
+    "approvedHighValue": "221c48e9684aa624f6b92a217046f0a4ec8c6c30f71d532b97e68189f028919b",
+    "approvedHighValueDisplay": "221c48e9684a...8189f028919b",
+    "standardMismatchActual": "a10f6f35428836284c6793925576b5340abf76726a23eb272ada98d708097923",
+    "highValueMismatchActual": "1ed06b434271f5bf5d1b643e3ed66055d7ef9a8fd41adedc9ff904c16973125d"
+  },
+  "normal": {
+    "scenario": "approved-normal-transaction",
+    "expected": {
+      "riskScore": 10,
+      "trustTier": "T1",
+      "approvalRequired": false,
+      "privilegeEscalationGate": false
+    },
+    "observed": {
+      "detectionStatus": "match",
+      "trustTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "trustReason": "Replay verified within normal governance range.",
+      "containmentActivated": false,
+      "executionAllowed": true,
+      "nextCalled": true,
+      "statusCode": 200,
+      "eventCounts": {
+        "trust.evaluated": 1,
+        "trust.escalated": 0,
+        "approval.required": 0,
+        "privilege.escalation.gated": 0,
+        "replay.mismatch": 0
+      },
+      "trustEscalation": null
+    },
+    "passCount": 100,
+    "failCount": 0,
+    "eventTotals": {
+      "trust.evaluated": 100,
+      "trust.escalated": 0,
+      "approval.required": 0,
+      "privilege.escalation.gated": 0
+    },
+    "pass": true
+  },
+  "mismatch": {
+    "scenario": "standard-replay-root-mismatch",
+    "expected": {
+      "riskScore": 85,
+      "trustTier": "T3",
+      "approvalRequired": true,
+      "privilegeEscalationGate": true
+    },
+    "observed": {
+      "detectionStatus": "mismatch",
+      "trustTier": "T3",
+      "riskScore": 85,
+      "approvalRequired": true,
+      "privilegeEscalationGate": true,
+      "trustReason": "Replay mismatch increased governance risk.",
+      "containmentActivated": true,
+      "executionAllowed": false,
+      "nextCalled": false,
+      "statusCode": 409,
+      "eventCounts": {
+        "trust.evaluated": 1,
+        "trust.escalated": 1,
+        "approval.required": 1,
+        "privilege.escalation.gated": 1,
+        "replay.mismatch": 1
+      },
+      "trustEscalation": {
+        "from": "T1",
+        "to": "T3",
+        "riskScore": 85,
+        "reason": "Replay mismatch increased governance risk."
+      }
+    },
+    "expectedTransition": {
+      "from": "T1",
+      "to": "T3"
+    },
+    "passCount": 100,
+    "failCount": 0,
+    "transitionPassCount": 100,
+    "eventTotals": {
+      "trust.evaluated": 100,
+      "trust.escalated": 100,
+      "approval.required": 100,
+      "privilege.escalation.gated": 100
+    },
+    "pass": true
+  },
+  "highValueMismatch": {
+    "scenario": "high-value-replay-root-mismatch",
+    "expected": {
+      "riskScore": 95,
+      "trustTier": "T4",
+      "approvalRequired": true,
+      "privilegeEscalationGate": true
+    },
+    "observed": {
+      "detectionStatus": "mismatch",
+      "trustTier": "T4",
+      "riskScore": 95,
+      "approvalRequired": true,
+      "privilegeEscalationGate": true,
+      "trustReason": "Replay mismatch increased governance risk.",
+      "containmentActivated": true,
+      "executionAllowed": false,
+      "nextCalled": false,
+      "statusCode": 409,
+      "eventCounts": {
+        "trust.evaluated": 1,
+        "trust.escalated": 1,
+        "approval.required": 1,
+        "privilege.escalation.gated": 1,
+        "replay.mismatch": 1
+      },
+      "trustEscalation": {
+        "from": "T1",
+        "to": "T4",
+        "riskScore": 95,
+        "reason": "Replay mismatch increased governance risk."
+      }
+    },
+    "expectedTransition": {
+      "from": "T1",
+      "to": "T4"
+    },
+    "passCount": 100,
+    "failCount": 0,
+    "transitionPassCount": 100,
+    "eventTotals": {
+      "trust.evaluated": 100,
+      "trust.escalated": 100,
+      "approval.required": 100,
+      "privilege.escalation.gated": 100
+    },
+    "pass": true
+  },
+  "assertions": {
+    "normalRemainsT1": true,
+    "standardMismatchEscalatesT1ToT3": true,
+    "highValueMismatchEscalatesT1ToT4": true,
+    "normalHasNoTrustEscalation": true,
+    "normalHasNoApprovalRequirement": true,
+    "normalHasNoPrivilegeGate": true,
+    "standardMismatchTrustEvaluated": true,
+    "standardMismatchTrustEscalated": true,
+    "standardMismatchApprovalRequired": true,
+    "standardMismatchPrivilegeGate": true,
+    "highValueMismatchTrustEvaluated": true,
+    "highValueMismatchTrustEscalated": true,
+    "highValueMismatchApprovalRequired": true,
+    "highValueMismatchPrivilegeGate": true,
+    "standardTransitionDetailsCorrect": true,
+    "highValueTransitionDetailsCorrect": true
+  },
+  "finalStatus": "PASS"
+}

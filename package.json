@@ -31,7 +31,14 @@
     "benchmark:v1:smoke": "npm run build && node --expose-gc benchmarks/v1/runtime-governance-benchmark.mjs --profile=smoke --output=/tmp/ega-v9-v1-benchmark-smoke",
     "benchmark:v1:publication": "npm run build && node --expose-gc benchmarks/v1/runtime-governance-benchmark.mjs --profile=publication --output=benchmarks/results/v1-runtime-governance",
     "benchmark:v1:gate": "node scripts/v1-benchmark-gate.cjs",
-    "benchmark:v1:all": "npm run benchmark:v1:publication && npm run benchmark:v1:gate"
+    "benchmark:v1:all": "npm run benchmark:v1:publication && npm run benchmark:v1:gate",
+    "test:replay-root": "npm run build && node --test benchmarks/replay-root/replay-root-change.test.mjs",
+    "test:workflow-divergence": "npm run build && node --test benchmarks/workflow-divergence/workflow-divergence.test.mjs",
+    "test:trust-state": "npm run build && node --test benchmarks/trust-state/trust-state-escalation.test.mjs",
+    "test:fail-closed": "npm run build && node --test benchmarks/fail-closed-containment/fail-closed-containment.test.mjs",
+    "test:tool-order": "npm run build && node --test benchmarks/tool-order/tool-order-mutation.test.mjs",
+    "test:approval-bypass": "npm run build && node --test benchmarks/approval-bypass/approval-bypass.test.mjs",
+    "test:tool-injection": "npm run build && node --test benchmarks/tool-injection/tool-injection.test.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"

@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "ega-v9.workflow-divergence-evidence.v1",
+  "testId": "WD-001",
+  "title": "Workflow Divergence Detection Through Replay Root Comparison",
+  "generatedAt": "2026-07-23T22:02:22.637Z",
+  "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
+  "sdkApisUsed": [
+    "EGA.init",
+    "EGA.replayRoot",
+    "EGA.guard",
+    "EGA.events"
+  ],
+  "repeatCount": 100,
+  "scope": {
+    "included": [
+      "approved workflow match classification",
+      "unexpected tool-step divergence",
+      "expected versus actual Replay Root comparison",
+      "replay.mismatch event recording",
+      "mutation.detected event recording",
+      "normal-workflow false-positive check"
+    ],
+    "excluded": [
+      "trust-state escalation correctness",
+      "containment effectiveness",
+      "operating-system attacks",
+      "network intrusion",
+      "GPU or virtual-machine escape",
+      "model-internal vulnerabilities"
+    ]
+  },
+  "approvedReplayRoot": "a0a27096c2f5373c933c724dfacf9a5d043a296c0265a31f73aad6843aa38ab2",
+  "approvedReplayRootDisplay": "a0a27096c2f5...d6843aa38ab2",
+  "normal": {
+    "scenario": "approved-purchase-workflow",
+    "detectionStatus": "match",
+    "matchCount": 100,
+    "mismatchCount": 0,
+    "falsePositiveMismatchCount": 0,
+    "nextCalledCount": 100
+  },
+  "divergent": {
+    "scenario": "unexpected-tool-step-insertion",
+    "mutationType": "unauthorized-tool-invocation",
+    "insertedStep": {
+      "sequence": 2.5,
+      "tool": "external.transfer",
+      "operation": "send",
+      "unauthorized": true,
+      "target": "unapproved-endpoint"
+    },
+    "detectionStatus": "mismatch",
+    "mismatchCount": 100,
+    "expectedReplayRoot": "a0a27096c2f5373c933c724dfacf9a5d043a296c0265a31f73aad6843aa38ab2",
+    "actualReplayRoot": "ab643e8265ee45979bf9c279b921fb0f64c6ecaf0950b59f53a57b5ea13212a3",
+    "actualReplayRootDisplay": "ab643e8265ee...7b5ea13212a3",
+    "expectedRootMatchedApprovedRoot": true,
+    "actualRootChanged": true,
+    "uniqueActualReplayRootCount": 1,
+    "eventCounts": {
+      "replay.mismatch": 100,
+      "mutation.detected": 100
+    }
+  },
+  "assertions": {
+    "normalDetectedAsMatch": true,
+    "noNormalFalsePositive": true,
+    "divergenceDetectedAsMismatch": true,
+    "expectedRootPreserved": true,
+    "actualRootChanged": true,
+    "divergentRootStable": true,
+    "replayMismatchEventsRecorded": true,
+    "mutationDetectedEventsRecorded": true
+  },
+  "finalStatus": "PASS"
+}

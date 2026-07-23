@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "ega-v9.tool-order-mutation-evidence.v1",
+  "testId": "TO-001",
+  "title": "Deterministic Detection of Tool Invocation Order Mutation",
+  "generatedAt": "2026-07-23T22:02:27.785Z",
+  "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
+  "sdkApisUsed": [
+    "EGA.init",
+    "EGA.replayRoot",
+    "EGA.guard",
+    "EGA.events"
+  ],
+  "configuration": {
+    "runtimeMode": "observe",
+    "failClosed": false,
+    "repeatCountPerScenario": 100
+  },
+  "repeatCountPerScenario": 100,
+  "totalExecutions": 200,
+  "mutationDefinition": {
+    "type": "tool-order-mutation",
+    "description": "The workflow retains the same tools, tool count, and tool arguments while reversing the first two tool invocations.",
+    "addedTools": 0,
+    "removedTools": 0,
+    "reorderedTools": 2
+  },
+  "toolOrders": {
+    "approved": [
+      "catalog.search",
+      "catalog.select",
+      "commerce.checkout"
+    ],
+    "reordered": [
+      "catalog.select",
+      "catalog.search",
+      "commerce.checkout"
+    ]
+  },
+  "replayRoots": {
+    "approved": "1b7199c563c3c6444341887fd2aecf64bd3eb642d8c2d8ab4fee10ade202efb0",
+    "approvedDisplay": "1b7199c563c3...10ade202efb0",
+    "reordered": "f549947939289283bc6286fe82a5d143f69385b84cfbdca3aff4896f815f9d82",
+    "reorderedDisplay": "f54994793928...896f815f9d82",
+    "changed": true
+  },
+  "approved": {
+    "scenario": "approved-tool-order",
+    "expected": {
+      "detectionStatus": "match",
+      "replayMismatchEvents": 0,
+      "mutationDetectedEvents": 0
+    },
+    "observed": {
+      "detectionStatus": "match",
+      "expectedReplayRoot": "1b7199c563c3c6444341887fd2aecf64bd3eb642d8c2d8ab4fee10ade202efb0",
+      "actualReplayRoot": "1b7199c563c3c6444341887fd2aecf64bd3eb642d8c2d8ab4fee10ade202efb0",
+      "trustTier": "T1",
+      "riskScore": 10,
+      "containmentActivated": false,
+      "containmentMode": "observe",
+      "executionAllowed": true,
+      "nextCalled": true,
+      "nextCallCount": 1,
+      "statusCode": 200,
+      "eventCounts": {
+        "workflow.verified": 1,
+        "hash.verified": 1,
+        "replay.mismatch": 0,
+        "mutation.detected": 0,
+        "containment.activated": 0,
+        "execution.blocked": 0
+      }
+    },
+    "matchCount": 100,
+    "mismatchCount": 0,
+    "stableRoot": true,
+    "uniqueActualRoots": [
+      "1b7199c563c3c6444341887fd2aecf64bd3eb642d8c2d8ab4fee10ade202efb0"
+    ],
+    "eventTotals": {
+      "replay.mismatch": 0,
+      "mutation.detected": 0,
+      "execution.blocked": 0
+    },
+    "pass": true
+  },
+  "reordered": {
+    "scenario": "reordered-tool-execution",
+    "expected": {
+      "detectionStatus": "mismatch",
+      "replayMismatchEvents": 100,
+      "mutationDetectedEvents": 100
+    },
+    "observed": {
+      "detectionStatus": "mismatch",
+      "expectedReplayRoot": "1b7199c563c3c6444341887fd2aecf64bd3eb642d8c2d8ab4fee10ade202efb0",
+      "actualReplayRoot": "f549947939289283bc6286fe82a5d143f69385b84cfbdca3aff4896f815f9d82",
+      "trustTier": "T3",
+      "riskScore": 70,
+      "containmentActivated": true,
+      "containmentMode": "observe",
+      "executionAllowed": true,
+      "nextCalled": true,
+      "nextCallCount": 1,
+      "statusCode": 200,
+      "eventCounts": {
+        "workflow.verified": 0,
+        "hash.verified": 0,
+        "replay.mismatch": 1,
+        "mutation.detected": 1,
+        "containment.activated": 1,
+        "execution.blocked": 0
+      }
+    },
+    "matchCount": 0,
+    "mismatchCount": 100,
+    "stableRoot": true,
+    "uniqueActualRoots": [
+      "f549947939289283bc6286fe82a5d143f69385b84cfbdca3aff4896f815f9d82"
+    ],
+    "eventTotals": {
+      "replay.mismatch": 100,
+      "mutation.detected": 100,
+      "execution.blocked": 0
+    },
+    "pass": true
+  },
+  "assertions": {
+    "sameToolCount": true,
+    "sameToolSet": true,
+    "orderActuallyChanged": true,
+    "toolOrderChangesReplayRoot": true,
+    "approvedRootStable100": true,
+    "reorderedRootStable100": true,
+    "approvedMatches100": true,
+    "approvedFalsePositivesZero": true,
+    "reorderedMismatchDetected100": true,
+    "replayMismatchEvents100": true,
+    "mutationDetectedEvents100": true,
+    "directAndRuntimeRootsConsistent": true,
+    "observeModeDoesNotBlock": true
+  },
+  "scope": {
+    "included": [
+      "tool invocation order integrity",
+      "Replay Root sensitivity to array order",
+      "deterministic mismatch detection",
+      "false-positive check for approved order",
+      "replay.mismatch event generation",
+      "mutation.detected event generation"
+    ],
+    "excluded": [
+      "tool insertion",
+      "tool deletion",
+      "tool argument mutation",
+      "fail-closed execution blocking",
+      "remote infrastructure security"
+    ]
+  },
+  "finalStatus": "PASS"
+}

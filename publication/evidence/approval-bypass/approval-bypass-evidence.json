@@ -1,0 +1,752 @@
+{
+  "schemaVersion": "ega-v9.approval-bypass-evidence.v1",
+  "testId": "AB-001",
+  "title": "Deterministic Detection and Fail-Closed Prevention of Approval Bypass",
+  "generatedAt": "2026-07-23T22:02:29.504Z",
+  "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
+  "sdkApisUsed": [
+    "EGA.init",
+    "EGA.replayRoot",
+    "EGA.guard",
+    "EGA.events"
+  ],
+  "configuration": {
+    "runtimeMode": "fail-closed",
+    "failClosed": true,
+    "approvalThreshold": 70,
+    "repeatCountPerScenario": 100
+  },
+  "repeatCountPerScenario": 100,
+  "totalExecutions": 200,
+  "mutationDefinition": {
+    "type": "approval-bypass",
+    "description": "The workflow retains the same business action, amount, currency, and tools while replacing the sealed human-approval record with self-authorized bypass state.",
+    "workflowFieldsChanged": 0,
+    "businessFieldsChanged": 0,
+    "toolCallsChanged": 0,
+    "approvalFieldsChanged": [
+      "required",
+      "status",
+      "approvedBy",
+      "approvalId",
+      "approvalMethod"
+    ]
+  },
+  "approvalStates": {
+    "approved": {
+      "required": true,
+      "status": "approved",
+      "approvedBy": "human-reviewer-01",
+      "approvalId": "APR-2026-0001",
+      "approvalMethod": "human-review",
+      "decision": "allow"
+    },
+    "bypassed": {
+      "required": false,
+      "status": "bypassed",
+      "approvedBy": "agent-self",
+      "approvalId": null,
+      "approvalMethod": "self-authorized",
+      "decision": "allow"
+    }
+  },
+  "replayRoots": {
+    "approved": "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5",
+    "bypassed": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+    "changed": true
+  },
+  "approved": {
+    "scenario": "legitimate-human-approval",
+    "observed": {
+      "detectionStatus": "match",
+      "expectedReplayRoot": "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5",
+      "actualReplayRoot": "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5",
+      "trustTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "containmentActivated": false,
+      "containmentMode": "fail-closed",
+      "executionAllowed": true,
+      "nextCalled": true,
+      "nextCallCount": 1,
+      "statusCode": 200,
+      "eventCounts": {
+        "workflow.verified": 1,
+        "hash.verified": 1,
+        "replay.mismatch": 0,
+        "mutation.detected": 0,
+        "trust.escalated": 0,
+        "approval.required": 0,
+        "privilege.escalation.gated": 0,
+        "quarantine.created": 0,
+        "containment.activated": 0,
+        "execution.blocked": 0
+      }
+    },
+    "matchCount": 100,
+    "mismatchCount": 0,
+    "nextCalledCount": 100,
+    "stableRoot": true,
+    "uniqueActualRoots": [
+      "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5"
+    ],
+    "eventTotals": {
+      "replay.mismatch": 0,
+      "mutation.detected": 0,
+      "trust.escalated": 0,
+      "approval.required": 0,
+      "privilege.escalation.gated": 0,
+      "containment.activated": 0,
+      "execution.blocked": 0
+    },
+    "pass": true
+  },
+  "bypassed": {
+    "scenario": "approval-bypass-mutation",
+    "observed": {
+      "detectionStatus": "mismatch",
+      "expectedReplayRoot": "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5",
+      "actualReplayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+      "trustTier": "T3",
+      "riskScore": 85,
+      "approvalRequired": true,
+      "privilegeEscalationGate": true,
+      "containmentActivated": true,
+      "containmentMode": "fail-closed",
+      "executionAllowed": false,
+      "nextCalled": false,
+      "nextCallCount": 0,
+      "statusCode": 409,
+      "responseBody": {
+        "ok": false,
+        "error": "EGA_CONTAINMENT_ACTIVATED",
+        "message": "Replay mismatch detected. Trust escalated and execution blocked by EGA V9.",
+        "ega": {
+          "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+          "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+          "trustLevel": "supported",
+          "status": "contained",
+          "scorpLock": true,
+          "clientIdentity": {
+            "anonymousClientId": "client_290528828100e374e33d45e5",
+            "source": "host-header",
+            "domainHint": "localhost"
+          },
+          "licenseState": {
+            "mode": "alpha",
+            "status": "active",
+            "enforcement": "disabled",
+            "reason": "V9 Alpha local runtime. License enforcement disabled."
+          },
+          "mitreMapping": {
+            "mapped": true,
+            "attackType": "Prompt Injection",
+            "atlasTechnique": "ATLAS: Prompt Injection",
+            "attackTechnique": "ATT&CK-style: Input Manipulation",
+            "severity": "high",
+            "reason": "Prompt-like payload produced replay mismatch."
+          },
+          "detection": {
+            "status": "mismatch",
+            "expectedReplayRoot": "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5",
+            "actualReplayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8"
+          },
+          "containment": {
+            "activated": true,
+            "mode": "fail-closed",
+            "reason": "replay root mismatch",
+            "quarantineId": "q_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "executionAllowed": false
+          },
+          "trust": {
+            "currentTier": "T3",
+            "riskScore": 85,
+            "approvalRequired": true,
+            "privilegeEscalationGate": true,
+            "reason": "Replay mismatch increased governance risk."
+          },
+          "businessGovernanceProfile": {
+            "metrics": {
+              "detected": true,
+              "amount": 100,
+              "currency": "USD",
+              "estimatedTransactionValue": 100
+            },
+            "trust": {
+              "currentTier": "T3",
+              "riskScore": 85,
+              "approvalRequired": true,
+              "privilegeEscalationGate": true,
+              "reason": "Replay mismatch increased governance risk."
+            }
+          },
+          "provenance": {
+            "graphId": "graph_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "lineage": [
+              "Decision",
+              "Policy",
+              "Tool Output",
+              "Input"
+            ],
+            "nodes": [
+              {
+                "id": "input_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "type": "input",
+                "label": "Input",
+                "data": {
+                  "body": {
+                    "workflowId": "WF-APPROVAL-001",
+                    "action": "purchase",
+                    "amount": 100,
+                    "currency": "USD",
+                    "approval": {
+                      "required": false,
+                      "status": "bypassed",
+                      "approvedBy": "agent-self",
+                      "approvalId": null,
+                      "approvalMethod": "self-authorized",
+                      "decision": "allow"
+                    },
+                    "tools": [
+                      {
+                        "sequence": 1,
+                        "name": "catalog.search",
+                        "arguments": {
+                          "query": "laptop"
+                        }
+                      },
+                      {
+                        "sequence": 2,
+                        "name": "catalog.select",
+                        "arguments": {
+                          "productId": "LP-001",
+                          "quantity": 1
+                        }
+                      },
+                      {
+                        "sequence": 3,
+                        "name": "commerce.checkout",
+                        "arguments": {
+                          "productId": "LP-001",
+                          "quantity": 1,
+                          "currency": "USD"
+                        }
+                      }
+                    ]
+                  },
+                  "query": null,
+                  "params": null
+                }
+              },
+              {
+                "id": "tool_output_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "type": "tool_output",
+                "label": "Tool Output",
+                "data": {
+                  "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+                  "hashVerified": false
+                }
+              },
+              {
+                "id": "policy_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "type": "policy",
+                "label": "Policy",
+                "data": {
+                  "policyId": "approval-bypass-policy-v1",
+                  "scorpLock": true,
+                  "failClosed": true
+                }
+              },
+              {
+                "id": "decision_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "type": "decision",
+                "label": "Decision",
+                "data": {
+                  "status": "contained",
+                  "executionAllowed": false
+                }
+              },
+              {
+                "id": "business_metrics_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "type": "business_metrics",
+                "label": "Business Metrics",
+                "data": {
+                  "detected": true,
+                  "amount": 100,
+                  "currency": "USD",
+                  "estimatedTransactionValue": 100
+                }
+              },
+              {
+                "id": "trust_escalation_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "type": "trust_escalation",
+                "label": "Trust Escalation",
+                "data": {
+                  "currentTier": "T3",
+                  "riskScore": 85,
+                  "approvalRequired": true,
+                  "privilegeEscalationGate": true,
+                  "reason": "Replay mismatch increased governance risk."
+                }
+              }
+            ],
+            "edges": [
+              {
+                "from": "input_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "to": "tool_output_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "label": "produces"
+              },
+              {
+                "from": "tool_output_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "to": "policy_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "label": "evaluated by"
+              },
+              {
+                "from": "policy_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "to": "decision_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "label": "governs"
+              },
+              {
+                "from": "input_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "to": "business_metrics_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "label": "metrics extracted from"
+              },
+              {
+                "from": "business_metrics_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "to": "trust_escalation_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "label": "contributes to"
+              },
+              {
+                "from": "trust_escalation_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "to": "decision_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "label": "escalates"
+              }
+            ],
+            "businessMetrics": {
+              "detected": true,
+              "amount": 100,
+              "currency": "USD",
+              "estimatedTransactionValue": 100
+            },
+            "businessGovernanceProfile": {
+              "metrics": {
+                "detected": true,
+                "amount": 100,
+                "currency": "USD",
+                "estimatedTransactionValue": 100
+              },
+              "trust": {
+                "currentTier": "T3",
+                "riskScore": 85,
+                "approvalRequired": true,
+                "privilegeEscalationGate": true,
+                "reason": "Replay mismatch increased governance risk."
+              }
+            }
+          }
+        },
+        "events": [
+          {
+            "type": "workflow.started",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "verified",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "licenseState": {
+              "mode": "alpha",
+              "status": "active",
+              "enforcement": "disabled",
+              "reason": "V9 Alpha local runtime. License enforcement disabled."
+            },
+            "id": "ee48f213-e091-4775-b28e-7c136039e45b",
+            "sequence": 1
+          },
+          {
+            "type": "lineage.reconstructed",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "licenseState": {
+              "mode": "alpha",
+              "status": "active",
+              "enforcement": "disabled",
+              "reason": "V9 Alpha local runtime. License enforcement disabled."
+            },
+            "details": {
+              "graphId": "graph_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+              "lineage": [
+                "Decision",
+                "Policy",
+                "Tool Output",
+                "Input"
+              ]
+            },
+            "id": "1cadc239-e14f-44cd-8269-d1468595eea7",
+            "sequence": 2
+          },
+          {
+            "type": "business.metrics.collected",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "detected": true,
+              "amount": 100,
+              "currency": "USD",
+              "estimatedTransactionValue": 100
+            },
+            "id": "06e07410-5644-4997-b6d7-2d3317220def",
+            "sequence": 3
+          },
+          {
+            "type": "trust.evaluated",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "licenseState": {
+              "mode": "alpha",
+              "status": "active",
+              "enforcement": "disabled",
+              "reason": "V9 Alpha local runtime. License enforcement disabled."
+            },
+            "details": {
+              "currentTier": "T3",
+              "riskScore": 85,
+              "approvalRequired": true,
+              "privilegeEscalationGate": true,
+              "reason": "Replay mismatch increased governance risk."
+            },
+            "id": "90edfd7b-2869-4ec8-9712-84e8b4264216",
+            "sequence": 4
+          },
+          {
+            "type": "mitre.mapped",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "licenseState": {
+              "mode": "alpha",
+              "status": "active",
+              "enforcement": "disabled",
+              "reason": "V9 Alpha local runtime. License enforcement disabled."
+            },
+            "details": {
+              "mapped": true,
+              "attackType": "Prompt Injection",
+              "atlasTechnique": "ATLAS: Prompt Injection",
+              "attackTechnique": "ATT&CK-style: Input Manipulation",
+              "severity": "high",
+              "reason": "Prompt-like payload produced replay mismatch."
+            },
+            "id": "7d929842-3ac6-4cbc-a460-9f323ba1eeee",
+            "sequence": 5
+          },
+          {
+            "type": "replay.mismatch",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "expectedReplayRoot": "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5",
+              "actualReplayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8"
+            },
+            "id": "cad4fd4a-0aae-4289-bec5-d846a4264e47",
+            "sequence": 6
+          },
+          {
+            "type": "mutation.detected",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "reason": "expected replay root does not match actual replay root"
+            },
+            "id": "ee3f1680-10b4-4cea-90b7-322a0d763b56",
+            "sequence": 7
+          },
+          {
+            "type": "trust.escalated",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "from": "T1",
+              "to": "T3",
+              "riskScore": 85,
+              "reason": "Replay mismatch increased governance risk."
+            },
+            "id": "5cca1f26-f5ee-4d55-9f45-467aed01a794",
+            "sequence": 8
+          },
+          {
+            "type": "privilege.escalation.gated",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "currentTier": "T3",
+              "riskScore": 85
+            },
+            "id": "359f23fc-d1c7-44a6-998a-a2461367efad",
+            "sequence": 9
+          },
+          {
+            "type": "approval.required",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "currentTier": "T3",
+              "riskScore": 85
+            },
+            "id": "9310dc26-b051-4a70-9276-8f4a8331a9ec",
+            "sequence": 10
+          },
+          {
+            "type": "quarantine.created",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "quarantineId": "q_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+              "reason": "replay root mismatch"
+            },
+            "id": "aee3a8c9-4dc7-49c5-be06-73d401aa9423",
+            "sequence": 11
+          },
+          {
+            "type": "containment.activated",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "mode": "fail-closed",
+              "executionAllowed": false
+            },
+            "id": "9b91f77f-a8c0-4a67-85c7-073cbfc3dc75",
+            "sequence": 12
+          },
+          {
+            "type": "execution.blocked",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "reason": "SCORP LOCK fail-closed containment"
+            },
+            "id": "ec4cdf71-ab43-440d-89b6-c374a0819f00",
+            "sequence": 13
+          }
+        ],
+        "eventSummary": {
+          "total": 13,
+          "byType": {
+            "workflow.started": 1,
+            "lineage.reconstructed": 1,
+            "business.metrics.collected": 1,
+            "trust.evaluated": 1,
+            "mitre.mapped": 1,
+            "replay.mismatch": 1,
+            "mutation.detected": 1,
+            "trust.escalated": 1,
+            "privilege.escalation.gated": 1,
+            "approval.required": 1,
+            "quarantine.created": 1,
+            "containment.activated": 1,
+            "execution.blocked": 1
+          },
+          "latest": {
+            "type": "execution.blocked",
+            "timestamp": "2026-07-23T22:02:29.490Z",
+            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
+            "trustLevel": "supported",
+            "status": "contained",
+            "clientIdentity": {
+              "anonymousClientId": "client_290528828100e374e33d45e5",
+              "source": "host-header",
+              "domainHint": "localhost"
+            },
+            "details": {
+              "reason": "SCORP LOCK fail-closed containment"
+            },
+            "id": "ec4cdf71-ab43-440d-89b6-c374a0819f00",
+            "sequence": 13
+          }
+        }
+      },
+      "eventCounts": {
+        "workflow.verified": 0,
+        "hash.verified": 0,
+        "replay.mismatch": 1,
+        "mutation.detected": 1,
+        "trust.escalated": 1,
+        "approval.required": 1,
+        "privilege.escalation.gated": 1,
+        "quarantine.created": 1,
+        "containment.activated": 1,
+        "execution.blocked": 1
+      }
+    },
+    "mismatchCount": 100,
+    "approvalRequiredCount": 100,
+    "privilegeGateCount": 100,
+    "executionDeniedCount": 100,
+    "nextCalledCount": 0,
+    "http409Count": 100,
+    "stableRoot": true,
+    "uniqueActualRoots": [
+      "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8"
+    ],
+    "eventTotals": {
+      "replay.mismatch": 100,
+      "mutation.detected": 100,
+      "trust.escalated": 100,
+      "approval.required": 100,
+      "privilege.escalation.gated": 100,
+      "quarantine.created": 100,
+      "containment.activated": 100,
+      "execution.blocked": 100
+    },
+    "pass": true
+  },
+  "assertions": {
+    "workflowIdUnchanged": true,
+    "businessActionUnchanged": true,
+    "amountUnchanged": true,
+    "currencyUnchanged": true,
+    "toolsUnchanged": true,
+    "approvalStateChanged": true,
+    "approvalMutationChangesReplayRoot": true,
+    "approvedRootStable100": true,
+    "bypassedRootStable100": true,
+    "approvedMatches100": true,
+    "approvedFalsePositivesZero": true,
+    "bypassDetected100": true,
+    "approvalRequired100": true,
+    "privilegeGate100": true,
+    "executionDenied100": true,
+    "replayMismatchEvents100": true,
+    "mutationDetectedEvents100": true,
+    "trustEscalatedEvents100": true,
+    "approvalRequiredEvents100": true,
+    "privilegeGateEvents100": true,
+    "quarantineEvents100": true,
+    "containmentEvents100": true,
+    "executionBlockedEvents100": true,
+    "failClosedNextCallsZero": true,
+    "http409Responses100": true,
+    "directAndRuntimeRootsConsistent": true
+  },
+  "scope": {
+    "included": [
+      "sealed approval-state integrity",
+      "approval-record mutation detection",
+      "Replay Root sensitivity to approval-state changes",
+      "trust-state escalation",
+      "approval-required event generation",
+      "privilege-escalation gating",
+      "fail-closed execution prevention",
+      "quarantine and containment evidence"
+    ],
+    "excluded": [
+      "cryptographic signature validation",
+      "human identity authentication",
+      "external approval-system availability",
+      "authorization-server compromise",
+      "operating-system compromise"
+    ]
+  },
+  "finalStatus": "PASS"
+}
