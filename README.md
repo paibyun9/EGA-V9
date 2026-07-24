@@ -282,31 +282,6 @@ Each validation also generates corresponding JSON and Markdown evidence under:
 ```text
 publication/evidence/
 ```
-
----
-
-### What You Are Verifying
-
-This validation suite demonstrates that EGA V9 can reproducibly verify:
-
-- Deterministic Replay Roots
-- Workflow Mutation Detection
-- Trust-State Escalation
-- Fail-Closed Runtime Governance
-- Tool Invocation Order Integrity
-- Approval Bypass Prevention
-- Workflow-Level Tool Injection Detection
-
----
-
-### Verify the Evidence. Then Decide.
-
-The purpose of this validation suite is **not** to ask you to trust EGA V9.
-
-Instead, it enables you to reproduce the governance evidence yourself before deciding whether EGA V9 is appropriate for your AI workflow.
-
-> **Proof, not promises.**
-
 ---
 
 **We don't hide problems. We solve them together.**
