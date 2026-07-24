@@ -376,7 +376,8 @@ Based on your evaluation, **What would have happened without EGA V9?**
 
 ## 9. Contact and Collaboration
 
-Feedback from researchers, developers, startups, and enterprise engineering teams is welcome.
+Whether you are evaluating EGA V9, exploring enterprise adoption, or experimenting with new AI workflows, 
+feedback and collaboration are welcome.
 
 ### Community Support
 - GitHub Issues (Questions, Bug Reports, Feature Requests, Documentation Feedback, and Independent Reproducibility Reports): https://github.com/paibyun9/EGA-V9/issues
