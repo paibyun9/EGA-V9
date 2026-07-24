@@ -270,9 +270,107 @@ Artifacts include:
 
 The next step is to evaluate how EGA V9 fits into a real enterprise AI workflow.
 
-Explore the complete Enterprise Evaluation Sample:
+### Step 1). Company Policy
 
-→ Enterprise Evaluation Sample
+Before evaluating EGA V9, define the policies that your AI system must follow.
+
+**Example: AI Shopping Policy**
+
+| Workflow | Company Policy |
+|----------|----------------|
+| Purchase | Payment must be completed before shipment. |
+| Refund | Refunds are allowed within 30 days and require manager approval. |
+| Return | Product inspection is required before approval. |
+
+---
+
+### Step 2). Integrate EGA V9
+
+Install EGA V9.
+
+```bash
+npm install ega-v9
+```
+
+Integrate EGA V9 into your AI workflow.
+
+```text
+Customer → AI Shopping Agent (e.g., LangChain)
+         → Company Policy
+         → [ EGA V9 ]
+         → Inventory API | Payment API | Refund API | Shipping API
+```
+
+EGA V9 enforces company policies before workflow execution while recording deterministic governance evidence.
+
+---
+
+### Step 3). Governed Workflow Execution
+
+**Standard Order Pipeline**
+
+```text
+Customer Order → Agent → [ EGA V9 ] → Payment API → PASS
+```
+
+**Policy-Enforced Refund Pipeline**
+
+```text
+Refund Request → Agent → Manager Approval → [ EGA V9 ] → Refund API → PASS
+```
+
+EGA V9 permits valid workflows while preserving execution, policy, and verification evidence for later review.
+
+---
+
+### Step 4). Deployment Decision
+
+Should EGA V9 be deployed to your production AI workflow?
+
+```text
+YES / NO
+```
+
+---
+
+### Step 5). Business Impact
+
+After completing the evaluation, consider the operational benefits.
+
+**Operational Reliability**
+
+- Enforces company policies before execution.
+- Detects workflow mutations before they reach production.
+
+**Security**
+
+- Detects approval bypass attempts.
+- Detects unauthorized tool execution.
+- Detects policy mutations.
+
+**Governance**
+
+- Replayable workflows.
+- Traceable execution.
+- Auditable decisions.
+
+**Engineering**
+
+- Faster incident investigation.
+- Deterministic debugging.
+- Reproducible execution evidence.
+
+**Business**
+
+- Reduced operational risk.
+- Increased confidence before production deployment.
+- Easier internal security and compliance reviews.
+
+---
+
+### Final Question
+
+**What would have happened without EGA V9?**
 
 ------------------------------------------------------------------------
 
