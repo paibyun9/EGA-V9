@@ -179,6 +179,146 @@ node quick-start.cjs
 
 ------------------------------------------------------------------------
 
+## 7. Verify EGA V9 Before Adoption
+
+> **Don't trust our claims. Verify them yourself.**
+
+Run the governance validation suite locally and verify the core runtime governance properties of EGA V9 using the same SDK implementation included in this repository.
+
+---
+
+### 1). Clone the Repository
+
+```bash
+git clone https://github.com/paibyun9/EGA-V9.git
+cd EGA-V9
+npm ci
+```
+
+---
+
+### 2). Run the Governance Validation Suite
+
+Validate the seven core governance and runtime-integrity properties.
+
+```bash
+# 1. Deterministic Replay Root Verification
+npm run test:replay-root
+
+# 2. Workflow Divergence Detection
+npm run test:workflow-divergence
+
+# 3. Trust-State Escalation
+npm run test:trust-state
+
+# 4. Fail-Closed Containment
+npm run test:fail-closed
+
+# 5. Tool Invocation Order Integrity
+npm run test:tool-order
+
+# 6. Approval Bypass Defense
+npm run test:approval-bypass
+
+# 7. Workflow-Level Tool Injection Detection
+npm run test:tool-injection
+```
+
+> **Note**
+>
+> - All validation runs locally.
+> - Zero external API calls.
+> - Deterministic execution.
+> - Each test automatically generates reproducible JSON and Markdown evidence.
+
+---
+
+### 3). Review the Evidence
+
+Validation artifacts are generated automatically under:
+
+```text
+publication/evidence/
+```
+
+Each validation produces reproducible evidence including:
+
+- JSON report
+- Markdown report
+- Final PASS / FAIL status
+
+---
+
+### Expected Validation Results
+
+| Validation | Expected Result |
+|------------|:---------------:|
+| Replay Root Verification | ✅ PASS |
+| Workflow Divergence Detection | ✅ PASS |
+| Trust-State Escalation | ✅ PASS |
+| Fail-Closed Containment | ✅ PASS |
+| Tool Order Integrity | ✅ PASS |
+| Approval Bypass Defense | ✅ PASS |
+| Workflow-Level Tool Injection Detection | ✅ PASS |
+
+---
+
+### Example Validation Output
+
+After running the suite, you should observe outputs similar to the following:
+
+| Validation | Example Evidence |
+|------------|------------------|
+| Replay Root | Stable repeats **100/100** |
+| Replay Root | Mutation changed root **PASS** |
+| Workflow Divergence | Divergences detected **100/100** |
+| Trust-State | T1 → T3/T4 escalation **100/100** |
+| Fail-Closed | Execution blocked **100/100** |
+| Approval Bypass | HTTP 409 responses **100/100** |
+| Tool Injection | Tool injections detected **100/100** |
+
+Each validation also generates corresponding JSON and Markdown evidence under:
+
+```text
+publication/evidence/
+```
+
+---
+
+### What You Are Verifying
+
+This validation suite demonstrates that EGA V9 can reproducibly verify:
+
+- Deterministic Replay Roots
+- Workflow Mutation Detection
+- Trust-State Escalation
+- Fail-Closed Runtime Governance
+- Tool Invocation Order Integrity
+- Approval Bypass Prevention
+- Workflow-Level Tool Injection Detection
+
+---
+
+### Verify the Evidence. Then Decide.
+
+The purpose of this validation suite is **not** to ask you to trust EGA V9.
+
+Instead, it enables you to reproduce the governance evidence yourself before deciding whether EGA V9 is appropriate for your AI workflow.
+
+> **Proof, not promises.**
+
+---
+
+**We don't hide problems. We solve them together.**
+
+------------------------------------------------------------------------
+
+
+
+
+
+
+
 ## 7. Contact and Collaboration
 
 Feedback from researchers, developers, startups, and enterprise engineering teams is welcome.
