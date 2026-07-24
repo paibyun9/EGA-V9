@@ -261,7 +261,6 @@ Each validation produces reproducible evidence including:
 | Approval Bypass Defense | ✅ PASS |
 | Workflow-Level Tool Injection Detection | ✅ PASS |
 
----
 
 **We don't hide problems. We solve them together.**
 
