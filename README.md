@@ -382,7 +382,7 @@ Whether you are evaluating EGA V9, exploring enterprise adoption, or experimenti
 feedback and collaboration are welcome.
 
 ### Community Support
-- GitHub Issues
+- GitHub Issues: https://github.com/paibyun9/EGA-V9/issues
 
 - Questions
 - Bug Reports
@@ -392,7 +392,7 @@ feedback and collaboration are welcome.
 
 ### Project Resources
 - Live Vercel Demo: https://ega-v9.vercel.app/
-- Official Project Website: https://lcm3.com/
+- LCM Official Website: https://lcm3.com/
 
 ### Direct Contact
 - contact@lcm3.com
