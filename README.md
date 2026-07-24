@@ -268,8 +268,6 @@ Artifacts include:
 
 ## 8. Enterprise Evaluation
 
-The validation suite verifies that EGA V9 functions correctly.
-
 The next step is to evaluate how EGA V9 fits into a real enterprise AI workflow.
 
 See the complete Enterprise Evaluation Sample:
