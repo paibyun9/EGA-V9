@@ -370,7 +370,9 @@ After completing the evaluation, consider the operational benefits.
 
 ### Final Question
 
-Based on your evaluation, **What would have happened without EGA V9?**
+Based on your evaluation, 
+
+**What would have happened without EGA V9?**
 
 ------------------------------------------------------------------------
 
@@ -380,7 +382,13 @@ Whether you are evaluating EGA V9, exploring enterprise adoption, or experimenti
 feedback and collaboration are welcome.
 
 ### Community Support
-- GitHub Issues (Questions, Bug Reports, Feature Requests, Documentation Feedback, and Independent Reproducibility Reports): https://github.com/paibyun9/EGA-V9/issues
+- GitHub Issues
+
+- Questions
+- Bug Reports
+- Feature Requests
+- Documentation Feedback
+- Independent Reproducibility Reports
 
 ### Project Resources
 - Live Vercel Demo: https://ega-v9.vercel.app/
