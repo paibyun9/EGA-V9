@@ -270,7 +270,7 @@ Artifacts include:
 
 The next step is to evaluate how EGA V9 fits into a real enterprise AI workflow.
 
-See the complete Enterprise Evaluation Sample:
+Explore the complete Enterprise Evaluation Sample:
 
 → Enterprise Evaluation Sample
 
