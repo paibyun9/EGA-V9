@@ -382,13 +382,10 @@ Whether you are evaluating EGA V9, exploring enterprise adoption, or experimenti
 feedback and collaboration are welcome.
 
 ### Community Support
-- GitHub Issues: https://github.com/paibyun9/EGA-V9/issues
+- GitHub Issues:
+  https://github.com/paibyun9/EGA-V9/issues
 
-- Questions
-- Bug Reports
-- Feature Requests
-- Documentation Feedback
-- Independent Reproducibility Reports
+  Use GitHub Issues for questions, bug reports, feature requests, documentation feedback, and independent reproducibility reports.
 
 ### Project Resources
 - Live Vercel Demo: https://ega-v9.vercel.app/
