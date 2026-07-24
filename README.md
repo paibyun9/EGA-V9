@@ -370,7 +370,7 @@ After completing the evaluation, consider the operational benefits.
 
 ### Final Question
 
-**What would have happened without EGA V9?**
+Based on your evaluation, **What would have happened without EGA V9?**
 
 ------------------------------------------------------------------------
 
