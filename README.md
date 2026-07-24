@@ -229,7 +229,7 @@ npm run test:tool-injection
 > - All validation runs locally.
 > - Zero external API calls.
 > - Deterministic execution.
-> - Each test automatically generates reproducible JSON and Markdown evidence.
+> - Each test automatically generates reproducible JSON and Markdown evidence files.
 
 ---
 
@@ -241,7 +241,7 @@ Validation artifacts are generated automatically under:
 publication/evidence/
 ```
 
-Each validation produces reproducible evidence including:
+Artifacts include:
 
 - JSON report
 - Markdown report
