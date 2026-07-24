@@ -263,27 +263,6 @@ Each validation produces reproducible evidence including:
 
 ---
 
-### Example Validation Output
-
-After running the suite, you should observe outputs similar to the following:
-
-| Validation | Example Evidence |
-|------------|------------------|
-| Replay Root | Stable repeats **100/100** |
-| Replay Root | Mutation changed root **PASS** |
-| Workflow Divergence | Divergences detected **100/100** |
-| Trust-State | T1 → T3/T4 escalation **100/100** |
-| Fail-Closed | Execution blocked **100/100** |
-| Approval Bypass | HTTP 409 responses **100/100** |
-| Tool Injection | Tool injections detected **100/100** |
-
-Each validation also generates corresponding JSON and Markdown evidence under:
-
-```text
-publication/evidence/
-```
----
-
 **We don't hide problems. We solve them together.**
 
 ------------------------------------------------------------------------
