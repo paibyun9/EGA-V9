@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "contractId": "ega-v9-input-validation-v1.0.1",
+  "releaseTarget": "ega-v9@1.0.1",
+  "compatibilityPolicy": {
+    "preserveExistingValidInputs": true,
+    "preserveReturnStructures": true,
+    "preservePublicExports": true,
+    "rejectUndefinedStandaloneInput": true,
+    "allowPreviouslyAcceptedDefinedValues": true,
+    "exposePayloadInErrorMessage": false,
+    "failClosed": true
+  },
+  "errorCodes": {
+    "EGA_INPUT_REQUIRED": {
+      "meaning": "A required public API input was omitted or undefined.",
+      "errorType": "TypeError"
+    },
+    "EGA_OPTIONS_TYPE": {
+      "meaning": "EGA.init options must be a plain object.",
+      "errorType": "TypeError"
+    },
+    "EGA_OPTION_TYPE": {
+      "meaning": "An EGA option has an unsupported type.",
+      "errorType": "TypeError"
+    },
+    "EGA_OPTION_VALUE": {
+      "meaning": "An EGA option has an unsupported value.",
+      "errorType": "TypeError"
+    },
+    "EGA_OPTION_RANGE": {
+      "meaning": "A numeric EGA option is outside its supported range.",
+      "errorType": "RangeError"
+    },
+    "EGA_GUARD_REQUEST_REQUIRED": {
+      "meaning": "The guard request object is missing or invalid.",
+      "errorType": "TypeError"
+    },
+    "EGA_GUARD_RESPONSE_REQUIRED": {
+      "meaning": "The guard response object is missing or invalid.",
+      "errorType": "TypeError"
+    },
+    "EGA_GUARD_NEXT_REQUIRED": {
+      "meaning": "The guard next callback is missing or invalid.",
+      "errorType": "TypeError"
+    }
+  },
+  "standaloneFunctions": [
+    "verifyExecution",
+    "replay",
+    "provenance",
+    "contain"
+  ],
+  "validatedOptions": {
+    "appName": "non-empty string",
+    "trustLevel": [
+      "supported",
+      "verified"
+    ],
+    "telemetry": "boolean",
+    "failClosed": "boolean",
+    "policyId": "non-empty string",
+    "approvalThreshold": "finite number between 0 and 100"
+  }
+}

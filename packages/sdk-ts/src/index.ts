@@ -207,6 +207,273 @@ type NextFunction = EGAGuardNext;
 type EGARequest = EGAGuardRequest;
 type EGAResponse = EGAGuardResponse;
 
+type EGAInputErrorCode =
+  | "EGA_INPUT_REQUIRED"
+  | "EGA_OPTIONS_TYPE"
+  | "EGA_OPTION_TYPE"
+  | "EGA_OPTION_VALUE"
+  | "EGA_OPTION_RANGE"
+  | "EGA_GUARD_REQUEST_REQUIRED"
+  | "EGA_GUARD_RESPONSE_REQUIRED"
+  | "EGA_GUARD_NEXT_REQUIRED";
+
+class EGAInputValidationError extends TypeError {
+  readonly code: EGAInputErrorCode;
+  readonly field?: string;
+  readonly expected?: string;
+  readonly receivedType: string;
+
+  constructor(args: {
+    code: EGAInputErrorCode;
+    message: string;
+    value: unknown;
+    field?: string;
+    expected?: string;
+  }) {
+    super(`[${args.code}] ${args.message}`);
+
+    this.name = "EGAInputValidationError";
+    this.code = args.code;
+    this.field = args.field;
+    this.expected = args.expected;
+    this.receivedType = describeInputType(
+      args.value
+    );
+
+    Object.setPrototypeOf(
+      this,
+      new.target.prototype
+    );
+  }
+}
+
+function describeInputType(
+  value: unknown
+): string {
+  if (value === null) {
+    return "null";
+  }
+
+  if (Array.isArray(value)) {
+    return "array";
+  }
+
+  return typeof value;
+}
+
+function isPlainObject(
+  value: unknown
+): value is Record<string, unknown> {
+  if (
+    value === null ||
+    typeof value !== "object" ||
+    Array.isArray(value)
+  ) {
+    return false;
+  }
+
+  const prototype =
+    Object.getPrototypeOf(value);
+
+  return (
+    prototype === Object.prototype ||
+    prototype === null
+  );
+}
+
+function assertStandaloneInput(
+  input: unknown,
+  functionName: string
+): void {
+  if (input === undefined) {
+    throw new EGAInputValidationError({
+      code: "EGA_INPUT_REQUIRED",
+      message:
+        `${functionName} input is required. Pass a defined execution value.`,
+      value: input,
+      field: "input",
+      expected: "defined value"
+    });
+  }
+}
+
+function validateEGAOptions(
+  options: unknown
+): asserts options is EGAOptions {
+  if (!isPlainObject(options)) {
+    throw new EGAInputValidationError({
+      code: "EGA_OPTIONS_TYPE",
+      message:
+        "EGA.init options must be a plain object.",
+      value: options,
+      field: "options",
+      expected: "plain object"
+    });
+  }
+
+  if (
+    options.appName !== undefined &&
+    (
+      typeof options.appName !== "string" ||
+      options.appName.trim().length === 0
+    )
+  ) {
+    throw new EGAInputValidationError({
+      code:
+        typeof options.appName === "string"
+          ? "EGA_OPTION_VALUE"
+          : "EGA_OPTION_TYPE",
+      message:
+        "options.appName must be a non-empty string.",
+      value: options.appName,
+      field: "options.appName",
+      expected: "non-empty string"
+    });
+  }
+
+  if (
+    options.trustLevel !== undefined &&
+    options.trustLevel !== "supported" &&
+    options.trustLevel !== "verified"
+  ) {
+    throw new EGAInputValidationError({
+      code: "EGA_OPTION_VALUE",
+      message:
+        'options.trustLevel must be "supported" or "verified".',
+      value: options.trustLevel,
+      field: "options.trustLevel",
+      expected:
+        '"supported" | "verified"'
+    });
+  }
+
+  for (
+    const field of [
+      "telemetry",
+      "failClosed"
+    ] as const
+  ) {
+    const value = options[field];
+
+    if (
+      value !== undefined &&
+      typeof value !== "boolean"
+    ) {
+      throw new EGAInputValidationError({
+        code: "EGA_OPTION_TYPE",
+        message:
+          `options.${field} must be a boolean.`,
+        value,
+        field: `options.${field}`,
+        expected: "boolean"
+      });
+    }
+  }
+
+  if (
+    options.policyId !== undefined &&
+    (
+      typeof options.policyId !== "string" ||
+      options.policyId.trim().length === 0
+    )
+  ) {
+    throw new EGAInputValidationError({
+      code:
+        typeof options.policyId === "string"
+          ? "EGA_OPTION_VALUE"
+          : "EGA_OPTION_TYPE",
+      message:
+        "options.policyId must be a non-empty string.",
+      value: options.policyId,
+      field: "options.policyId",
+      expected: "non-empty string"
+    });
+  }
+
+  if (
+    options.approvalThreshold !== undefined
+  ) {
+    if (
+      typeof options.approvalThreshold !==
+        "number" ||
+      !Number.isFinite(
+        options.approvalThreshold
+      )
+    ) {
+      throw new EGAInputValidationError({
+        code: "EGA_OPTION_TYPE",
+        message:
+          "options.approvalThreshold must be a finite number.",
+        value:
+          options.approvalThreshold,
+        field:
+          "options.approvalThreshold",
+        expected:
+          "finite number from 0 to 100"
+      });
+    }
+
+    if (
+      options.approvalThreshold < 0 ||
+      options.approvalThreshold > 100
+    ) {
+      throw new EGAInputValidationError({
+        code: "EGA_OPTION_RANGE",
+        message:
+          "options.approvalThreshold must be between 0 and 100.",
+        value:
+          options.approvalThreshold,
+        field:
+          "options.approvalThreshold",
+        expected:
+          "number from 0 to 100"
+      });
+    }
+  }
+}
+
+function validateGuardInvocation(
+  req: unknown,
+  res: unknown,
+  next: unknown
+): asserts req is EGARequest {
+  if (!isPlainObject(req)) {
+    throw new EGAInputValidationError({
+      code:
+        "EGA_GUARD_REQUEST_REQUIRED",
+      message:
+        "EGA guard requires a request object.",
+      value: req,
+      field: "req",
+      expected: "request object"
+    });
+  }
+
+  if (!isPlainObject(res)) {
+    throw new EGAInputValidationError({
+      code:
+        "EGA_GUARD_RESPONSE_REQUIRED",
+      message:
+        "EGA guard requires a response object.",
+      value: res,
+      field: "res",
+      expected: "response object"
+    });
+  }
+
+  if (typeof next !== "function") {
+    throw new EGAInputValidationError({
+      code:
+        "EGA_GUARD_NEXT_REQUIRED",
+      message:
+        "EGA guard requires a next callback.",
+      value: next,
+      field: "next",
+      expected: "function"
+    });
+  }
+}
+
 export class EGA {
   private readonly options: Required<EGAOptions>;
   private readonly eventLog: EGAEvent[] = [];
@@ -224,11 +491,19 @@ export class EGA {
   }
 
   static init(options: EGAOptions = {}): EGA {
+    validateEGAOptions(options);
+
     return new EGA(options);
   }
 
   guard() {
     return (req: EGARequest, res: EGAResponse, next: NextFunction) => {
+      validateGuardInvocation(
+        req,
+        res,
+        next
+      );
+
       const requestId = randomUUID();
       const clientIdentity = buildAnonymousClientIdentity(req, this.options.appName);
       const licenseState = evaluateLicenseState(req);
@@ -926,6 +1201,10 @@ function stableStringify(input: unknown): string {
 }
 
 export function verifyExecution(input: unknown): EGARequestContext {
+  assertStandaloneInput(
+    input,
+    "verifyExecution"
+  );
   const ega = EGA.init();
   const replayRoot = ega.replayRoot(input);
   const businessMetrics = collectBusinessMetrics(input);
@@ -987,14 +1266,26 @@ export function verifyExecution(input: unknown): EGARequestContext {
 }
 
 export function replay(input: unknown): EGARequestContext {
+  assertStandaloneInput(
+    input,
+    "replay"
+  );
   return verifyExecution(input);
 }
 
 export function provenance(input: unknown): EGARequestContext {
+  assertStandaloneInput(
+    input,
+    "provenance"
+  );
   return verifyExecution(input);
 }
 
 export function contain(input: unknown): EGARequestContext {
+  assertStandaloneInput(
+    input,
+    "contain"
+  );
   return verifyExecution(input);
 }
 

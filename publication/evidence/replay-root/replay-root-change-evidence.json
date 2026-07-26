@@ -2,7 +2,7 @@
   "schemaVersion": "ega-v9.replay-root-change-evidence.v1",
   "testId": "RRC-001",
   "title": "Replay Root Stability and Mutation Sensitivity",
-  "generatedAt": "2026-07-23T22:02:20.930Z",
+  "generatedAt": "2026-07-24T17:56:18.317Z",
   "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
   "sdkApisUsed": [
     "EGA.init",

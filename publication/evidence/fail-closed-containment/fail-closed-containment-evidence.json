@@ -2,7 +2,7 @@
   "schemaVersion": "ega-v9.fail-closed-containment-evidence.v1",
   "testId": "FC-001",
   "title": "Fail-Closed Containment and Downstream Execution Prevention",
-  "generatedAt": "2026-07-23T22:02:26.075Z",
+  "generatedAt": "2026-07-25T17:33:57.152Z",
   "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
   "sdkApisUsed": [
     "EGA.init",
@@ -64,7 +64,7 @@
       "jsonCallCount": 0,
       "statusCallCount": 0,
       "responseHeaders": {
-        "x-ega-request-id": "ab83479b-8847-4da9-9582-a4a1b2824ea6",
+        "x-ega-request-id": "70017853-20b6-41d1-b0ad-be48fc30de01",
         "x-ega-replay-root": "a38d155d1195237432d3a97ce6765ed39c670eb525181e4116349897bd60b864",
         "x-ega-trust-level": "supported",
         "x-ega-scorp-lock": "true",
@@ -120,7 +120,7 @@
       "containmentActivated": true,
       "containmentMode": "fail-closed",
       "containmentReason": "replay root mismatch",
-      "quarantineId": "q_f40f22c2-5f7c-4960-9442-3f57022b750b",
+      "quarantineId": "q_69d701da-1e84-47c3-ac37-5cf13069c320",
       "executionAllowed": false,
       "contextStatus": "contained",
       "trustTier": "T3",
@@ -133,7 +133,7 @@
       "jsonCallCount": 1,
       "statusCallCount": 1,
       "responseHeaders": {
-        "x-ega-request-id": "f40f22c2-5f7c-4960-9442-3f57022b750b",
+        "x-ega-request-id": "69d701da-1e84-47c3-ac37-5cf13069c320",
         "x-ega-replay-root": "a53bc4276fb082cff683659f2dd5ee2f825046b8cdd424e7f4f8a2b0cc48fbc9",
         "x-ega-trust-level": "supported",
         "x-ega-scorp-lock": "true",
@@ -188,7 +188,7 @@
       "containmentActivated": true,
       "containmentMode": "observe",
       "containmentReason": "replay root mismatch",
-      "quarantineId": "q_e2d854a7-65d2-4fea-ad68-044ca716c3f3",
+      "quarantineId": "q_9a2f4a10-b2d0-41d9-94df-7e99a6c5c1de",
       "executionAllowed": true,
       "contextStatus": "contained",
       "trustTier": "T3",
@@ -199,7 +199,7 @@
       "jsonCallCount": 0,
       "statusCallCount": 0,
       "responseHeaders": {
-        "x-ega-request-id": "e2d854a7-65d2-4fea-ad68-044ca716c3f3",
+        "x-ega-request-id": "9a2f4a10-b2d0-41d9-94df-7e99a6c5c1de",
         "x-ega-replay-root": "a53bc4276fb082cff683659f2dd5ee2f825046b8cdd424e7f4f8a2b0cc48fbc9",
         "x-ega-trust-level": "supported",
         "x-ega-scorp-lock": "true",

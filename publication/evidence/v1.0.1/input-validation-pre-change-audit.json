@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "ega-v9.input-validation-audit.v1",
+  "releaseTarget": "ega-v9@1.0.1",
+  "generatedAt": "2026-07-25T16:41:54.746Z",
+  "phase": "pre-change-audit",
+  "files": [
+    {
+      "file": "packages/sdk-ts/src/index.ts",
+      "exists": true,
+      "size": 36343,
+      "sha256": "beaf784615714a9c5b67dfcaddefbf9407118a2c31d39ba221446667f7c3f5ed"
+    },
+    {
+      "file": "packages/sdk-ts/dist/index.js",
+      "exists": true,
+      "size": 34273,
+      "sha256": "2d150df0d85761b4179610c0caa08d661ca662ffd6446efc94cda649b209d321"
+    },
+    {
+      "file": "packages/sdk-ts/dist/index.d.ts",
+      "exists": true,
+      "size": 6388,
+      "sha256": "089b76b91081159545d446cc97b25c01c4c32ebef1ed351bc54ae69373a881dc"
+    },
+    {
+      "file": "audit/v1.0.1/step-4/current-invalid-input-results.json",
+      "exists": true,
+      "size": 64695,
+      "sha256": "aea760d140a063b8781f711a2f90d0093d07c4dd02f27e256ad0242c30922522"
+    },
+    {
+      "file": "audit/v1.0.1/step-4/current-constructor-results.json",
+      "exists": true,
+      "size": 1174,
+      "sha256": "df425ab6ef05b6b111b7e31dce01ef274940482095c8fec23ad6be90aa72d5a1"
+    }
+  ],
+  "finalStatus": "PASS"
+}

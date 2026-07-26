@@ -1,6 +1,6 @@
 {
   "name": "ega-v9",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "EGA V9 monorepo: Rust runtime core, TypeScript SDK, dashboard, examples, and SCORP LOCK governance.",
   "license": "MIT",
@@ -38,13 +38,22 @@
     "test:fail-closed": "npm run build && node --test benchmarks/fail-closed-containment/fail-closed-containment.test.mjs",
     "test:tool-order": "npm run build && node --test benchmarks/tool-order/tool-order-mutation.test.mjs",
     "test:approval-bypass": "npm run build && node --test benchmarks/approval-bypass/approval-bypass.test.mjs",
-    "test:tool-injection": "npm run build && node --test benchmarks/tool-injection/tool-injection.test.mjs"
+    "test:tool-injection": "npm run build && node --test benchmarks/tool-injection/tool-injection.test.mjs",
+    "v1.0.1:seven-test-baseline": "node scripts/v1.0.1-seven-test-baseline.cjs",
+    "v1.0.1:api-contract": "node scripts/v1.0.1-public-api-contract-gate.cjs",
+    "v1.0.1:fail-closed-runtime": "node scripts/v1.0.1-fail-closed-runtime-gate.cjs",
+    "v1.0.1:export-compatibility": "node scripts/v1.0.1-export-compatibility-gate.cjs",
+    "v1.0.1:examples": "node scripts/v1.0.1-examples-gate.cjs",
+    "v1.0.1:express-examples": "node scripts/v1.0.1-express-examples-import-gate.cjs",
+    "v1.0.1:readme-sdk-alignment": "node scripts/v1.0.1-readme-sdk-alignment-gate.cjs",
+    "release:v1.0.1:gate": "node scripts/v1.0.1-integrated-release-gate.cjs",
+    "release:v1.0.1:final-gate": "node scripts/v1.0.1-integrated-release-gate.cjs --require-clean --require-target-version"
   },
   "devDependencies": {
     "@types/node": "^26.0.0"
   },
   "dependencies": {
-    "ega-v9": "^1.0.0",
+    "ega-v9": "^1.0.1",
     "express": "^5.2.1"
   }
 }

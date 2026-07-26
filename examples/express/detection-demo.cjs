@@ -1,5 +1,5 @@
 const express = require("express");
-const { EGA } = require("../../packages/sdk-ts/dist/index.js");
+const { EGA } = require("ega-v9");
 
 const app = express();
 app.use(express.json());

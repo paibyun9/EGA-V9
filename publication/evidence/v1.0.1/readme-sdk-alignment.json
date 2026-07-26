@@ -1,0 +1,328 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "testId": "readme-sdk-alignment",
+  "generatedAt": "2026-07-26T20:35:21.580Z",
+  "nodeVersion": "v20.20.2",
+  "platform": "darwin-arm64",
+  "packageMetadata": {
+    "rootName": "ega-v9",
+    "rootVersion": "1.0.1",
+    "sdkName": "ega-v9",
+    "sdkVersion": "1.0.1",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
+  },
+  "expectedExports": [
+    "EGA",
+    "contain",
+    "ega",
+    "provenance",
+    "replay",
+    "verifyExecution"
+  ],
+  "checks": [
+    {
+      "name": "README exists: root",
+      "pass": true,
+      "path": "README.md"
+    },
+    {
+      "name": "README exists: sdk",
+      "pass": true,
+      "path": "packages/sdk-ts/README.md"
+    },
+    {
+      "name": "README exists: examples",
+      "pass": true,
+      "path": "examples/README.md"
+    },
+    {
+      "name": "SDK package name is ega-v9",
+      "pass": true,
+      "observed": "ega-v9"
+    },
+    {
+      "name": "Root and SDK versions match",
+      "pass": true,
+      "rootVersion": "1.0.1",
+      "sdkVersion": "1.0.1"
+    },
+    {
+      "name": "Package CommonJS export condition exists",
+      "pass": true,
+      "observed": "./dist/index.js"
+    },
+    {
+      "name": "Package ESM export condition exists",
+      "pass": true,
+      "observed": "./dist/index.mjs"
+    },
+    {
+      "name": "Package TypeScript export condition exists",
+      "pass": true,
+      "observed": "./dist/index.d.ts"
+    },
+    {
+      "name": "SDK build",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "TypeScript declaration exists",
+      "pass": true
+    },
+    {
+      "name": "Declaration includes supported trust level",
+      "pass": true
+    },
+    {
+      "name": "Declaration includes verified trust level",
+      "pass": true
+    },
+    {
+      "name": "Declaration includes requestId",
+      "pass": true
+    },
+    {
+      "name": "Declaration includes replayRoot",
+      "pass": true
+    },
+    {
+      "name": "Declaration includes containment object",
+      "pass": true
+    },
+    {
+      "name": "Declaration includes nested executionAllowed",
+      "pass": true
+    },
+    {
+      "name": "root README is not empty",
+      "pass": true
+    },
+    {
+      "name": "root README has no internal SDK import",
+      "pass": true
+    },
+    {
+      "name": "sdk README is not empty",
+      "pass": true
+    },
+    {
+      "name": "sdk README has no internal SDK import",
+      "pass": true
+    },
+    {
+      "name": "examples README is not empty",
+      "pass": true
+    },
+    {
+      "name": "examples README has no internal SDK import",
+      "pass": true
+    },
+    {
+      "name": "Documentation includes npm install ega-v9",
+      "pass": true
+    },
+    {
+      "name": "Documentation includes CommonJS public package import",
+      "pass": true
+    },
+    {
+      "name": "Documentation includes ESM public package import",
+      "pass": true
+    },
+    {
+      "name": "Documentation identifies TypeScript support",
+      "pass": true
+    },
+    {
+      "name": "Documentation mentions public export: EGA",
+      "pass": true
+    },
+    {
+      "name": "Documentation mentions public export: contain",
+      "pass": true
+    },
+    {
+      "name": "Documentation mentions public export: ega",
+      "pass": true
+    },
+    {
+      "name": "Documentation mentions public export: provenance",
+      "pass": true
+    },
+    {
+      "name": "Documentation mentions public export: replay",
+      "pass": true
+    },
+    {
+      "name": "Documentation mentions public export: verifyExecution",
+      "pass": true
+    },
+    {
+      "name": "No forbidden README contract: Obsolete trustLevel \"T1\"",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Obsolete trustLevel \"T2\"",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Obsolete trustLevel \"T3\"",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Invalid verification.workflowId",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Invalid verification.replayConsistency",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Invalid verification.trustState",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Invalid verification.containmentRequired",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Invalid flat verification.executionAllowed",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Obsolete CommonJS-only claim",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "No forbidden README contract: Obsolete ESM unsupported claim",
+      "pass": true,
+      "matchedReadmes": []
+    },
+    {
+      "name": "Any documented trustLevel uses a valid SDK value",
+      "pass": true,
+      "trustLevelOptional": true,
+      "documentedTrustLevels": [],
+      "invalidDocumentedTrustLevels": []
+    },
+    {
+      "name": "Documentation contract supports field: verification.requestId",
+      "pass": true,
+      "field": "verification.requestId"
+    },
+    {
+      "name": "Documentation contract supports field: verification.replayRoot",
+      "pass": true,
+      "field": "verification.replayRoot"
+    },
+    {
+      "name": "Documentation contract supports field: verification.trustLevel",
+      "pass": true,
+      "field": "verification.trustLevel"
+    },
+    {
+      "name": "Documentation contract supports field: verification.status",
+      "pass": true,
+      "field": "verification.status"
+    },
+    {
+      "name": "Documentation contract supports field: verification.containment.activated",
+      "pass": true,
+      "field": "verification.containment.activated"
+    },
+    {
+      "name": "Documentation contract supports field: verification.containment.executionAllowed",
+      "pass": true,
+      "field": "verification.containment.executionAllowed"
+    },
+    {
+      "name": "Any explicit README package versions match SDK package.json",
+      "pass": true,
+      "sdkVersion": "1.0.1",
+      "documentedVersions": [],
+      "mismatchedVersions": []
+    },
+    {
+      "name": "SDK npm pack",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Parse npm pack output",
+      "pass": true
+    },
+    {
+      "name": "Generated SDK tarball exists",
+      "pass": true,
+      "tarball": "ega-v9-1.0.1.tgz"
+    },
+    {
+      "name": "Install packed SDK and TypeScript",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Fresh CommonJS README contract",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Fresh ESM README contract",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Fresh TypeScript compiler exists",
+      "pass": true
+    },
+    {
+      "name": "Fresh TypeScript README contract compile",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Fresh TypeScript README contract runtime",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Fresh installed SDK preserves frozen six exports",
+      "pass": true,
+      "expectedExports": [
+        "EGA",
+        "contain",
+        "ega",
+        "provenance",
+        "replay",
+        "verifyExecution"
+      ],
+      "observedExports": [
+        "EGA",
+        "contain",
+        "ega",
+        "provenance",
+        "replay",
+        "verifyExecution"
+      ]
+    }
+  ],
+  "summary": {
+    "totalChecks": 60,
+    "passedChecks": 60,
+    "failedChecks": 0
+  },
+  "finalStatus": "PASS"
+}

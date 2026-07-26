@@ -1,0 +1,539 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "gateId": "seven-test-verification-baseline",
+  "generatedAt": "2026-07-26T20:35:08.157Z",
+  "repository": {
+    "branch": "feat/v1-api-contract",
+    "latestCommit": "5404fe4 Add seven supplementary governance evidence suites"
+  },
+  "policy": {
+    "requiredTests": 7,
+    "requiredPasses": 7,
+    "ambiguousEvidenceAllowed": false,
+    "negativeEvidenceAllowed": false,
+    "releaseAllowedOnlyWhenFinalStatusPass": true
+  },
+  "totals": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "ambiguous": 0
+  },
+  "finalStatus": "PASS",
+  "releaseAllowed": true,
+  "results": [
+    {
+      "id": "tool-order-mutation",
+      "name": "Tool Order Mutation",
+      "file": "publication/evidence/tool-order/tool-order-mutation-evidence.json",
+      "status": "PASS",
+      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+      "exists": true,
+      "parsePass": true,
+      "sizeBytes": 4755,
+      "sha256": "9f4918a3db21d3ac43107e9f2f29beb777763c9eee6a6dd156956523b598bf7f",
+      "topLevelKeys": [
+        "approved",
+        "assertions",
+        "configuration",
+        "finalStatus",
+        "generatedAt",
+        "mutationDefinition",
+        "reordered",
+        "repeatCountPerScenario",
+        "replayRoots",
+        "schemaVersion",
+        "scope",
+        "sdkApisUsed",
+        "sdkEntryPoint",
+        "testId",
+        "title",
+        "toolOrders",
+        "totalExecutions"
+      ],
+      "scalarCount": 113,
+      "explicitFinalStatus": "PASS",
+      "suitePassFields": [
+        "$.approved.pass"
+      ],
+      "positiveSignals": [
+        {
+          "path": "$.approved.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.reordered.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.finalStatus",
+          "key": "finalStatus",
+          "value": "PASS",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        }
+      ],
+      "negativeSignals": [],
+      "ignoredSignals": [],
+      "informationalSignals": []
+    },
+    {
+      "id": "approval-bypass",
+      "name": "Approval Bypass",
+      "file": "publication/evidence/approval-bypass/approval-bypass-evidence.json",
+      "status": "PASS",
+      "reason": "Approval Bypass contract passed: approved.pass=true, bypassed.pass=true, finalStatus=PASS; intentional required=false mutation fields were ignored.",
+      "exists": true,
+      "parsePass": true,
+      "sizeBytes": 27570,
+      "sha256": "2d447c45ec84ce2740906d1d66496b60ae9c4b06983bc3146cbeac44352c1028",
+      "topLevelKeys": [
+        "approvalStates",
+        "approved",
+        "assertions",
+        "bypassed",
+        "configuration",
+        "finalStatus",
+        "generatedAt",
+        "mutationDefinition",
+        "repeatCountPerScenario",
+        "replayRoots",
+        "schemaVersion",
+        "scope",
+        "sdkApisUsed",
+        "sdkEntryPoint",
+        "testId",
+        "title",
+        "totalExecutions"
+      ],
+      "scalarCount": 516,
+      "explicitFinalStatus": "PASS",
+      "suitePassFields": [
+        "$.approved.pass",
+        "$.bypassed.pass"
+      ],
+      "positiveSignals": [
+        {
+          "path": "$.approved.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.bypassed.observed.responseBody.ega.containment.activated",
+          "key": "activated",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.bypassed.observed.responseBody.ega.businessGovernanceProfile.metrics.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.bypassed.observed.responseBody.ega.provenance.nodes[4].data.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.bypassed.observed.responseBody.ega.provenance.businessMetrics.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.bypassed.observed.responseBody.ega.provenance.businessGovernanceProfile.metrics.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.bypassed.observed.responseBody.events[0].status",
+          "key": "status",
+          "value": "verified",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        },
+        {
+          "path": "$.bypassed.observed.responseBody.events[2].details.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.bypassed.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.finalStatus",
+          "key": "finalStatus",
+          "value": "PASS",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        }
+      ],
+      "negativeSignals": [],
+      "ignoredSignals": [],
+      "informationalSignals": []
+    },
+    {
+      "id": "tool-injection",
+      "name": "Tool Injection",
+      "file": "publication/evidence/tool-injection/tool-injection-evidence.json",
+      "status": "PASS",
+      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+      "exists": true,
+      "parsePass": true,
+      "sizeBytes": 27344,
+      "sha256": "2ccf729fb0b8fccc1e4b619dcefd651493966c3903b6a3cccb72c0a1fa5093cf",
+      "topLevelKeys": [
+        "approved",
+        "assertions",
+        "configuration",
+        "finalStatus",
+        "generatedAt",
+        "injected",
+        "injectedTool",
+        "mutationDefinition",
+        "repeatCountPerScenario",
+        "replayRoots",
+        "schemaVersion",
+        "scope",
+        "sdkApisUsed",
+        "sdkEntryPoint",
+        "testId",
+        "title",
+        "toolSequences",
+        "totalExecutions"
+      ],
+      "scalarCount": 511,
+      "explicitFinalStatus": "PASS",
+      "suitePassFields": [
+        "$.approved.pass"
+      ],
+      "positiveSignals": [
+        {
+          "path": "$.approved.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.injected.observed.responseBody.ega.containment.activated",
+          "key": "activated",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.injected.observed.responseBody.ega.businessGovernanceProfile.metrics.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.injected.observed.responseBody.ega.provenance.nodes[4].data.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.injected.observed.responseBody.ega.provenance.businessMetrics.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.injected.observed.responseBody.ega.provenance.businessGovernanceProfile.metrics.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.injected.observed.responseBody.events[0].status",
+          "key": "status",
+          "value": "verified",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        },
+        {
+          "path": "$.injected.observed.responseBody.events[2].details.detected",
+          "key": "detected",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.injected.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.finalStatus",
+          "key": "finalStatus",
+          "value": "PASS",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        }
+      ],
+      "negativeSignals": [],
+      "ignoredSignals": [],
+      "informationalSignals": []
+    },
+    {
+      "id": "replay-root-verification",
+      "name": "Replay Root Verification",
+      "file": "publication/evidence/replay-root/replay-root-change-evidence.json",
+      "status": "PASS",
+      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+      "exists": true,
+      "parsePass": true,
+      "sizeBytes": 2328,
+      "sha256": "0393d2fc175915eaf458a727b175d80c157d24f99d27120c6ab2424f8a175759",
+      "topLevelKeys": [
+        "assertions",
+        "baseline",
+        "finalStatus",
+        "generatedAt",
+        "hashAlgorithm",
+        "mutation",
+        "reorderedBaseline",
+        "repeatCount",
+        "schemaVersion",
+        "scope",
+        "sdkApisUsed",
+        "sdkConsistency",
+        "sdkEntryPoint",
+        "testId",
+        "title"
+      ],
+      "scalarCount": 47,
+      "explicitFinalStatus": "PASS",
+      "suitePassFields": [],
+      "positiveSignals": [
+        {
+          "path": "$.sdkConsistency.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.finalStatus",
+          "key": "finalStatus",
+          "value": "PASS",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        }
+      ],
+      "negativeSignals": [],
+      "ignoredSignals": [],
+      "informationalSignals": []
+    },
+    {
+      "id": "workflow-divergence",
+      "name": "Workflow Divergence Verification",
+      "file": "publication/evidence/workflow-divergence/workflow-divergence-evidence.json",
+      "status": "PASS",
+      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+      "exists": true,
+      "parsePass": true,
+      "sizeBytes": 2455,
+      "sha256": "879a610368124dfca3d580c5cad795d61129e98e4302f97218da14b6e7ac36a7",
+      "topLevelKeys": [
+        "approvedReplayRoot",
+        "approvedReplayRootDisplay",
+        "assertions",
+        "divergent",
+        "finalStatus",
+        "generatedAt",
+        "normal",
+        "repeatCount",
+        "schemaVersion",
+        "scope",
+        "sdkApisUsed",
+        "sdkEntryPoint",
+        "testId",
+        "title"
+      ],
+      "scalarCount": 56,
+      "explicitFinalStatus": "PASS",
+      "suitePassFields": [],
+      "positiveSignals": [
+        {
+          "path": "$.finalStatus",
+          "key": "finalStatus",
+          "value": "PASS",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        }
+      ],
+      "negativeSignals": [],
+      "ignoredSignals": [],
+      "informationalSignals": []
+    },
+    {
+      "id": "trust-state-escalation",
+      "name": "Trust-State Escalation",
+      "file": "publication/evidence/trust-state/trust-state-escalation-evidence.json",
+      "status": "PASS",
+      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+      "exists": true,
+      "parsePass": true,
+      "sizeBytes": 5863,
+      "sha256": "0c9266a0f2e68159a775fbfc6afd71d10b85143674d546068fa2016408169c41",
+      "topLevelKeys": [
+        "assertions",
+        "configuration",
+        "finalStatus",
+        "generatedAt",
+        "highValueMismatch",
+        "mismatch",
+        "normal",
+        "repeatCountPerScenario",
+        "replayRoots",
+        "schemaVersion",
+        "scope",
+        "sdkApisUsed",
+        "sdkEntryPoint",
+        "testId",
+        "title",
+        "totalExecutions"
+      ],
+      "scalarCount": 144,
+      "explicitFinalStatus": "PASS",
+      "suitePassFields": [],
+      "positiveSignals": [
+        {
+          "path": "$.normal.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.mismatch.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.highValueMismatch.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.finalStatus",
+          "key": "finalStatus",
+          "value": "PASS",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        }
+      ],
+      "negativeSignals": [],
+      "ignoredSignals": [],
+      "informationalSignals": []
+    },
+    {
+      "id": "fail-closed-containment",
+      "name": "Fail-Closed Containment",
+      "file": "publication/evidence/fail-closed-containment/fail-closed-containment-evidence.json",
+      "status": "PASS",
+      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+      "exists": true,
+      "parsePass": true,
+      "sizeBytes": 8580,
+      "sha256": "695020b93a71aee44538068eda689b509bec0c145819982322f12d82975e5aa2",
+      "topLevelKeys": [
+        "assertions",
+        "failClosedMismatch",
+        "finalStatus",
+        "generatedAt",
+        "normal",
+        "observeMismatch",
+        "repeatCountPerScenario",
+        "replayRoots",
+        "schemaVersion",
+        "scope",
+        "sdkApisUsed",
+        "sdkEntryPoint",
+        "testId",
+        "title",
+        "totalExecutions"
+      ],
+      "scalarCount": 207,
+      "explicitFinalStatus": "PASS",
+      "suitePassFields": [],
+      "positiveSignals": [
+        {
+          "path": "$.normal.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.failClosedMismatch.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.observeMismatch.pass",
+          "key": "pass",
+          "value": true,
+          "type": "boolean",
+          "reason": "positive-boolean-true"
+        },
+        {
+          "path": "$.finalStatus",
+          "key": "finalStatus",
+          "value": "PASS",
+          "type": "string",
+          "reason": "explicit-positive-status"
+        }
+      ],
+      "negativeSignals": [],
+      "ignoredSignals": [],
+      "informationalSignals": [
+        {
+          "path": "$.normal.observed.contextStatus",
+          "key": "contextStatus",
+          "value": "verified",
+          "type": "string",
+          "reason": "unscoped-positive-string"
+        }
+      ]
+    }
+  ]
+}

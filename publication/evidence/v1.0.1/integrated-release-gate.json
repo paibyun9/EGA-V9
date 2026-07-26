@@ -1,0 +1,299 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-07-26T20:35:30.946Z",
+  "summary": {
+    "schemaVersion": "1.0",
+    "releaseTarget": "1.0.1",
+    "packageVersion": "1.0.1",
+    "mode": {
+      "requireClean": false,
+      "requireTargetVersion": true
+    },
+    "finalStatus": "PASS",
+    "totalChecks": 28,
+    "passedChecks": 28,
+    "failedChecks": 0,
+    "failedCheckIds": [],
+    "freshConsumer": {
+      "totalTests": 12,
+      "passedTests": 12,
+      "failedTests": 0
+    }
+  },
+  "checks": [
+    {
+      "id": "A01",
+      "name": "Required release files exist",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "missingFiles": []
+      }
+    },
+    {
+      "id": "B01",
+      "name": "Phase A API audit",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-phase-a-api-audit.cjs"
+    },
+    {
+      "id": "B02",
+      "name": "Public API contract gate",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-public-api-contract-gate.cjs"
+    },
+    {
+      "id": "B03",
+      "name": "Seven-test verification baseline",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-seven-test-baseline.cjs"
+    },
+    {
+      "id": "B04",
+      "name": "Fail-closed runtime gate",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-fail-closed-runtime-gate.cjs"
+    },
+    {
+      "id": "B05",
+      "name": "Export compatibility gate",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-export-compatibility-gate.cjs"
+    },
+    {
+      "id": "B06",
+      "name": "Executable examples gate",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-examples-gate.cjs"
+    },
+    {
+      "id": "B07",
+      "name": "Express examples import gate",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-express-examples-import-gate.cjs"
+    },
+    {
+      "id": "B08",
+      "name": "README and SDK alignment gate",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node scripts/v1.0.1-readme-sdk-alignment-gate.cjs"
+    },
+    {
+      "id": "C01",
+      "name": "SDK build",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "npm run build"
+    },
+    {
+      "id": "C02",
+      "name": "Repository test suite",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "npm test"
+    },
+    {
+      "id": "C03",
+      "name": "Root and SDK versions match",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "rootVersion": "1.0.1",
+        "sdkVersion": "1.0.1"
+      }
+    },
+    {
+      "id": "C04",
+      "name": "Package version equals release target",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "releaseTarget": "1.0.1",
+        "rootVersion": "1.0.1",
+        "sdkVersion": "1.0.1",
+        "enforcement": true
+      }
+    },
+    {
+      "id": "D01",
+      "name": "Create SDK npm tarball",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "npm pack ./packages/sdk-ts --pack-destination <local-temp-path> --json"
+    },
+    {
+      "id": "D02",
+      "name": "Tarball exists",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "tarballFilename": "ega-v9-1.0.1.tgz",
+        "packedVersion": "1.0.1"
+      }
+    },
+    {
+      "id": "D03",
+      "name": "Tarball version matches SDK version",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "sdkVersion": "1.0.1",
+        "packedVersion": "1.0.1"
+      }
+    },
+    {
+      "id": "D04",
+      "name": "Tarball content is complete and clean",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "packedFiles": [
+          "LICENSE",
+          "README.md",
+          "dist/index.d.ts",
+          "dist/index.js",
+          "dist/index.mjs",
+          "package.json"
+        ],
+        "missingPackedFiles": [],
+        "forbiddenPackedFiles": []
+      }
+    },
+    {
+      "id": "E01",
+      "name": "Initialize fresh consumer",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "npm init -y"
+    },
+    {
+      "id": "E02",
+      "name": "Install packed SDK into fresh consumer",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "npm install <local-temp-path>"
+    },
+    {
+      "id": "E03",
+      "name": "Install TypeScript consumer compiler",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "npm install --save-dev typescript@^5"
+    },
+    {
+      "id": "E04",
+      "name": "Fresh-consumer fixtures copied",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0
+    },
+    {
+      "id": "F01",
+      "name": "Fresh Consumer 12-Test Gate",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "/opt/homebrew/Cellar/node@20/20.20.2/bin/node fresh-consumer-12-test-gate.cjs"
+    },
+    {
+      "id": "F02",
+      "name": "Fresh Consumer evidence reports 12/12 PASS",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "summary": {
+          "finalStatus": "PASS",
+          "packageName": "ega-v9",
+          "packageVersion": "1.0.1",
+          "totalTests": 12,
+          "passedTests": 12,
+          "failedTests": 0,
+          "failedTestNumbers": []
+        }
+      }
+    },
+    {
+      "id": "F03",
+      "name": "Fresh Consumer evidence has no local path leak",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "pathLeakDetected": false
+      }
+    },
+    {
+      "id": "G00",
+      "name": "Public v1.0.1 evidence sanitized for publication",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "checkedFiles": 12,
+        "sanitizedFileCount": 1,
+        "sanitizedEvidenceFiles": [
+          "publication/evidence/v1.0.1/phase-a-api-audit.json"
+        ]
+      }
+    },
+    {
+      "id": "G01",
+      "name": "Public v1.0.1 evidence contains no local paths",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "checkedFiles": 12,
+        "leakingEvidenceFiles": []
+      }
+    },
+    {
+      "id": "H01",
+      "name": "Git diff whitespace check",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "command": "git diff --check"
+    },
+    {
+      "id": "H02",
+      "name": "Git clean-tree enforcement deferred",
+      "pass": true,
+      "actualPass": true,
+      "exitCode": 0,
+      "details": {
+        "requireClean": false,
+        "changedFileCount": 42
+      }
+    }
+  ]
+}

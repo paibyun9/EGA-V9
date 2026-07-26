@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "packageName": "ega-v9",
+  "releaseTarget": "1.0.1",
+  "contractId": "ega-v9-public-api-v1.0.1",
+  "entryPoint": "packages/sdk-ts/dist/index.js",
+  "moduleSystem": {
+    "required": [
+      "commonjs"
+    ],
+    "optional": [
+      "typescript-consumer"
+    ],
+    "notClaimed": [
+      "native-esm-named-exports"
+    ]
+  },
+  "requiredExports": [
+    "EGA",
+    "contain",
+    "ega",
+    "provenance",
+    "replay",
+    "verifyExecution"
+  ],
+  "forbiddenExports": [
+    "createEga",
+    "govern",
+    "guard"
+  ],
+  "policy": {
+    "allowMissingRequiredExports": false,
+    "allowUnexpectedExports": false,
+    "allowForbiddenExports": false,
+    "requireCallableFunctionExports": [
+      "contain",
+      "provenance",
+      "replay",
+      "verifyExecution"
+    ],
+    "requireEgaExport": true,
+    "requireBuildBeforeVerification": true,
+    "failClosed": true,
+    "requireObjectExports": [
+      "ega"
+    ],
+    "requireRootMain": false,
+    "requireSdkMain": true,
+    "requireSdkTypes": true
+  }
+}

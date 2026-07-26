@@ -2,7 +2,7 @@
   "schemaVersion": "ega-v9.approval-bypass-evidence.v1",
   "testId": "AB-001",
   "title": "Deterministic Detection and Fail-Closed Prevention of Approval Bypass",
-  "generatedAt": "2026-07-23T22:02:29.504Z",
+  "generatedAt": "2026-07-24T17:56:26.988Z",
   "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
   "sdkApisUsed": [
     "EGA.init",
@@ -123,7 +123,7 @@
         "error": "EGA_CONTAINMENT_ACTIVATED",
         "message": "Replay mismatch detected. Trust escalated and execution blocked by EGA V9.",
         "ega": {
-          "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+          "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
           "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
           "trustLevel": "supported",
           "status": "contained",
@@ -156,7 +156,7 @@
             "activated": true,
             "mode": "fail-closed",
             "reason": "replay root mismatch",
-            "quarantineId": "q_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "quarantineId": "q_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "executionAllowed": false
           },
           "trust": {
@@ -182,7 +182,7 @@
             }
           },
           "provenance": {
-            "graphId": "graph_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "graphId": "graph_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "lineage": [
               "Decision",
               "Policy",
@@ -191,7 +191,7 @@
             ],
             "nodes": [
               {
-                "id": "input_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "id": "input_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "type": "input",
                 "label": "Input",
                 "data": {
@@ -240,7 +240,7 @@
                 }
               },
               {
-                "id": "tool_output_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "id": "tool_output_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "type": "tool_output",
                 "label": "Tool Output",
                 "data": {
@@ -249,7 +249,7 @@
                 }
               },
               {
-                "id": "policy_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "id": "policy_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "type": "policy",
                 "label": "Policy",
                 "data": {
@@ -259,7 +259,7 @@
                 }
               },
               {
-                "id": "decision_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "id": "decision_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "type": "decision",
                 "label": "Decision",
                 "data": {
@@ -268,7 +268,7 @@
                 }
               },
               {
-                "id": "business_metrics_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "id": "business_metrics_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "type": "business_metrics",
                 "label": "Business Metrics",
                 "data": {
@@ -279,7 +279,7 @@
                 }
               },
               {
-                "id": "trust_escalation_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "id": "trust_escalation_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "type": "trust_escalation",
                 "label": "Trust Escalation",
                 "data": {
@@ -293,33 +293,33 @@
             ],
             "edges": [
               {
-                "from": "input_14945f69-3db0-4a89-af9c-5e3a11e170a8",
-                "to": "tool_output_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "from": "input_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
+                "to": "tool_output_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "label": "produces"
               },
               {
-                "from": "tool_output_14945f69-3db0-4a89-af9c-5e3a11e170a8",
-                "to": "policy_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "from": "tool_output_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
+                "to": "policy_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "label": "evaluated by"
               },
               {
-                "from": "policy_14945f69-3db0-4a89-af9c-5e3a11e170a8",
-                "to": "decision_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "from": "policy_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
+                "to": "decision_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "label": "governs"
               },
               {
-                "from": "input_14945f69-3db0-4a89-af9c-5e3a11e170a8",
-                "to": "business_metrics_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "from": "input_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
+                "to": "business_metrics_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "label": "metrics extracted from"
               },
               {
-                "from": "business_metrics_14945f69-3db0-4a89-af9c-5e3a11e170a8",
-                "to": "trust_escalation_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "from": "business_metrics_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
+                "to": "trust_escalation_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "label": "contributes to"
               },
               {
-                "from": "trust_escalation_14945f69-3db0-4a89-af9c-5e3a11e170a8",
-                "to": "decision_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+                "from": "trust_escalation_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
+                "to": "decision_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
                 "label": "escalates"
               }
             ],
@@ -349,8 +349,8 @@
         "events": [
           {
             "type": "workflow.started",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "verified",
@@ -365,13 +365,13 @@
               "enforcement": "disabled",
               "reason": "V9 Alpha local runtime. License enforcement disabled."
             },
-            "id": "ee48f213-e091-4775-b28e-7c136039e45b",
+            "id": "cf2f5f6e-891f-49b0-8758-f38997eea727",
             "sequence": 1
           },
           {
             "type": "lineage.reconstructed",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -387,7 +387,7 @@
               "reason": "V9 Alpha local runtime. License enforcement disabled."
             },
             "details": {
-              "graphId": "graph_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+              "graphId": "graph_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
               "lineage": [
                 "Decision",
                 "Policy",
@@ -395,13 +395,13 @@
                 "Input"
               ]
             },
-            "id": "1cadc239-e14f-44cd-8269-d1468595eea7",
+            "id": "1b9ad4a8-cea3-48ab-ba4c-e84bae47879e",
             "sequence": 2
           },
           {
             "type": "business.metrics.collected",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -416,13 +416,13 @@
               "currency": "USD",
               "estimatedTransactionValue": 100
             },
-            "id": "06e07410-5644-4997-b6d7-2d3317220def",
+            "id": "6c2dc104-4911-4ff1-8ca9-464350db8cfc",
             "sequence": 3
           },
           {
             "type": "trust.evaluated",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -444,13 +444,13 @@
               "privilegeEscalationGate": true,
               "reason": "Replay mismatch increased governance risk."
             },
-            "id": "90edfd7b-2869-4ec8-9712-84e8b4264216",
+            "id": "2f89c754-2051-42b8-a9f3-54f002fc6812",
             "sequence": 4
           },
           {
             "type": "mitre.mapped",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -473,13 +473,13 @@
               "severity": "high",
               "reason": "Prompt-like payload produced replay mismatch."
             },
-            "id": "7d929842-3ac6-4cbc-a460-9f323ba1eeee",
+            "id": "fc7d302d-39df-4e10-b1c9-e3ab51b175ef",
             "sequence": 5
           },
           {
             "type": "replay.mismatch",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -492,13 +492,13 @@
               "expectedReplayRoot": "62f16aa8ad2be63ac04891731795b341322de1b0d98ff241f1aa49a8b53eafd5",
               "actualReplayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8"
             },
-            "id": "cad4fd4a-0aae-4289-bec5-d846a4264e47",
+            "id": "dd7c33b5-7762-4217-bd76-b60da20b10c0",
             "sequence": 6
           },
           {
             "type": "mutation.detected",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -510,13 +510,13 @@
             "details": {
               "reason": "expected replay root does not match actual replay root"
             },
-            "id": "ee3f1680-10b4-4cea-90b7-322a0d763b56",
+            "id": "c89fe3eb-c88f-46c5-b252-2c17f729b1be",
             "sequence": 7
           },
           {
             "type": "trust.escalated",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -531,13 +531,13 @@
               "riskScore": 85,
               "reason": "Replay mismatch increased governance risk."
             },
-            "id": "5cca1f26-f5ee-4d55-9f45-467aed01a794",
+            "id": "dfaa88ef-d3d2-4893-a8df-45bc086f1813",
             "sequence": 8
           },
           {
             "type": "privilege.escalation.gated",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -550,13 +550,13 @@
               "currentTier": "T3",
               "riskScore": 85
             },
-            "id": "359f23fc-d1c7-44a6-998a-a2461367efad",
+            "id": "76e7f506-8243-43ed-a314-c0e853c33daf",
             "sequence": 9
           },
           {
             "type": "approval.required",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -569,13 +569,13 @@
               "currentTier": "T3",
               "riskScore": 85
             },
-            "id": "9310dc26-b051-4a70-9276-8f4a8331a9ec",
+            "id": "4c72450f-dc74-4f7b-9b7d-3b644a096ee5",
             "sequence": 10
           },
           {
             "type": "quarantine.created",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.973Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -585,16 +585,16 @@
               "domainHint": "localhost"
             },
             "details": {
-              "quarantineId": "q_14945f69-3db0-4a89-af9c-5e3a11e170a8",
+              "quarantineId": "q_133fa2ea-f680-47b9-90bf-3b9ecd02c082",
               "reason": "replay root mismatch"
             },
-            "id": "aee3a8c9-4dc7-49c5-be06-73d401aa9423",
+            "id": "ec795061-4539-4379-8981-3151a03c6df5",
             "sequence": 11
           },
           {
             "type": "containment.activated",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.974Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -607,13 +607,13 @@
               "mode": "fail-closed",
               "executionAllowed": false
             },
-            "id": "9b91f77f-a8c0-4a67-85c7-073cbfc3dc75",
+            "id": "6836df41-3f79-4c09-a816-89bc51308652",
             "sequence": 12
           },
           {
             "type": "execution.blocked",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.974Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -625,7 +625,7 @@
             "details": {
               "reason": "SCORP LOCK fail-closed containment"
             },
-            "id": "ec4cdf71-ab43-440d-89b6-c374a0819f00",
+            "id": "34c9f904-6844-480d-8b5a-641bde4cd653",
             "sequence": 13
           }
         ],
@@ -648,8 +648,8 @@
           },
           "latest": {
             "type": "execution.blocked",
-            "timestamp": "2026-07-23T22:02:29.490Z",
-            "requestId": "14945f69-3db0-4a89-af9c-5e3a11e170a8",
+            "timestamp": "2026-07-24T17:56:26.974Z",
+            "requestId": "133fa2ea-f680-47b9-90bf-3b9ecd02c082",
             "replayRoot": "8303d0fa0ebaeb7730fe8da29c080bb079072d5d5c9ae4feb9019d301aeb84b8",
             "trustLevel": "supported",
             "status": "contained",
@@ -661,7 +661,7 @@
             "details": {
               "reason": "SCORP LOCK fail-closed containment"
             },
-            "id": "ec4cdf71-ab43-440d-89b6-c374a0819f00",
+            "id": "34c9f904-6844-480d-8b5a-641bde4cd653",
             "sequence": 13
           }
         }

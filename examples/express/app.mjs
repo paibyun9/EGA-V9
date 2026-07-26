@@ -1,5 +1,5 @@
 import express from "express";
-import { ega } from "../../packages/sdk-ts/dist/index.js";
+import { ega } from "ega-v9";
 
 export function createCheckoutApp() {
   const app = express();

@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "1.0.0",
+  "gateId": "v1.0.1-public-api-contract-lock",
+  "packageName": "ega-v9",
+  "releaseTarget": "ega-v9@1.0.1",
+  "generatedAt": "2026-07-26T20:35:08.083Z",
+  "repository": {
+    "branch": "feat/v1-api-contract",
+    "latestCommit": "5404fe4 Add seven supplementary governance evidence suites"
+  },
+  "contract": {
+    "file": "contracts/public-api-v1.0.1.json",
+    "sha256": "d2351ed91e4d1772a7e7c2a7128427758431709e32efac8037b0f7ec66329dfe",
+    "entryPoint": "packages/sdk-ts/dist/index.js",
+    "requiredExports": [
+      "EGA",
+      "contain",
+      "ega",
+      "provenance",
+      "replay",
+      "verifyExecution"
+    ],
+    "forbiddenExports": [
+      "createEga",
+      "govern",
+      "guard"
+    ]
+  },
+  "packageMetadata": {
+    "root": {
+      "name": "ega-v9",
+      "version": "1.0.1",
+      "main": null,
+      "types": null,
+      "exports": null
+    },
+    "sdk": {
+      "name": "ega-v9",
+      "version": "1.0.1",
+      "main": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.mjs",
+          "require": "./dist/index.js",
+          "default": "./dist/index.js"
+        },
+        "./package.json": "./package.json"
+      }
+    }
+  },
+  "runtime": {
+    "loadError": null,
+    "exports": [
+      "EGA",
+      "contain",
+      "ega",
+      "provenance",
+      "replay",
+      "verifyExecution"
+    ],
+    "missingExports": [],
+    "unexpectedExports": [],
+    "forbiddenExportsFound": [],
+    "exportTypes": {
+      "EGA": "function",
+      "contain": "function",
+      "ega": "object",
+      "provenance": "function",
+      "replay": "function",
+      "verifyExecution": "function"
+    }
+  },
+  "typescriptDeclarations": {
+    "file": "packages/sdk-ts/dist/index.d.ts",
+    "requiredExportMatches": {
+      "EGA": true,
+      "contain": true,
+      "ega": true,
+      "provenance": true,
+      "replay": true,
+      "verifyExecution": true
+    }
+  },
+  "totals": {
+    "totalChecks": 25,
+    "passedChecks": 25,
+    "failedChecks": 0
+  },
+  "checks": [
+    {
+      "id": "build-pass",
+      "status": "PASS",
+      "expected": 0,
+      "observed": 0,
+      "message": "SDK build completed successfully."
+    },
+    {
+      "id": "entry-point-exists",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "packages/sdk-ts/dist/index.js"
+    },
+    {
+      "id": "commonjs-entry-load",
+      "status": "PASS",
+      "expected": "CommonJS load succeeds",
+      "observed": "CommonJS load succeeded",
+      "message": "packages/sdk-ts/dist/index.js"
+    },
+    {
+      "id": "required-exports-complete",
+      "status": "PASS",
+      "expected": [
+        "EGA",
+        "contain",
+        "ega",
+        "provenance",
+        "replay",
+        "verifyExecution"
+      ],
+      "observed": [
+        "EGA",
+        "contain",
+        "ega",
+        "provenance",
+        "replay",
+        "verifyExecution"
+      ],
+      "message": "All required exports are present."
+    },
+    {
+      "id": "unexpected-exports-absent",
+      "status": "PASS",
+      "expected": [],
+      "observed": [],
+      "message": "No unexpected public exports found."
+    },
+    {
+      "id": "forbidden-exports-absent",
+      "status": "PASS",
+      "expected": [],
+      "observed": [],
+      "message": "No forbidden exports found."
+    },
+    {
+      "id": "callable-export-contain",
+      "status": "PASS",
+      "expected": "function",
+      "observed": "function",
+      "message": "contain must remain callable."
+    },
+    {
+      "id": "callable-export-provenance",
+      "status": "PASS",
+      "expected": "function",
+      "observed": "function",
+      "message": "provenance must remain callable."
+    },
+    {
+      "id": "callable-export-replay",
+      "status": "PASS",
+      "expected": "function",
+      "observed": "function",
+      "message": "replay must remain callable."
+    },
+    {
+      "id": "callable-export-verifyExecution",
+      "status": "PASS",
+      "expected": "function",
+      "observed": "function",
+      "message": "verifyExecution must remain callable."
+    },
+    {
+      "id": "object-export-ega",
+      "status": "PASS",
+      "expected": "object",
+      "observed": "object",
+      "message": "ega must remain an object export."
+    },
+    {
+      "id": "ega-export-present",
+      "status": "PASS",
+      "expected": "EGA export exists as function or object",
+      "observed": "function",
+      "message": "The principal EGA export must remain available."
+    },
+    {
+      "id": "root-package-name",
+      "status": "PASS",
+      "expected": "ega-v9",
+      "observed": "ega-v9",
+      "message": "Root package name must match the contract."
+    },
+    {
+      "id": "sdk-package-name",
+      "status": "PASS",
+      "expected": "ega-v9",
+      "observed": "ega-v9",
+      "message": "SDK package name must match the contract."
+    },
+    {
+      "id": "root-main-policy",
+      "status": "PASS",
+      "expected": "optional",
+      "observed": null,
+      "message": "Root package main entry is optional for the workspace root."
+    },
+    {
+      "id": "sdk-main-defined",
+      "status": "PASS",
+      "expected": "non-empty string",
+      "observed": "./dist/index.js",
+      "message": "SDK package main entry must be defined."
+    },
+    {
+      "id": "sdk-types-defined",
+      "status": "PASS",
+      "expected": "non-empty string",
+      "observed": "./dist/index.d.ts",
+      "message": "SDK TypeScript declaration entry must be defined."
+    },
+    {
+      "id": "sdk-main-file-exists",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "packages/sdk-ts/dist/index.js"
+    },
+    {
+      "id": "sdk-types-file-exists",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "packages/sdk-ts/dist/index.d.ts"
+    },
+    {
+      "id": "typescript-declaration-EGA",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "EGA must appear in the public declaration file."
+    },
+    {
+      "id": "typescript-declaration-contain",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "contain must appear in the public declaration file."
+    },
+    {
+      "id": "typescript-declaration-ega",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "ega must appear in the public declaration file."
+    },
+    {
+      "id": "typescript-declaration-provenance",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "provenance must appear in the public declaration file."
+    },
+    {
+      "id": "typescript-declaration-replay",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "replay must appear in the public declaration file."
+    },
+    {
+      "id": "typescript-declaration-verifyExecution",
+      "status": "PASS",
+      "expected": true,
+      "observed": true,
+      "message": "verifyExecution must appear in the public declaration file."
+    }
+  ],
+  "finalStatus": "PASS",
+  "releaseAllowed": true
+}

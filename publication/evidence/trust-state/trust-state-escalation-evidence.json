@@ -2,7 +2,7 @@
   "schemaVersion": "ega-v9.trust-state-escalation-evidence.v1",
   "testId": "TS-001",
   "title": "Deterministic Trust State Evaluation and Escalation",
-  "generatedAt": "2026-07-23T22:02:24.356Z",
+  "generatedAt": "2026-07-24T17:56:21.775Z",
   "sdkEntryPoint": "packages/sdk-ts/dist/index.js",
   "sdkApisUsed": [
     "EGA.init",
