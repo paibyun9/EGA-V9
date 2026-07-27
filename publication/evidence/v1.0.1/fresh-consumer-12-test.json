@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-07-26T20:35:30.855Z",
+  "environment": {
+    "node": "v20.20.2",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "summary": {
+    "finalStatus": "PASS",
+    "packageName": "ega-v9",
+    "packageVersion": "1.0.1",
+    "totalTests": 12,
+    "passedTests": 12,
+    "failedTests": 0,
+    "failedTestNumbers": []
+  },
+  "tests": [
+    {
+      "number": 1,
+      "name": "Fresh npm installation succeeds",
+      "pass": true,
+      "details": {
+        "installedDependency": {
+          "version": "1.0.1"
+        }
+      }
+    },
+    {
+      "number": 2,
+      "name": "Installed package identity and version are valid",
+      "pass": true,
+      "details": {
+        "installedName": "ega-v9",
+        "installedVersion": "1.0.1",
+        "requestedDependency": "<local-tarball>"
+      }
+    },
+    {
+      "number": 3,
+      "name": "CommonJS import succeeds",
+      "pass": true,
+      "details": {
+        "exports": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "number": 4,
+      "name": "ESM import succeeds",
+      "pass": true,
+      "details": {
+        "exports": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "number": 5,
+      "name": "CommonJS and ESM named exports match",
+      "pass": true,
+      "details": {
+        "commonjsExports": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ],
+        "esmExports": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "number": 6,
+      "name": "Installed exports match official public API contract",
+      "pass": true,
+      "details": {
+        "expectedExports": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ],
+        "installedExports": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "number": 7,
+      "name": "CommonJS example executes successfully",
+      "pass": true,
+      "details": {
+        "exitCode": 0,
+        "stdout": "EGA V9 CommonJS Example: PASS\n{\n  requestId: '275e6f2d-6fc9-47bc-896d-609b0d26de45',\n  replayRoot: 'b8a34fbcf4160492e481c6a3ff4994a5202f9913f5ef144c0575259ecb332858',\n  trustLevel: 'supported',\n  status: 'verified',\n  containmentActivated: false,\n  executionAllowed: true,\n  verificationAvailable: true,\n  replayAvailable: true,\n  provenanceAvailable: true,\n  containmentAvailable: true\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "number": 8,
+      "name": "ESM example executes successfully",
+      "pass": true,
+      "details": {
+        "exitCode": 0,
+        "stdout": "EGA V9 ESM Example: PASS\n{\n  requestId: '0eab19a4-c8c5-4026-90a7-0c8553de51c0',\n  replayRoot: '2cf8596957fb12f15a5dc4447764647bd78a6cb8960f24ab7ddd13972b32d77f',\n  trustLevel: 'supported',\n  status: 'verified',\n  containmentActivated: false,\n  executionAllowed: true,\n  verificationAvailable: true,\n  replayAvailable: true,\n  provenanceAvailable: true,\n  containmentAvailable: true\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "number": 9,
+      "name": "TypeScript consumer compiles successfully",
+      "pass": true,
+      "details": {
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    {
+      "number": 10,
+      "name": "Compiled TypeScript example executes successfully",
+      "pass": true,
+      "details": {
+        "compiledFile": "examples/typescript/dist/basic.mjs",
+        "exitCode": 0,
+        "stdout": "EGA V9 TypeScript Example: PASS\n{\n  requestId: 'e462f265-b8d5-4b30-9799-b12095ee3466',\n  replayRoot: 'b9a5c4dfed6e3d4f6d7583cb478fc0ebd61ae1c044e3ac7ba3f4f15fefe581c4',\n  trustLevel: 'supported',\n  status: 'verified',\n  containmentActivated: false,\n  executionAllowed: true,\n  verificationAvailable: true,\n  replayAvailable: true,\n  provenanceAvailable: true,\n  containmentAvailable: true\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "number": 11,
+      "name": "Production npm audit reports zero vulnerabilities",
+      "pass": true,
+      "details": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "vulnerabilityTotal": 0
+      }
+    },
+    {
+      "number": 12,
+      "name": "Installed package contains no forbidden files or local paths",
+      "pass": true,
+      "details": {
+        "installedFiles": [
+          "LICENSE",
+          "README.md",
+          "dist/index.d.ts",
+          "dist/index.js",
+          "dist/index.mjs",
+          "package.json"
+        ],
+        "forbiddenFiles": [],
+        "localPathMatches": []
+      }
+    }
+  ]
+}

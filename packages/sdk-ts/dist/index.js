@@ -6,6 +6,163 @@ exports.replay = replay;
 exports.provenance = provenance;
 exports.contain = contain;
 const crypto_1 = require("crypto");
+class EGAInputValidationError extends TypeError {
+    constructor(args) {
+        super(`[${args.code}] ${args.message}`);
+        this.name = "EGAInputValidationError";
+        this.code = args.code;
+        this.field = args.field;
+        this.expected = args.expected;
+        this.receivedType = describeInputType(args.value);
+        Object.setPrototypeOf(this, new.target.prototype);
+    }
+}
+function describeInputType(value) {
+    if (value === null) {
+        return "null";
+    }
+    if (Array.isArray(value)) {
+        return "array";
+    }
+    return typeof value;
+}
+function isPlainObject(value) {
+    if (value === null ||
+        typeof value !== "object" ||
+        Array.isArray(value)) {
+        return false;
+    }
+    const prototype = Object.getPrototypeOf(value);
+    return (prototype === Object.prototype ||
+        prototype === null);
+}
+function assertStandaloneInput(input, functionName) {
+    if (input === undefined) {
+        throw new EGAInputValidationError({
+            code: "EGA_INPUT_REQUIRED",
+            message: `${functionName} input is required. Pass a defined execution value.`,
+            value: input,
+            field: "input",
+            expected: "defined value"
+        });
+    }
+}
+function validateEGAOptions(options) {
+    if (!isPlainObject(options)) {
+        throw new EGAInputValidationError({
+            code: "EGA_OPTIONS_TYPE",
+            message: "EGA.init options must be a plain object.",
+            value: options,
+            field: "options",
+            expected: "plain object"
+        });
+    }
+    if (options.appName !== undefined &&
+        (typeof options.appName !== "string" ||
+            options.appName.trim().length === 0)) {
+        throw new EGAInputValidationError({
+            code: typeof options.appName === "string"
+                ? "EGA_OPTION_VALUE"
+                : "EGA_OPTION_TYPE",
+            message: "options.appName must be a non-empty string.",
+            value: options.appName,
+            field: "options.appName",
+            expected: "non-empty string"
+        });
+    }
+    if (options.trustLevel !== undefined &&
+        options.trustLevel !== "supported" &&
+        options.trustLevel !== "verified") {
+        throw new EGAInputValidationError({
+            code: "EGA_OPTION_VALUE",
+            message: 'options.trustLevel must be "supported" or "verified".',
+            value: options.trustLevel,
+            field: "options.trustLevel",
+            expected: '"supported" | "verified"'
+        });
+    }
+    for (const field of [
+        "telemetry",
+        "failClosed"
+    ]) {
+        const value = options[field];
+        if (value !== undefined &&
+            typeof value !== "boolean") {
+            throw new EGAInputValidationError({
+                code: "EGA_OPTION_TYPE",
+                message: `options.${field} must be a boolean.`,
+                value,
+                field: `options.${field}`,
+                expected: "boolean"
+            });
+        }
+    }
+    if (options.policyId !== undefined &&
+        (typeof options.policyId !== "string" ||
+            options.policyId.trim().length === 0)) {
+        throw new EGAInputValidationError({
+            code: typeof options.policyId === "string"
+                ? "EGA_OPTION_VALUE"
+                : "EGA_OPTION_TYPE",
+            message: "options.policyId must be a non-empty string.",
+            value: options.policyId,
+            field: "options.policyId",
+            expected: "non-empty string"
+        });
+    }
+    if (options.approvalThreshold !== undefined) {
+        if (typeof options.approvalThreshold !==
+            "number" ||
+            !Number.isFinite(options.approvalThreshold)) {
+            throw new EGAInputValidationError({
+                code: "EGA_OPTION_TYPE",
+                message: "options.approvalThreshold must be a finite number.",
+                value: options.approvalThreshold,
+                field: "options.approvalThreshold",
+                expected: "finite number from 0 to 100"
+            });
+        }
+        if (options.approvalThreshold < 0 ||
+            options.approvalThreshold > 100) {
+            throw new EGAInputValidationError({
+                code: "EGA_OPTION_RANGE",
+                message: "options.approvalThreshold must be between 0 and 100.",
+                value: options.approvalThreshold,
+                field: "options.approvalThreshold",
+                expected: "number from 0 to 100"
+            });
+        }
+    }
+}
+function validateGuardInvocation(req, res, next) {
+    if (!isPlainObject(req)) {
+        throw new EGAInputValidationError({
+            code: "EGA_GUARD_REQUEST_REQUIRED",
+            message: "EGA guard requires a request object.",
+            value: req,
+            field: "req",
+            expected: "request object"
+        });
+    }
+    if (!isPlainObject(res)) {
+        throw new EGAInputValidationError({
+            code: "EGA_GUARD_RESPONSE_REQUIRED",
+            message: "EGA guard requires a response object.",
+            value: res,
+            field: "res",
+            expected: "response object"
+        });
+    }
+    if (typeof next !== "function") {
+        throw new EGAInputValidationError({
+            code: "EGA_GUARD_NEXT_REQUIRED",
+            message: "EGA guard requires a next callback.",
+            value: next,
+            field: "next",
+            expected: "function"
+        });
+    }
+}
 class EGA {
     constructor(options = {}) {
         this.eventLog = [];
@@ -20,10 +177,12 @@ class EGA {
         };
     }
     static init(options = {}) {
+        validateEGAOptions(options);
         return new EGA(options);
     }
     guard() {
         return (req, res, next) => {
+            validateGuardInvocation(req, res, next);
             const requestId = (0, crypto_1.randomUUID)();
             const clientIdentity = buildAnonymousClientIdentity(req, this.options.appName);
             const licenseState = evaluateLicenseState(req);
@@ -621,6 +780,7 @@ function stableStringify(input) {
     }).join(",")}}`;
 }
 function verifyExecution(input) {
+    assertStandaloneInput(input, "verifyExecution");
     const ega = EGA.init();
     const replayRoot = ega.replayRoot(input);
     const businessMetrics = collectBusinessMetrics(input);
@@ -680,12 +840,15 @@ function verifyExecution(input) {
     };
 }
 function replay(input) {
+    assertStandaloneInput(input, "replay");
     return verifyExecution(input);
 }
 function provenance(input) {
+    assertStandaloneInput(input, "provenance");
     return verifyExecution(input);
 }
 function contain(input) {
+    assertStandaloneInput(input, "contain");
     return verifyExecution(input);
 }
 function guardLatencyMicroseconds(startedAt) {

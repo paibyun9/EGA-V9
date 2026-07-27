@@ -1,0 +1,272 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "generatedAt": "2026-07-26T20:35:05.732Z",
+  "repository": {
+    "root": "<local-user-path>",
+    "gitStatus": {
+      "command": "git status --short",
+      "cwd": ".",
+      "exitCode": 0,
+      "stdout": "M examples/express/app.cjs\n M examples/express/app.mjs\n M examples/express/containment-demo.cjs\n M examples/express/dashboard-demo.cjs\n M examples/express/detection-demo.cjs\n M examples/express/event-bus-demo.cjs\n M examples/express/explainability-demo.cjs\n M examples/express/trust-escalation-demo.cjs\n M package-lock.json\n M package.json\n M packages/sdk-ts/dist/index.js\n M packages/sdk-ts/package.json\n M packages/sdk-ts/src/index.ts\n M publication/evidence/approval-bypass/approval-bypass-evidence.json\n M publication/evidence/fail-closed-containment/fail-closed-containment-evidence.json\n M publication/evidence/replay-root/replay-root-change-evidence.json\n M publication/evidence/tool-injection/tool-injection-evidence.json\n M publication/evidence/tool-order/tool-order-mutation-evidence.json\n M publication/evidence/trust-state/trust-state-escalation-evidence.json\n M publication/evidence/workflow-divergence/workflow-divergence-evidence.json\n?? contracts/\n?? examples/README.md\n?? examples/commonjs/\n?? examples/esm/\n?? examples/typescript/\n?? packages/sdk-ts/dist/index.mjs\n?? packages/sdk-ts/scripts/\n?? packages/sdk-ts/test/export-compatibility/\n?? packages/sdk-ts/test/runtime-blocking/\n?? packages/sdk-ts/test/validation/\n?? publication/evidence/v1.0.1/\n?? scripts/v1.0.1-examples-gate.cjs\n?? scripts/v1.0.1-export-compatibility-gate.cjs\n?? scripts/v1.0.1-express-examples-import-gate.cjs\n?? scripts/v1.0.1-fail-closed-runtime-gate.cjs\n?? scripts/v1.0.1-fresh-consumer-12-test-gate.cjs\n?? scripts/v1.0.1-integrated-release-gate.cjs\n?? scripts/v1.0.1-phase-a-api-audit.cjs\n?? scripts/v1.0.1-public-api-contract-gate.cjs\n?? scripts/v1.0.1-readme-sdk-alignment-gate.cjs\n?? scripts/v1.0.1-seven-test-baseline.cjs",
+      "stderr": ""
+    },
+    "branch": {
+      "command": "git branch --show-current",
+      "cwd": ".",
+      "exitCode": 0,
+      "stdout": "feat/v1-api-contract",
+      "stderr": ""
+    },
+    "latestCommit": {
+      "command": "git log -1 --oneline",
+      "cwd": ".",
+      "exitCode": 0,
+      "stdout": "5404fe4 Add seven supplementary governance evidence suites",
+      "stderr": ""
+    }
+  },
+  "environment": {
+    "node": {
+      "command": "node --version",
+      "cwd": ".",
+      "exitCode": 0,
+      "stdout": "v20.20.2",
+      "stderr": ""
+    },
+    "npm": {
+      "command": "npm --version",
+      "cwd": ".",
+      "exitCode": 0,
+      "stdout": "10.8.2",
+      "stderr": ""
+    },
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "files": {
+    "rootPackageExists": true,
+    "sdkPackageExists": true,
+    "rootReadmeExists": true,
+    "sdkReadmeExists": true,
+    "packageLockExists": true,
+    "buildFiles": [
+      "packages/sdk-ts/dist/index.d.ts",
+      "packages/sdk-ts/dist/index.js",
+      "packages/sdk-ts/dist/index.mjs"
+    ]
+  },
+  "rootPackage": {
+    "name": "ega-v9",
+    "version": "1.0.1",
+    "private": true,
+    "workspaces": [
+      "packages/sdk-ts"
+    ],
+    "scripts": {
+      "build": "npm run build -w packages/sdk-ts",
+      "test": "npm run test:v1",
+      "dev": "npm run dev -w packages/sdk-ts",
+      "release:gate": "node scripts/release-gate.cjs",
+      "stage-b:gate": "node scripts/stage-b-engine-gate.cjs",
+      "stage-c:gate": "node scripts/stage-c-benchmark-gate.cjs",
+      "stage-d:gate": "node scripts/stage-d-table-consistency-gate.cjs",
+      "release:all-gates": "npm run release:gate && npm run stage-b:gate && npm run stage-c:gate && npm run stage-d:gate && npm run stage-e:gate",
+      "table4:build": "node scripts/build-table4.cjs",
+      "stage-e:gate": "node scripts/stage-e-publication-consistency-gate.cjs",
+      "stage-e:live": "EGA_LIVE_PUBLICATION_CHECK=1 node scripts/stage-e-publication-consistency-gate.cjs",
+      "example:express": "npm run build && node examples/express/server.mjs",
+      "test:express-integration": "npm run build && node packages/sdk-ts/test/express-guard-integration.mjs",
+      "test:behavior:normal": "npm run build && node --test packages/sdk-ts/test/behavior/normal-workflow.test.mjs",
+      "test:behavior:replay-mismatch": "npm run build && node --test packages/sdk-ts/test/behavior/replay-mismatch.test.mjs",
+      "test:behavior:provenance": "npm run build && node --test packages/sdk-ts/test/behavior/provenance.test.mjs",
+      "test:behavior:containment": "npm run build && node --test packages/sdk-ts/test/behavior/containment.test.mjs",
+      "test:behavior:trust-state": "npm run build && node --test packages/sdk-ts/test/behavior/trust-state.test.mjs",
+      "test:v1": "npm run build && node scripts/testing/run-v1-test-suite.cjs",
+      "test:behavior:negative": "npm run build && node --test packages/sdk-ts/test/behavior/negative-paths.test.mjs",
+      "benchmark:v1:smoke": "npm run build && node --expose-gc benchmarks/v1/runtime-governance-benchmark.mjs --profile=smoke --output=<local-temp-path>",
+      "benchmark:v1:publication": "npm run build && node --expose-gc benchmarks/v1/runtime-governance-benchmark.mjs --profile=publication --output=benchmarks/results/v1-runtime-governance",
+      "benchmark:v1:gate": "node scripts/v1-benchmark-gate.cjs",
+      "benchmark:v1:all": "npm run benchmark:v1:publication && npm run benchmark:v1:gate",
+      "test:replay-root": "npm run build && node --test benchmarks/replay-root/replay-root-change.test.mjs",
+      "test:workflow-divergence": "npm run build && node --test benchmarks/workflow-divergence/workflow-divergence.test.mjs",
+      "test:trust-state": "npm run build && node --test benchmarks/trust-state/trust-state-escalation.test.mjs",
+      "test:fail-closed": "npm run build && node --test benchmarks/fail-closed-containment/fail-closed-containment.test.mjs",
+      "test:tool-order": "npm run build && node --test benchmarks/tool-order/tool-order-mutation.test.mjs",
+      "test:approval-bypass": "npm run build && node --test benchmarks/approval-bypass/approval-bypass.test.mjs",
+      "test:tool-injection": "npm run build && node --test benchmarks/tool-injection/tool-injection.test.mjs",
+      "v1.0.1:seven-test-baseline": "node scripts/v1.0.1-seven-test-baseline.cjs",
+      "v1.0.1:api-contract": "node scripts/v1.0.1-public-api-contract-gate.cjs",
+      "v1.0.1:fail-closed-runtime": "node scripts/v1.0.1-fail-closed-runtime-gate.cjs",
+      "v1.0.1:export-compatibility": "node scripts/v1.0.1-export-compatibility-gate.cjs",
+      "v1.0.1:examples": "node scripts/v1.0.1-examples-gate.cjs",
+      "v1.0.1:express-examples": "node scripts/v1.0.1-express-examples-import-gate.cjs",
+      "v1.0.1:readme-sdk-alignment": "node scripts/v1.0.1-readme-sdk-alignment-gate.cjs",
+      "release:v1.0.1:gate": "node scripts/v1.0.1-integrated-release-gate.cjs",
+      "release:v1.0.1:final-gate": "node scripts/v1.0.1-integrated-release-gate.cjs --require-clean --require-target-version"
+    }
+  },
+  "sdkPackage": {
+    "name": "ega-v9",
+    "version": "1.0.1",
+    "description": "EGA V9 TypeScript SDK for replay, provenance, containment, and SCORP LOCK governance.",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    },
+    "files": [
+      "dist",
+      "README.md",
+      "LICENSE"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/paibyun9/EGA-V9.git",
+      "directory": "packages/sdk-ts"
+    },
+    "homepage": "https://github.com/paibyun9/EGA-V9#readme",
+    "bugs": {
+      "url": "https://github.com/paibyun9/EGA-V9/issues"
+    },
+    "license": "MIT",
+    "scripts": {
+      "build": "tsc && node scripts/generate-esm-wrapper.cjs",
+      "test": "npm run build && node ../../scripts/testing/run-v1-test-suite.cjs"
+    }
+  },
+  "entryPoints": [
+    {
+      "name": "main",
+      "configuredPath": "./dist/index.js",
+      "absolutePath": "<local-user-path>",
+      "exists": true,
+      "relativePath": "packages/sdk-ts/dist/index.js",
+      "runtime": {
+        "loaded": true,
+        "type": "object",
+        "keys": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "name": "module",
+      "configuredPath": "./dist/index.mjs",
+      "absolutePath": "<local-user-path>",
+      "exists": true,
+      "relativePath": "packages/sdk-ts/dist/index.mjs",
+      "runtime": {
+        "loaded": true,
+        "type": "object",
+        "keys": [
+          "EGA",
+          "__esModule",
+          "contain",
+          "default",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "name": "exports[.].types",
+      "configuredPath": "./dist/index.d.ts",
+      "absolutePath": "<local-user-path>",
+      "exists": true,
+      "relativePath": "packages/sdk-ts/dist/index.d.ts",
+      "runtime": {
+        "loaded": false,
+        "skipped": true,
+        "reason": "Type declaration file"
+      }
+    },
+    {
+      "name": "exports[.].import",
+      "configuredPath": "./dist/index.mjs",
+      "absolutePath": "<local-user-path>",
+      "exists": true,
+      "relativePath": "packages/sdk-ts/dist/index.mjs",
+      "runtime": {
+        "loaded": true,
+        "type": "object",
+        "keys": [
+          "EGA",
+          "__esModule",
+          "contain",
+          "default",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "name": "exports[.].require",
+      "configuredPath": "./dist/index.js",
+      "absolutePath": "<local-user-path>",
+      "exists": true,
+      "relativePath": "packages/sdk-ts/dist/index.js",
+      "runtime": {
+        "loaded": true,
+        "type": "object",
+        "keys": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    },
+    {
+      "name": "exports[.].default",
+      "configuredPath": "./dist/index.js",
+      "absolutePath": "<local-user-path>",
+      "exists": true,
+      "relativePath": "packages/sdk-ts/dist/index.js",
+      "runtime": {
+        "loaded": true,
+        "type": "object",
+        "keys": [
+          "EGA",
+          "contain",
+          "ega",
+          "provenance",
+          "replay",
+          "verifyExecution"
+        ]
+      }
+    }
+  ],
+  "packageDryRun": {
+    "command": "npm pack --dry-run --json",
+    "cwd": "packages/sdk-ts",
+    "exitCode": 0,
+    "stdout": "[\n  {\n    \"id\": \"ega-v9@1.0.1\",\n    \"name\": \"ega-v9\",\n    \"version\": \"1.0.1\",\n    \"size\": 12070,\n    \"unpackedSize\": 54881,\n    \"shasum\": \"47735254569497a72c5cac2f0edeb24a0175d9c0\",\n    \"integrity\": \"sha512-ZsKd12TTGTnAusAfawyIOqbnldMAK8P14R/AT7wXsM4J5TDO16NoVdLrv/TkL8LvSuhH77Jmhn/NCMxVuuhK9w==\",\n    \"filename\": \"ega-v9-1.0.1.tgz\",\n    \"files\": [\n      {\n        \"path\": \"LICENSE\",\n        \"size\": 1069,\n        \"mode\": 420\n      },\n      {\n        \"path\": \"README.md\",\n        \"size\": 5841,\n        \"mode\": 420\n      },\n      {\n        \"path\": \"dist/index.d.ts\",\n        \"size\": 6388,\n        \"mode\": 420\n      },\n      {\n        \"path\": \"dist/index.js\",\n        \"size\": 39989,\n        \"mode\": 420\n      },\n      {\n        \"path\": \"dist/index.mjs\",\n        \"size\": 388,\n        \"mode\": 420\n      },\n      {\n        \"path\": \"package.json\",\n        \"size\": 1206,\n        \"mode\": 420\n      }\n    ],\n    \"entryCount\": 6,\n    \"bundled\": []\n  }\n]",
+    "stderr": ""
+  },
+  "releasePrinciples": {
+    "breakingPublicApiChangesAllowed": false,
+    "sevenRuntimeVerificationTestsRequired": true,
+    "freshConsumerValidationRequired": true,
+    "npmAuditVulnerabilityTarget": 0,
+    "absolutePathLeakTarget": 0
+  }
+}

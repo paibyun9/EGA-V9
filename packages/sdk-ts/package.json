@@ -1,16 +1,16 @@
 {
   "name": "ega-v9",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.1",
   "description": "EGA V9 TypeScript SDK for replay, provenance, containment, and SCORP LOCK governance.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/generate-esm-wrapper.cjs",
     "test": "npm run build && node ../../scripts/testing/run-v1-test-suite.cjs",
     "dev": "tsc --watch"
   },
@@ -26,5 +26,24 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paibyun9/EGA-V9.git",
+    "directory": "packages/sdk-ts"
+  },
+  "homepage": "https://github.com/paibyun9/EGA-V9#readme",
+  "bugs": {
+    "url": "https://github.com/paibyun9/EGA-V9/issues"
+  },
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
   }
 }

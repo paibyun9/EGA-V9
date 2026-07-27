@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "testId": "commonjs-typescript-esm-export-compatibility",
+  "generatedAt": "2026-07-26T20:35:11.490Z",
+  "nodeVersion": "v20.20.2",
+  "platform": "darwin-arm64",
+  "expectedNamedExports": [
+    "EGA",
+    "contain",
+    "ega",
+    "provenance",
+    "replay",
+    "verifyExecution"
+  ],
+  "packageEntries": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "default": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "checks": [
+    {
+      "name": "SDK build",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "CommonJS package entry",
+      "pass": true
+    },
+    {
+      "name": "ESM package entry",
+      "pass": true
+    },
+    {
+      "name": "TypeScript declaration entry",
+      "pass": true
+    },
+    {
+      "name": "Require export condition",
+      "pass": true
+    },
+    {
+      "name": "Import export condition",
+      "pass": true
+    },
+    {
+      "name": "Types export condition",
+      "pass": true
+    },
+    {
+      "name": "dist/index.js exists",
+      "pass": true
+    },
+    {
+      "name": "dist/index.mjs exists",
+      "pass": true
+    },
+    {
+      "name": "dist/index.d.ts exists",
+      "pass": true
+    },
+    {
+      "name": "CommonJS frozen export set",
+      "pass": true,
+      "exports": [
+        "EGA",
+        "contain",
+        "ega",
+        "provenance",
+        "replay",
+        "verifyExecution"
+      ]
+    },
+    {
+      "name": "Local CJS and ESM tests",
+      "pass": true,
+      "exitCode": 0
+    }
+  ],
+  "finalStatus": "PASS"
+}

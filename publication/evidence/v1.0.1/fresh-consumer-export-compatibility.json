@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "testId": "fresh-consumer-export-compatibility",
+  "generatedAt": "2026-07-25T18:08:01.712Z",
+  "commonjs": {
+    "installed": true,
+    "runtimePass": true
+  },
+  "esm": {
+    "installed": true,
+    "namedImportPass": true,
+    "defaultImportCompatibilityPass": true,
+    "runtimePass": true
+  },
+  "typescript": {
+    "installed": true,
+    "declarationResolutionPass": true,
+    "compilePass": true
+  },
+  "consumerFilesPresent": true,
+  "finalStatus": "PASS"
+}

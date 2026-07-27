@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "testId": "express-examples-public-package-imports",
+  "generatedAt": "2026-07-26T20:35:17.496Z",
+  "nodeVersion": "v20.20.2",
+  "platform": "darwin-arm64",
+  "checks": [
+    {
+      "name": "No internal SDK import: app.cjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: app.mjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: containment-demo.cjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: dashboard-demo.cjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: detection-demo.cjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: event-bus-demo.cjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: explainability-demo.cjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: server.mjs",
+      "pass": true
+    },
+    {
+      "name": "No internal SDK import: trust-escalation-demo.cjs",
+      "pass": true
+    },
+    {
+      "name": "SDK build",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "SDK npm pack",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Generated tarball exists",
+      "pass": true,
+      "tarball": "ega-v9-1.0.1.tgz"
+    },
+    {
+      "name": "Install packed SDK and Express",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Express examples copied",
+      "pass": true
+    },
+    {
+      "name": "CommonJS public package resolution",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "ESM Express app import",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "CommonJS smoke completed",
+      "pass": true
+    },
+    {
+      "name": "ESM app smoke completed",
+      "pass": true
+    }
+  ],
+  "finalStatus": "PASS"
+}

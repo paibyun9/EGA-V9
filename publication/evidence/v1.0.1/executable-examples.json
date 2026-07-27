@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "testId": "executable-examples",
+  "generatedAt": "2026-07-26T20:35:14.425Z",
+  "nodeVersion": "v20.20.2",
+  "platform": "darwin-arm64",
+  "packageVersion": "1.0.1",
+  "expectedExports": [
+    "EGA",
+    "contain",
+    "ega",
+    "provenance",
+    "replay",
+    "verifyExecution"
+  ],
+  "observedExports": [
+    "EGA",
+    "contain",
+    "ega",
+    "provenance",
+    "replay",
+    "verifyExecution"
+  ],
+  "examples": {
+    "commonjs": {
+      "runtimePass": true
+    },
+    "esm": {
+      "runtimePass": true
+    },
+    "typescript": {
+      "compilePass": true,
+      "runtimePass": true
+    }
+  },
+  "checks": [
+    {
+      "name": "Example file exists: README.md",
+      "pass": true
+    },
+    {
+      "name": "Example file exists: commonjs/basic.cjs",
+      "pass": true
+    },
+    {
+      "name": "Example file exists: esm/basic.mjs",
+      "pass": true
+    },
+    {
+      "name": "Example file exists: typescript/basic.mts",
+      "pass": true
+    },
+    {
+      "name": "Example file exists: typescript/tsconfig.json",
+      "pass": true
+    },
+    {
+      "name": "SDK build",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "SDK npm pack",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Generated tarball exists",
+      "pass": true,
+      "tarball": "ega-v9-1.0.1.tgz"
+    },
+    {
+      "name": "Install packed SDK",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Installed package.json exists",
+      "pass": true
+    },
+    {
+      "name": "Installed CommonJS entry exists",
+      "pass": true
+    },
+    {
+      "name": "Installed ESM entry exists",
+      "pass": true
+    },
+    {
+      "name": "Installed TypeScript declaration exists",
+      "pass": true
+    },
+    {
+      "name": "Examples copied to isolated consumer",
+      "pass": true
+    },
+    {
+      "name": "Run CommonJS example",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Run ESM example",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Repository TypeScript compiler exists",
+      "pass": true
+    },
+    {
+      "name": "Compile TypeScript example",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Compiled TypeScript example exists",
+      "pass": true
+    },
+    {
+      "name": "Run compiled TypeScript example",
+      "pass": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Installed package preserves frozen export set",
+      "pass": true,
+      "observedExports": [
+        "EGA",
+        "contain",
+        "ega",
+        "provenance",
+        "replay",
+        "verifyExecution"
+      ]
+    }
+  ],
+  "finalStatus": "PASS"
+}

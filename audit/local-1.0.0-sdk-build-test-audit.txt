@@ -1,0 +1,40 @@
+{
+  "auditTime": "2026-07-20T18:06:14.473Z",
+  "phase": "Phase 2 — SDK Build and Test",
+  "result": "PASS",
+  "environment": {
+    "node": "v20.20.2",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "rootPackage": {
+    "name": "ega-v9",
+    "version": "1.0.0",
+    "buildScript": "npm run build -w packages/sdk-ts",
+    "testScript": "npm run test:v1",
+    "officialTestScript": "npm run build && node scripts/testing/run-v1-test-suite.cjs"
+  },
+  "sdkPackage": {
+    "name": "ega-v9",
+    "version": "1.0.0",
+    "buildScript": "tsc",
+    "testScript": "npm run build && node ../../scripts/testing/run-v1-test-suite.cjs",
+    "main": "dist/index.js",
+    "mainExists": true,
+    "mainSizeBytes": 34273,
+    "types": "dist/index.d.ts",
+    "typesExists": true,
+    "typesSizeBytes": 6388
+  },
+  "verifiedCommands": [
+    "npm ci",
+    "npm run build",
+    "npm test",
+    "npm --workspace packages/sdk-ts run build",
+    "npm --workspace packages/sdk-ts run test",
+    "npm pack --dry-run --json"
+  ],
+  "expectedOfficialTestResult": "10/10 test groups passed"
+}
+
+npmVersion: 10.8.2

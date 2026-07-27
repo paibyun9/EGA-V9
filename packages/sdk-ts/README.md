@@ -19,7 +19,7 @@ EGA V9 paper.
 2.  Installation
 3.  Three-Line Integration
 4.  Quick Start
-5.  Expected Output
+5. [Verified Behavior](#5-verified-behavior)
 6.  Reproducing the Paper
 7.  Publication Verification
 8.  Runtime Architecture
@@ -32,15 +32,21 @@ EGA V9 paper.
 
 ## 1. Why EGA V9?
 
-Autonomous AI systems require deterministic runtime governance rather
-than probabilistic execution trust.
+**LLM-based guards add cost. Runtime failures still happen.**
 
-EGA V9 introduces four governance primitives:
+EGA V9 takes a different approach.
 
--   Deterministic Replay
--   Provenance-aware Verification
--   Trust-State Evaluation
--   Fail-Closed Containment
+Instead of asking another LLM whether an execution is safe, EGA V9 verifies workflow execution deterministically.
+
+### EGA V9
+
+- Runtime verification with **0 additional LLM calls**
+- Median (P50) verification latency: **0.003055 ms**
+- **10,000 workflows evaluated**
+- **0% false positives / 0% false negatives**
+- Deterministic replay, provenance verification, and fail-closed containment
+
+> **Deterministic Replay > Probabilistic Trust**
 
 ------------------------------------------------------------------------
 
@@ -62,24 +68,34 @@ npm ci
 
 ## 3. Three-Line Integration
 
-Apply EGA execution governance before protected routes.
+Protect an existing AI application with a single middleware.
+
+### Before
+
+```javascript
+app.post("/checkout", async (req) => {
+  await agent.buy(req.body.item);
+});
+```
+
+### After
 
 ```javascript
 const { ega } = require("ega-v9");
 
 app.use(ega.guard());
+```
 
-The middleware verifies the workflow before the application route executes.
-Replay mismatches are fail-closed contained and do not reach the protected
-route.
+A verified request proceeds to the protected route. A replay mismatch is fail-closed contained before the protected operation is executed.
 
-4. Quick Start
+------------------------------------------------------------------------
 
-Create quick-start.cjs.
+## 4. Quick Start
 
-const {
-  verifyExecution
-} = require("ega-v9");
+Create a file named `quick-start.cjs`.
+
+```javascript
+const { verifyExecution } = require("ega-v9");
 
 const workflow = [
   {
@@ -101,91 +117,94 @@ const workflow = [
 
 const result = verifyExecution(workflow);
 
-console.log(
-  JSON.stringify(
-    {
-      status: result.status,
-      replayConsistency:
-        result.detection.status === "match",
-      trustState:
-        result.trust.currentTier,
-      containmentRequired:
-        result.containment.activated &&
-        !result.containment.executionAllowed,
-      executionAllowed:
-        result.containment.executionAllowed
-    },
-    null,
-    2
-  )
-);
+console.log({
+  status: result.status,
+  replayConsistency:
+    result.detection.status === "match",
+  trustState:
+    result.trust.currentTier,
+  containmentRequired:
+    result.containment.activated &&
+    !result.containment.executionAllowed,
+  executionAllowed:
+    result.containment.executionAllowed
+});
+```
 
 Run:
 
+```bash
 node quick-start.cjs
-5. Expected Output
+```
+
+Expected output:
+
+```text
 {
-  "status": "verified",
-  "replayConsistency": true,
-  "trustState": "T1",
-  "containmentRequired": false,
-  "executionAllowed": true
+  status: 'verified',
+  replayConsistency: true,
+  trustState: 'T1',
+  containmentRequired: false,
+  executionAllowed: true
 }
+```
+
+---
+
+## 5. Verified Behavior
+
+The Quick Start example demonstrates deterministic runtime verification.
+
+```text
+{
+  status: 'verified',
+  replayConsistency: true,
+  trustState: 'T1',
+  containmentRequired: false,
+  executionAllowed: true
+}
+```
+
+This output demonstrates that:
+
+- ✅ Replay consistency is verified.
+- ✅ The workflow remains in Trust State **T1**.
+- ✅ No containment is required.
+- ✅ Execution is allowed.
+
+These results were verified using the published EGA V9 Release Candidate package.
+
+------------------------------------------------------------------------
 
 ## 6. Reproducing the Paper
 
-``` bash
-npm run build
-npm test
-npm run stage-c:gate
-npm run table4:build
-npm run stage-d:gate
-npm run release:all-gates
-```
+The complete replication workflow used in the EGA V9 paper is available here:
 
-This workflow regenerates the publication artifact used by the paper and
-validates its consistency.
+→ Detailed guide → **[Reproducing the Paper](docs/REPRODUCING_THE_PAPER.md)**
+
+This guide explains how to:
+
+- Build the SDK
+- Run the benchmark
+- Regenerate Table 4
+- Execute all publication verification gates
+- Reproduce the paper artifacts
 
 ------------------------------------------------------------------------
 
 ## 7. Publication Verification
 
-Run the verification gates sequentially:
+The complete publication verification workflow is documented here.
 
-``` bash
-npm run release:gate
-npm run stage-b:gate
-npm run stage-c:gate
-npm run stage-d:gate
-npm run stage-e:gate
-```
-
-When all public assets are finalized:
-
-``` bash
-npm run stage-e:live
-```
+Detailed guide → **[Publication Verification](docs/PUBLICATION_VERIFICATION.md)**
 
 ------------------------------------------------------------------------
 
 ## 8. Runtime Architecture
 
-``` text
-Workflow
-   │
-   ▼
-TypeScript SDK
-   │
-   ▼
-Runtime Governance Core
-   ├── Deterministic Replay
-   ├── Provenance Verification
-   ├── Trust-State Evaluation
-   └── Fail-Closed Containment
-   │
-   ▼
-Publication Verification
-```
+The complete EGA V9 runtime architecture is documented here.
+
+Detailed guide → **[Runtime Architecture](docs/RUNTIME_ARCHITECTURE.md)**
 
 ------------------------------------------------------------------------
 
