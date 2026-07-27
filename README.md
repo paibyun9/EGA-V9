@@ -89,7 +89,7 @@ const { ega } = require("ega-v9");
 
 app.use(ega.guard());
 ```
-**Existing Stack + One Runtime Governance Layer = Deterministic AI Execution**
+**Existing Stack + One Runtime Governance Layer = Deterministic Governance for AI Execution**
 
 ------------------------------------------------------------------------
 
