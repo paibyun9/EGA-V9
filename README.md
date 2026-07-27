@@ -301,7 +301,7 @@ Before evaluating EGA V9, define the policies that your AI system must follow.
 }
 ```
 
-* Illustrative example only. Actual policy integration depends on your application architecture.*
+* Illustrative example only. Actual policy integration depends on your application architecture.
 
 ---
 
