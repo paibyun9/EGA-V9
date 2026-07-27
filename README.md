@@ -288,6 +288,21 @@ Before evaluating EGA V9, define the policies that your AI system must follow.
 | Refund | Refunds are allowed within 30 days and require manager approval. |
 | Return | Product inspection is required before approval. |
 
+**Example Policy Definition**
+
+```json
+{
+  "purchase": {
+    "paymentRequired": true
+  },
+  "refund": {
+    "managerApproval": true
+  }
+}
+```
+
+*Illustrative example only. Actual policy integration depends on your application architecture.*
+
 ---
 
 ### Step 2). Integrate EGA V9
