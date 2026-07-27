@@ -151,13 +151,6 @@ node quick-start.cjs
 }
 ```
 
-**Verification Summary**
-
-- ✅ Replay verified
-- ✅ Trust state: T1
-- ✅ No containment required
-- ✅ Execution allowed
-
 ------------------------------------------------------------------------
 
 ## 6. Why Adopt EGA V9?
