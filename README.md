@@ -160,7 +160,7 @@ node quick-start.cjs
 | TypeScript | ✅ Verified |
 | Express | ✅ Verified |
 | npm install | ✅ Verified |
-| npm audit | ✅ Clean* |
+| npm audit | ✅ Clean |
 
 *Verified during the official v1.0.1 clean-consumer release validation.
 
