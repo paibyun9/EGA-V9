@@ -13,86 +13,101 @@ EGA V9 paper.
 
 ------------------------------------------------------------------------
 
-## Table of Contents
+## 1. Are You Facing These Problems?
 
-1.  Why EGA V9?
-2.  Installation
-3.  Three-Line Integration
-4.  Quick Start
-5. [Verified Behavior](#5-verified-behavior)
-6.  Reproducing the Paper
-7.  Publication Verification
-8.  Runtime Architecture
-9.  Repository Structure
-10. Contact and Collaboration
-11. License
-12. Roadmap
+☐ AI agent tool calls cannot be verified.
 
-------------------------------------------------------------------------
+☐ Agent execution cannot be replayed.
 
-## 1. Why EGA V9?
+☐ State corruption is difficult to diagnose.
 
-**LLM-based guards add cost. Runtime failures still happen.**
+☐ Workflow failures are hard to reproduce.
 
-EGA V9 takes a different approach.
+☐ Prompt injection leaves little audit evidence.
 
-Instead of asking another LLM whether an execution is safe, EGA V9 verifies workflow execution deterministically.
-
-### EGA V9
-
-- Runtime verification with **0 additional LLM calls**
-- Median (P50) verification latency: **0.003055 ms**
-- **10,000 workflows evaluated**
-- **0% false positives / 0% false negatives**
-- Deterministic replay, provenance verification, and fail-closed containment
-
-> **Deterministic Replay > Probabilistic Trust**
+☐ Multi-agent execution becomes a black box.
 
 ------------------------------------------------------------------------
 
-## 2. Installation
+## 2. EGA V9 Solves These Problems
 
-``` bash
-npm install ega-v9
-```
+✓ Replay Verification
 
-Repository replication:
+✓ Runtime Governance
 
-``` bash
-git clone https://github.com/paibyun9/EGA-V9.git
-cd EGA-V9
-npm ci
-```
+✓ Trust-State Evaluation
+
+✓ Fail-Closed Containment
+
+✓ Execution Provenance
 
 ------------------------------------------------------------------------
 
-## 3. Three-Line Integration
+## 3. Works With
 
-Protect an existing AI application with a single middleware.
+✓ LangChain + EGA V9
 
-### Before
+✓ OpenAI Agents SDK + EGA V9
 
-```javascript
-app.post("/checkout", async (req) => {
-  await agent.buy(req.body.item);
-});
-```
+✓ CrewAI + EGA V9
 
-### After
+✓ AutoGen + EGA V9
+
+✓ MCP Tool Server + EGA V9
+
+> **Note;**
+>
+> **EGA V9 complements your existing agent framework—it does not replace it.**
+>
+> Keep your orchestration logic, prompts, and tool definitions.
+> EGA adds deterministic runtime verification underneath.
+
+------------------------------------------------------------------------
+
+## 4. Runtime Architecture
+
+| Existing Stack | Existing Stack + EGA |
+|----------------|----------------------|
+| **LangChain / Framework** | **LangChain / Framework** |
+| ↓ | ↓ |
+| **Your Agent** | **Your Agent** |
+| ↓ | ↓ |
+| **LLM / External Tools**<br><sub>Black Box</sub> | **EGA Runtime Governance Layer** |
+|  | ├─ Replay Verification |
+|  | ├─ Runtime Governance |
+|  | ├─ Trust-State Evaluation |
+|  | ├─ Fail-Closed Containment |
+|  | └─ Execution Provenance |
+|  | ↓ |
+|  | **LLM / External Tools** |
+
+> **No framework migration. No prompt rewrite. No workflow redesign.**  
+> **Just add EGA Runtime Governance.**
 
 ```javascript
 const { ega } = require("ega-v9");
 
 app.use(ega.guard());
 ```
-
-A verified request proceeds to the protected route. A replay mismatch is fail-closed contained before the protected operation is executed.
+**Existing Stack + One Runtime Governance Layer = Deterministic Governance for AI Execution**
 
 ------------------------------------------------------------------------
 
-## 4. Quick Start
+## 5. Quick Start
 
-Create a file named `quick-start.cjs`.
+Get EGA V9 running in less than one minute.
+
+### 1). Install
+
+```bash
+npm install ega-v9
+```
+
+---
+
+### 2). Create a Quick Start Example
+
+Create a file named `quick-start.cjs`, paste the following code, and save it.
 
 ```javascript
 const { verifyExecution } = require("ega-v9");
@@ -101,17 +116,11 @@ const workflow = [
   {
     step: 1,
     action: "search_product",
-    item: "laptop"
+    item: "Laptop"
   },
   {
     step: 2,
-    action: "select_product",
-    quantity: 1
-  },
-  {
-    step: 3,
-    action: "checkout_request",
-    approved: true
+    action: "checkout_request"
   }
 ];
 
@@ -119,139 +128,280 @@ const result = verifyExecution(workflow);
 
 console.log({
   status: result.status,
-  replayConsistency:
-    result.detection.status === "match",
-  trustState:
-    result.trust.currentTier,
-  containmentRequired:
-    result.containment.activated &&
-    !result.containment.executionAllowed,
-  executionAllowed:
-    result.containment.executionAllowed
+  trustState: result.trust.currentTier,
+  executionAllowed: result.containment.executionAllowed,
+  containmentActivated: result.containment.activated
 });
 ```
 
-Run:
+### 3). Run
 
 ```bash
 node quick-start.cjs
 ```
 
-Expected output:
+### 4). Expected Output
 
-```text
+```json
 {
   status: 'verified',
-  replayConsistency: true,
   trustState: 'T1',
-  containmentRequired: false,
-  executionAllowed: true
+  executionAllowed: true,
+  containmentActivated: false
 }
+```
+
+------------------------------------------------------------------------
+
+## 6. Why Adopt EGA V9?
+
+### Build trustworthy AI workflows without sacrificing speed, cost, or simplicity.
+
+- ⚡ **Fast** — Runtime verification in milliseconds.
+- 💰 **Near-Zero Cost** — Runtime verification without external LLM or API calls.
+- 🚀 **Simple** — Integrate with just a few lines of code.
+- 🔒 **Secure** — Protect AI workflows with deterministic governance and fail-closed execution.
+
+### Built for Production
+
+- **Replay** — Reconstruct every workflow exactly.
+- **Auditability** — Generate cryptographically verifiable runtime evidence.
+- **Runtime Verification** — Detect execution inconsistencies.
+- **Deterministic Governance** — Govern AI with predictable decisions.
+- **Fail-Closed Execution** — Automatically contain unsafe workflows.
+
+------------------------------------------------------------------------
+
+## 7. Verify EGA V9 Before Adoption
+
+> **Don't trust our claims. Verify them yourself.**
+
+Run the governance validation suite locally and verify the core runtime governance properties of EGA V9 using the same SDK implementation included in this repository.
+
+---
+
+### 1). Clone the Repository
+
+```bash
+git clone https://github.com/paibyun9/EGA-V9.git
+cd EGA-V9
+npm ci
 ```
 
 ---
 
-## 5. Verified Behavior
+### 2). Run the Governance Validation Suite
 
-The Quick Start example demonstrates deterministic runtime verification.
+Validate the seven core governance and runtime-integrity properties.
+
+```bash
+# 1. Deterministic Replay Root Verification
+npm run test:replay-root
+
+# 2. Workflow Divergence Detection
+npm run test:workflow-divergence
+
+# 3. Trust-State Escalation
+npm run test:trust-state
+
+# 4. Fail-Closed Containment
+npm run test:fail-closed
+
+# 5. Tool Invocation Order Integrity
+npm run test:tool-order
+
+# 6. Approval Bypass Defense
+npm run test:approval-bypass
+
+# 7. Workflow-Level Tool Injection Detection
+npm run test:tool-injection
+```
+
+> **Note**
+>
+> - All validation runs locally.
+> - Zero external API calls.
+> - Deterministic execution.
+> - Each test automatically generates reproducible JSON and Markdown evidence files.
+
+---
+
+### 3). Review the Evidence
+
+Validation artifacts are generated automatically under:
 
 ```text
-{
-  status: 'verified',
-  replayConsistency: true,
-  trustState: 'T1',
-  containmentRequired: false,
-  executionAllowed: true
-}
+publication/evidence/
 ```
 
-This output demonstrates that:
+Artifacts include:
 
-- ✅ Replay consistency is verified.
-- ✅ The workflow remains in Trust State **T1**.
-- ✅ No containment is required.
-- ✅ Execution is allowed.
+- JSON report
+- Markdown report
+- Final PASS / FAIL status
 
-These results were verified using the published EGA V9 Release Candidate package.
+---
 
-------------------------------------------------------------------------
+### Expected Validation Results
 
-## 6. Reproducing the Paper
+| Validation | Expected Result |
+|------------|:---------------:|
+| Replay Root Verification | ✅ PASS |
+| Workflow Divergence Detection | ✅ PASS |
+| Trust-State Escalation | ✅ PASS |
+| Fail-Closed Containment | ✅ PASS |
+| Tool Order Integrity | ✅ PASS |
+| Approval Bypass Defense | ✅ PASS |
+| Workflow-Level Tool Injection Detection | ✅ PASS |
 
-The complete replication workflow used in the EGA V9 paper is available here:
 
-→ Detailed guide → **[Reproducing the Paper](docs/REPRODUCING_THE_PAPER.md)**
-
-This guide explains how to:
-
-- Build the SDK
-- Run the benchmark
-- Regenerate Table 4
-- Execute all publication verification gates
-- Reproduce the paper artifacts
+**We don't hide problems. We solve them together.**
 
 ------------------------------------------------------------------------
 
-## 7. Publication Verification
+## 8. Enterprise Evaluation
 
-The complete publication verification workflow is documented here.
+The next step is to evaluate how EGA V9 fits into a real enterprise AI workflow.
 
-Detailed guide → **[Publication Verification](docs/PUBLICATION_VERIFICATION.md)**
+### Step 1). Company Policy
 
-------------------------------------------------------------------------
+Before evaluating EGA V9, define the policies that your AI system must follow.
 
-## 8. Runtime Architecture
+**Example: AI Shopping Policy**
 
-The complete EGA V9 runtime architecture is documented here.
+| Workflow | Company Policy |
+|----------|----------------|
+| Purchase | Payment must be completed before shipment. |
+| Refund | Refunds are allowed within 30 days and require manager approval. |
+| Return | Product inspection is required before approval. |
 
-Detailed guide → **[Runtime Architecture](docs/RUNTIME_ARCHITECTURE.md)**
+---
 
-------------------------------------------------------------------------
+### Step 2). Integrate EGA V9
 
-## 9. Repository Structure
+Install EGA V9.
 
-``` text
-EGA-V9/
-├── benchmarks/
-├── crates/
-├── dashboard/
-├── docs/
-├── packages/sdk-ts/
-├── paper/generated/
-├── publication/
-├── scripts/
-├── package.json
-├── SECURITY.md
-├── LICENSE
-└── README.md
+```bash
+npm install ega-v9
 ```
 
+Integrate EGA V9 into your AI workflow.
+
+```text
+Customer → AI Shopping Agent (e.g., LangChain)
+         → Company Policy
+         → [ EGA V9 ]
+         → Inventory API | Payment API | Refund API | Shipping API
+```
+
+EGA V9 enforces company policies before workflow execution while recording deterministic governance evidence.
+
+---
+
+### Step 3). Governed Workflow Execution
+
+**Standard Order Pipeline**
+
+```text
+Customer Order → Agent → [ EGA V9 ] → Payment API → PASS
+```
+
+**Policy-Enforced Refund Pipeline**
+
+```text
+Refund Request → Agent → Manager Approval → [ EGA V9 ] → Refund API → PASS
+```
+
+EGA V9 permits valid workflows while preserving execution, policy, and verification evidence for later review.
+
+---
+
+### Step 4). Deployment Decision
+
+Should EGA V9 be deployed to your production AI workflow?
+
+```text
+YES / NO
+```
+
+---
+
+### Step 5). Business Impact
+
+After completing the evaluation, consider the operational benefits.
+
+**Operational Reliability**
+
+- Enforces company policies before execution.
+- Detects workflow mutations before they reach production.
+
+**Security**
+
+- Detects approval bypass attempts.
+- Detects unauthorized tool execution.
+- Detects policy mutations.
+
+**Governance**
+
+- Replayable workflows.
+- Traceable execution.
+- Auditable decisions.
+
+**Engineering**
+
+- Faster incident investigation.
+- Deterministic debugging.
+- Reproducible execution evidence.
+
+**Business**
+
+- Reduced operational risk.
+- Increased confidence before production deployment.
+- Easier internal security and compliance reviews.
+
+---
+
+### Final Question
+
+Based on your evaluation, 
+
+**What would have happened without EGA V9?**
+
 ------------------------------------------------------------------------
 
-## 10. Contact and Collaboration
+## 9. Contact and Collaboration
 
-contact@lcm3.com
+Whether you are evaluating EGA V9, exploring enterprise adoption, or experimenting with new AI workflows, 
+feedback and collaboration are welcome.
 
-Feedback from researchers, developers, startups, and enterprise
-engineering teams is welcome.
+### Community Support
+- GitHub Issues:
+  https://github.com/paibyun9/EGA-V9/issues
+
+  Use GitHub Issues for questions, bug reports, feature requests, documentation feedback, and independent reproducibility reports.
+
+### Project Resources
+- Live Vercel Demo: https://ega-v9.vercel.app/
+- LCM Official Website: https://lcm3.com/
+
+### Direct Contact
+- contact@lcm3.com
 
 ------------------------------------------------------------------------
 
-## 11. License
+## 10. License
 
 Released under the MIT License.
 
 ------------------------------------------------------------------------
 
-## 12. Roadmap
+## 11. Roadmap
 
-Current development:
-
--   Complete README replication guide
--   Finalize SDK
--   Finalize benchmark reproducibility
--   Finalize Stage E
--   Release v1.0.0
+- Improve SDK integrations
+- Expand language support
+- Add enterprise deployment examples
+- Continue benchmark reproducibility
+- Future EGA releases
 
 ------------------------------------------------------------------------
 
