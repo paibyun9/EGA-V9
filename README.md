@@ -151,6 +151,19 @@ node quick-start.cjs
 }
 ```
 
+### Runtime Compatibility
+
+| Environment | Status |
+|-------------|--------|
+| CommonJS | ✅ Verified |
+| ESM | ✅ Verified |
+| TypeScript | ✅ Verified |
+| Express | ✅ Verified |
+| npm install | ✅ Verified |
+| npm audit | ✅ 0 vulnerabilities* |
+
+*Verified during the official v1.0.1 clean-consumer release validation.
+
 ------------------------------------------------------------------------
 
 ## 6. Why Adopt EGA V9?
