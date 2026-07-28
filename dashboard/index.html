@@ -158,7 +158,7 @@
 </head>
 <body>
   <main class="wrap">
-    <div class="badge">EGA V9 · v1.0.0 · Scorp Locked Vercel Demo</div>
+    <div class="badge">EGA V9 · v1.0.1 · Scorp-Locked Vercel Demo</div>
 
     <h1>
       Execution Governance AI (EGA) V9<br />
@@ -253,7 +253,7 @@
           <pre>npm install ega-v9</pre>
 
           <h3>Use in 3 Lines</h3>
-          <pre>import { govern } from "ega-v9";
+          <pre>import { verifyExecution } from "ega-v9";
 
 const workflow = [
   { step: 1, action: "search_product", item: "laptop" },
@@ -261,15 +261,25 @@ const workflow = [
   { step: 3, action: "checkout_request", approved: true }
 ];
 
-const result = govern(workflow);</pre>
+const result = verifyExecution(workflow);</pre>
         </div>
 
         <div>
           <h3>Expected Output</h3>
           <pre>{
-  "replayConsistency": true,
-  "trustState": "VERIFIED",
-  "containmentRequired": false
+  "status": "verified",
+  "trustLevel": "supported",
+  "scorpLock": true,
+  "trust": {
+    "currentTier": "T1",
+    "riskScore": 10,
+    "approvalRequired": false
+  },
+  "containment": {
+    "activated": false,
+    "mode": "fail-closed",
+    "executionAllowed": true
+  }
 }</pre>
 
           <div class="status verified" style="display:block;">
