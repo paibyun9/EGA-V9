@@ -12,3 +12,11 @@ crates/**/target/
 # Local manuscript source — publish only after final approval
 paper/*.docx
 paper/*.pdf
+
+# EGA V9 Commercial License runtime data
+services/license-api/data/
+data/license-registry.json
+*.license-registry.json
+services/license-api/data/license-notification-queue.json
+data/license-notification-queue.json
+*.license-notification-queue.json

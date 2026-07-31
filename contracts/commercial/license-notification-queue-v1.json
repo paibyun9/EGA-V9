@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "queueType": "license-lifecycle-notification",
+  "taskTypes": [
+    "day60-commercial-reminder",
+    "day83-expiration-warning",
+    "day90-evaluation-expired"
+  ],
+  "taskStatus": [
+    "pending",
+    "processing",
+    "sent",
+    "failed",
+    "cancelled"
+  ],
+  "properties": {
+    "taskId": {
+      "type": "string",
+      "required": true
+    },
+    "taskType": {
+      "type": "string",
+      "required": true
+    },
+    "licenseId": {
+      "type": "string",
+      "required": true
+    },
+    "workEmail": {
+      "type": "string",
+      "required": true
+    },
+    "contactName": {
+      "type": "string",
+      "required": true
+    },
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "issuedAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    },
+    "expiresAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "attempts": {
+      "type": "integer",
+      "required": true
+    },
+    "createdAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    },
+    "updatedAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    }
+  },
+  "rules": [
+    "taskId must be deterministic from licenseId and taskType.",
+    "The same lifecycle task must never be queued twice.",
+    "The Evaluation License Key must never be stored in the queue.",
+    "Queue writes must be atomic.",
+    "This queue does not send email; it only records pending work."
+  ]
+}

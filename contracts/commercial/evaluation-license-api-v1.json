@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "endpoint": "/api/licenses/evaluation",
+  "method": "POST",
+  "request": {
+    "contentType": "application/json",
+    "required": [
+      "contactName",
+      "companyName",
+      "workEmail"
+    ],
+    "properties": {
+      "contactName": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      },
+      "companyName": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "workEmail": {
+        "type": "string",
+        "format": "email",
+        "maxLength": 254
+      }
+    }
+  },
+  "successResponse": {
+    "status": 201,
+    "body": {
+      "evaluationLicenseKey": "string",
+      "licenseId": "string",
+      "issuedAt": "ISO-8601 string",
+      "expiresAt": "ISO-8601 string"
+    }
+  },
+  "errorResponses": [
+    {
+      "status": 400,
+      "code": "EGA_LICENSE_REQUEST_INVALID"
+    },
+    {
+      "status": 405,
+      "code": "EGA_LICENSE_METHOD_NOT_ALLOWED"
+    },
+    {
+      "status": 413,
+      "code": "EGA_LICENSE_REQUEST_TOO_LARGE"
+    },
+    {
+      "status": 500,
+      "code": "EGA_LICENSE_SERVER_ERROR"
+    },
+    {
+      "status": 503,
+      "code": "EGA_LICENSE_SERVICE_UNAVAILABLE"
+    }
+  ]
+}

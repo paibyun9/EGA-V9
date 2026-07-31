@@ -1,0 +1,13 @@
+{
+  "templateId": "day83-expiration-warning",
+  "templateVersion": 1,
+  "taskType": "day83-expiration-warning",
+  "subject": "Your EGA V9 evaluation expires in 7 days",
+  "text": "Hello {{contactName}},\n\nYour EGA V9 Evaluation License for {{companyName}} expires in 7 days.\n\nExpiration date: {{expiresDate}}\n\nTo continue using EGA V9 without interruption, please activate a Commercial License before the expiration date.\n\nLCM\nhttps://lcm3.com",
+  "requiredVariables": [
+    "contactName",
+    "companyName",
+    "workEmail",
+    "expiresDate"
+  ]
+}

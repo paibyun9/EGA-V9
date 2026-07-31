@@ -1,0 +1,13 @@
+{
+  "templateId": "day90-evaluation-expired",
+  "templateVersion": 1,
+  "taskType": "day90-evaluation-expired",
+  "subject": "Your EGA V9 Evaluation License has expired",
+  "text": "Hello {{contactName}},\n\nYour EGA V9 Evaluation License for {{companyName}} expired on {{expiresDate}}.\n\nContinued use of EGA V9 now requires an active Commercial License.\n\nTo continue, please visit:\nhttps://lcm3.com\n\nLCM",
+  "requiredVariables": [
+    "contactName",
+    "companyName",
+    "workEmail",
+    "expiresDate"
+  ]
+}

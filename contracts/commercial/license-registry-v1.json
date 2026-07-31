@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "recordType": "evaluation-license-registration",
+  "primaryKey": "licenseId",
+  "uniqueTrialIdentity": "normalizedWorkEmail",
+  "properties": {
+    "licenseId": {
+      "type": "string",
+      "required": true
+    },
+    "contactName": {
+      "type": "string",
+      "required": true
+    },
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "workEmail": {
+      "type": "string",
+      "required": true
+    },
+    "normalizedWorkEmail": {
+      "type": "string",
+      "required": true
+    },
+    "issuedAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    },
+    "expiresAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    },
+    "status": {
+      "enum": [
+        "active",
+        "expiring",
+        "expired",
+        "commercial-requested",
+        "commercial",
+        "closed"
+      ],
+      "required": true
+    },
+    "day60ReminderQueuedAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "day60ReminderSentAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "day83WarningQueuedAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "day83WarningSentAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "expirationQueuedAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "expirationSentAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "commercialRequestedAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "commercialActivatedAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "createdAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    },
+    "updatedAt": {
+      "type": "ISO-8601 string",
+      "required": true
+    }
+  },
+  "rules": [
+    "One 90-day Evaluation License per normalized work email.",
+    "The Evaluation License Key itself must not be stored in the registry.",
+    "Notification queuedAt and sentAt timestamps must be tracked separately.",
+    "Only one lifecycle notification task may be queued for each milestone.",
+    "All writes must be atomic.",
+    "A missing or corrupt registry must fail closed for license issuance.",
+    "Status changes must update updatedAt."
+  ]
+}

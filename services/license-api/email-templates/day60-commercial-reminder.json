@@ -1,0 +1,13 @@
+{
+  "templateId": "day60-commercial-reminder",
+  "templateVersion": 1,
+  "taskType": "day60-commercial-reminder",
+  "subject": "Your EGA V9 evaluation has 30 days remaining",
+  "text": "Hello {{contactName}},\n\nYour EGA V9 Evaluation License for {{companyName}} has 30 days remaining.\n\nYour evaluation expires on {{expiresDate}}.\n\nTo continue using EGA V9 after the evaluation period, please activate a Commercial License.\n\nLCM\nhttps://lcm3.com",
+  "requiredVariables": [
+    "contactName",
+    "companyName",
+    "workEmail",
+    "expiresDate"
+  ]
+}

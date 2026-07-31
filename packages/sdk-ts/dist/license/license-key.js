@@ -1,0 +1,177 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EGALicenseKeyError = void 0;
+exports.serializeLicenseForSigning = serializeLicenseForSigning;
+exports.issueEvaluationLicenseKey = issueEvaluationLicenseKey;
+exports.verifyEvaluationLicenseKey = verifyEvaluationLicenseKey;
+const crypto_1 = require("crypto");
+const LICENSE_KEY_PREFIX = "EGA9-LIC-V1";
+class EGALicenseKeyError extends Error {
+    constructor(code, message) {
+        super(`[${code}] ${message}`);
+        this.name = "EGALicenseKeyError";
+        this.code = code;
+        Object.setPrototypeOf(this, new.target.prototype);
+    }
+}
+exports.EGALicenseKeyError = EGALicenseKeyError;
+function encodeBase64Url(value) {
+    return Buffer
+        .from(value)
+        .toString("base64url");
+}
+function decodeBase64Url(value) {
+    try {
+        return Buffer.from(value, "base64url");
+    }
+    catch {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_FORMAT", "Evaluation License Key contains invalid Base64URL data.");
+    }
+}
+/**
+ * Produces stable JSON for signature generation.
+ *
+ * The property order is explicitly controlled so that the same license
+ * always produces the same payload bytes.
+ */
+function serializeLicenseForSigning(license) {
+    if (license.licenseKind === "evaluation") {
+        return JSON.stringify({
+            schemaVersion: license.schemaVersion,
+            licenseKind: license.licenseKind,
+            licenseId: license.licenseId,
+            contactName: license.contactName,
+            companyName: license.companyName,
+            workEmail: license.workEmail,
+            issuedAt: license.issuedAt,
+            expiresAt: license.expiresAt
+        });
+    }
+    return JSON.stringify({
+        schemaVersion: license.schemaVersion,
+        licenseKind: license.licenseKind,
+        licenseId: license.licenseId,
+        contactName: license.contactName,
+        companyName: license.companyName,
+        workEmail: license.workEmail,
+        issuedAt: license.issuedAt,
+        ...(license.expiresAt
+            ? { expiresAt: license.expiresAt }
+            : {})
+    });
+}
+function toPrivateKey(key) {
+    try {
+        return key instanceof crypto_1.KeyObject
+            ? key
+            : (0, crypto_1.createPrivateKey)(key);
+    }
+    catch {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_SIGNATURE", "A valid Ed25519 private key is required to issue an Evaluation License Key.");
+    }
+}
+function toPublicKey(key) {
+    try {
+        return key instanceof crypto_1.KeyObject
+            ? key
+            : (0, crypto_1.createPublicKey)(key);
+    }
+    catch {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_SIGNATURE", "A valid Ed25519 public key is required to verify an Evaluation License Key.");
+    }
+}
+function assertEvaluationLicense(value) {
+    if (typeof value !== "object" ||
+        value === null ||
+        Array.isArray(value)) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_PAYLOAD", "Evaluation License payload must be an object.");
+    }
+    const license = value;
+    if (license.schemaVersion !== 1 ||
+        license.licenseKind !== "evaluation") {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_TYPE", "Evaluation License Key must contain a version 1 evaluation license.");
+    }
+    const requiredStringFields = [
+        "licenseId",
+        "contactName",
+        "companyName",
+        "workEmail",
+        "issuedAt",
+        "expiresAt"
+    ];
+    for (const field of requiredStringFields) {
+        if (typeof license[field] !== "string" ||
+            license[field].trim().length === 0) {
+            throw new EGALicenseKeyError("EGA_LICENSE_KEY_PAYLOAD", `Evaluation License payload requires a non-empty ${field}.`);
+        }
+    }
+    const email = String(license.workEmail);
+    if (!email.includes("@") ||
+        email.startsWith("@") ||
+        email.endsWith("@")) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_PAYLOAD", "Evaluation License payload contains an invalid workEmail.");
+    }
+    const issuedAt = new Date(String(license.issuedAt));
+    const expiresAt = new Date(String(license.expiresAt));
+    if (Number.isNaN(issuedAt.getTime()) ||
+        Number.isNaN(expiresAt.getTime())) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_PAYLOAD", "Evaluation License dates must be valid ISO-8601 date strings.");
+    }
+    if (expiresAt.getTime() <=
+        issuedAt.getTime()) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_PAYLOAD", "Evaluation License expiresAt must be later than issuedAt.");
+    }
+}
+/**
+ * Server-side function.
+ *
+ * This function requires the LCM private key and must not be called from
+ * browser code or distributed with production private-key material.
+ */
+function issueEvaluationLicenseKey(license, privateKey) {
+    assertEvaluationLicense(license);
+    const payload = serializeLicenseForSigning(license);
+    const signature = (0, crypto_1.sign)(null, Buffer.from(payload, "utf8"), toPrivateKey(privateKey));
+    return [
+        LICENSE_KEY_PREFIX,
+        encodeBase64Url(payload),
+        encodeBase64Url(signature)
+    ].join(".");
+}
+/**
+ * SDK-side function.
+ *
+ * Verifies the signature using only the public key and returns the trusted
+ * Evaluation License payload.
+ */
+function verifyEvaluationLicenseKey(evaluationLicenseKey, publicKey) {
+    if (typeof evaluationLicenseKey !== "string" ||
+        evaluationLicenseKey.trim().length === 0) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_FORMAT", "Evaluation License Key is required.");
+    }
+    const parts = evaluationLicenseKey.split(".");
+    if (parts.length !== 3 ||
+        parts[0] !== LICENSE_KEY_PREFIX) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_FORMAT", "Evaluation License Key has an unsupported format.");
+    }
+    const payloadBuffer = decodeBase64Url(parts[1]);
+    const signatureBuffer = decodeBase64Url(parts[2]);
+    const signatureIsValid = (0, crypto_1.verify)(null, payloadBuffer, toPublicKey(publicKey), signatureBuffer);
+    if (!signatureIsValid) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_SIGNATURE", "Evaluation License Key signature verification failed.");
+    }
+    let parsed;
+    try {
+        parsed = JSON.parse(payloadBuffer.toString("utf8"));
+    }
+    catch {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_PAYLOAD", "Evaluation License Key payload is not valid JSON.");
+    }
+    assertEvaluationLicense(parsed);
+    const canonicalPayload = serializeLicenseForSigning(parsed);
+    if (canonicalPayload !==
+        payloadBuffer.toString("utf8")) {
+        throw new EGALicenseKeyError("EGA_LICENSE_KEY_PAYLOAD", "Evaluation License Key payload is not canonical.");
+    }
+    return parsed;
+}
