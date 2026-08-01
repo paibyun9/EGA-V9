@@ -1,4 +1,7 @@
 import {
+  buildActivationSuccessMessage
+} from "./activation-success-message";
+import {
   EGAEvaluationLicense
 } from "../license/types";
 

@@ -1,18 +1,20 @@
 {
   "name": "ega-v9",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "EGA V9 TypeScript SDK for replay, provenance, containment, and SCORP LOCK governance.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "scripts/postinstall-message.cjs"
   ],
   "scripts": {
     "build": "tsc && node scripts/generate-esm-wrapper.cjs && node scripts/prepare-cli.cjs",
     "test": "npm run build && node ../../scripts/testing/run-v1-test-suite.cjs",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "postinstall": "node scripts/postinstall-message.cjs"
   },
   "keywords": [
     "ai-agents",
