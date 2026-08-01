@@ -535,7 +535,21 @@ function createFileLicenseRegistry(
           null,
         expirationSentAt:
           null,
+        commercialRequestId:
+          null,
+        commercialRequestStatus:
+          null,
         commercialRequestedAt:
+          null,
+        commercialReviewedAt:
+          null,
+        commercialRejectionReason:
+          null,
+        commercialLicenseId:
+          null,
+        commercialIssuedAt:
+          null,
+        commercialExpiresAt:
           null,
         commercialActivatedAt:
           null,

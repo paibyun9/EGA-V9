@@ -98,6 +98,50 @@
     "updatedAt": {
       "type": "ISO-8601 string",
       "required": true
+    },
+    "commercialRequestId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "commercialRequestStatus": {
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        null
+      ]
+    },
+    "commercialReviewedAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "commercialRejectionReason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "commercialLicenseId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "commercialIssuedAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
+    },
+    "commercialExpiresAt": {
+      "type": [
+        "ISO-8601 string",
+        "null"
+      ]
     }
   },
   "rules": [
@@ -107,6 +151,10 @@
     "Only one lifecycle notification task may be queued for each milestone.",
     "All writes must be atomic.",
     "A missing or corrupt registry must fail closed for license issuance.",
-    "Status changes must update updatedAt."
+    "Status changes must update updatedAt.",
+    "Only one active Commercial request may exist for a License.",
+    "Commercial License metadata may be stored, but the signed Commercial License Key must not be stored.",
+    "Commercial approval must preserve the original company and work-email identity.",
+    "An approved Commercial License may have no expiration date."
   ]
 }

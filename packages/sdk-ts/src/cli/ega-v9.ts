@@ -14,6 +14,10 @@ import {
 } from "./register-command";
 
 import {
+  runUpgradeCommand
+} from "./upgrade-command";
+
+import {
   createLicenseApiClient
 } from "./license-api-client";
 
@@ -36,10 +40,12 @@ function printHelp(): void {
       "",
       "Usage:",
       "  ega-v9 register",
+      "  ega-v9 upgrade",
       "  ega-v9 --help",
       "",
       "Commands:",
-      "  register    Activate a 90-day Evaluation License"
+      "  register    Activate a 90-day Evaluation License",
+      "  upgrade     Request or activate a Commercial License"
     ].join("\n")
   );
 }
@@ -54,6 +60,18 @@ async function main(): Promise<void> {
     !command
   ) {
     printHelp();
+    return;
+  }
+
+  if (
+    command === "upgrade"
+  ) {
+    const exitCode =
+      await runUpgradeCommand();
+
+    process.exitCode =
+      exitCode;
+
     return;
   }
 

@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const promises_1 = require("readline/promises");
 const process_1 = require("process");
 const register_command_1 = require("./register-command");
+const upgrade_command_1 = require("./upgrade-command");
 const license_api_client_1 = require("./license-api-client");
 const license_key_1 = require("../license/license-key");
 const public_key_1 = require("../license/public-key");
@@ -14,10 +15,12 @@ function printHelp() {
         "",
         "Usage:",
         "  ega-v9 register",
+        "  ega-v9 upgrade",
         "  ega-v9 --help",
         "",
         "Commands:",
-        "  register    Activate a 90-day Evaluation License"
+        "  register    Activate a 90-day Evaluation License",
+        "  upgrade     Request or activate a Commercial License"
     ].join("\n"));
 }
 async function main() {
@@ -26,6 +29,12 @@ async function main() {
         command === "-h" ||
         !command) {
         printHelp();
+        return;
+    }
+    if (command === "upgrade") {
+        const exitCode = await (0, upgrade_command_1.runUpgradeCommand)();
+        process.exitCode =
+            exitCode;
         return;
     }
     if (command !== "register") {

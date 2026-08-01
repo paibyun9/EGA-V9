@@ -20,6 +20,18 @@ const {
 );
 
 const {
+  createCommercialUpgradeService
+} = require(
+  "./commercial-upgrade-service.cjs"
+);
+
+const {
+  createCommercialUpgradeHandler
+} = require(
+  "./commercial-upgrade-handler.cjs"
+);
+
+const {
   createFileCompanyUsageMeter
 } = require(
   "./company-usage-meter.cjs"
@@ -174,6 +186,32 @@ function createLicenseApiServer(options = {}) {
 
   registry.initialize();
 
+  const commercialUpgradeService =
+    privateKey
+      ? createCommercialUpgradeService({
+          registry,
+          privateKey,
+          publicKey:
+            require("node:crypto")
+              .createPublicKey(
+                privateKey
+              ),
+          nowFactory:
+            typeof now ===
+              "function"
+              ? now
+              : () => new Date()
+        })
+      : null;
+
+  const commercialUpgradeHandler =
+    commercialUpgradeService
+      ? createCommercialUpgradeHandler({
+          service:
+            commercialUpgradeService
+        })
+      : null;
+
   const usageMeter =
     options.usageMeter ??
     createFileCompanyUsageMeter({
@@ -224,6 +262,134 @@ function createLicenseApiServer(options = {}) {
               signingAvailable:
                 Boolean(privateKey)
             }
+          );
+
+          return;
+        }
+
+        if (
+          url.pathname ===
+          "/api/licenses/commercial/request"
+        ) {
+          if (
+            request.method !==
+              "POST"
+          ) {
+            response.setHeader(
+              "allow",
+              "POST"
+            );
+
+            sendJson(
+              response,
+              405,
+              {
+                error: {
+                  code:
+                    "EGA_COMMERCIAL_METHOD_NOT_ALLOWED",
+                  message:
+                    "Only POST is supported."
+                }
+              }
+            );
+
+            return;
+          }
+
+          if (
+            !commercialUpgradeHandler
+          ) {
+            sendJson(
+              response,
+              503,
+              {
+                error: {
+                  code:
+                    "EGA_COMMERCIAL_SERVICE_UNAVAILABLE",
+                  message:
+                    "Commercial Upgrade Service is unavailable."
+                }
+              }
+            );
+
+            return;
+          }
+
+          const result =
+            commercialUpgradeHandler
+              .requestUpgrade(
+                request
+              );
+
+          sendJson(
+            response,
+            result.created
+              ? 201
+              : 200,
+            result
+          );
+
+          return;
+        }
+
+        if (
+          url.pathname ===
+          "/api/licenses/commercial/status"
+        ) {
+          if (
+            request.method !==
+              "GET"
+          ) {
+            response.setHeader(
+              "allow",
+              "GET"
+            );
+
+            sendJson(
+              response,
+              405,
+              {
+                error: {
+                  code:
+                    "EGA_COMMERCIAL_METHOD_NOT_ALLOWED",
+                  message:
+                    "Only GET is supported."
+                }
+              }
+            );
+
+            return;
+          }
+
+          if (
+            !commercialUpgradeHandler
+          ) {
+            sendJson(
+              response,
+              503,
+              {
+                error: {
+                  code:
+                    "EGA_COMMERCIAL_SERVICE_UNAVAILABLE",
+                  message:
+                    "Commercial Upgrade Service is unavailable."
+                }
+              }
+            );
+
+            return;
+          }
+
+          const result =
+            commercialUpgradeHandler
+              .getStatus(
+                request
+              );
+
+          sendJson(
+            response,
+            200,
+            result
           );
 
           return;

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "name": "Commercial License Upgrade Flow V1",
+  "purpose": "Convert an authenticated EGA V9 Evaluation License into an approved Commercial License without storing private signing material or issued License Keys in the Registry.",
+  "flow": [
+    "The customer submits a Commercial License request using the installed Evaluation License Key.",
+    "The License Registry records the request as pending.",
+    "LCM reviews the request and commercial agreement outside the automated pricing system.",
+    "An authorized server-side command approves the request.",
+    "The Registry records Commercial License metadata but not the signed License Key.",
+    "The customer checks the request again using the existing Evaluation License Key.",
+    "The server regenerates and returns the signed Commercial License Key.",
+    "The SDK verifies and replaces the local Evaluation License Key.",
+    "Runtime License Admission subsequently admits the Commercial License."
+  ],
+  "requestStatuses": [
+    "pending",
+    "approved",
+    "rejected"
+  ],
+  "securityRules": [
+    "A valid signed Evaluation or Commercial License Key is required for customer request and status operations.",
+    "The Commercial License Key must never be stored in the Registry.",
+    "The private signing key must only exist in the License Service environment.",
+    "Commercial approval must not be exposed through an unauthenticated public endpoint.",
+    "Only the License owning the request may retrieve its status or Commercial License Key.",
+    "Commercial pricing and payment automation are outside V1."
+  ]
+}

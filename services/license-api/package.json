@@ -8,7 +8,8 @@
     "start": "node src/server.cjs",
     "test": "node --test test/*.test.cjs",
     "lifecycle:run": "node src/run-license-lifecycle.cjs",
-    "notifications:run": "node src/run-notification-worker.cjs"
+    "notifications:run": "node src/run-notification-worker.cjs",
+    "commercial:approve": "node src/run-commercial-approval.cjs"
   },
   "engines": {
     "node": ">=20"
