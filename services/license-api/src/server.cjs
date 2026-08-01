@@ -19,6 +19,18 @@ const {
   "./license-registry.cjs"
 );
 
+const {
+  createFileCompanyUsageMeter
+} = require(
+  "./company-usage-meter.cjs"
+);
+
+const {
+  createUsageEventHandler
+} = require(
+  "./usage-event-handler.cjs"
+);
+
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 8787;
 const MAX_BODY_BYTES = 16 * 1024;
@@ -162,6 +174,31 @@ function createLicenseApiServer(options = {}) {
 
   registry.initialize();
 
+  const usageMeter =
+    options.usageMeter ??
+    createFileCompanyUsageMeter({
+      aggregatePath:
+        options.usageAggregatePath,
+      eventPath:
+        options.usageEventPath
+    });
+
+  usageMeter.initialize();
+
+  const usageEventHandler =
+    privateKey
+      ? createUsageEventHandler({
+          registry,
+          usageMeter,
+          privateKey,
+          nowFactory:
+            typeof now ===
+              "function"
+              ? now
+              : () => new Date()
+        })
+      : null;
+
   return http.createServer(
     async (
       request,
@@ -186,6 +223,80 @@ function createLicenseApiServer(options = {}) {
                 "ega-v9-license-api",
               signingAvailable:
                 Boolean(privateKey)
+            }
+          );
+
+          return;
+        }
+
+        if (
+          url.pathname ===
+          "/api/usage/events"
+        ) {
+          if (
+            request.method !== "POST"
+          ) {
+            response.setHeader(
+              "allow",
+              "POST"
+            );
+
+            sendJson(
+              response,
+              405,
+              {
+                error: {
+                  code:
+                    "EGA_USAGE_METHOD_NOT_ALLOWED",
+                  message:
+                    "Only POST is supported."
+                }
+              }
+            );
+
+            return;
+          }
+
+          if (!usageEventHandler) {
+            sendJson(
+              response,
+              503,
+              {
+                error: {
+                  code:
+                    "EGA_USAGE_SERVICE_UNAVAILABLE",
+                  message:
+                    "Company Usage Meter is unavailable."
+                }
+              }
+            );
+
+            return;
+          }
+
+          const usageBody =
+            await readJsonBody(
+              request
+            );
+
+          const result =
+            usageEventHandler.record(
+              request,
+              usageBody
+            );
+
+          sendJson(
+            response,
+            result.created
+              ? 201
+              : 200,
+            {
+              status:
+                result.created
+                  ? "recorded"
+                  : "duplicate",
+              eventId:
+                result.eventId
             }
           );
 

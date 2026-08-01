@@ -20,3 +20,11 @@ data/license-registry.json
 services/license-api/data/license-notification-queue.json
 data/license-notification-queue.json
 *.license-notification-queue.json
+
+# EGA V9 Company Usage Meter runtime data
+services/license-api/data/company-usage-daily.json
+services/license-api/data/company-usage-events.jsonl
+data/company-usage-daily.json
+data/company-usage-events.jsonl
+*.company-usage-daily.json
+*.company-usage-events.jsonl

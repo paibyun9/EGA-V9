@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "name": "Company Usage Meter V1",
+  "purpose": "Measure company-level EGA V9 governed execution activity without calculating prices or collecting customer payloads.",
+  "attribution": {
+    "v1CompanyKey": "licenseId",
+    "companyNameSource": "License Registry",
+    "note": "V1 assumes one active commercial identity per License Registry record. A separate organizationId may be introduced later without changing the execution metrics."
+  },
+  "event": {
+    "required": [
+      "eventId",
+      "occurredAt",
+      "environment",
+      "riskLevel",
+      "executionResult",
+      "sdkVersion"
+    ],
+    "properties": {
+      "eventId": {
+        "type": "UUID string"
+      },
+      "occurredAt": {
+        "type": "ISO-8601 string"
+      },
+      "environment": {
+        "enum": [
+          "development",
+          "production"
+        ]
+      },
+      "riskLevel": {
+        "enum": [
+          "standard",
+          "high-risk"
+        ]
+      },
+      "executionResult": {
+        "enum": [
+          "allow",
+          "deny",
+          "contain"
+        ]
+      },
+      "sdkVersion": {
+        "type": "string"
+      }
+    }
+  },
+  "dailyAggregate": {
+    "dimensions": [
+      "licenseId",
+      "companyName",
+      "date"
+    ],
+    "metrics": [
+      "totalGovernedExecutions",
+      "standardExecutions",
+      "highRiskExecutions",
+      "allowCount",
+      "denyCount",
+      "containmentCount"
+    ]
+  },
+  "derivedMetrics": [
+    "highRiskPercentage"
+  ],
+  "prohibitedData": [
+    "prompt",
+    "toolArguments",
+    "transactionDetails",
+    "accountNumbers",
+    "cardNumbers",
+    "customerDocuments",
+    "customerPolicyText",
+    "executionPayload"
+  ],
+  "excludedFunctions": [
+    "priceCalculation",
+    "invoiceCalculation",
+    "planRecommendation",
+    "revenueForecast",
+    "industryPricingWeight"
+  ]
+}
