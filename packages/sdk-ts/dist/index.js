@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ega = exports.EGA = void 0;
+exports.evaluateRuntimeAdmission = exports.assertRuntimeLicenseAdmission = exports.EGARuntimeAdmissionError = exports.ega = exports.EGA = void 0;
 exports.verifyExecution = verifyExecution;
 exports.replay = replay;
 exports.provenance = provenance;
 exports.contain = contain;
+const runtime_admission_provider_1 = require("./license/runtime-admission-provider");
 const crypto_1 = require("crypto");
 class EGAInputValidationError extends TypeError {
     constructor(args) {
@@ -780,6 +781,7 @@ function stableStringify(input) {
     }).join(",")}}`;
 }
 function verifyExecution(input) {
+    (0, runtime_admission_provider_1.enforceRuntimeLicenseAdmission)();
     assertStandaloneInput(input, "verifyExecution");
     const ega = EGA.init();
     const replayRoot = ega.replayRoot(input);
@@ -1069,3 +1071,7 @@ function createGuard(options = {}) {
 exports.ega = Object.freeze({
     guard: createGuard
 });
+var runtime_admission_1 = require("./license/runtime-admission");
+Object.defineProperty(exports, "EGARuntimeAdmissionError", { enumerable: true, get: function () { return runtime_admission_1.EGARuntimeAdmissionError; } });
+Object.defineProperty(exports, "assertRuntimeLicenseAdmission", { enumerable: true, get: function () { return runtime_admission_1.assertRuntimeLicenseAdmission; } });
+Object.defineProperty(exports, "evaluateRuntimeAdmission", { enumerable: true, get: function () { return runtime_admission_1.evaluateRuntimeAdmission; } });

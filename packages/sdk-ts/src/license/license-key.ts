@@ -216,6 +216,164 @@ function assertEvaluationLicense(
   }
 }
 
+function assertCommercialLicense(
+  value: unknown
+): asserts value is EGALicense {
+  if (
+    typeof value !== "object" ||
+    value === null ||
+    Array.isArray(value)
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_PAYLOAD",
+      "Commercial License payload must be an object."
+    );
+  }
+
+  const license =
+    value as Record<string, unknown>;
+
+  if (
+    license.schemaVersion !== 1 ||
+    license.licenseKind !==
+      "commercial"
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_TYPE",
+      "Commercial License Key must contain a version 1 commercial license."
+    );
+  }
+
+  const requiredStringFields = [
+    "licenseId",
+    "contactName",
+    "companyName",
+    "workEmail",
+    "issuedAt"
+  ] as const;
+
+  for (
+    const field of
+    requiredStringFields
+  ) {
+    if (
+      typeof license[field] !==
+        "string" ||
+      license[field].trim().length ===
+        0
+    ) {
+      throw new EGALicenseKeyError(
+        "EGA_LICENSE_KEY_PAYLOAD",
+        `Commercial License payload requires a non-empty ${field}.`
+      );
+    }
+  }
+
+  const email =
+    String(license.workEmail);
+
+  if (
+    !email.includes("@") ||
+    email.startsWith("@") ||
+    email.endsWith("@")
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_PAYLOAD",
+      "Commercial License payload contains an invalid workEmail."
+    );
+  }
+
+  const issuedAt =
+    new Date(
+      String(license.issuedAt)
+    );
+
+  if (
+    Number.isNaN(
+      issuedAt.getTime()
+    )
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_PAYLOAD",
+      "Commercial License issuedAt must be a valid ISO-8601 date string."
+    );
+  }
+
+  if (
+    license.expiresAt !==
+      undefined
+  ) {
+    if (
+      typeof license.expiresAt !==
+        "string" ||
+      license.expiresAt.trim()
+        .length === 0
+    ) {
+      throw new EGALicenseKeyError(
+        "EGA_LICENSE_KEY_PAYLOAD",
+        "Commercial License expiresAt must be a valid non-empty ISO-8601 date string when provided."
+      );
+    }
+
+    const expiresAt =
+      new Date(
+        license.expiresAt
+      );
+
+    if (
+      Number.isNaN(
+        expiresAt.getTime()
+      ) ||
+      expiresAt.getTime() <=
+        issuedAt.getTime()
+    ) {
+      throw new EGALicenseKeyError(
+        "EGA_LICENSE_KEY_PAYLOAD",
+        "Commercial License expiresAt must be later than issuedAt."
+      );
+    }
+  }
+}
+
+function assertLicense(
+  value: unknown
+): asserts value is EGALicense {
+  if (
+    typeof value !== "object" ||
+    value === null ||
+    Array.isArray(value)
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_PAYLOAD",
+      "License payload must be an object."
+    );
+  }
+
+  const license =
+    value as Record<string, unknown>;
+
+  if (
+    license.licenseKind ===
+      "evaluation"
+  ) {
+    assertEvaluationLicense(value);
+    return;
+  }
+
+  if (
+    license.licenseKind ===
+      "commercial"
+  ) {
+    assertCommercialLicense(value);
+    return;
+  }
+
+  throw new EGALicenseKeyError(
+    "EGA_LICENSE_KEY_TYPE",
+    "License Key contains an unsupported license type."
+  );
+}
+
 /**
  * Server-side function.
  *
@@ -322,6 +480,97 @@ export function verifyEvaluationLicenseKey(
     throw new EGALicenseKeyError(
       "EGA_LICENSE_KEY_PAYLOAD",
       "Evaluation License Key payload is not canonical."
+    );
+  }
+
+  return parsed;
+}
+
+/**
+ * Verifies a signed EGA V9 License Key and returns either
+ * an Evaluation License or a Commercial License.
+ */
+export function verifyLicenseKey(
+  licenseKey: string,
+  publicKey: string | Buffer | KeyObject
+): EGALicense {
+  if (
+    typeof licenseKey !== "string" ||
+    licenseKey.trim().length === 0
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_FORMAT",
+      "EGA V9 License Key is required."
+    );
+  }
+
+  const parts =
+    licenseKey.split(".");
+
+  if (
+    parts.length !== 3 ||
+    parts[0] !== LICENSE_KEY_PREFIX
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_FORMAT",
+      "EGA V9 License Key has an unsupported format."
+    );
+  }
+
+  const payloadBuffer =
+    decodeBase64Url(parts[1]);
+
+  const signatureBuffer =
+    decodeBase64Url(parts[2]);
+
+  const signatureIsValid =
+    verify(
+      null,
+      payloadBuffer,
+      toPublicKey(publicKey),
+      signatureBuffer
+    );
+
+  if (!signatureIsValid) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_SIGNATURE",
+      "EGA V9 License Key signature verification failed."
+    );
+  }
+
+  let parsed:
+    unknown;
+
+  try {
+    parsed =
+      JSON.parse(
+        payloadBuffer.toString(
+          "utf8"
+        )
+      );
+  } catch {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_PAYLOAD",
+      "EGA V9 License Key payload is not valid JSON."
+    );
+  }
+
+  assertLicense(parsed);
+
+  const canonicalPayload =
+    serializeLicenseForSigning(
+      parsed
+    );
+
+  if (
+    canonicalPayload !==
+    payloadBuffer.toString(
+      "utf8"
+    )
+  ) {
+    throw new EGALicenseKeyError(
+      "EGA_LICENSE_KEY_PAYLOAD",
+      "EGA V9 License Key payload is not canonical."
     );
   }
 

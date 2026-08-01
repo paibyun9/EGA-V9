@@ -25,3 +25,8 @@ export declare function issueEvaluationLicenseKey(license: EGAEvaluationLicense,
  * Evaluation License payload.
  */
 export declare function verifyEvaluationLicenseKey(evaluationLicenseKey: string, publicKey: string | Buffer | KeyObject): EGAEvaluationLicense;
+/**
+ * Verifies a signed EGA V9 License Key and returns either
+ * an Evaluation License or a Commercial License.
+ */
+export declare function verifyLicenseKey(licenseKey: string, publicKey: string | Buffer | KeyObject): EGALicense;

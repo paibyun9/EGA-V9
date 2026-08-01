@@ -185,4 +185,5 @@ declare function createGuard(options?: EGAGuardOptions): (req: EGAGuardRequest, 
 export declare const ega: Readonly<{
     guard: typeof createGuard;
 }>;
-export {};
+export { EGARuntimeAdmissionError, assertRuntimeLicenseAdmission, evaluateRuntimeAdmission } from "./license/runtime-admission";
+export type { EGARuntimeAdmissionDecision, EGARuntimeAdmissionDependencies, EGARuntimeAdmissionReason } from "./license/runtime-admission";

@@ -1,3 +1,7 @@
+import {
+  enforceRuntimeLicenseAdmission
+} from "./license/runtime-admission-provider";
+
 import { createHash, randomUUID } from "crypto";
 
 export type EGATrustLevel = "supported" | "verified";
@@ -1201,6 +1205,8 @@ function stableStringify(input: unknown): string {
 }
 
 export function verifyExecution(input: unknown): EGARequestContext {
+  enforceRuntimeLicenseAdmission();
+
   assertStandaloneInput(
     input,
     "verifyExecution"
@@ -1641,3 +1647,15 @@ function createGuard(options: EGAGuardOptions = {}) {
 export const ega = Object.freeze({
   guard: createGuard
 });
+
+export {
+  EGARuntimeAdmissionError,
+  assertRuntimeLicenseAdmission,
+  evaluateRuntimeAdmission
+} from "./license/runtime-admission";
+
+export type {
+  EGARuntimeAdmissionDecision,
+  EGARuntimeAdmissionDependencies,
+  EGARuntimeAdmissionReason
+} from "./license/runtime-admission";

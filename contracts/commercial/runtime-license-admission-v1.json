@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "name": "Runtime License Admission V1",
+  "purpose": "Prevent EGA V9 governed execution unless a valid active Evaluation or Commercial License is admitted.",
+  "admissionFlow": [
+    "Read the locally stored License Key automatically.",
+    "Load the official EGA V9 License Public Key.",
+    "Verify the License Key signature and payload.",
+    "Evaluate the License against the current runtime clock.",
+    "Allow an active Evaluation License.",
+    "Deny an expired Evaluation License at Day 90 or later.",
+    "Allow an active Commercial License.",
+    "Fail closed for missing, corrupt, forged, unsupported, or invalid licenses."
+  ],
+  "allowedDecisions": [
+    "allow",
+    "deny"
+  ],
+  "allowConditions": [
+    "evaluation-active",
+    "commercial-active"
+  ],
+  "denyConditions": [
+    "license-missing",
+    "public-key-unavailable",
+    "license-verification-failed",
+    "evaluation-expired",
+    "license-invalid",
+    "license-unsupported"
+  ],
+  "securityRules": [
+    "Runtime admission must execute before governed execution begins.",
+    "A missing License Key must never silently enable execution.",
+    "An invalid signature must never fall back to Evaluation mode.",
+    "The runtime clock must be injectable only for tests.",
+    "Customer prompts, tool arguments, and execution payloads must not be included in admission errors.",
+    "Metering failure and License Admission failure are separate concerns."
+  ]
+}
