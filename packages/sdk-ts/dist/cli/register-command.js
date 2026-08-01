@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EGARegisterCommandError = void 0;
 exports.runRegisterCommand = runRegisterCommand;
+const activation_success_message_1 = require("./activation-success-message");
 class EGARegisterCommandError extends Error {
     constructor(code, message) {
         super(`[${code}] ${message}`);
@@ -36,16 +37,6 @@ function formatDate(value) {
     return date
         .toISOString()
         .slice(0, 10);
-}
-function calculateDaysRemaining(expiresAt, now = new Date()) {
-    const expirationDate = new Date(expiresAt);
-    if (Number.isNaN(expirationDate.getTime())) {
-        return 0;
-    }
-    const dayMilliseconds = 24 * 60 * 60 * 1000;
-    return Math.max(0, Math.ceil((expirationDate.getTime() -
-        now.getTime()) /
-        dayMilliseconds));
 }
 async function runRegisterCommand(dependencies) {
     dependencies.write("");
@@ -87,16 +78,13 @@ async function runRegisterCommand(dependencies) {
         overwrite: dependencies.overwrite ??
             false
     });
-    dependencies.write("");
-    dependencies.write("✓ Evaluation License Activated");
-    dependencies.write("");
-    dependencies.write(`Issued: ${formatDate(license.issuedAt)}`);
-    dependencies.write(`Expires: ${formatDate(license.expiresAt)}`);
-    dependencies.write(`Days Remaining: ${calculateDaysRemaining(license.expiresAt)}`);
-    dependencies.write("");
-    dependencies.write(`License stored: ${licensePath}`);
-    dependencies.write("");
-    dependencies.write("Happy Building.");
+    dependencies.write((0, activation_success_message_1.buildActivationSuccessMessage)({
+        contactName,
+        companyName,
+        workEmail,
+        issuedAt: formatDate(license.issuedAt),
+        expiresAt: formatDate(license.expiresAt)
+    }));
     return {
         license,
         licensePath

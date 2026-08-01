@@ -135,36 +135,6 @@ function formatDate(
     .slice(0, 10);
 }
 
-function calculateDaysRemaining(
-  expiresAt: string,
-  now: Date = new Date()
-): number {
-  const expirationDate =
-    new Date(expiresAt);
-
-  if (
-    Number.isNaN(
-      expirationDate.getTime()
-    )
-  ) {
-    return 0;
-  }
-
-  const dayMilliseconds =
-    24 * 60 * 60 * 1000;
-
-  return Math.max(
-    0,
-    Math.ceil(
-      (
-        expirationDate.getTime() -
-        now.getTime()
-      ) /
-      dayMilliseconds
-    )
-  );
-}
-
 export async function runRegisterCommand(
   dependencies: EGARegisterCommandDependencies
 ): Promise<EGARegisterCommandResult> {
@@ -257,33 +227,20 @@ export async function runRegisterCommand(
         }
       );
 
-  dependencies.write("");
   dependencies.write(
-    "✓ Evaluation License Activated"
-  );
-  dependencies.write("");
-  dependencies.write(
-    `Issued: ${formatDate(
-      license.issuedAt
-    )}`
-  );
-  dependencies.write(
-    `Expires: ${formatDate(
-      license.expiresAt
-    )}`
-  );
-  dependencies.write(
-    `Days Remaining: ${calculateDaysRemaining(
-      license.expiresAt
-    )}`
-  );
-  dependencies.write("");
-  dependencies.write(
-    `License stored: ${licensePath}`
-  );
-  dependencies.write("");
-  dependencies.write(
-    "Happy Building."
+    buildActivationSuccessMessage({
+      contactName,
+      companyName,
+      workEmail,
+      issuedAt:
+        formatDate(
+          license.issuedAt
+        ),
+      expiresAt:
+        formatDate(
+          license.expiresAt
+        )
+    })
   );
 
   return {

@@ -155,19 +155,43 @@ test(
         "string"
       );
 
-      assert.equal(
-        messages.includes(
-          "✓ Evaluation License Activated"
-        ),
-        true
-      );
+      const renderedMessages =
+        messages.join("\n");
 
-      assert.equal(
-        messages.includes(
-          "Happy Building."
-        ),
-        true
-      );
+      for (const requiredText of [
+        "✓ Evaluation License Activated",
+        "Contact Name: Test User",
+        "Company Name: Test Company",
+        "Work Email:   test@example.com",
+        "✓ EGA V9 is now activated.",
+        "You can start using Runtime Governance immediately.",
+        "Need help or want to collaborate?",
+        "https://github.com/paibyun9/EGA-V9/issues",
+        "https://ega-v9.vercel.app/",
+        "https://lcm3.com/"
+      ]) {
+        assert.equal(
+          renderedMessages.includes(
+            requiredText
+          ),
+          true,
+          `Missing activation output: ${requiredText}`
+        );
+      }
+
+      for (const removedText of [
+        "Days Remaining:",
+        "License stored:",
+        "Happy Building."
+      ]) {
+        assert.equal(
+          renderedMessages.includes(
+            removedText
+          ),
+          false,
+          `Old activation output remains: ${removedText}`
+        );
+      }
     } finally {
       rmSync(
         directoryPath,
