@@ -103,9 +103,30 @@ Get EGA V9 running in less than one minute.
 npm install ega-v9
 ```
 
+### 2). Activate your Evaluation License
+
+After the installation completes, run:
+```bash
+npx ega-v9 register
+```
+
+This activates your free 90-day Evaluation License.
+```bash
+You will be prompted for:
+
+Contact Name
+Company Name
+Work Email
+
+After successful activation, you will see:
+
+✓ Evaluation License Activated
+✓ EGA V9 is now activated.
+```
+
 ---
 
-### 2). Create a Quick Start Example
+### 3). Create a Quick Start Example
 
 Create a file named `quick-start.cjs`, paste the following code, and save it.
 
@@ -134,13 +155,13 @@ console.log({
 });
 ```
 
-### 3). Run
+### 4). Run
 
 ```bash
 node quick-start.cjs
 ```
 
-### 4). Expected Output
+### 5). Expected Output
 
 ```json
 {
