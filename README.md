@@ -183,7 +183,7 @@ node quick-start.cjs
 | npm install | ✅ Verified |
 | npm audit | ✅ Clean |
 
-*Verified during the official v1.0.1 clean-consumer release validation.
+*This step is required only once per machine.*
 
 ------------------------------------------------------------------------
 
