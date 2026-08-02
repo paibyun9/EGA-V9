@@ -174,6 +174,7 @@
 
     <section class="panel">
       <h2>① Replay Consistency</h2>
+
       <p class="subtitle">
         Run the same workflow twice. EGA produces the same deterministic replay root.
       </p>
@@ -188,6 +189,7 @@
           <div class="label">Replay Root #1</div>
           <div id="hash1" class="hash">Not executed</div>
         </div>
+
         <div class="box">
           <div class="label">Replay Root #2</div>
           <div id="hash2" class="hash">Not executed</div>
@@ -201,6 +203,7 @@
 
     <section class="panel">
       <h2>② DAG Divergence Detection</h2>
+
       <p class="subtitle">
         Compare a normal workflow with a mutated workflow. If the execution path changes,
         EGA detects the mismatch and blocks propagation.
@@ -229,6 +232,7 @@
           <div class="label">Normal DAG Root</div>
           <div id="normalHash" class="hash">Not executed</div>
         </div>
+
         <div class="box">
           <div class="label">Mutated DAG Root</div>
           <div id="mutatedHash" class="hash">Not executed</div>
@@ -241,18 +245,34 @@
     </section>
 
     <section class="panel">
-      <h2>③ 3-Line Integration</h2>
+      <h2>③ Install, Activate, and Verify</h2>
+
       <p class="subtitle">
-        EGA V9 can be attached to an existing workflow with a minimal integration path.
-        Install the SDK, import governance, and verify a workflow in minutes.
+        EGA V9 can be attached to an existing workflow through a minimal integration path.
+        Install the SDK, activate your free 90-day Evaluation License, and verify a workflow
+        in minutes.
       </p>
 
       <div class="grid">
         <div>
-          <h3>Install</h3>
+          <h3>1. Install</h3>
+
           <pre>npm install ega-v9</pre>
 
-          <h3>Use in 3 Lines</h3>
+          <h3>2. Activate</h3>
+
+          <pre>npx ega-v9 register</pre>
+
+          <p class="subtitle">
+            Activate your free 90-day Evaluation License.
+            This step is required only once per machine.
+          </p>
+
+          <pre>✓ Evaluation License Activated
+✓ EGA V9 is now activated.</pre>
+
+          <h3>3. Use in 3 Lines</h3>
+
           <pre>import { verifyExecution } from "ega-v9";
 
 const workflow = [
@@ -266,6 +286,7 @@ const result = verifyExecution(workflow);</pre>
 
         <div>
           <h3>Expected Output</h3>
+
           <pre>{
   "status": "verified",
   "trustLevel": "supported",
@@ -283,15 +304,31 @@ const result = verifyExecution(workflow);</pre>
 }</pre>
 
           <div class="status verified" style="display:block;">
-            ✓ READY IN MINUTES — Install, import, and verify an autonomous workflow.
+            ✓ READY IN MINUTES — Install, activate, and verify an autonomous workflow.
           </div>
         </div>
       </div>
     </section>
 
     <div class="footer">
-      GitHub: <a href="https://github.com/paibyun9/EGA-V9" target="_blank">paibyun9/EGA-V9</a>
-      · npm: <a href="https://www.npmjs.com/package/ega-v9" target="_blank">ega-v9</a>
+      GitHub:
+      <a
+        href="https://github.com/paibyun9/EGA-V9"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        paibyun9/EGA-V9
+      </a>
+
+      · npm:
+      <a
+        href="https://www.npmjs.com/package/ega-v9"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ega-v9
+      </a>
+
       · Proof, not promise.
     </div>
   </main>
@@ -300,126 +337,299 @@ const result = verifyExecution(workflow);</pre>
     const workflow = {
       workflowId: "purchase-demo-001",
       steps: [
-        { step: 1, action: "search_product", item: "laptop" },
-        { step: 2, action: "select_product", quantity: 1 },
-        { step: 3, action: "checkout_request", approved: true }
+        {
+          step: 1,
+          action: "search_product",
+          item: "laptop"
+        },
+        {
+          step: 2,
+          action: "select_product",
+          quantity: 1
+        },
+        {
+          step: 3,
+          action: "checkout_request",
+          approved: true
+        }
       ]
     };
 
     const normalWorkflow = {
       workflowId: "purchase-demo-001",
       dag: [
-        { id: "A", action: "search_product", next: "B" },
-        { id: "B", action: "select_product", next: "C" },
-        { id: "C", action: "checkout_request", next: null }
+        {
+          id: "A",
+          action: "search_product",
+          next: "B"
+        },
+        {
+          id: "B",
+          action: "select_product",
+          next: "C"
+        },
+        {
+          id: "C",
+          action: "checkout_request",
+          next: null
+        }
       ]
     };
 
-    let currentMutatedWorkflow = structuredClone(normalWorkflow);
+    let currentMutatedWorkflow =
+      structuredClone(normalWorkflow);
 
     document.getElementById("workflow").textContent =
-      JSON.stringify(workflow, null, 2);
+      JSON.stringify(
+        workflow,
+        null,
+        2
+      );
 
     function renderWorkflows() {
       document.getElementById("normalWorkflow").textContent =
-        JSON.stringify(normalWorkflow, null, 2);
+        JSON.stringify(
+          normalWorkflow,
+          null,
+          2
+        );
 
       document.getElementById("mutatedWorkflow").textContent =
-        JSON.stringify(currentMutatedWorkflow, null, 2);
+        JSON.stringify(
+          currentMutatedWorkflow,
+          null,
+          2
+        );
 
-      renderGraph("normalGraph", normalWorkflow.dag);
-      renderGraph("mutatedGraph", currentMutatedWorkflow.dag);
+      renderGraph(
+        "normalGraph",
+        normalWorkflow.dag
+      );
+
+      renderGraph(
+        "mutatedGraph",
+        currentMutatedWorkflow.dag
+      );
     }
 
     function renderGraph(id, dag) {
-      const el = document.getElementById(id);
-      el.innerHTML = "";
+      const element =
+        document.getElementById(id);
+
+      element.innerHTML = "";
 
       dag.forEach((node, index) => {
-        const nodeEl = document.createElement("div");
-        nodeEl.className = "node" + (node.action.includes("unauthorized") ? " bad" : "");
-        nodeEl.textContent = node.action;
-        el.appendChild(nodeEl);
+        const nodeElement =
+          document.createElement("div");
+
+        nodeElement.className =
+          "node" +
+          (
+            node.action.includes("unauthorized")
+              ? " bad"
+              : ""
+          );
+
+        nodeElement.textContent =
+          node.action;
+
+        element.appendChild(
+          nodeElement
+        );
 
         if (index < dag.length - 1) {
-          const arrow = document.createElement("span");
-          arrow.className = "arrow";
-          arrow.textContent = "→";
-          el.appendChild(arrow);
+          const arrow =
+            document.createElement("span");
+
+          arrow.className =
+            "arrow";
+
+          arrow.textContent =
+            "→";
+
+          element.appendChild(
+            arrow
+          );
         }
       });
     }
 
     function stableStringify(input) {
-      if (input === null || typeof input !== "object") {
+      if (
+        input === null ||
+        typeof input !== "object"
+      ) {
         return JSON.stringify(input);
       }
 
       if (Array.isArray(input)) {
-        return "[" + input.map(stableStringify).join(",") + "]";
+        return (
+          "[" +
+          input
+            .map(stableStringify)
+            .join(",") +
+          "]"
+        );
       }
 
-      return "{" + Object.keys(input).sort().map(key => {
-        return JSON.stringify(key) + ":" + stableStringify(input[key]);
-      }).join(",") + "}";
+      return (
+        "{" +
+        Object
+          .keys(input)
+          .sort()
+          .map(key => {
+            return (
+              JSON.stringify(key) +
+              ":" +
+              stableStringify(
+                input[key]
+              )
+            );
+          })
+          .join(",") +
+        "}"
+      );
     }
 
     async function sha256(text) {
-      const encoded = new TextEncoder().encode(text);
-      const buffer = await crypto.subtle.digest("SHA-256", encoded);
-      return Array.from(new Uint8Array(buffer))
-        .map(b => b.toString(16).padStart(2, "0"))
+      const encoded =
+        new TextEncoder()
+          .encode(text);
+
+      const buffer =
+        await crypto.subtle.digest(
+          "SHA-256",
+          encoded
+        );
+
+      return Array
+        .from(
+          new Uint8Array(buffer)
+        )
+        .map(byte =>
+          byte
+            .toString(16)
+            .padStart(2, "0")
+        )
         .join("");
     }
 
     async function replayRoot(input) {
-      return sha256(stableStringify(input));
+      return sha256(
+        stableStringify(input)
+      );
     }
 
     async function runReplay() {
-      const hashA = await replayRoot(workflow);
-      const hashB = await replayRoot(workflow);
+      const hashA =
+        await replayRoot(workflow);
 
-      document.getElementById("hash1").textContent = hashA;
-      document.getElementById("hash2").textContent = hashB;
+      const hashB =
+        await replayRoot(workflow);
+
+      document
+        .getElementById("hash1")
+        .textContent = hashA;
+
+      document
+        .getElementById("hash2")
+        .textContent = hashB;
 
       if (hashA === hashB) {
-        document.getElementById("verified").style.display = "block";
+        document
+          .getElementById("verified")
+          .style
+          .display = "block";
       }
     }
 
     function resetReplay() {
-      document.getElementById("hash1").textContent = "Not executed";
-      document.getElementById("hash2").textContent = "Not executed";
-      document.getElementById("verified").style.display = "none";
+      document
+        .getElementById("hash1")
+        .textContent = "Not executed";
+
+      document
+        .getElementById("hash2")
+        .textContent = "Not executed";
+
+      document
+        .getElementById("verified")
+        .style
+        .display = "none";
     }
 
     async function runDivergence() {
-      const normalHash = await replayRoot(normalWorkflow);
-      const mutatedHash = await replayRoot(currentMutatedWorkflow);
+      const normalHash =
+        await replayRoot(
+          normalWorkflow
+        );
 
-      document.getElementById("normalHash").textContent = normalHash;
-      document.getElementById("mutatedHash").textContent = mutatedHash;
+      const mutatedHash =
+        await replayRoot(
+          currentMutatedWorkflow
+        );
 
-      const diverged = normalHash !== mutatedHash;
-      document.getElementById("divergenceStatus").style.display =
-        diverged ? "block" : "none";
+      document
+        .getElementById("normalHash")
+        .textContent = normalHash;
+
+      document
+        .getElementById("mutatedHash")
+        .textContent = mutatedHash;
+
+      const diverged =
+        normalHash !== mutatedHash;
+
+      document
+        .getElementById("divergenceStatus")
+        .style
+        .display =
+          diverged
+            ? "block"
+            : "none";
     }
 
     function clearDivergenceResult() {
-      document.getElementById("normalHash").textContent = "Not executed";
-      document.getElementById("mutatedHash").textContent = "Not executed";
-      document.getElementById("divergenceStatus").style.display = "none";
+      document
+        .getElementById("normalHash")
+        .textContent = "Not executed";
+
+      document
+        .getElementById("mutatedHash")
+        .textContent = "Not executed";
+
+      document
+        .getElementById("divergenceStatus")
+        .style
+        .display = "none";
     }
 
     function mutateWorkflow() {
       currentMutatedWorkflow = {
-        workflowId: "purchase-demo-001",
+        workflowId:
+          "purchase-demo-001",
+
         dag: [
-          { id: "A", action: "search_product", next: "B" },
-          { id: "B", action: "select_product", next: "X" },
-          { id: "X", action: "unauthorized_tool_call", next: "C" },
-          { id: "C", action: "checkout_request", next: null }
+          {
+            id: "A",
+            action: "search_product",
+            next: "B"
+          },
+          {
+            id: "B",
+            action: "select_product",
+            next: "X"
+          },
+          {
+            id: "X",
+            action: "unauthorized_tool_call",
+            next: "C"
+          },
+          {
+            id: "C",
+            action: "checkout_request",
+            next: null
+          }
         ]
       };
 
@@ -429,7 +639,9 @@ const result = verifyExecution(workflow);</pre>
 
     function resetDivergence() {
       currentMutatedWorkflow =
-        structuredClone(normalWorkflow);
+        structuredClone(
+          normalWorkflow
+        );
 
       renderWorkflows();
       clearDivergenceResult();
