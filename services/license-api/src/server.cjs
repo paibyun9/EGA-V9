@@ -3,7 +3,8 @@
 const http = require("node:http");
 
 const {
-  createPrivateKey
+  createPrivateKey,
+  timingSafeEqual
 } = require("node:crypto");
 
 const {
@@ -70,6 +71,114 @@ function sendJson(
   );
 
   response.end(payload);
+}
+
+function readBearerToken(
+  request
+) {
+  const authorization =
+    String(
+      request.headers
+        .authorization ?? ""
+    );
+
+  const match =
+    /^Bearer\s+(.+)$/i.exec(
+      authorization
+    );
+
+  return match
+    ? match[1].trim()
+    : "";
+}
+
+function secureTokenEquals(
+  providedToken,
+  expectedToken
+) {
+  if (
+    typeof providedToken !== "string" ||
+    typeof expectedToken !== "string" ||
+    providedToken.length === 0 ||
+    expectedToken.length === 0
+  ) {
+    return false;
+  }
+
+  const provided =
+    Buffer.from(
+      providedToken,
+      "utf8"
+    );
+
+  const expected =
+    Buffer.from(
+      expectedToken,
+      "utf8"
+    );
+
+  if (
+    provided.length !==
+    expected.length
+  ) {
+    return false;
+  }
+
+  return timingSafeEqual(
+    provided,
+    expected
+  );
+}
+
+function loadInternalRegistryReadToken(
+  explicitToken
+) {
+  const token =
+    explicitToken ??
+    process.env
+      .EGA_V9_LICENSE_INTERNAL_READ_TOKEN;
+
+  if (
+    typeof token !== "string" ||
+    token.trim().length < 32
+  ) {
+    return null;
+  }
+
+  return token.trim();
+}
+
+function serializeInternalRegistryRecord(
+  record
+) {
+  return {
+    licenseId:
+      record.licenseId,
+
+    contactName:
+      record.contactName,
+
+    companyName:
+      record.companyName,
+
+    workEmail:
+      record.workEmail,
+
+    issuedAt:
+      record.issuedAt,
+
+    expiresAt:
+      record.expiresAt,
+
+    status:
+      record.status,
+
+    createdAt:
+      record.createdAt,
+
+    updatedAt:
+      record.updatedAt
+  };
 }
 
 function readJsonBody(request) {
@@ -176,6 +285,11 @@ function createLicenseApiServer(options = {}) {
 
   const licenseIdFactory =
     options.licenseIdFactory;
+
+  const internalRegistryReadToken =
+    loadInternalRegistryReadToken(
+      options.internalRegistryReadToken
+    );
 
   const registry =
     options.registry ??
@@ -463,6 +577,109 @@ function createLicenseApiServer(options = {}) {
                   : "duplicate",
               eventId:
                 result.eventId
+            }
+          );
+
+          return;
+        }
+
+        if (
+          url.pathname ===
+          "/api/internal/license-registry/records"
+        ) {
+          if (
+            request.method !== "GET"
+          ) {
+            response.setHeader(
+              "allow",
+              "GET"
+            );
+
+            sendJson(
+              response,
+              405,
+              {
+                error: {
+                  code:
+                    "EGA_INTERNAL_REGISTRY_METHOD_NOT_ALLOWED",
+                  message:
+                    "Only GET is supported."
+                }
+              }
+            );
+
+            return;
+          }
+
+          if (
+            !internalRegistryReadToken
+          ) {
+            sendJson(
+              response,
+              503,
+              {
+                error: {
+                  code:
+                    "EGA_INTERNAL_REGISTRY_UNAVAILABLE",
+                  message:
+                    "Internal License Registry access is unavailable."
+                }
+              }
+            );
+
+            return;
+          }
+
+          const providedToken =
+            readBearerToken(
+              request
+            );
+
+          if (
+            !secureTokenEquals(
+              providedToken,
+              internalRegistryReadToken
+            )
+          ) {
+            response.setHeader(
+              "www-authenticate",
+              'Bearer realm="ega-v9-internal-registry"'
+            );
+
+            sendJson(
+              response,
+              401,
+              {
+                error: {
+                  code:
+                    "EGA_INTERNAL_REGISTRY_UNAUTHORIZED",
+                  message:
+                    "Valid internal authorization is required."
+                }
+              }
+            );
+
+            return;
+          }
+
+          const records =
+            registry
+              .listRecords()
+              .map(
+                serializeInternalRegistryRecord
+              );
+
+          sendJson(
+            response,
+            200,
+            {
+              schemaVersion: 1,
+              count:
+                records.length,
+              records,
+              generatedAt:
+                new Date()
+                  .toISOString()
             }
           );
 
