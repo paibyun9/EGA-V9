@@ -416,6 +416,41 @@ Based on your evaluation,
 
 **What would have happened without EGA V9?**
 
+### Illustrative Scene: What Changes with EGA V9
+
+This is an illustrative example only.  
+Your actual company policies will differ.  
+What matters is the interception point and the evidence.
+
+**Without EGA V9**
+
+```text
+Refund Request
+  → AI Agent
+  → Refund API
+The refund can be executed even if approval or policy checks are missing or bypassed.
+With EGA V9
+textRefund Request
+  → AI Agent
+  → [ EGA V9 Runtime Governance ]
+       ├─ Valid workflow   → Refund API (PASS + evidence)
+       └─ Invalid workflow → Containment (execution blocked + evidence)
+EGA V9 sits immediately before tool execution.
+If a policy or integrity violation is detected on the current request, the workflow is fail-closed and does not reach the Refund API.
+Example containment evidence (simplified)
+JSON{
+  "decision": "BLOCK",
+  "reason": "policy_violation",
+  "containment": true,
+  "executionAllowed": false
+}
+In short:
+EGA V9 does not replace your agent or your policies.
+It enforces them at the moment of execution and records deterministic evidence when it blocks.
+Scope note:
+Containment is currently enforced per-request, for the duration a policy or integrity violation is actively detected.
+Persistent, cross-request quarantine of a flagged execution identity/capability across subsequent clean-looking attempts is on the roadmap and is not yet enforced by the current runtime.
+
 ------------------------------------------------------------------------
 
 ## 9. Contact and Collaboration
