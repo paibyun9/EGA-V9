@@ -443,7 +443,8 @@ Refund Request
 
 EGA V9 sits immediately before tool execution.
 If a policy or integrity violation is detected on the current request, the workflow is fail-closed and does not reach the Refund API.
-Example containment evidence (simplified)
+
+**Example containment evidence (simplified)**
 
 ```text
 JSON{
