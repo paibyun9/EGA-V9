@@ -363,6 +363,11 @@ Refund Request → Agent → Manager Approval → [ EGA V9 ] → Refund API → 
 
 EGA V9 permits valid workflows while preserving execution, policy, and verification evidence for later review.
 
+**Scope note:**
+
+Containment is currently enforced per-request, for the duration a policy or integrity violation is actively detected.
+Persistent, cross-request quarantine of a flagged execution identity/capability across subsequent clean-looking attempts is on the roadmap and is not yet enforced by the current runtime.
+
 ---
 
 ### Step 4). Deployment Decision
@@ -458,11 +463,6 @@ JSON{
 
 EGA V9 does not replace your agent or your policies.
 It enforces them at the moment of execution and records deterministic evidence when it blocks.
-
-**Scope note:**
-
-Containment is currently enforced per-request, for the duration a policy or integrity violation is actively detected.
-Persistent, cross-request quarantine of a flagged execution identity/capability across subsequent clean-looking attempts is on the roadmap and is not yet enforced by the current runtime.
 
 ------------------------------------------------------------------------
 
