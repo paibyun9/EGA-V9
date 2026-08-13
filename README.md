@@ -444,13 +444,15 @@ Refund Request
 EGA V9 sits immediately before tool execution.
 If a policy or integrity violation is detected on the current request, the workflow is fail-closed and does not reach the Refund API.
 Example containment evidence (simplified)
+
+```text
 JSON{
   "decision": "BLOCK",
   "reason": "policy_violation",
   "containment": true,
   "executionAllowed": false
 }
-
+```
 **In short:**
 
 EGA V9 does not replace your agent or your policies.
