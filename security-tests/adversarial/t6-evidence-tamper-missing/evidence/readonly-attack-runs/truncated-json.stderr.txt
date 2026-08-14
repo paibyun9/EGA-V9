@@ -1,0 +1,14 @@
+<anonymous_script>:1
+{"schemaVersion":"1.0.0","finalStatus":"PASS",
+
+SyntaxError: Expected double-quoted property name in JSON at position 46
+    at JSON.parse (<anonymous>)
+    at Object.<anonymous> (/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/read-only-fail-closed-gate.cjs:17:23)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49
+
+Node.js v20.20.2

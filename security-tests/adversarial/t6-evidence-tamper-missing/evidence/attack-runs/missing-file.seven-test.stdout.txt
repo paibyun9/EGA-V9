@@ -1,0 +1,48 @@
+EGA V9@1.0.1
+Seven-Test Verification Baseline
+================================
+
+PASS      Tool Order Mutation
+  Evidence: publication/evidence/tool-order/tool-order-mutation-evidence.json
+  Reason:   Explicit finalStatus=PASS and no effective negative signals found.
+  SHA-256:  9f4918a3db21d3ac43107e9f2f29beb777763c9eee6a6dd156956523b598bf7f
+
+PASS      Approval Bypass
+  Evidence: publication/evidence/approval-bypass/approval-bypass-evidence.json
+  Reason:   Approval Bypass contract passed: approved.pass=true, bypassed.pass=true, finalStatus=PASS; intentional required=false mutation fields were ignored.
+  SHA-256:  2d447c45ec84ce2740906d1d66496b60ae9c4b06983bc3146cbeac44352c1028
+
+PASS      Tool Injection
+  Evidence: publication/evidence/tool-injection/tool-injection-evidence.json
+  Reason:   Explicit finalStatus=PASS and no effective negative signals found.
+  SHA-256:  2ccf729fb0b8fccc1e4b619dcefd651493966c3903b6a3cccb72c0a1fa5093cf
+
+PASS      Replay Root Verification
+  Evidence: publication/evidence/replay-root/replay-root-change-evidence.json
+  Reason:   Explicit finalStatus=PASS and no effective negative signals found.
+  SHA-256:  0393d2fc175915eaf458a727b175d80c157d24f99d27120c6ab2424f8a175759
+
+PASS      Workflow Divergence Verification
+  Evidence: publication/evidence/workflow-divergence/workflow-divergence-evidence.json
+  Reason:   Explicit finalStatus=PASS and no effective negative signals found.
+  SHA-256:  879a610368124dfca3d580c5cad795d61129e98e4302f97218da14b6e7ac36a7
+
+PASS      Trust-State Escalation
+  Evidence: publication/evidence/trust-state/trust-state-escalation-evidence.json
+  Reason:   Explicit finalStatus=PASS and no effective negative signals found.
+  SHA-256:  0c9266a0f2e68159a775fbfc6afd71d10b85143674d546068fa2016408169c41
+
+PASS      Fail-Closed Containment
+  Evidence: publication/evidence/fail-closed-containment/fail-closed-containment-evidence.json
+  Reason:   Explicit finalStatus=PASS and no effective negative signals found.
+  SHA-256:  695020b93a71aee44538068eda689b509bec0c145819982322f12d82975e5aa2
+
+--------------------------------
+Total:     7
+Passed:    7
+Failed:    0
+Ambiguous: 0
+Final:     PASS
+Release:   ALLOWED
+
+JSON evidence: publication/evidence/v1.0.1/seven-test-verification-baseline.json

@@ -1,0 +1,27 @@
+{
+  "testId": "T3-race-retry-duplicate-execution",
+  "scope": "IN_SCOPE",
+  "approvedIntent": {
+    "replayRoot": null
+  },
+  "control": null,
+  "attacks": {
+    "concurrentDuplicates": null,
+    "timeoutRetry": null,
+    "repeatedDuplicates": null
+  },
+  "metrics": {
+    "attackScenarios": 3,
+    "duplicateSideEffects": 0,
+    "duplicatePurchaseExecutions": 0,
+    "duplicateToolExecutions": 0
+  },
+  "backbone": {
+    "singleExecutionBinding": "NOT_VERIFIED",
+    "duplicateSuppression": "NOT_VERIFIED",
+    "raceSafety": "NOT_VERIFIED",
+    "retrySafety": "NOT_VERIFIED",
+    "evidenceCompleteness": "INCOMPLETE"
+  },
+  "classification": "NOT_VERIFIED"
+}

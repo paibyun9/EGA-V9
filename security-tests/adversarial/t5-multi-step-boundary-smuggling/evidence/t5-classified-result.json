@@ -1,0 +1,122 @@
+{
+  "testId": "T5-multi-step-boundary-smuggling",
+  "generatedAt": "2026-08-13T22:57:28.115Z",
+  "sourceCommit": "e1bb950a63f5305a57ab044383eb437fedab1cf1",
+  "scope": "IN_SCOPE",
+  "policy": {
+    "approvalThreshold": 20,
+    "nativeHighValueBoundary": 500,
+    "controlTransactionValue": 999
+  },
+  "controls": {
+    "lowValue": {
+      "name": "lowValueControl",
+      "finalSemanticValue": 300,
+      "detectionStatus": "match",
+      "trustState": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "executionAllowed": true,
+      "containmentActivated": false,
+      "businessMetrics": {
+        "detected": false
+      },
+      "replayRoot": "7e8aca57bc61e37f6e840f148219cd3b599080f94270871ca333bea89f16d3e9",
+      "nextCalls": 1,
+      "protectedBoundaryCalls": 1,
+      "highValueSideEffects": 0,
+      "statusCode": 200,
+      "responseCalls": 0
+    },
+    "highValue": {
+      "name": "highValueControl",
+      "finalSemanticValue": 999,
+      "detectionStatus": "match",
+      "trustState": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "executionAllowed": true,
+      "containmentActivated": false,
+      "businessMetrics": {
+        "detected": false
+      },
+      "replayRoot": "b7da15f63ae2714360dd84c9a7a3b89dfb8d439d15729057960e0ad10292ee87",
+      "nextCalls": 1,
+      "protectedBoundaryCalls": 1,
+      "highValueSideEffects": 1,
+      "statusCode": 200,
+      "responseCalls": 0
+    }
+  },
+  "attacks": {
+    "splitStepAmounts": {
+      "name": "splitStepAmounts",
+      "finalSemanticValue": 999,
+      "detectionStatus": "match",
+      "trustState": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "executionAllowed": true,
+      "containmentActivated": false,
+      "businessMetrics": {
+        "detected": false
+      },
+      "replayRoot": "1ac5c68bd7cd7fd95f83dcd024ae7d444aa35da7352b686831651d450f7a69e2",
+      "nextCalls": 1,
+      "protectedBoundaryCalls": 1,
+      "highValueSideEffects": 1,
+      "statusCode": 200,
+      "responseCalls": 0
+    },
+    "nestedTransferBatch": {
+      "name": "nestedTransferBatch",
+      "finalSemanticValue": 999,
+      "detectionStatus": "match",
+      "trustState": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "executionAllowed": true,
+      "containmentActivated": false,
+      "businessMetrics": {
+        "detected": false
+      },
+      "replayRoot": "54e6d26a55c6a8b7e9a5047088d62d4ca09cd225149833621412f1f0acf19540",
+      "nextCalls": 1,
+      "protectedBoundaryCalls": 1,
+      "highValueSideEffects": 1,
+      "statusCode": 200,
+      "responseCalls": 0
+    },
+    "mixedMultiStepValue": {
+      "name": "mixedMultiStepValue",
+      "finalSemanticValue": 999,
+      "detectionStatus": "match",
+      "trustState": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "executionAllowed": true,
+      "containmentActivated": false,
+      "businessMetrics": {
+        "detected": false
+      },
+      "replayRoot": "09dc4845b326d97bf4868f66b1d185923b8d366251ef2dd716c136e54d0024a5",
+      "nextCalls": 1,
+      "protectedBoundaryCalls": 1,
+      "highValueSideEffects": 1,
+      "statusCode": 200,
+      "responseCalls": 0
+    }
+  },
+  "metrics": {
+    "attacksAttempted": 3,
+    "successfulSmuggles": 3,
+    "highValueSideEffects": 3
+  },
+  "backbone": {
+    "nativeBoundaryEstablished": "NOT_VERIFIED",
+    "compositionGovernance": "NOT_VERIFIED",
+    "finalSideEffectGovernance": "NOT_VERIFIED",
+    "evidenceCompleteness": "COMPLETE"
+  },
+  "classification": "NOT_VERIFIED"
+}

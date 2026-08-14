@@ -1,0 +1,4 @@
+25ad6b94415b3f794a87c82c6ea9e003196ddd87853cd4e0c8ec2d8b2ca40c39  packages/sdk-ts/src/index.ts
+a694b99597ae6c82b17fa5ba64e31f76c467b865fb3528c9f9355f30a116cf6a  packages/sdk-ts/test/runtime-blocking/fail-closed-runtime-blocking.test.cjs
+110b7cd6e2e914a51a82eb502fc5e748d27be9f719537c32a1e9c41754e0928b  packages/sdk-ts/test/behavior/containment.test.mjs
+d69ff4eb5c4a28bd412b56a52f6d9035802098be41f58283179fc61fced93296  packages/sdk-ts/test/behavior/trust-state.test.mjs

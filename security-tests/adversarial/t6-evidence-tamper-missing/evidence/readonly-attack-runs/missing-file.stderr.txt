@@ -1,0 +1,20 @@
+node:fs:448
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/missing-file.json'
+    at Object.readFileSync (node:fs:448:20)
+    at Object.<anonymous> (/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/read-only-fail-closed-gate.cjs:18:6)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+    at Module.load (node:internal/modules/cjs/loader:1266:32)
+    at Module._load (node:internal/modules/cjs/loader:1091:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/missing-file.json'
+}
+
+Node.js v20.20.2

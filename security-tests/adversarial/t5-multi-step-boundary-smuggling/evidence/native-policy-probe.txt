@@ -1,0 +1,170 @@
+
+=== T5 NATIVE POLICY PROBE ===
+
+--- singleSmall ---
+{
+  "name": "singleSmall",
+  "nextCalls": 1,
+  "status": "verified",
+  "trustState": "T1",
+  "riskScore": 10,
+  "approvalRequired": false,
+  "privilegeEscalationGate": false,
+  "executionAllowed": true,
+  "containmentActivated": false,
+  "businessMetrics": {
+    "detected": false
+  },
+  "businessGovernanceProfile": {
+    "metrics": {
+      "detected": false
+    },
+    "trust": {
+      "currentTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "reason": "Replay verified within normal governance range."
+    }
+  }
+}
+
+--- twoSmall ---
+{
+  "name": "twoSmall",
+  "nextCalls": 1,
+  "status": "verified",
+  "trustState": "T1",
+  "riskScore": 10,
+  "approvalRequired": false,
+  "privilegeEscalationGate": false,
+  "executionAllowed": true,
+  "containmentActivated": false,
+  "businessMetrics": {
+    "detected": false
+  },
+  "businessGovernanceProfile": {
+    "metrics": {
+      "detected": false
+    },
+    "trust": {
+      "currentTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "reason": "Replay verified within normal governance range."
+    }
+  }
+}
+
+--- quantity10 ---
+{
+  "name": "quantity10",
+  "nextCalls": 1,
+  "status": "verified",
+  "trustState": "T1",
+  "riskScore": 10,
+  "approvalRequired": false,
+  "privilegeEscalationGate": false,
+  "executionAllowed": true,
+  "containmentActivated": false,
+  "businessMetrics": {
+    "detected": false
+  },
+  "businessGovernanceProfile": {
+    "metrics": {
+      "detected": false
+    },
+    "trust": {
+      "currentTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "reason": "Replay verified within normal governance range."
+    }
+  }
+}
+
+--- quantity100 ---
+{
+  "name": "quantity100",
+  "nextCalls": 1,
+  "status": "verified",
+  "trustState": "T1",
+  "riskScore": 10,
+  "approvalRequired": false,
+  "privilegeEscalationGate": false,
+  "executionAllowed": true,
+  "containmentActivated": false,
+  "businessMetrics": {
+    "detected": false
+  },
+  "businessGovernanceProfile": {
+    "metrics": {
+      "detected": false
+    },
+    "trust": {
+      "currentTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "reason": "Replay verified within normal governance range."
+    }
+  }
+}
+
+--- quantity999 ---
+{
+  "name": "quantity999",
+  "nextCalls": 1,
+  "status": "verified",
+  "trustState": "T1",
+  "riskScore": 10,
+  "approvalRequired": false,
+  "privilegeEscalationGate": false,
+  "executionAllowed": true,
+  "containmentActivated": false,
+  "businessMetrics": {
+    "detected": false
+  },
+  "businessGovernanceProfile": {
+    "metrics": {
+      "detected": false
+    },
+    "trust": {
+      "currentTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "reason": "Replay verified within normal governance range."
+    }
+  }
+}
+
+--- splitQuantity ---
+{
+  "name": "splitQuantity",
+  "nextCalls": 1,
+  "status": "verified",
+  "trustState": "T1",
+  "riskScore": 10,
+  "approvalRequired": false,
+  "privilegeEscalationGate": false,
+  "executionAllowed": true,
+  "containmentActivated": false,
+  "businessMetrics": {
+    "detected": false
+  },
+  "businessGovernanceProfile": {
+    "metrics": {
+      "detected": false
+    },
+    "trust": {
+      "currentTier": "T1",
+      "riskScore": 10,
+      "approvalRequired": false,
+      "privilegeEscalationGate": false,
+      "reason": "Replay verified within normal governance range."
+    }
+  }
+}

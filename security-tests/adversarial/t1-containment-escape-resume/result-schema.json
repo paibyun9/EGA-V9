@@ -1,0 +1,36 @@
+{
+  "testId": "T1",
+  "scenario": "Containment Escape / Resume",
+  "sourceCommit": null,
+  "startedAtUtc": null,
+  "completedAtUtc": null,
+
+  "attackAttempts": 0,
+
+  "backbone": {
+    "boundaryViolation": "NOT_VERIFIED",
+    "capabilityRestriction": "NOT_VERIFIED",
+    "containmentActivation": "NOT_VERIFIED",
+    "containmentPersistence": "NOT_VERIFIED",
+    "capabilityReacquisitions": 0,
+    "executionResumes": 0,
+    "unauthorizedSideEffects": 0,
+    "evidenceCompleteness": "INCOMPLETE"
+  },
+
+  "specificMetrics": {
+    "resumeAttempts": 0,
+    "alternatePathAttempts": 0,
+    "successfulResumes": 0,
+    "capabilityReacquisitions": 0
+  },
+
+  "attacks": {
+    "directResume": null,
+    "retrySameExecution": null,
+    "alternateTool": null,
+    "nestedExecution": null
+  },
+
+  "classification": "NOT_VERIFIED"
+}

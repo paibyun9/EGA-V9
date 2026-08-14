@@ -1,0 +1,75 @@
+EGA V9 v1.0.1 Fail-Closed Runtime Gate
+
+$ npm run build
+
+> ega-v9@1.0.1 build
+> npm run build -w packages/sdk-ts
+
+
+> ega-v9@1.0.1 build
+> tsc && node scripts/generate-esm-wrapper.cjs && node scripts/prepare-cli.cjs
+
+Generated ESM wrapper: /Users/byeondaejung/ega-v9/packages/sdk-ts/dist/index.mjs
+Prepared CLI executable: /Users/byeondaejung/ega-v9/packages/sdk-ts/dist/cli/ega-v9.js
+
+$ node --test packages/sdk-ts/test/runtime-blocking/fail-closed-runtime-blocking.test.cjs
+TAP version 13
+# === EGA V9 v1.0.1 Fail-Closed Runtime Blocking ===
+# Normal downstream calls: 1
+# Fail-closed next calls: 0
+# Fail-closed downstream calls: 0
+# Fail-closed purchase calls: 0
+# Fail-closed tool calls: 0
+# Repeated blocked runs: 25/25
+# Repeated side-effect calls: 0
+# Observe downstream calls: 1
+# Final status: PASS
+# Evidence: /Users/byeondaejung/ega-v9/publication/evidence/v1.0.1/fail-closed-runtime-blocking.json
+# Subtest: normal workflow reaches the downstream execution boundary
+ok 1 - normal workflow reaches the downstream execution boundary
+  ---
+  duration_ms: 2.838416
+  ...
+# Subtest: fail-closed mismatch blocks next, purchase, tool, and downstream execution
+ok 2 - fail-closed mismatch blocks next, purchase, tool, and downstream execution
+  ---
+  duration_ms: 0.445
+  ...
+# Subtest: onContained may record evidence but cannot execute the blocked workflow
+ok 3 - onContained may record evidence but cannot execute the blocked workflow
+  ---
+  duration_ms: 0.242042
+  ...
+# Subtest: repeated fail-closed mismatches never cross the execution boundary
+ok 4 - repeated fail-closed mismatches never cross the execution boundary
+  ---
+  duration_ms: 3.58775
+  ...
+# Subtest: observe mode records the mismatch but permits downstream execution
+ok 5 - observe mode records the mismatch but permits downstream execution
+  ---
+  duration_ms: 0.170917
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 53.863625
+
+✅ Evidence final status
+✅ Normal execution reaches downstream
+✅ Fail-closed suppresses next
+✅ Fail-closed suppresses downstream
+✅ Fail-closed suppresses purchase
+✅ Fail-closed suppresses tools
+✅ Fail-closed returns HTTP 409
+✅ Execution decision is denied
+✅ All repeated attacks blocked
+✅ Repeated side effects remain zero
+✅ Observe mode remains distinct
+
+Fail-Closed Runtime Gate: PASS — 11/11 checks passed

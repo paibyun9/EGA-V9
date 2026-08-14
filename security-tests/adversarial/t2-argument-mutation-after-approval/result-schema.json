@@ -1,0 +1,26 @@
+{
+  "testId": "T2-argument-mutation-after-approval",
+  "scope": "IN_SCOPE",
+  "approvedIntent": {
+    "replayRoot": null
+  },
+  "control": null,
+  "attacks": {
+    "amountMutation": null,
+    "recipientMutation": null,
+    "toolArgumentMutation": null
+  },
+  "metrics": {
+    "mutationsAttempted": 3,
+    "mutationsDetected": 0,
+    "mutatedExecutions": 0,
+    "unauthorizedSideEffects": 0
+  },
+  "backbone": {
+    "approvalBinding": "NOT_VERIFIED",
+    "executionDivergenceDetection": "NOT_VERIFIED",
+    "preSideEffectBlocking": "NOT_VERIFIED",
+    "evidenceCompleteness": "INCOMPLETE"
+  },
+  "classification": "NOT_VERIFIED"
+}

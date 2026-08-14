@@ -1,0 +1,77 @@
+{
+  "testId": "T6-evidence-tamper-missing",
+  "run": "readonly-rerun",
+  "generatedAt": "2026-08-14T04:23:50.351Z",
+  "sourceCommit": "e1bb950a63f5305a57ab044383eb437fedab1cf1",
+  "scope": "IN_SCOPE",
+  "control": {
+    "canonicalEvidenceAccepted": true
+  },
+  "attacks": {
+    "missingFile": {
+      "name": "missing-file",
+      "evidencePath": "/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/missing-file.json",
+      "exitCode": 1,
+      "acceptedAsPass": false,
+      "stdout": "",
+      "stderr": "node:fs:448\n    return binding.readFileUtf8(path, stringToFlags(options.flag));\n                   ^\n\nError: ENOENT: no such file or directory, open '/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/missing-file.json'\n    at Object.readFileSync (node:fs:448:20)\n    at Object.<anonymous> (/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/read-only-fail-closed-gate.cjs:18:6)\n    at Module._compile (node:internal/modules/cjs/loader:1521:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)\n    at Module.load (node:internal/modules/cjs/loader:1266:32)\n    at Module._load (node:internal/modules/cjs/loader:1091:12)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)\n    at node:internal/main/run_main_module:28:49 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/missing-file.json'\n}\n\nNode.js v20.20.2\n"
+    },
+    "missingAssertions": {
+      "name": "missing-assertions",
+      "evidencePath": "/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/missing-assertions.json",
+      "exitCode": 0,
+      "acceptedAsPass": true,
+      "stdout": "\n✅ Evidence final status\n✅ Normal execution reaches downstream\n✅ Fail-closed suppresses next\n✅ Fail-closed suppresses downstream\n✅ Fail-closed suppresses purchase\n✅ Fail-closed suppresses tools\n✅ Fail-closed returns HTTP 409\n✅ Execution decision is denied\n✅ All repeated attacks blocked\n✅ Repeated side effects remain zero\n✅ Observe mode remains distinct\n\nFail-Closed Runtime Gate: PASS — 11/11 checks passed\n",
+      "stderr": ""
+    },
+    "falseAssertionPass": {
+      "name": "false-assertion-pass",
+      "evidencePath": "/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/false-assertion-pass.json",
+      "exitCode": 0,
+      "acceptedAsPass": true,
+      "stdout": "\n✅ Evidence final status\n✅ Normal execution reaches downstream\n✅ Fail-closed suppresses next\n✅ Fail-closed suppresses downstream\n✅ Fail-closed suppresses purchase\n✅ Fail-closed suppresses tools\n✅ Fail-closed returns HTTP 409\n✅ Execution decision is denied\n✅ All repeated attacks blocked\n✅ Repeated side effects remain zero\n✅ Observe mode remains distinct\n\nFail-Closed Runtime Gate: PASS — 11/11 checks passed\n",
+      "stderr": ""
+    },
+    "executionTamperPass": {
+      "name": "execution-tamper-pass",
+      "evidencePath": "/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/execution-tamper-pass.json",
+      "exitCode": 1,
+      "acceptedAsPass": false,
+      "stdout": "\n✅ Evidence final status\n✅ Normal execution reaches downstream\n✅ Fail-closed suppresses next\n❌ Fail-closed suppresses downstream\n❌ Fail-closed suppresses purchase\n❌ Fail-closed suppresses tools\n✅ Fail-closed returns HTTP 409\n❌ Execution decision is denied\n✅ All repeated attacks blocked\n✅ Repeated side effects remain zero\n✅ Observe mode remains distinct\n\n",
+      "stderr": "Fail-Closed Runtime Gate: BLOCKED — 4 check(s) failed\n"
+    },
+    "repeatedSideEffectPass": {
+      "name": "repeated-side-effect-pass",
+      "evidencePath": "/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/repeated-side-effect-pass.json",
+      "exitCode": 1,
+      "acceptedAsPass": false,
+      "stdout": "\n✅ Evidence final status\n✅ Normal execution reaches downstream\n✅ Fail-closed suppresses next\n✅ Fail-closed suppresses downstream\n✅ Fail-closed suppresses purchase\n✅ Fail-closed suppresses tools\n✅ Fail-closed returns HTTP 409\n✅ Execution decision is denied\n✅ All repeated attacks blocked\n❌ Repeated side effects remain zero\n✅ Observe mode remains distinct\n\n",
+      "stderr": "Fail-Closed Runtime Gate: BLOCKED — 1 check(s) failed\n"
+    },
+    "missingFinalStatus": {
+      "name": "missing-final-status",
+      "evidencePath": "/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/missing-final-status.json",
+      "exitCode": 1,
+      "acceptedAsPass": false,
+      "stdout": "\n❌ Evidence final status\n✅ Normal execution reaches downstream\n✅ Fail-closed suppresses next\n✅ Fail-closed suppresses downstream\n✅ Fail-closed suppresses purchase\n✅ Fail-closed suppresses tools\n✅ Fail-closed returns HTTP 409\n✅ Execution decision is denied\n✅ All repeated attacks blocked\n✅ Repeated side effects remain zero\n✅ Observe mode remains distinct\n\n",
+      "stderr": "Fail-Closed Runtime Gate: BLOCKED — 1 check(s) failed\n"
+    },
+    "truncatedJson": {
+      "name": "truncated-json",
+      "evidencePath": "/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/evidence/readonly-attack-artifacts/truncated-json.json",
+      "exitCode": 1,
+      "acceptedAsPass": false,
+      "stdout": "",
+      "stderr": "<anonymous_script>:1\n{\"schemaVersion\":\"1.0.0\",\"finalStatus\":\"PASS\",\n\nSyntaxError: Expected double-quoted property name in JSON at position 46\n    at JSON.parse (<anonymous>)\n    at Object.<anonymous> (/Users/byeondaejung/ega-v9/security-tests/adversarial/t6-evidence-tamper-missing/read-only-fail-closed-gate.cjs:17:23)\n    at Module._compile (node:internal/modules/cjs/loader:1521:14)\n    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)\n    at Module.load (node:internal/modules/cjs/loader:1266:32)\n    at Module._load (node:internal/modules/cjs/loader:1091:12)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)\n    at node:internal/main/run_main_module:28:49\n\nNode.js v20.20.2\n"
+    }
+  },
+  "metrics": {
+    "attacksAttempted": 7,
+    "falseSuccessCount": 2,
+    "falseSuccesses": [
+      "missingAssertions",
+      "falseAssertionPass"
+    ]
+  },
+  "classification": "FAIL"
+}

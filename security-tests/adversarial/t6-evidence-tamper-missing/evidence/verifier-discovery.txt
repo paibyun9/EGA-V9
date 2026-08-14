@@ -1,0 +1,207 @@
+=== POSSIBLE EVIDENCE VERIFIERS ===
+packages/sdk-ts/test/runtime-blocking/fail-closed-runtime-blocking.test.cjs:178:  finalStatus: "BLOCKED",
+packages/sdk-ts/test/runtime-blocking/fail-closed-runtime-blocking.test.cjs:612:  evidence.finalStatus =
+packages/sdk-ts/test/runtime-blocking/fail-closed-runtime-blocking.test.cjs:684:    `Final status: ${evidence.finalStatus}`
+packages/sdk-ts/dist/index.js:486:        return (0, crypto_1.createHash)("sha256").update(this.canonicalize(input)).digest("hex");
+packages/sdk-ts/dist/index.js:618:    const anonymousClientId = `client_${(0, crypto_1.createHash)("sha256")
+packages/sdk-ts/src/index.ts:841:    return createHash("sha256").update(this.canonicalize(input)).digest("hex");
+packages/sdk-ts/src/index.ts:999:  const anonymousClientId = `client_${createHash("sha256")
+scripts/v1.0.1-export-compatibility-gate.cjs:238:  finalStatus:
+scripts/v1.0.1-export-compatibility-gate.cjs:277:  `Export Compatibility Gate: ${evidence.finalStatus}`
+scripts/v1.0.1-export-compatibility-gate.cjs:281:  evidence.finalStatus !==
+scripts/stage-e-publication-consistency-gate.cjs:81:  const manifestPath = "publication/manifest.json";
+scripts/stage-e-publication-consistency-gate.cjs:84:    "Publication manifest exists",
+scripts/stage-e-publication-consistency-gate.cjs:85:    exists(manifestPath),
+scripts/stage-e-publication-consistency-gate.cjs:86:    `Expected: ${manifestPath}`
+scripts/stage-e-publication-consistency-gate.cjs:89:  if (!exists(manifestPath)) {
+scripts/stage-e-publication-consistency-gate.cjs:90:    console.log("\n❌ BLOCKED — Publication manifest is missing.\n");
+scripts/stage-e-publication-consistency-gate.cjs:94:  const manifest = readJson(manifestPath);
+scripts/stage-e-publication-consistency-gate.cjs:107:    manifest.benchmark_table
+scripts/stage-e-publication-consistency-gate.cjs:128:  const table4 = readJson(manifest.benchmark_table);
+scripts/stage-e-publication-consistency-gate.cjs:136:    rootPackage.name === manifest.npm_package,
+scripts/stage-e-publication-consistency-gate.cjs:137:    `Manifest=${manifest.npm_package}, root package=${rootPackage.name}`
+scripts/stage-e-publication-consistency-gate.cjs:142:    sdkPackage.name === manifest.npm_package,
+scripts/stage-e-publication-consistency-gate.cjs:143:    `Manifest=${manifest.npm_package}, SDK package=${sdkPackage.name}`
+scripts/stage-e-publication-consistency-gate.cjs:148:    manifest.license === "MIT"
+scripts/stage-e-publication-consistency-gate.cjs:152:    "SDK license matches manifest",
+scripts/stage-e-publication-consistency-gate.cjs:153:    sdkPackage.license === manifest.license,
+scripts/stage-e-publication-consistency-gate.cjs:154:    `Manifest=${manifest.license}, SDK=${sdkPackage.license}`
+scripts/stage-e-publication-consistency-gate.cjs:166:  if (manifest.release_policy.require_version_alignment) {
+scripts/stage-e-publication-consistency-gate.cjs:169:      rootPackage.version === manifest.target_version,
+scripts/stage-e-publication-consistency-gate.cjs:170:      `Target=${manifest.target_version}, root=${rootPackage.version}`
+scripts/stage-e-publication-consistency-gate.cjs:175:      sdkPackage.version === manifest.target_version,
+scripts/stage-e-publication-consistency-gate.cjs:176:      `Target=${manifest.target_version}, SDK=${sdkPackage.version}`
+scripts/stage-e-publication-consistency-gate.cjs:181:      demoHtml.includes(`v${manifest.target_version}`),
+scripts/stage-e-publication-consistency-gate.cjs:182:      `Expected demo to contain v${manifest.target_version}`
+scripts/stage-e-publication-consistency-gate.cjs:187:      rootReadme.includes(manifest.target_version) ||
+scripts/stage-e-publication-consistency-gate.cjs:188:        rootReadme.includes(`v${manifest.target_version}`),
+scripts/stage-e-publication-consistency-gate.cjs:189:      `Expected README to contain ${manifest.target_version}`
+scripts/stage-e-publication-consistency-gate.cjs:197:  for (const api of manifest.public_api) {
+scripts/stage-e-publication-consistency-gate.cjs:207:    rootReadme.includes(`npm install ${manifest.npm_package}`),
+scripts/stage-e-publication-consistency-gate.cjs:208:    `Expected: npm install ${manifest.npm_package}`
+scripts/stage-e-publication-consistency-gate.cjs:213:    demoHtml.includes(`npm install ${manifest.npm_package}`),
+scripts/stage-e-publication-consistency-gate.cjs:214:    `Expected: npm install ${manifest.npm_package}`
+scripts/stage-e-publication-consistency-gate.cjs:219:    demoHtml.includes(`from "${manifest.npm_package}"`) ||
+scripts/stage-e-publication-consistency-gate.cjs:220:      demoHtml.includes(`from '${manifest.npm_package}'`),
+scripts/stage-e-publication-consistency-gate.cjs:221:    `Expected import from ${manifest.npm_package}`
+scripts/stage-e-publication-consistency-gate.cjs:228:  for (const feature of manifest.required_demo_features) {
+scripts/stage-e-publication-consistency-gate.cjs:237:    manifest.required_publication_phrases
+scripts/stage-e-publication-consistency-gate.cjs:254:    !isPending(manifest.github_repository),
+scripts/stage-e-publication-consistency-gate.cjs:255:    manifest.github_repository
+scripts/stage-e-publication-consistency-gate.cjs:260:    !isPending(manifest.npm_url),
+scripts/stage-e-publication-consistency-gate.cjs:261:    manifest.npm_url
+scripts/stage-e-publication-consistency-gate.cjs:264:  if (manifest.release_policy.require_demo_url) {
+scripts/stage-e-publication-consistency-gate.cjs:267:      !isPending(manifest.vercel_demo_url),
+scripts/stage-e-publication-consistency-gate.cjs:274:    demoHtml.includes(manifest.github_repository),
+scripts/stage-e-publication-consistency-gate.cjs:275:    `Expected: ${manifest.github_repository}`
+scripts/stage-e-publication-consistency-gate.cjs:280:    demoHtml.includes(manifest.npm_url),
+scripts/stage-e-publication-consistency-gate.cjs:281:    `Expected: ${manifest.npm_url}`
+scripts/stage-e-publication-consistency-gate.cjs:284:  if (!isPending(manifest.vercel_demo_url)) {
+scripts/stage-e-publication-consistency-gate.cjs:287:      manifest.vercel_demo_url.startsWith("https://")
+scripts/stage-e-publication-consistency-gate.cjs:316:  if (manifest.release_policy.require_homepage_alignment) {
+scripts/stage-e-publication-consistency-gate.cjs:330:        homepage.includes(manifest.short_name) ||
+scripts/stage-e-publication-consistency-gate.cjs:331:          homepage.includes(manifest.project_name)
+scripts/stage-e-publication-consistency-gate.cjs:336:        homepage.includes(manifest.github_repository)
+scripts/stage-e-publication-consistency-gate.cjs:341:        homepage.includes(manifest.npm_url)
+scripts/stage-e-publication-consistency-gate.cjs:346:        homepage.includes(manifest.vercel_demo_url)
+scripts/stage-e-publication-consistency-gate.cjs:351:        homepage.includes(manifest.target_version) ||
+scripts/stage-e-publication-consistency-gate.cjs:352:          homepage.includes(`v${manifest.target_version}`)
+scripts/stage-e-publication-consistency-gate.cjs:366:  if (manifest.release_policy.require_clean_git) {
+scripts/stage-e-publication-consistency-gate.cjs:389:    manifest.release_policy.require_live_url_checks ||
+scripts/stage-e-publication-consistency-gate.cjs:390:    process.env.EGA_LIVE_PUBLICATION_CHECK === "1";
+scripts/stage-e-publication-consistency-gate.cjs:395:    await checkLiveUrl("GitHub repository", manifest.github_repository);
+scripts/stage-e-publication-consistency-gate.cjs:396:    await checkLiveUrl("npm package", manifest.npm_url);
+scripts/stage-e-publication-consistency-gate.cjs:398:    if (!isPending(manifest.vercel_demo_url)) {
+scripts/stage-e-publication-consistency-gate.cjs:399:      await checkLiveUrl("Vercel Demo", manifest.vercel_demo_url);
+scripts/stage-e-publication-consistency-gate.cjs:402:    if (manifest.release_policy.require_homepage_alignment) {
+scripts/stage-e-publication-consistency-gate.cjs:403:      await checkLiveUrl("lcm3.com", manifest.homepage_url);
+scripts/stage-e-publication-consistency-gate.cjs:408:      "Run EGA_LIVE_PUBLICATION_CHECK=1 npm run stage-e:gate when public URLs are ready."
+scripts/v1.0.1-express-examples-import-gate.cjs:120:  const finalStatus =
+scripts/v1.0.1-express-examples-import-gate.cjs:139:    finalStatus,
+scripts/v1.0.1-express-examples-import-gate.cjs:165:    `Express Examples Import Gate: ${finalStatus}`
+scripts/v1.0.1-express-examples-import-gate.cjs:169:    finalStatus === "PASS"
+scripts/v1.0.1-fail-closed-runtime-gate.cjs:93:      evidence.finalStatus ===
+scripts/check-v1-api-contract.cjs:20:  fail("v1 API contract manifest exists");
+scripts/v1.0.1-readme-sdk-alignment-gate.cjs:182:  const finalStatus =
+scripts/v1.0.1-readme-sdk-alignment-gate.cjs:216:    finalStatus,
+scripts/v1.0.1-readme-sdk-alignment-gate.cjs:242:    `README SDK Alignment Gate: ${finalStatus}`
+scripts/v1.0.1-readme-sdk-alignment-gate.cjs:246:    finalStatus === "PASS"
+scripts/v1.0.1-public-api-contract-gate.cjs:56:function sha256File(file) {
+scripts/v1.0.1-public-api-contract-gate.cjs:58:    .createHash("sha256")
+scripts/v1.0.1-public-api-contract-gate.cjs:533:const finalStatus =
+scripts/v1.0.1-public-api-contract-gate.cjs:553:    sha256: sha256File(contractPath),
+scripts/v1.0.1-public-api-contract-gate.cjs:615:  finalStatus,
+scripts/v1.0.1-public-api-contract-gate.cjs:617:    finalStatus === "PASS",
+scripts/v1.0.1-public-api-contract-gate.cjs:683:  `Final:   ${finalStatus}`,
+scripts/v1.0.1-public-api-contract-gate.cjs:711:if (finalStatus !== "PASS") {
+scripts/v1.0.1-examples-gate.cjs:152:    finalStatus: "BLOCKED",
+scripts/v1.0.1-examples-gate.cjs:708:  finalStatus:
+scripts/v1.0.1-examples-gate.cjs:750:  `Executable Examples Gate: ${evidence.finalStatus}`
+scripts/v1.0.1-examples-gate.cjs:754:  evidence.finalStatus !==
+scripts/v1.0.1-integrated-release-gate.cjs:929:    freshSummary?.finalStatus ===
+scripts/v1.0.1-integrated-release-gate.cjs:1157:    finalStatus:
+scripts/v1.0.1-fresh-consumer-12-test-gate.cjs:760:    finalStatus:
+scripts/v1.0.1-seven-test-baseline.cjs:121:function sha256(buffer) {
+scripts/v1.0.1-seven-test-baseline.cjs:123:    .createHash("sha256")
+scripts/v1.0.1-seven-test-baseline.cjs:299:      sha256: null,
+scripts/v1.0.1-seven-test-baseline.cjs:325:      sha256: sha256(raw),
+scripts/v1.0.1-seven-test-baseline.cjs:365:    typeof parsed?.finalStatus === "string"
+scripts/v1.0.1-seven-test-baseline.cjs:366:      ? parsed.finalStatus.trim().toUpperCase()
+scripts/v1.0.1-seven-test-baseline.cjs:388:      `Evidence finalStatus is ${explicitFinalStatus}, not PASS.`;
+scripts/v1.0.1-seven-test-baseline.cjs:400:      "Approval Bypass contract passed: approved.pass=true, bypassed.pass=true, finalStatus=PASS; intentional required=false mutation fields were ignored.";
+scripts/v1.0.1-seven-test-baseline.cjs:406:      "Explicit finalStatus=PASS and no effective negative signals found.";
+scripts/v1.0.1-seven-test-baseline.cjs:424:    sha256: sha256(raw),
+scripts/v1.0.1-seven-test-baseline.cjs:465:const finalStatus =
+scripts/v1.0.1-seven-test-baseline.cjs:509:  finalStatus,
+scripts/v1.0.1-seven-test-baseline.cjs:510:  releaseAllowed: finalStatus === "PASS",
+scripts/v1.0.1-seven-test-baseline.cjs:535:  if (result.sha256) {
+scripts/v1.0.1-seven-test-baseline.cjs:536:    lines.push(`  SHA-256:  ${result.sha256}`);
+scripts/v1.0.1-seven-test-baseline.cjs:570:lines.push(`Final:     ${finalStatus}`);
+scripts/v1.0.1-seven-test-baseline.cjs:593:if (finalStatus !== "PASS") {
+publication/evidence/tool-injection/tool-injection-evidence.json:746:  "finalStatus": "PASS"
+publication/evidence/tool-order/tool-order-mutation-evidence.json:160:  "finalStatus": "PASS"
+publication/evidence/approval-bypass/approval-bypass-evidence.json:751:  "finalStatus": "PASS"
+publication/evidence/v1.0.1/fresh-consumer-12-test.json:10:    "finalStatus": "PASS",
+publication/evidence/v1.0.1/phase-a-api-audit.json:77:      "stage-e:live": "EGA_LIVE_PUBLICATION_CHECK=1 node scripts/stage-e-publication-consistency-gate.cjs",
+publication/evidence/v1.0.1/fresh-consumer-export-compatibility.json:22:  "finalStatus": "PASS"
+publication/evidence/v1.0.1/express-examples-imports.json:88:  "finalStatus": "PASS"
+publication/evidence/v1.0.1/public-api-contract-gate.json:13:    "sha256": "d2351ed91e4d1772a7e7c2a7128427758431709e32efac8037b0f7ec66329dfe",
+publication/evidence/v1.0.1/public-api-contract-gate.json:282:  "finalStatus": "PASS",
+publication/evidence/v1.0.1/fail-closed-runtime-blocking.json:58:  "finalStatus": "PASS"
+publication/evidence/v1.0.1/readme-sdk-alignment.json:327:  "finalStatus": "PASS"
+publication/evidence/v1.0.1/integrated-release-gate.json:12:    "finalStatus": "PASS",
+publication/evidence/v1.0.1/integrated-release-gate.json:234:          "finalStatus": "PASS",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:23:  "finalStatus": "PASS",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:31:      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:35:      "sha256": "9f4918a3db21d3ac43107e9f2f29beb777763c9eee6a6dd156956523b598bf7f",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:40:        "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:76:          "path": "$.finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:77:          "key": "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:92:      "reason": "Approval Bypass contract passed: approved.pass=true, bypassed.pass=true, finalStatus=PASS; intentional required=false mutation fields were ignored.",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:96:      "sha256": "2d447c45ec84ce2740906d1d66496b60ae9c4b06983bc3146cbeac44352c1028",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:103:        "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:187:          "path": "$.finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:188:          "key": "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:203:      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:207:      "sha256": "2ccf729fb0b8fccc1e4b619dcefd651493966c3903b6a3cccb72c0a1fa5093cf",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:212:        "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:298:          "path": "$.finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:299:          "key": "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:314:      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:318:      "sha256": "0393d2fc175915eaf458a727b175d80c157d24f99d27120c6ab2424f8a175759",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:322:        "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:348:          "path": "$.finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:349:          "key": "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:364:      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:368:      "sha256": "879a610368124dfca3d580c5cad795d61129e98e4302f97218da14b6e7ac36a7",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:374:        "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:390:          "path": "$.finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:391:          "key": "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:406:      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:410:      "sha256": "0c9266a0f2e68159a775fbfc6afd71d10b85143674d546068fa2016408169c41",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:414:        "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:455:          "path": "$.finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:456:          "key": "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:471:      "reason": "Explicit finalStatus=PASS and no effective negative signals found.",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:475:      "sha256": "695020b93a71aee44538068eda689b509bec0c145819982322f12d82975e5aa2",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:479:        "finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:519:          "path": "$.finalStatus",
+publication/evidence/v1.0.1/seven-test-verification-baseline.json:520:          "key": "finalStatus",
+publication/evidence/v1.0.1/input-validation-pre-change-audit.json:11:      "sha256": "beaf784615714a9c5b67dfcaddefbf9407118a2c31d39ba221446667f7c3f5ed"
+publication/evidence/v1.0.1/input-validation-pre-change-audit.json:17:      "sha256": "2d150df0d85761b4179610c0caa08d661ca662ffd6446efc94cda649b209d321"
+publication/evidence/v1.0.1/input-validation-pre-change-audit.json:23:      "sha256": "089b76b91081159545d446cc97b25c01c4c32ebef1ed351bc54ae69373a881dc"
+publication/evidence/v1.0.1/input-validation-pre-change-audit.json:29:      "sha256": "aea760d140a063b8781f711a2f90d0093d07c4dd02f27e256ad0242c30922522"
+publication/evidence/v1.0.1/input-validation-pre-change-audit.json:35:      "sha256": "df425ab6ef05b6b111b7e31dce01ef274940482095c8fec23ad6be90aa72d5a1"
+publication/evidence/v1.0.1/input-validation-pre-change-audit.json:38:  "finalStatus": "PASS"
+publication/evidence/v1.0.1/executable-examples.json:139:  "finalStatus": "PASS"
+publication/evidence/v1.0.1/export-compatibility.json:90:  "finalStatus": "PASS"
+publication/evidence/replay-root/replay-root-change-evidence.json:68:  "finalStatus": "PASS"
+publication/evidence/trust-state/trust-state-escalation-evidence.json:197:  "finalStatus": "PASS"
+publication/evidence/phase-3-consumer-gate.json:73:  "finalStatus": "PASS"
+publication/evidence/workflow-divergence/workflow-divergence-evidence.json:75:  "finalStatus": "PASS"
+publication/evidence/fail-closed-containment/fail-closed-containment-evidence.json:256:  "finalStatus": "PASS"
+
+=== POSSIBLE JSON EVIDENCE CONSUMERS ===
+scripts/stage-e-publication-consistency-gate.cjs:32:  return fs.readFileSync(path.join(ROOT, relativePath), "utf8");
+scripts/stage-e-publication-consistency-gate.cjs:36:  return JSON.parse(read(relativePath));
+scripts/v1.0.1-fail-closed-runtime-gate.cjs:81:const evidence = JSON.parse(
+
+=== PACKAGE COMMANDS ===
+release:gate => node scripts/release-gate.cjs
+stage-b:gate => node scripts/stage-b-engine-gate.cjs
+stage-c:gate => node scripts/stage-c-benchmark-gate.cjs
+stage-d:gate => node scripts/stage-d-table-consistency-gate.cjs
+release:all-gates => npm run release:gate && npm run stage-b:gate && npm run stage-c:gate && npm run stage-d:gate && npm run stage-e:gate
+stage-e:gate => node scripts/stage-e-publication-consistency-gate.cjs
+stage-e:live => EGA_LIVE_PUBLICATION_CHECK=1 node scripts/stage-e-publication-consistency-gate.cjs
+benchmark:v1:publication => npm run build && node --expose-gc benchmarks/v1/runtime-governance-benchmark.mjs --profile=publication --output=benchmarks/results/v1-runtime-governance
+benchmark:v1:gate => node scripts/v1-benchmark-gate.cjs
+benchmark:v1:all => npm run benchmark:v1:publication && npm run benchmark:v1:gate
+v1.0.1:api-contract => node scripts/v1.0.1-public-api-contract-gate.cjs
+v1.0.1:fail-closed-runtime => node scripts/v1.0.1-fail-closed-runtime-gate.cjs
+v1.0.1:export-compatibility => node scripts/v1.0.1-export-compatibility-gate.cjs
+v1.0.1:examples => node scripts/v1.0.1-examples-gate.cjs
+v1.0.1:express-examples => node scripts/v1.0.1-express-examples-import-gate.cjs
+v1.0.1:readme-sdk-alignment => node scripts/v1.0.1-readme-sdk-alignment-gate.cjs
+release:v1.0.1:gate => node scripts/v1.0.1-integrated-release-gate.cjs
+release:v1.0.1:final-gate => node scripts/v1.0.1-integrated-release-gate.cjs --require-clean --require-target-version

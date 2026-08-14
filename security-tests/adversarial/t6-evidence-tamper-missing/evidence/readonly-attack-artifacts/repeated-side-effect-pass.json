@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseTarget": "ega-v9@1.0.1",
+  "testId": "fail-closed-runtime-blocking",
+  "generatedAt": "2026-07-26T20:35:09.818Z",
+  "repeatCount": 25,
+  "normal": {
+    "nextCalls": 1,
+    "downstreamCalls": 1,
+    "purchaseCalls": 1,
+    "toolCalls": 1,
+    "containmentRequired": false,
+    "executionAllowed": true
+  },
+  "failClosed": {
+    "nextCalls": 0,
+    "downstreamCalls": 0,
+    "purchaseCalls": 0,
+    "toolCalls": 0,
+    "statusCode": 409,
+    "responseCalls": 1,
+    "responseError": "EGA_CONTAINMENT_ACTIVATED",
+    "containmentRequired": true,
+    "executionAllowed": false,
+    "detectionStatus": "mismatch",
+    "containmentActivated": true
+  },
+  "observe": {
+    "nextCalls": 1,
+    "downstreamCalls": 1,
+    "purchaseCalls": 1,
+    "toolCalls": 1,
+    "containmentRequired": false,
+    "executionAllowed": true,
+    "detectionStatus": "mismatch"
+  },
+  "repeatedFailClosed": {
+    "attemptedRuns": 25,
+    "blockedRuns": 25,
+    "totalNextCalls": 0,
+    "totalDownstreamCalls": 1,
+    "totalPurchaseCalls": 1,
+    "totalToolCalls": 1,
+    "total409Responses": 25
+  },
+  "assertions": {
+    "normalExecutionReached": true,
+    "failClosedNextSuppressed": true,
+    "failClosedDownstreamSuppressed": true,
+    "failClosedPurchaseSuppressed": true,
+    "failClosedToolSuppressed": true,
+    "failClosedHttp409": true,
+    "failClosedDecisionDenied": true,
+    "repeatedRunsAllBlocked": true,
+    "repeatedSideEffectsZero": true,
+    "observeModeContinued": true
+  },
+  "finalStatus": "PASS"
+}

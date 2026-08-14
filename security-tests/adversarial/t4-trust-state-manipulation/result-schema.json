@@ -1,0 +1,25 @@
+{
+  "testId": "T4-trust-state-manipulation",
+  "scope": "IN_SCOPE",
+  "control": null,
+  "attacks": {
+    "headerTrustSpoof": null,
+    "bodyTrustSpoof": null,
+    "preloadedDecisionSpoof": null,
+    "combinedPolicySpoof": null
+  },
+  "metrics": {
+    "attacksAttempted": 4,
+    "unauthorizedTrustPromotions": 0,
+    "unauthorizedAllowedExecutions": 0,
+    "unauthorizedSideEffects": 0
+  },
+  "backbone": {
+    "restrictedStateEstablished": "NOT_VERIFIED",
+    "trustForgeryResistance": "NOT_VERIFIED",
+    "policyEvidenceBinding": "NOT_VERIFIED",
+    "preSideEffectBlocking": "NOT_VERIFIED",
+    "evidenceCompleteness": "INCOMPLETE"
+  },
+  "classification": "NOT_VERIFIED"
+}

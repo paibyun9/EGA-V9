@@ -1,0 +1,254 @@
+{
+  "testId": "T3-race-retry-duplicate-execution",
+  "generatedAt": "2026-08-13T21:41:29.362Z",
+  "sourceCommit": "e1bb950a63f5305a57ab044383eb437fedab1cf1",
+  "scope": "IN_SCOPE",
+  "approvedIntent": {
+    "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+    "workflow": {
+      "steps": [
+        {
+          "action": "validate-payment",
+          "tool": "payment-validator",
+          "input": {
+            "orderId": "T3-ORDER-001"
+          }
+        },
+        {
+          "action": "purchase",
+          "tool": "payment-provider",
+          "input": {
+            "amount": 125,
+            "currency": "USD",
+            "recipient": "merchant-approved",
+            "destinationAccount": "acct-approved-001"
+          }
+        }
+      ]
+    }
+  },
+  "control": {
+    "attempt": {
+      "label": "control",
+      "outcome": "executed",
+      "executionAllowed": true,
+      "containmentRequired": false,
+      "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+      "statusCode": 200,
+      "responseCalls": 0
+    },
+    "protectedBoundaryCalls": 1,
+    "purchaseExecutions": 1,
+    "toolExecutions": 1,
+    "totalSideEffects": 1,
+    "duplicateSideEffects": 0,
+    "duplicatePurchaseExecutions": 0,
+    "duplicateToolExecutions": 0
+  },
+  "attacks": {
+    "concurrentDuplicates": {
+      "requestCount": 10,
+      "attempts": [
+        {
+          "label": "race-1",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-2",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-3",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-4",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-5",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-6",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-7",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-8",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-9",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "race-10",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        }
+      ],
+      "protectedBoundaryCalls": 10,
+      "purchaseExecutions": 10,
+      "toolExecutions": 10,
+      "totalSideEffects": 10,
+      "duplicateSideEffects": 9,
+      "duplicatePurchaseExecutions": 9,
+      "duplicateToolExecutions": 9
+    },
+    "timeoutRetry": {
+      "requestCount": 2,
+      "attempts": [
+        {
+          "label": "timeout-original",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "timeout-retry",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        }
+      ],
+      "protectedBoundaryCalls": 2,
+      "purchaseExecutions": 2,
+      "toolExecutions": 2,
+      "totalSideEffects": 2,
+      "duplicateSideEffects": 1,
+      "duplicatePurchaseExecutions": 1,
+      "duplicateToolExecutions": 1
+    },
+    "repeatedDuplicates": {
+      "requestCount": 5,
+      "attempts": [
+        {
+          "label": "duplicate-1",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "duplicate-2",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "duplicate-3",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "duplicate-4",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        },
+        {
+          "label": "duplicate-5",
+          "outcome": "executed",
+          "executionAllowed": true,
+          "containmentRequired": false,
+          "replayRoot": "4d8c12db89e663af57a3f39dccc319bb49f6cfe790e0e712dde889d7ff9e413f",
+          "statusCode": 200,
+          "responseCalls": 0
+        }
+      ],
+      "protectedBoundaryCalls": 5,
+      "purchaseExecutions": 5,
+      "toolExecutions": 5,
+      "totalSideEffects": 5,
+      "duplicateSideEffects": 4,
+      "duplicatePurchaseExecutions": 4,
+      "duplicateToolExecutions": 4
+    }
+  },
+  "metrics": {
+    "attackScenarios": 3,
+    "duplicateSideEffects": 14,
+    "duplicatePurchaseExecutions": 14,
+    "duplicateToolExecutions": 14
+  },
+  "backbone": {
+    "singleExecutionBinding": "VERIFIED",
+    "duplicateSuppression": "NOT_VERIFIED",
+    "raceSafety": "NOT_VERIFIED",
+    "retrySafety": "NOT_VERIFIED",
+    "repeatedDeliverySafety": "NOT_VERIFIED",
+    "evidenceCompleteness": "COMPLETE"
+  },
+  "classification": "FAIL"
+}

@@ -1,0 +1,22 @@
+{
+  "testId": "T7-core-integrity-mismatch",
+  "checks": {
+    "violationStatus": true,
+    "fileMismatch": true,
+    "violationTrue": true,
+    "expectedPreserved": true,
+    "observedPresent": true,
+    "expectedObservedDiffer": true,
+    "sourcePreserved": true,
+    "sourceCommitPreserved": true,
+    "baselineIdPreserved": true
+  },
+  "backbone": {
+    "mismatchDetection": "VERIFIED",
+    "violationClassification": "VERIFIED",
+    "expectedPreservation": "VERIFIED",
+    "observedPreservation": "VERIFIED",
+    "sourcePreservation": "VERIFIED"
+  },
+  "classification": "PASS"
+}

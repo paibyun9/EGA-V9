@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "baselineId": "ega-v9-core-e1bb950a63f5",
+  "algorithm": "sha256",
+  "source": {
+    "type": "git-commit",
+    "commit": "e1bb950a63f5305a57ab044383eb437fedab1cf1"
+  },
+  "protectedFiles": [
+    {
+      "source": "packages/sdk-ts/src/index.ts",
+      "expected": "25ad6b94415b3f794a87c82c6ea9e003196ddd87853cd4e0c8ec2d8b2ca40c39"
+    },
+    {
+      "source": "packages/sdk-ts/test/runtime-blocking/fail-closed-runtime-blocking.test.cjs",
+      "expected": "a694b99597ae6c82b17fa5ba64e31f76c467b865fb3528c9f9355f30a116cf6a"
+    },
+    {
+      "source": "packages/sdk-ts/test/behavior/containment.test.mjs",
+      "expected": "110b7cd6e2e914a51a82eb502fc5e748d27be9f719537c32a1e9c41754e0928b"
+    },
+    {
+      "source": "packages/sdk-ts/test/behavior/trust-state.test.mjs",
+      "expected": "d69ff4eb5c4a28bd412b56a52f6d9035802098be41f58283179fc61fced93296"
+    }
+  ]
+}

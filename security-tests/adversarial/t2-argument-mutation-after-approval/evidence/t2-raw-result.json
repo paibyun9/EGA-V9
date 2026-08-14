@@ -1,0 +1,150 @@
+{
+  "testId": "T2-argument-mutation-after-approval",
+  "generatedAt": "2026-08-13T21:10:44.502Z",
+  "sourceCommit": "e1bb950a63f5305a57ab044383eb437fedab1cf1",
+  "scope": "IN_SCOPE",
+  "approvedIntent": {
+    "workflow": {
+      "steps": [
+        {
+          "action": "validate-payment",
+          "tool": "payment-validator",
+          "input": {
+            "orderId": "T2-ORDER-001"
+          }
+        },
+        {
+          "action": "purchase",
+          "tool": "payment-provider",
+          "input": {
+            "amount": 125,
+            "currency": "USD",
+            "recipient": "merchant-approved",
+            "destinationAccount": "acct-approved-001"
+          }
+        }
+      ]
+    },
+    "replayRoot": "611fe5dd9f27211cf4bb7b84e81d348db52d9050a74f1f47d951859f646de6d1"
+  },
+  "control": {
+    "replayRootDiverged": false,
+    "executionAllowed": true,
+    "nextCalls": 1,
+    "sideEffects": 1
+  },
+  "attacks": {
+    "amountMutation": {
+      "name": "amountMutation",
+      "approvedReplayRoot": "611fe5dd9f27211cf4bb7b84e81d348db52d9050a74f1f47d951859f646de6d1",
+      "actualReplayRoot": "8648a422493c0a4258a239512b688e3d3fc46588869e2706b5a292fa7513183d",
+      "replayRootDiverged": true,
+      "detectionStatus": "mismatch",
+      "containmentRequired": true,
+      "containmentActivated": true,
+      "executionAllowed": false,
+      "nextCalls": 0,
+      "downstreamCalls": 0,
+      "purchaseCalls": 0,
+      "toolCalls": 0,
+      "unauthorizedSideEffects": 0,
+      "statusCode": 409,
+      "responseCalls": 1,
+      "responseError": "EGA_CONTAINMENT_ACTIVATED",
+      "events": [
+        "workflow.started",
+        "lineage.reconstructed",
+        "trust.evaluated",
+        "mitre.mapped",
+        "replay.mismatch",
+        "mutation.detected",
+        "trust.escalated",
+        "privilege.escalation.gated",
+        "approval.required",
+        "quarantine.created",
+        "containment.activated",
+        "execution.blocked"
+      ],
+      "evidenceComplete": true
+    },
+    "recipientMutation": {
+      "name": "recipientMutation",
+      "approvedReplayRoot": "611fe5dd9f27211cf4bb7b84e81d348db52d9050a74f1f47d951859f646de6d1",
+      "actualReplayRoot": "e644c7367870b53225cb1e1a0d0dffee8603b20fc86d0714800b22491fa61a98",
+      "replayRootDiverged": true,
+      "detectionStatus": "mismatch",
+      "containmentRequired": true,
+      "containmentActivated": true,
+      "executionAllowed": false,
+      "nextCalls": 0,
+      "downstreamCalls": 0,
+      "purchaseCalls": 0,
+      "toolCalls": 0,
+      "unauthorizedSideEffects": 0,
+      "statusCode": 409,
+      "responseCalls": 1,
+      "responseError": "EGA_CONTAINMENT_ACTIVATED",
+      "events": [
+        "workflow.started",
+        "lineage.reconstructed",
+        "trust.evaluated",
+        "mitre.mapped",
+        "replay.mismatch",
+        "mutation.detected",
+        "trust.escalated",
+        "privilege.escalation.gated",
+        "approval.required",
+        "quarantine.created",
+        "containment.activated",
+        "execution.blocked"
+      ],
+      "evidenceComplete": true
+    },
+    "toolArgumentMutation": {
+      "name": "toolArgumentMutation",
+      "approvedReplayRoot": "611fe5dd9f27211cf4bb7b84e81d348db52d9050a74f1f47d951859f646de6d1",
+      "actualReplayRoot": "bb7477b99a9e208af73e86eeca3b6f5c7e3fb3eefd44fdf589b3a6086a4159d1",
+      "replayRootDiverged": true,
+      "detectionStatus": "mismatch",
+      "containmentRequired": true,
+      "containmentActivated": true,
+      "executionAllowed": false,
+      "nextCalls": 0,
+      "downstreamCalls": 0,
+      "purchaseCalls": 0,
+      "toolCalls": 0,
+      "unauthorizedSideEffects": 0,
+      "statusCode": 409,
+      "responseCalls": 1,
+      "responseError": "EGA_CONTAINMENT_ACTIVATED",
+      "events": [
+        "workflow.started",
+        "lineage.reconstructed",
+        "trust.evaluated",
+        "mitre.mapped",
+        "replay.mismatch",
+        "mutation.detected",
+        "trust.escalated",
+        "privilege.escalation.gated",
+        "approval.required",
+        "quarantine.created",
+        "containment.activated",
+        "execution.blocked"
+      ],
+      "evidenceComplete": true
+    }
+  },
+  "metrics": {
+    "mutationsAttempted": 3,
+    "mutationsDetected": 3,
+    "mutatedExecutions": 0,
+    "unauthorizedSideEffects": 0
+  },
+  "backbone": {
+    "approvalBinding": "VERIFIED",
+    "executionDivergenceDetection": "VERIFIED",
+    "preSideEffectBlocking": "VERIFIED",
+    "evidenceCompleteness": "COMPLETE"
+  },
+  "classification": "NOT_VERIFIED"
+}
