@@ -581,11 +581,23 @@ Released under the MIT License.
 
 ## 11. Roadmap
 
+**Immediate Priority**
+
+- Persistent containment across renewed execution attempts (address the gap identified in Capability Boundaries above)
+
+**Subsequent Priorities**
+
+- Exactly-once side-effect governance for concurrent and retry scenarios
+- Stronger evidence-contract integrity
+- Compositional governance across multi-step execution paths
+- Deeper interception at external execution boundaries
+
+**Ongoing**
+
 - Improve SDK integrations
 - Expand language support
 - Add enterprise deployment examples
 - Continue benchmark reproducibility
-- Future EGA releases
 
 ------------------------------------------------------------------------
 
