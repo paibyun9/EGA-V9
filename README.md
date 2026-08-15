@@ -313,21 +313,28 @@ These results define the current verified capability boundary of EGA V9.
 
 ## 8. Enterprise Evaluation
 
+
 The next step is to evaluate how EGA V9 fits into a real enterprise AI workflow.
 
-### Step 1). Company Policy
+
+### Step 1). Define Company Policy
+
 
 Before evaluating EGA V9, define the policies that your AI system must follow.
 
+
 **Example: AI Shopping Policy**
 
+
 | Workflow | Company Policy |
-|----------|----------------|
+|---|---|
 | Purchase | Payment must be completed before shipment. |
 | Refund | Refunds are allowed within 30 days and require manager approval. |
 | Return | Product inspection is required before approval. |
 
+
 **Example Policy Configuration**
+
 
 ```json
 {
@@ -338,149 +345,145 @@ Before evaluating EGA V9, define the policies that your AI system must follow.
     "managerApproval": true
   }
 }
-```
 
-* Illustrative example only. Actual policy integration depends on your application architecture.
+Illustrative example only. Actual policy integration depends on your application architecture.
 
----
+Step 2). Integrate EGA V9
 
-### Step 2). Integrate EGA V9
+Install EGA V9:
 
-Install EGA V9.
-
-```bash
 npm install ega-v9
-```
 
-Integrate EGA V9 into your AI workflow.
+Integrate EGA V9 at the governed execution boundary of your AI workflow:
 
-```text
-Customer → AI Shopping Agent (e.g., LangChain)
-         → Company Policy
-         → [ EGA V9 ]
-         → Inventory API | Payment API | Refund API | Shipping API
-```
+Customer
+  → AI Shopping Agent
+  → Company Policy
+  → [ EGA V9 ]
+  → Inventory API | Payment API | Refund API | Shipping API
 
-EGA V9 enforces company policies before workflow execution while recording deterministic governance evidence.
+EGA V9 evaluates configured governance conditions before governed tool execution and records deterministic governance evidence.
 
----
+Step 3). Execute Governed Workflows
 
-### Step 3). Governed Workflow Execution
+Standard Order Pipeline
 
-**Standard Order Pipeline**
+Customer Order
+  → Agent
+  → [ EGA V9 ]
+  → Payment API
+  → PASS
 
-```text
-Customer Order → Agent → [ EGA V9 ] → Payment API → PASS
-```
+Policy-Enforced Refund Pipeline
 
-**Policy-Enforced Refund Pipeline**
+Refund Request
+  → Agent
+  → Manager Approval
+  → [ EGA V9 ]
+  → Refund API
+  → PASS
 
-```text
-Refund Request → Agent → Manager Approval → [ EGA V9 ] → Refund API → PASS
-```
+Within the configured governance conditions, EGA V9 permits valid governed execution while preserving execution and verification evidence for later review.
 
-EGA V9 permits valid workflows while preserving execution, policy, and verification evidence for later review.
+Current Capability Boundary
 
-**Scope note:**
+Fail-closed containment is enforced while a policy or integrity violation is actively detected within the governed execution path.
 
-Containment is currently enforced per-request, for the duration a policy or integrity violation is actively detected.
-Persistent, cross-request quarantine of a flagged execution identity/capability across subsequent clean-looking attempts is on the roadmap and is not yet enforced by the current runtime.
+Persistent, cross-request containment of a previously flagged execution identity or capability across subsequent clean-looking attempts is not established in EGA V9.
 
----
+See Capability Boundaries above for additional verified and unverified capabilities.
 
-### Step 4). Deployment Decision
+Step 4). Make the Deployment Decision
 
-Should EGA V9 be deployed to your production AI workflow?
+After evaluating EGA V9 in your own workflow and environment, decide whether it should be deployed to your production AI workflow.
 
-```text
 YES / NO
-```
 
----
+The deployment decision should be based on your own policies, workflow architecture, security requirements, and evaluation results.
 
-### Step 5). Business Impact
+Step 5). Evaluate Potential Business Impact
 
-After completing the evaluation, consider the operational benefits.
+Depending on the deployment environment, potential benefits may include:
 
-**Operational Reliability**
+Operational Reliability
 
-- Enforces company policies before execution.
-- Detects workflow mutations before they reach production.
+Evaluates configured governance conditions before governed tool execution.
+Detects evaluated workflow mutations before governed tool execution.
+Produces deterministic governance evidence for later investigation.
 
-**Security**
+Security
 
-- Detects approval bypass attempts.
-- Detects unauthorized tool execution.
-- Detects policy mutations.
+Detects evaluated approval-bypass attempts.
+Detects evaluated unauthorized tool execution.
+Detects evaluated policy and workflow mutations.
 
-**Governance**
+Governance
 
-- Replayable workflows.
-- Traceable execution.
-- Auditable decisions.
+Replayable governed workflows.
+Traceable execution evidence.
+Auditable governance decisions.
 
-**Engineering**
+Engineering
 
-- Faster incident investigation.
-- Deterministic debugging.
-- Reproducible execution evidence.
+Deterministic workflow debugging.
+Reproducible execution evidence.
+Additional evidence for incident investigation.
 
-**Business**
+Business
 
-- Reduced operational risk.
-- Increased confidence before production deployment.
-- Easier internal security and compliance reviews.
+Additional runtime controls for operational risk management.
+Greater visibility before production deployment.
+Evidence that may support internal security and compliance reviews.
 
----
+These are potential operational benefits, not guaranteed business outcomes. Actual impact depends on the application architecture, deployment environment, configured policies, and workload.
 
-### Final Question
+Final Question
 
-Based on your evaluation, 
+After completing your evaluation, ask:
 
-**What would have happened without EGA V9?**
+What would have happened without EGA V9?
 
-### Illustrative Scene: What Changes with EGA V9
+Illustrative Scene: What Changes with EGA V9
 
-This is an illustrative example only.  
-Your actual company policies will differ.  
-What matters is the interception point and the evidence.
+This example is illustrative only.
 
-**Without EGA V9**
+Your actual company policies and runtime architecture will differ. What matters here is the governed execution boundary and the evidence produced by the governance decision.
 
-```text
+Without EGA V9
+
 Refund Request
   → AI Agent
   → Refund API
-The refund can be executed even if approval or policy checks are missing or bypassed.
-```
 
-**With EGA V9**
+In this illustrative configuration, the refund could reach the Refund API if the required approval or policy check were missing or bypassed.
 
-```text
+With EGA V9
+
 Refund Request
   → AI Agent
   → [ EGA V9 Runtime Governance ]
        ├─ Valid workflow   → Refund API (PASS + evidence)
-       └─ Invalid workflow → Containment (execution blocked + evidence)
-```
+       └─ Invalid workflow → Containment (BLOCK + evidence)
 
-EGA V9 sits immediately before tool execution.
-If a policy or integrity violation is detected on the current request, the workflow is fail-closed and does not reach the Refund API.
+EGA V9 sits at the governed execution boundary before the tool call.
 
-**Example containment evidence (simplified)**
+If a configured policy or integrity violation is detected on the current governed request, EGA V9 applies fail-closed containment and prevents that governed execution path from reaching the Refund API.
 
-```text
-JSON{
+Example Containment Evidence (Simplified)
+
+{
   "decision": "BLOCK",
   "reason": "policy_violation",
   "containment": true,
   "executionAllowed": false
 }
-```
-**In short:**
+In Short
 
-EGA V9 does not replace your agent or your policies.
-It enforces them at the moment of execution and records deterministic evidence when it blocks.
+EGA V9 does not replace your AI agent, foundation model, application logic, or company policies.
+
+It provides a deterministic runtime-governance layer that evaluates configured governance conditions at the governed execution boundary and records deterministic evidence when execution is verified or blocked.
+
+Evaluate it in your own environment. Verify the evidence. Then decide whether to deploy it.
 
 ------------------------------------------------------------------------
 
