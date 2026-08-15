@@ -313,18 +313,13 @@ These results define the current verified capability boundary of EGA V9.
 
 ## 8. Enterprise Evaluation
 
-
-The next step is to evaluate how EGA V9 fits into a real enterprise AI workflow.
-
+The next step is simple: evaluate EGA V9 inside a real enterprise AI workflow.
 
 ### Step 1). Define Company Policy
 
-
 Before evaluating EGA V9, define the policies that your AI system must follow.
 
-
 **Example: AI Shopping Policy**
-
 
 | Workflow | Company Policy |
 |---|---|
@@ -332,9 +327,7 @@ Before evaluating EGA V9, define the policies that your AI system must follow.
 | Refund | Refunds are allowed within 30 days and require manager approval. |
 | Return | Product inspection is required before approval. |
 
-
 **Example Policy Configuration**
-
 
 ```json
 {
@@ -359,7 +352,7 @@ Install EGA V9:
 npm install ega-v9
 ```
 
-Integrate EGA V9 at the governed execution boundary of your AI workflow:
+Place EGA V9 at the governed execution boundary:
 
 ```text
 Customer
@@ -370,6 +363,8 @@ Customer
 ```
 
 EGA V9 evaluates configured governance conditions before governed tool execution and records deterministic governance evidence.
+
+It does not replace the AI agent or the company policy. It governs the execution path between the agent decision and the protected tool or API.
 
 ---
 
@@ -396,81 +391,91 @@ Refund Request
   → PASS
 ```
 
-Within the configured governance conditions, EGA V9 permits valid governed execution while preserving execution and verification evidence for later review.
+A valid governed workflow proceeds to execution.
+
+When EGA V9 detects a policy or integrity violation on the governed execution path, it fails closed before the protected tool call and records governance evidence.
 
 #### Current Capability Boundary
 
-Fail-closed containment is enforced while a policy or integrity violation is actively detected within the governed execution path.
+This protection has a defined boundary.
 
-Persistent, cross-request containment of a previously flagged execution identity or capability across subsequent clean-looking attempts is **not established in EGA V9**.
+Fail-closed containment remains effective while the triggering policy or integrity violation is actively detected.
 
-See **Capability Boundaries** above for additional verified and unverified capabilities.
+EGA V9 does **not** currently establish persistent containment across renewed execution attempts after the original triggering condition has been removed.
+
+Exactly-once side-effect execution under concurrent, retry, or duplicate execution is also **not established** in EGA V9.
+
+See **Capability Boundaries** above for the complete current validation status.
 
 ---
 
 ### Step 4). Make the Deployment Decision
 
-After evaluating EGA V9 in your own workflow and environment, decide whether it should be deployed to your production AI workflow.
+Now test EGA V9 against your own workflows, policies, and failure scenarios.
+
+Then make the decision:
 
 ```text
 YES / NO
 ```
 
-The deployment decision should be based on your own policies, workflow architecture, security requirements, and evaluation results.
+Should EGA V9 be deployed at the execution boundary of your production AI workflow?
+
+The answer should come from your own evaluation and evidence.
 
 ---
 
-### Step 5). Evaluate Potential Business Impact
+### Step 5). Evaluate the Operational Impact
 
-Depending on the deployment environment, potential benefits may include:
+After running the evaluation, examine what changes when execution governance is present.
 
 **Operational Reliability**
 
-- Evaluates configured governance conditions before governed tool execution.
-- Detects evaluated workflow mutations before governed tool execution.
-- Produces deterministic governance evidence for later investigation.
+- Enforces configured governance conditions before protected tool execution.
+- Detects workflow mutations before protected execution.
+- Records deterministic evidence when governance decisions are made.
 
 **Security**
 
-- Detects evaluated approval-bypass attempts.
-- Detects evaluated unauthorized tool execution.
-- Detects evaluated policy and workflow mutations.
+- Detects approval-bypass attempts.
+- Detects unauthorized tool execution.
+- Detects policy and workflow mutations.
+- Applies fail-closed containment when a governed violation is detected.
 
 **Governance**
 
 - Replayable governed workflows.
-- Traceable execution evidence.
+- Traceable execution.
 - Auditable governance decisions.
+- Reproducible execution evidence.
 
 **Engineering**
 
 - Deterministic workflow debugging.
-- Reproducible execution evidence.
-- Additional evidence for incident investigation.
+- Reproducible evidence for incident investigation.
+- Clear PASS / BLOCK execution outcomes.
 
 **Business**
 
-- Additional runtime controls for operational risk management.
-- Greater visibility before production deployment.
-- Evidence that may support internal security and compliance reviews.
+- Adds a governance checkpoint before high-impact AI actions.
+- Provides evidence for internal security and governance review.
+- Makes execution failures and policy violations easier to inspect.
 
-These are potential operational benefits, not guaranteed business outcomes. Actual impact depends on the application architecture, deployment environment, configured policies, and workload.
+Actual operational impact will depend on your workflow, policies, architecture, and deployment environment.
 
 ---
 
 ### Final Question
 
-After completing your evaluation, ask:
+After completing the evaluation, ask one question:
 
-**What would have happened without EGA V9?**
+## What would have happened without EGA V9?
 
-### Illustrative Scene: What Changes with EGA V9
+### Illustrative Scene: A Refund Workflow
 
-This example is illustrative only.
+Assume the company policy requires manager approval before a refund.
 
-Your actual company policies and runtime architecture will differ. What matters here is the governed execution boundary and the evidence produced by the governance decision.
-
-**Without EGA V9**
+**Without an Execution-Governance Check**
 
 ```text
 Refund Request
@@ -478,7 +483,7 @@ Refund Request
   → Refund API
 ```
 
-In this illustrative configuration, the refund could reach the Refund API if the required approval or policy check were missing or bypassed.
+If the required approval is missing or bypassed and no equivalent execution-governance check exists at this boundary, the refund request can reach the Refund API.
 
 **With EGA V9**
 
@@ -486,13 +491,23 @@ In this illustrative configuration, the refund could reach the Refund API if the
 Refund Request
   → AI Agent
   → [ EGA V9 Runtime Governance ]
-       ├─ Valid workflow   → Refund API (PASS + evidence)
-       └─ Invalid workflow → Containment (BLOCK + evidence)
+       │
+       ├─ Valid workflow
+       │     → Refund API
+       │     → PASS + evidence
+       │
+       └─ Policy / integrity violation detected
+             → BLOCK
+             → Containment + evidence
 ```
 
-EGA V9 sits at the governed execution boundary before the tool call.
+The difference is the execution boundary.
 
-If a configured policy or integrity violation is detected on the current governed request, EGA V9 applies fail-closed containment and prevents that governed execution path from reaching the Refund API.
+EGA V9 checks the configured governance conditions before the protected tool call.
+
+If the workflow is valid, execution proceeds.
+
+If a policy or integrity violation is detected, the governed execution path fails closed before reaching the protected API and the decision is recorded as deterministic governance evidence.
 
 **Example Containment Evidence (Simplified)**
 
@@ -509,11 +524,32 @@ If a configured policy or integrity violation is detected on the current governe
 
 ### In Short
 
-EGA V9 does not replace your AI agent, foundation model, application logic, or company policies.
+EGA V9 does not replace your AI agent.
 
-It provides a deterministic runtime-governance layer that evaluates configured governance conditions at the governed execution boundary and records deterministic evidence when execution is verified or blocked.
+It does not replace your foundation model.
 
-**Evaluate it in your own environment. Verify the evidence. Then decide whether to deploy it.**
+It does not replace your company policies.
+
+**It adds a deterministic governance boundary before protected AI execution.**
+
+```text
+AI Decision
+     ↓
+Company Policy
+     ↓
+[ EGA V9 ]
+     ↓
+PASS  → Execute + Evidence
+BLOCK → Contain + Evidence
+```
+
+The core question is not whether you trust the AI agent.
+
+**The core question is whether you can verify and govern what the agent is about to execute.**
+
+Test EGA V9 in your own environment.
+
+**Verify the evidence. Understand the capability boundaries. Then decide whether to deploy it.**
 
 ------------------------------------------------------------------------
 
