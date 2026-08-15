@@ -264,6 +264,55 @@ npm run test:tool-injection
 
 Validation artifacts are generated automatically under:
 
+publication/evidence/
+
+Artifacts include:
+
+JSON report
+Markdown report
+Final PASS / FAIL status
+Core Governance Validation Results
+
+These seven tests validate the core deterministic-governance primitives evaluated by EGA V9. All are reproducible locally — see Section 2 above.
+
+### Validation	Result
+
+| Validation | Expected Result |
+|------------|:---------------:|
+| Replay Root Verification | ✅ PASS |
+| Workflow Divergence Detection | ✅ PASS |
+| Trust-State Escalation | ✅ PASS |
+| Fail-Closed Containment | ✅ PASS |
+| Tool Order Integrity | ✅ PASS |
+| Approval Bypass Defense | ✅ PASS |
+| Workflow-Level Tool Injection Detection | ✅ PASS |
+
+
+Additional Adversarial Verification
+
+A separate adversarial test suite was used to probe capabilities beyond the core validation suite. These tests identified both verified behavior and current capability boundaries.
+
+Adversarial Capability	Result
+Fail-closed containment during an active mismatch	✅ VERIFIED
+Persistent containment after removal of the triggering condition	⚠️ NOT ESTABLISHED
+Exactly-once side-effect execution under concurrent, retry, or duplicate execution	❌ NOT PROVIDED
+Complete evidence-contract integrity	❌ NOT ESTABLISHED
+Multi-step compositional governance	⚠️ NOT VERIFIED
+Direct interception of already-attempted external side effects	⚠️ NOT VERIFIED
+
+These results do not invalidate the core validation results above. They define the current verified capability boundary of EGA V9. Persistent containment across renewed execution attempts is the immediate research priority.
+
+Don't trust our claims. Verify them yourself — including the capabilities we have not yet established.
+
+**We don't hide problems. We publish them, prioritize them, and work to resolve them.**
+
+
+
+
+### 3). Review the Evidence
+
+Validation artifacts are generated automatically under:
+
 ```text
 publication/evidence/
 ```
@@ -278,15 +327,7 @@ Artifacts include:
 
 ### Expected Validation Results
 
-| Validation | Expected Result |
-|------------|:---------------:|
-| Replay Root Verification | ✅ PASS |
-| Workflow Divergence Detection | ✅ PASS |
-| Trust-State Escalation | ✅ PASS |
-| Fail-Closed Containment | ✅ PASS |
-| Tool Order Integrity | ✅ PASS |
-| Approval Bypass Defense | ✅ PASS |
-| Workflow-Level Tool Injection Detection | ✅ PASS |
+
 
 
 **We don't hide problems. We solve them together.**
