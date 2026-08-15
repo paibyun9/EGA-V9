@@ -262,23 +262,20 @@ npm run test:tool-injection
 
 ### 3). Review the Evidence
 
-Validation artifacts are generated automatically under:
-
-publication/evidence/
+Validation artifacts are generated automatically under `publication/evidence/`.
 
 Artifacts include:
 
-JSON report
-Markdown report
-Final PASS / FAIL status
-Core Governance Validation Results
+- JSON report
+- Markdown report
+- Final PASS / FAIL status
 
-These seven tests validate the core deterministic-governance primitives evaluated by EGA V9. All are reproducible locally — see Section 2 above.
+---
 
-### Validation	Result
+### Validation Results
 
 | Validation | Expected Result |
-|------------|:---------------:|
+|---|---|
 | Replay Root Verification | ✅ PASS |
 | Workflow Divergence Detection | ✅ PASS |
 | Trust-State Escalation | ✅ PASS |
@@ -287,22 +284,29 @@ These seven tests validate the core deterministic-governance primitives evaluate
 | Approval Bypass Defense | ✅ PASS |
 | Workflow-Level Tool Injection Detection | ✅ PASS |
 
+These tests validate the core deterministic-governance capabilities evaluated by EGA V9.
 
-Additional Adversarial Verification
+---
 
-A separate adversarial test suite was used to probe capabilities beyond the core validation suite. These tests identified both verified behavior and current capability boundaries.
+### Capability Boundaries
 
-Adversarial Capability	Result
-Fail-closed containment during an active mismatch	✅ VERIFIED
-Persistent containment after removal of the triggering condition	⚠️ NOT ESTABLISHED
-Exactly-once side-effect execution under concurrent, retry, or duplicate execution	❌ NOT PROVIDED
-Complete evidence-contract integrity	❌ NOT ESTABLISHED
-Multi-step compositional governance	⚠️ NOT VERIFIED
-Direct interception of already-attempted external side effects	⚠️ NOT VERIFIED
+Additional adversarial testing was performed beyond the core validation suite.
 
-These results do not invalidate the core validation results above. They define the current verified capability boundary of EGA V9. Persistent containment across renewed execution attempts is the immediate research priority.
+**Verified**
+- ✅ Fail-closed containment during an active mismatch
 
-Don't trust our claims. Verify them yourself — including the capabilities we have not yet established.
+**Not Established**
+- ⚠️ Persistent containment after the triggering condition is removed
+- ⚠️ Exactly-once side-effect execution under concurrent, retry, or duplicate execution
+- ⚠️ Complete evidence-contract integrity
+
+**Not Verified**
+- ⚠️ Multi-step compositional governance
+- ⚠️ Direct interception of already-attempted external side effects
+
+These results define the current verified capability boundary of EGA V9.
+
+> **Don't trust our claims. Verify them yourself — including the capabilities we have not yet established.**
 
 **We don't hide problems. We publish them, prioritize them, and work to resolve them.**
 
