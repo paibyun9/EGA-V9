@@ -221,7 +221,6 @@ git clone https://github.com/paibyun9/EGA-V9.git
 cd EGA-V9
 npm ci
 ```
-
 ---
 
 ### 2). Run the Governance Validation Suite
