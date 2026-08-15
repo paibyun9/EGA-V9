@@ -306,32 +306,6 @@ Don't trust our claims. Verify them yourself — including the capabilities we h
 
 **We don't hide problems. We publish them, prioritize them, and work to resolve them.**
 
-
-
-
-### 3). Review the Evidence
-
-Validation artifacts are generated automatically under:
-
-```text
-publication/evidence/
-```
-
-Artifacts include:
-
-- JSON report
-- Markdown report
-- Final PASS / FAIL status
-
----
-
-### Expected Validation Results
-
-
-
-
-**We don't hide problems. We solve them together.**
-
 ------------------------------------------------------------------------
 
 ## 8. Enterprise Evaluation
