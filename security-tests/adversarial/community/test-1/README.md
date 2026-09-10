@@ -1,14 +1,22 @@
-# EGA V9 Community Adversarial Test — Test 1
+# Hi @captainarlock,
 
 **Proof before explanation.**
 
-Two technical questions were raised by the community.
+Thank you for taking the time to raise these questions about EGA V9.
 
-This README turns both questions into executable tests against the published EGA V9 package.
+Rather than answering them only with an explanation, we translated your questions into executable tests against the currently published EGA V9 package.
 
-No EGA V9 core code is modified.
+We followed this sequence:
 
-**Don't trust our conclusion. Copy the test. Run it. Observe the result yourself.**
+**Your Question → How We Translated It → Copy & Run → Our Raw Result → What It Means**
+
+Please feel free to reproduce the tests yourself. If you encounter any problem while running them, let us know anytime.
+
+And if your result differs from ours, we genuinely want to see it. Different or contradictory results are always welcome — they help us identify what the evidence actually supports and where EGA V9's boundaries are.
+
+Proof before explanation.
+
+Let's begin.
 
 ---
 
