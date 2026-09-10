@@ -1,0 +1,32 @@
+=== ORIGINAL PAYLOAD BEFORE EGA VALIDATION ===
+{
+  "steps": [
+    {
+      "action": "purchase",
+      "tool": "payment-provider",
+      "input": {
+        "amount": 125,
+        "currency": "USD",
+        "recipient": "merchant-approved"
+      }
+    }
+  ]
+}
+
+=== HTTP STATUS ===
+200
+
+=== FINAL EXECUTION RESULT ===
+{
+  "ok": true,
+  "sideEffectCalls": 1,
+  "executedAmount": 12500,
+  "observation": {
+    "validatedExecutionAllowed": true,
+    "validatedReplayRoot": "5e58d085b71ebe881071f1764d6ba1b4d5e1d9223ff422ce3d2ad7af2bce27e3",
+    "amountBeforeMutation": 125,
+    "amountAfterMutation": 12500,
+    "mutatedReplayRoot": "9940d344c1a2d829b0961c77103cd845ca89e04f151ecf73945eeb95c3074981",
+    "replayRootChanged": true
+  }
+}

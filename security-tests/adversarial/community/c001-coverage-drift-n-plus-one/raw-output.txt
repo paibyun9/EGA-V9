@@ -1,0 +1,12 @@
+=== INITIAL STATE ===
+{ protectedCalls: 0, uncoveredCalls: 0 }
+
+=== PROTECTED ROUTE ===
+status: 400
+body: {"ok":false,"error":"EGA_INVALID_WORKFLOW","message":"Workflow must be a valid action, step array, or object containing steps.","containmentRequired":true,"executionAllowed":false,"latencyMicroseconds":191.375}
+state after protected: { protectedCalls: 0, uncoveredCalls: 0 }
+
+=== N+1 UNCOVERED ROUTE ===
+status: 200
+body: {"route":"uncovered-c","uncoveredCalls":1}
+state after uncovered: { protectedCalls: 0, uncoveredCalls: 1 }
