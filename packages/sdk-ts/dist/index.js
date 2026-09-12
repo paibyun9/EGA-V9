@@ -183,6 +183,7 @@ class EGA {
     }
     guard() {
         return (req, res, next) => {
+            (0, runtime_admission_provider_1.enforceRuntimeLicenseAdmission)();
             validateGuardInvocation(req, res, next);
             const requestId = (0, crypto_1.randomUUID)();
             const clientIdentity = buildAnonymousClientIdentity(req, this.options.appName);

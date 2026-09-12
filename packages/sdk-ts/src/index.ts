@@ -502,6 +502,8 @@ export class EGA {
 
   guard() {
     return (req: EGARequest, res: EGAResponse, next: NextFunction) => {
+      enforceRuntimeLicenseAdmission();
+
       validateGuardInvocation(
         req,
         res,
