@@ -155,7 +155,7 @@ type NextFunction = EGAGuardNext;
 type EGARequest = EGAGuardRequest;
 type EGAResponse = EGAGuardResponse;
 export declare class EGA {
-    private readonly options;
+    #private;
     private readonly eventLog;
     private eventSequence;
     private constructor();

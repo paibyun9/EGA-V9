@@ -479,19 +479,19 @@ function validateGuardInvocation(
 }
 
 export class EGA {
-  private readonly options: Required<EGAOptions>;
+  #options: Readonly<Required<EGAOptions>>;
   private readonly eventLog: EGAEvent[] = [];
   private eventSequence = 0;
 
   private constructor(options: EGAOptions = {}) {
-    this.options = {
+    this.#options = Object.freeze({
       appName: options.appName ?? "ega-v9-app",
       trustLevel: options.trustLevel ?? "supported",
       telemetry: options.telemetry ?? false,
       failClosed: options.failClosed ?? true,
       policyId: options.policyId ?? "default-policy",
       approvalThreshold: options.approvalThreshold ?? 70
-    };
+    });
   }
 
   static init(options: EGAOptions = {}): EGA {
@@ -511,7 +511,7 @@ export class EGA {
       );
 
       const requestId = randomUUID();
-      const clientIdentity = buildAnonymousClientIdentity(req, this.options.appName);
+      const clientIdentity = buildAnonymousClientIdentity(req, this.#options.appName);
       const licenseState = evaluateLicenseState(req);
       const actualReplayRoot = this.createReplayRoot(req);
       const expectedReplayRoot = this.getExpectedReplayRoot(req);
@@ -521,7 +521,7 @@ export class EGA {
         timestamp: new Date().toISOString(),
         requestId,
         replayRoot: actualReplayRoot,
-        trustLevel: this.options.trustLevel,
+        trustLevel: this.#options.trustLevel,
         status: "verified",
         clientIdentity,
         licenseState
@@ -537,9 +537,9 @@ export class EGA {
       const businessMetrics = collectBusinessMetrics(req.body);
       const trust = evaluateTrust({
         isMismatch,
-        failClosed: this.options.failClosed,
+        failClosed: this.#options.failClosed,
         businessMetrics,
-        approvalThreshold: this.options.approvalThreshold
+        approvalThreshold: this.#options.approvalThreshold
       });
 
       const businessGovernanceProfile = buildBusinessGovernanceProfile(businessMetrics, trust);
@@ -556,7 +556,7 @@ export class EGA {
       const context: EGARequestContext = {
         requestId,
         replayRoot: actualReplayRoot,
-        trustLevel: this.options.trustLevel,
+        trustLevel: this.#options.trustLevel,
         status: isMismatch ? "contained" : "verified",
         scorpLock: true,
         clientIdentity,
@@ -569,10 +569,10 @@ export class EGA {
         },
         containment: {
           activated: isMismatch,
-          mode: this.options.failClosed ? "fail-closed" : "observe",
+          mode: this.#options.failClosed ? "fail-closed" : "observe",
           reason: isMismatch ? "replay root mismatch" : undefined,
           quarantineId,
-          executionAllowed: !isMismatch || !this.options.failClosed
+          executionAllowed: !isMismatch || !this.#options.failClosed
         },
         trust,
         businessGovernanceProfile,
@@ -755,7 +755,7 @@ export class EGA {
           }
         });
 
-        if (this.options.failClosed) {
+        if (this.#options.failClosed) {
           this.recordEvent({
             type: "execution.blocked",
             timestamp: new Date().toISOString(),
@@ -859,7 +859,7 @@ export class EGA {
 
   private createReplayRoot(req: EGARequest): string {
     return this.replayRoot({
-      appName: this.options.appName,
+      appName: this.#options.appName,
       method: req.method ?? "UNKNOWN",
       path: req.originalUrl ?? req.url ?? req.path ?? "/",
       body: req.body ?? null,
@@ -908,9 +908,9 @@ export class EGA {
         type: "policy",
         label: "Policy",
         data: {
-          policyId: this.options.policyId,
+          policyId: this.#options.policyId,
           scorpLock: true,
-          failClosed: this.options.failClosed
+          failClosed: this.#options.failClosed
         }
       },
       {
@@ -919,7 +919,7 @@ export class EGA {
         label: "Decision",
         data: {
           status: args.isMismatch ? "contained" : "verified",
-          executionAllowed: !args.isMismatch || !this.options.failClosed
+          executionAllowed: !args.isMismatch || !this.#options.failClosed
         }
       },
       {

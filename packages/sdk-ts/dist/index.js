@@ -1,4 +1,16 @@
 "use strict";
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _EGA_options;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.evaluateRuntimeAdmission = exports.assertRuntimeLicenseAdmission = exports.EGARuntimeAdmissionError = exports.ega = exports.EGA = void 0;
 exports.verifyExecution = verifyExecution;
@@ -166,16 +178,17 @@ function validateGuardInvocation(req, res, next) {
 }
 class EGA {
     constructor(options = {}) {
+        _EGA_options.set(this, void 0);
         this.eventLog = [];
         this.eventSequence = 0;
-        this.options = {
+        __classPrivateFieldSet(this, _EGA_options, Object.freeze({
             appName: options.appName ?? "ega-v9-app",
             trustLevel: options.trustLevel ?? "supported",
             telemetry: options.telemetry ?? false,
             failClosed: options.failClosed ?? true,
             policyId: options.policyId ?? "default-policy",
             approvalThreshold: options.approvalThreshold ?? 70
-        };
+        }), "f");
     }
     static init(options = {}) {
         validateEGAOptions(options);
@@ -186,7 +199,7 @@ class EGA {
             (0, runtime_admission_provider_1.enforceRuntimeLicenseAdmission)();
             validateGuardInvocation(req, res, next);
             const requestId = (0, crypto_1.randomUUID)();
-            const clientIdentity = buildAnonymousClientIdentity(req, this.options.appName);
+            const clientIdentity = buildAnonymousClientIdentity(req, __classPrivateFieldGet(this, _EGA_options, "f").appName);
             const licenseState = evaluateLicenseState(req);
             const actualReplayRoot = this.createReplayRoot(req);
             const expectedReplayRoot = this.getExpectedReplayRoot(req);
@@ -195,7 +208,7 @@ class EGA {
                 timestamp: new Date().toISOString(),
                 requestId,
                 replayRoot: actualReplayRoot,
-                trustLevel: this.options.trustLevel,
+                trustLevel: __classPrivateFieldGet(this, _EGA_options, "f").trustLevel,
                 status: "verified",
                 clientIdentity,
                 licenseState
@@ -208,9 +221,9 @@ class EGA {
             const businessMetrics = collectBusinessMetrics(req.body);
             const trust = evaluateTrust({
                 isMismatch,
-                failClosed: this.options.failClosed,
+                failClosed: __classPrivateFieldGet(this, _EGA_options, "f").failClosed,
                 businessMetrics,
-                approvalThreshold: this.options.approvalThreshold
+                approvalThreshold: __classPrivateFieldGet(this, _EGA_options, "f").approvalThreshold
             });
             const businessGovernanceProfile = buildBusinessGovernanceProfile(businessMetrics, trust);
             const provenance = this.buildProvenanceGraph({
@@ -224,7 +237,7 @@ class EGA {
             const context = {
                 requestId,
                 replayRoot: actualReplayRoot,
-                trustLevel: this.options.trustLevel,
+                trustLevel: __classPrivateFieldGet(this, _EGA_options, "f").trustLevel,
                 status: isMismatch ? "contained" : "verified",
                 scorpLock: true,
                 clientIdentity,
@@ -237,10 +250,10 @@ class EGA {
                 },
                 containment: {
                     activated: isMismatch,
-                    mode: this.options.failClosed ? "fail-closed" : "observe",
+                    mode: __classPrivateFieldGet(this, _EGA_options, "f").failClosed ? "fail-closed" : "observe",
                     reason: isMismatch ? "replay root mismatch" : undefined,
                     quarantineId,
-                    executionAllowed: !isMismatch || !this.options.failClosed
+                    executionAllowed: !isMismatch || !__classPrivateFieldGet(this, _EGA_options, "f").failClosed
                 },
                 trust,
                 businessGovernanceProfile,
@@ -409,7 +422,7 @@ class EGA {
                         executionAllowed: context.containment.executionAllowed
                     }
                 });
-                if (this.options.failClosed) {
+                if (__classPrivateFieldGet(this, _EGA_options, "f").failClosed) {
                     this.recordEvent({
                         type: "execution.blocked",
                         timestamp: new Date().toISOString(),
@@ -499,7 +512,7 @@ class EGA {
     }
     createReplayRoot(req) {
         return this.replayRoot({
-            appName: this.options.appName,
+            appName: __classPrivateFieldGet(this, _EGA_options, "f").appName,
             method: req.method ?? "UNKNOWN",
             path: req.originalUrl ?? req.url ?? req.path ?? "/",
             body: req.body ?? null,
@@ -539,9 +552,9 @@ class EGA {
                 type: "policy",
                 label: "Policy",
                 data: {
-                    policyId: this.options.policyId,
+                    policyId: __classPrivateFieldGet(this, _EGA_options, "f").policyId,
                     scorpLock: true,
-                    failClosed: this.options.failClosed
+                    failClosed: __classPrivateFieldGet(this, _EGA_options, "f").failClosed
                 }
             },
             {
@@ -550,7 +563,7 @@ class EGA {
                 label: "Decision",
                 data: {
                     status: args.isMismatch ? "contained" : "verified",
-                    executionAllowed: !args.isMismatch || !this.options.failClosed
+                    executionAllowed: !args.isMismatch || !__classPrivateFieldGet(this, _EGA_options, "f").failClosed
                 }
             },
             {
@@ -602,6 +615,7 @@ class EGA {
     }
 }
 exports.EGA = EGA;
+_EGA_options = new WeakMap();
 function buildAnonymousClientIdentity(req, appName) {
     const headers = req.headers ?? {};
     const hostValue = headers.host ?? headers.Host;
