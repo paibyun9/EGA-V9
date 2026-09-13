@@ -29,6 +29,7 @@ const {
 );
 
 const {
+  EGALicenseStoreError,
   readEvaluationLicenseKey,
   saveEvaluationLicenseKey
 } = require(
@@ -94,6 +95,9 @@ test(
         await runRegisterCommand({
           ask: async () =>
             answers.shift(),
+
+          readEvaluationLicenseKey:
+            () => null,
 
           issueEvaluationLicense:
             async input => ({
@@ -222,6 +226,9 @@ test(
           ask: async () =>
             answers.shift(),
 
+          readEvaluationLicenseKey:
+            () => null,
+
           issueEvaluationLicense:
             async () => {
               serviceCalled = true;
@@ -277,6 +284,9 @@ test(
           ask: async () =>
             answers.shift(),
 
+          readEvaluationLicenseKey:
+            () => null,
+
           issueEvaluationLicense:
             async () => {
               throw new Error(
@@ -324,6 +334,9 @@ test(
           ask: async () =>
             answers.shift(),
 
+          readEvaluationLicenseKey:
+            () => null,
+
           issueEvaluationLicense:
             async () => ({
               evaluationLicenseKey: ""
@@ -350,6 +363,78 @@ test(
           EGARegisterCommandError &&
         error.code ===
           "EGA_REGISTER_RESPONSE"
+    );
+  }
+);
+
+test(
+  "register command rejects an existing local license before calling the service",
+  async () => {
+    let askCalls = 0;
+    let serviceCalls = 0;
+    let saveCalls = 0;
+
+    await assert.rejects(
+      () =>
+        runRegisterCommand({
+          ask: async () => {
+            askCalls += 1;
+
+            return "unused";
+          },
+
+          readEvaluationLicenseKey:
+            () => "existing-license",
+
+          issueEvaluationLicense:
+            async () => {
+              serviceCalls += 1;
+
+              return {
+                evaluationLicenseKey:
+                  "unused"
+              };
+            },
+
+          verifyEvaluationLicenseKey:
+            () => {
+              throw new Error(
+                "must not be called"
+              );
+            },
+
+          saveEvaluationLicenseKey:
+            () => {
+              saveCalls += 1;
+
+              throw new Error(
+                "must not be called"
+              );
+            },
+
+          write: () => {}
+        }),
+
+      error =>
+        error instanceof
+          EGALicenseStoreError &&
+        error.code ===
+          "EGA_LICENSE_STORE_EXISTS"
+    );
+
+    assert.equal(
+      askCalls,
+      0
+    );
+
+    assert.equal(
+      serviceCalls,
+      0
+    );
+
+    assert.equal(
+      saveCalls,
+      0
     );
   }
 );

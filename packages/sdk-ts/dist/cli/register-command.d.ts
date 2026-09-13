@@ -14,6 +14,7 @@ export type EGARegisterCommandDependencies = {
     saveEvaluationLicenseKey: (evaluationLicenseKey: string, options?: {
         overwrite?: boolean;
     }) => string;
+    readEvaluationLicenseKey: () => string | null;
     write: (message: string) => void;
     overwrite?: boolean;
 };

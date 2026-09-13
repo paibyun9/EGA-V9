@@ -5,6 +5,10 @@ import {
   EGAEvaluationLicense
 } from "../license/types";
 
+import {
+  EGALicenseStoreError
+} from "../license/license-store";
+
 export type EGARegistrationInput = {
   contactName: string;
   companyName: string;
@@ -34,6 +38,9 @@ export type EGARegisterCommandDependencies = {
       overwrite?: boolean;
     }
   ) => string;
+
+  readEvaluationLicenseKey: () =>
+    string | null;
 
   write: (
     message: string
@@ -148,6 +155,16 @@ export async function runRegisterCommand(
     "No credit card required."
   );
   dependencies.write("");
+
+  if (
+    dependencies.overwrite !== true &&
+    dependencies.readEvaluationLicenseKey() !== null
+  ) {
+    throw new EGALicenseStoreError(
+      "EGA_LICENSE_STORE_EXISTS",
+      "An Evaluation License Key is already stored. Explicit overwrite approval is required."
+    );
+  }
 
   const contactName =
     requireNonEmpty(

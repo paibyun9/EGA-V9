@@ -60,6 +60,7 @@ async function main() {
             issueEvaluationLicense: input => licenseApi
                 .issueEvaluationLicense(input),
             verifyEvaluationLicenseKey: evaluationLicenseKey => (0, license_key_1.verifyEvaluationLicenseKey)(evaluationLicenseKey, publicKey),
+            readEvaluationLicenseKey: () => (0, license_store_1.readEvaluationLicenseKey)(),
             saveEvaluationLicenseKey: (evaluationLicenseKey, options) => (0, license_store_1.saveEvaluationLicenseKey)(evaluationLicenseKey, options),
             write: message => console.log(message)
         });

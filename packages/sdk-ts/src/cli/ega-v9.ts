@@ -30,6 +30,7 @@ import {
 } from "../license/public-key";
 
 import {
+  readEvaluationLicenseKey,
   saveEvaluationLicenseKey
 } from "../license/license-store";
 
@@ -125,6 +126,10 @@ async function main(): Promise<void> {
             evaluationLicenseKey,
             publicKey
           ),
+
+      readEvaluationLicenseKey:
+        () =>
+          readEvaluationLicenseKey(),
 
       saveEvaluationLicenseKey:
         (

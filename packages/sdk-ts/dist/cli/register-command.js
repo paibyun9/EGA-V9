@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EGARegisterCommandError = void 0;
 exports.runRegisterCommand = runRegisterCommand;
 const activation_success_message_1 = require("./activation-success-message");
+const license_store_1 = require("../license/license-store");
 class EGARegisterCommandError extends Error {
     constructor(code, message) {
         super(`[${code}] ${message}`);
@@ -45,6 +46,10 @@ async function runRegisterCommand(dependencies) {
     dependencies.write("Activate your 90-day Evaluation License.");
     dependencies.write("No credit card required.");
     dependencies.write("");
+    if (dependencies.overwrite !== true &&
+        dependencies.readEvaluationLicenseKey() !== null) {
+        throw new license_store_1.EGALicenseStoreError("EGA_LICENSE_STORE_EXISTS", "An Evaluation License Key is already stored. Explicit overwrite approval is required.");
+    }
     const contactName = requireNonEmpty(await dependencies.ask("Contact Name: "), "Contact Name");
     const companyName = requireNonEmpty(await dependencies.ask("Company Name: "), "Company Name");
     const workEmail = validateWorkEmail(await dependencies.ask("Work Email: "));
