@@ -46,7 +46,7 @@ Create a fresh directory and install EGA V9:
 mkdir ega-v9-test-1-q1
 cd ega-v9-test-1-q1
 npm init -y
-npm install ega-v9@1.0.4 express@5.2.1
+npm install ega-v9@1.0.3 express@5.2.1
 npx ega-v9 register
 ```
 
