@@ -77,7 +77,7 @@ function evaluateRuntimeAdmission(dependencies = {}) {
         });
         throw new EGARuntimeAdmissionError({
             code: "EGA_RUNTIME_LICENSE_MISSING",
-            message: "No EGA V9 License Key is installed. Run `npx ega-v9 register` before starting governed execution.",
+            message: "EGA V9 requires an active Evaluation License.\n\nRun:\n  npx ega-v9 register",
             admission
         });
     }
