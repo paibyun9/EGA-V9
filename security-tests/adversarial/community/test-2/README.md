@@ -91,7 +91,7 @@ Observed test environment:
 ```text
 Node.js: v20.20.2
 npm: 10.8.2
-ega-v9: 1.0.4
+ega-v9: 1.0.3
 ```
 
 EGA V9 core modification:
@@ -112,7 +112,7 @@ The published package was used as installed.
 mkdir ega-v9-community-test-2
 cd ega-v9-community-test-2
 npm init -y
-npm install ega-v9@1.0.4
+npm install ega-v9@1.0.3
 ```
 
 If EGA V9 has not already been activated in your environment, complete the normal Evaluation License activation:
