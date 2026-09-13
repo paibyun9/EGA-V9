@@ -2,20 +2,12 @@
 
 const message = [
   "",
-  "────────────────────────────────────────────────────────",
+  "EGA V9 installed successfully.",
   "",
-  "✓ EGA V9 installed successfully.",
+  "License Activation is required before governed execution.",
   "",
-  "EGA V9 is installed but not activated.",
-  "",
-  "Activate your FREE 90-Day Evaluation License.",
-  "No credit card required.",
-  "",
-  "Run:",
-  "",
-  "    npx ega-v9 register",
-  "",
-  "────────────────────────────────────────────────────────",
+  "Next step:",
+  "  npx ega-v9 register",
   ""
 ].join("\n");
 
