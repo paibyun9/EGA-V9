@@ -95,34 +95,51 @@ app.use(ega.guard());
 
 ## 5. Quick Start
 
-Get EGA V9 running in less than one minute.
+Choose your preferred activation method to get started with EGA V9.
 
-### 1). Install
+### Choose Your Activation Method
+
+Two ways to get started with EGA V9.
+
+#### ① npm Activation
+
+**For Node.js developers**
+
+**Step 1. Install**
 
 ```bash
 npm install ega-v9
 ```
 
-### 2). Activate your Evaluation License
+**Step 2. Register**
 
-After the installation completes, run:
 ```bash
 npx ega-v9 register
 ```
 
-This activates your free 90-day Evaluation License.
-```bash
-You will be prompted for:
+Run these commands in your terminal. Enter your name, work email, and optional organization. Review and confirm to activate.
 
-Contact Name
-Company Name
-Work Email
+#### ② HF MCP Activation
 
-After successful activation, you will see:
+**For Hugging Face users**
 
-✓ Evaluation License Activated
-✓ EGA V9 is now activated.
-```
+**Step 1. Open EGA MCP**
+
+[Open Hugging Face MCP](https://huggingface.co/spaces/lcm3/ega-v9-mcp)
+
+**Step 2. Verify Identity**
+
+Click **"Verify with Hugging Face"** and complete identity verification.
+
+**Step 3. Confirm**
+
+Review your name, verified email, and optional organization. Click **Confirm** to activate.
+
+---
+
+**✓ Free 90-day Evaluation License**
+
+Explicit confirmation required for activation.
 
 ---
 
